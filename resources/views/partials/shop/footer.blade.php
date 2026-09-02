@@ -44,7 +44,7 @@
 
             <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
                 <ul class="fh5co-footer-links">
-                    <li><a href="{{ url('/boutique') }}">Boutique</a></li>
+                    <li><a href="{{ route('catalog') }}">Boutique</a></li>
                     <li><a href="{{ url('/confidentialite') }}">Confidentialité</a></li>
                     <li><a href="{{ url('/cookies') }}">Cookies</a></li>
                     <li><a href="{{ url('/mentions-legales') }}">Mentions légales</a></li>

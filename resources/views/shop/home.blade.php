@@ -33,7 +33,7 @@
                                     <div class="desc">
                                         <h2>{{ $settings->site_name }}</h2>
                                         <p>{{ $settings->tagline }}</p>
-                                        <p><a href="{{ url('/boutique') }}" class="btn btn-primary btn-outline btn-lg">Découvrir</a></p>
+                                        <p><a href="{{ route('catalog') }}" class="btn btn-primary btn-outline btn-lg">Découvrir</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -81,27 +81,18 @@
                     <p>Meubles et objets choisis pour leur fabrication soignée et leur design intemporel.</p>
                 </div>
             </div>
+            @foreach ($products->chunk(3) as $row)
+                <div class="row">
+                    @foreach ($row as $product)
+                        <x-shop.product-card :product="$product" />
+                    @endforeach
+                </div>
+            @endforeach
+
             <div class="row">
-                @foreach ($products as $product)
-                    <div class="col-md-4 text-center animate-box">
-                        <div class="product">
-                            <div class="product-grid" style="background-image:url('{{ $product->images->first()?->url }}');">
-                                @if ($product->compare_at_price && $product->compare_at_price > $product->price)
-                                    <span class="sale">Promo</span>
-                                @endif
-                                <div class="inner">
-                                    <p>
-                                        <a href="{{ url('/produit/'.$product->slug) }}" class="icon"><i class="icon-eye"></i></a>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="desc">
-                                <h3><a href="{{ url('/produit/'.$product->slug) }}">{{ $product->name }}</a></h3>
-                                <span class="price">{{ number_format((float) $product->price, 0) }}&nbsp;€</span>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+                <div class="col-md-12 text-center" style="margin-top:20px;">
+                    <a href="{{ route('catalog') }}" class="btn btn-primary btn-outline btn-lg">Voir toute la boutique</a>
+                </div>
             </div>
         </div>
     </div>
