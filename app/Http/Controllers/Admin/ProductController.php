@@ -37,7 +37,7 @@ class ProductController extends Controller
     public function create(): View
     {
         return view('admin.products.create', [
-            'product' => new Product(),
+            'product' => new Product,
             'categories' => Category::ordered()->get(),
         ]);
     }

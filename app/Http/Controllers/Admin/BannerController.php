@@ -23,7 +23,7 @@ class BannerController extends Controller
     public function create(): View
     {
         return view('admin.banners.create', [
-            'banner' => new Banner(),
+            'banner' => new Banner,
             'positions' => Banner::POSITIONS,
         ]);
     }

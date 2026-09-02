@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\BlogPostFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class BlogPost extends Model
 {
-    /** @use HasFactory<\Database\Factories\BlogPostFactory> */
+    /** @use HasFactory<BlogPostFactory> */
     use HasFactory;
 
     protected $fillable = [

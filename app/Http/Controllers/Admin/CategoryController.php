@@ -23,7 +23,7 @@ class CategoryController extends Controller
     public function create(): View
     {
         return view('admin.categories.create', [
-            'category' => new Category(),
+            'category' => new Category,
             'categories' => Category::ordered()->get(),
         ]);
     }

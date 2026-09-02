@@ -66,7 +66,7 @@ class ProductSeeder extends Seeder
             [
                 'category_id' => $deco->id,
                 'name' => 'Earing Wireless',
-                'description' => "Lampe baladeuse sans fil au design épuré, corps en aluminium brossé et base lestée. Autonomie de 12 heures, idéale pour éclairer une table basse ou un coin lecture sans contrainte de prise.",
+                'description' => 'Lampe baladeuse sans fil au design épuré, corps en aluminium brossé et base lestée. Autonomie de 12 heures, idéale pour éclairer une table basse ou un coin lecture sans contrainte de prise.',
                 'price' => 100,
                 'compare_at_price' => 120,
                 'colors' => ['Laiton', 'Noir mat'],
@@ -110,7 +110,7 @@ class ProductSeeder extends Seeder
             [
                 'category_id' => $deco->id,
                 'name' => 'Ariane Prin',
-                'description' => "Vase en céramique tourné à la main, glaçure mate irrégulière qui capte la lumière. Chaque pièce est unique et légèrement différente de la photo, signature du travail artisanal.",
+                'description' => 'Vase en céramique tourné à la main, glaçure mate irrégulière qui capte la lumière. Chaque pièce est unique et légèrement différente de la photo, signature du travail artisanal.',
                 'price' => 99,
                 'compare_at_price' => null,
                 'colors' => ['Sable', 'Terracotta', 'Vert sauge'],
@@ -121,7 +121,7 @@ class ProductSeeder extends Seeder
             [
                 'category_id' => $chaises->id,
                 'name' => 'The Haluz Rocking Chair',
-                'description' => "Rocking-chair en bois cintré et cannage tressé main, silhouette légère et aérienne. Un classique revisité pour un coin lecture chaleureux.",
+                'description' => 'Rocking-chair en bois cintré et cannage tressé main, silhouette légère et aérienne. Un classique revisité pour un coin lecture chaleureux.',
                 'price' => 420,
                 'compare_at_price' => null,
                 'colors' => ['Naturel', 'Noyer'],

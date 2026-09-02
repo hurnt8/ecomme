@@ -26,13 +26,13 @@ class ReviewGenerator
 
     private const COMMENTS = [
         "Très belle finition, le produit est encore plus beau en vrai qu'en photo.",
-        "Bon rapport qualité-prix, la livraison était rapide et soignée.",
-        "Exactement ce que je cherchais, je recommande sans hésiter.",
-        "Belle pièce, conforme à la description. Un investissement qui en vaut la peine.",
-        "Coup de cœur ! La qualité des matériaux se sent tout de suite.",
-        "Très satisfait de mon achat, solide et bien fini.",
-        "Livraison rapide, emballage soigné, produit conforme.",
-        "Je recommande, le service client a été très réactif à mes questions.",
+        'Bon rapport qualité-prix, la livraison était rapide et soignée.',
+        'Exactement ce que je cherchais, je recommande sans hésiter.',
+        'Belle pièce, conforme à la description. Un investissement qui en vaut la peine.',
+        'Coup de cœur ! La qualité des matériaux se sent tout de suite.',
+        'Très satisfait de mon achat, solide et bien fini.',
+        'Livraison rapide, emballage soigné, produit conforme.',
+        'Je recommande, le service client a été très réactif à mes questions.',
     ];
 
     public static function syncCount(Product $product, int $count): void

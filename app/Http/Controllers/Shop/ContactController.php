@@ -36,7 +36,7 @@ class ContactController extends Controller
                 Log::error('Failed to send contact message', ['error' => $e->getMessage()]);
 
                 return back()->withInput()->with('toast', [
-                    'message' => "Une erreur est survenue, merci de réessayer ou de nous contacter directement par e-mail.",
+                    'message' => 'Une erreur est survenue, merci de réessayer ou de nous contacter directement par e-mail.',
                     'type' => 'error',
                 ]);
             }
