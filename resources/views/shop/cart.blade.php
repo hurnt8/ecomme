@@ -54,6 +54,9 @@
                                                     @if ($item->size)
                                                         <br><small class="text-muted">Taille : {{ $item->size }}</small>
                                                     @endif
+                                                    @if ($item->wasCapped)
+                                                        <br><small class="text-danger">Quantité ajustée : stock limité à {{ $item->quantity }}.</small>
+                                                    @endif
                                                 </span>
                                             </a>
                                         </td>
@@ -85,7 +88,7 @@
                             <h3 style="margin-top:0;">Récapitulatif</h3>
                             <p>Sous-total <strong style="float:right;">{{ number_format($subtotal, 0) }}&nbsp;€</strong></p>
                             <p class="text-muted">Frais de livraison calculés à l'étape suivante.</p>
-                            <p><a href="{{ url('/commande') }}" class="btn btn-primary btn-block">Passer commande</a></p>
+                            <p><a href="{{ route('checkout.index') }}" class="btn btn-primary btn-block">Passer commande</a></p>
                         </div>
                     </div>
                 </div>
