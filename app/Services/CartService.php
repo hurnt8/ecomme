@@ -71,7 +71,20 @@ class CartService
     }
 
     /**
-     * @return Collection<int, object{key: string, product: Product, color: ?string, size: ?string, quantity: int, lineTotal: float}>
+     * Reads the cart. A line whose requested quantity now exceeds live stock
+     * (the product can sell out between "add to cart" and checkout) is
+     * capped for display/ordering purposes and flagged via `wasCapped` —
+     * but the session itself is left untouched, so the flag keeps showing
+     * on every page (cart, checkout) until the customer explicitly updates
+     * or removes the line. This is what lets PlaceOrderAction refuse to
+     * silently order less than requested: the flag can't have been quietly
+     * cleared by an intervening page view.
+     *
+     * Lines for a product that's gone entirely (deleted, deactivated, or
+     * out of stock) are pruned from the session — there's no quantity fix
+     * for those, only removal, so nothing is lost by dropping them here.
+     *
+     * @return Collection<int, object{key: string, product: Product, color: ?string, size: ?string, quantity: int, lineTotal: float, wasCapped: bool}>
      */
     public function items(): Collection
     {
@@ -86,15 +99,21 @@ class CartService
             ->get()
             ->keyBy('id');
 
-        return collect($raw)
-            ->map(function (array $line, string $key) use ($products) {
+        $pruned = $raw;
+        $changed = false;
+
+        $items = collect($raw)
+            ->map(function (array $line, string $key) use ($products, &$pruned, &$changed) {
                 $product = $products->get($line['product_id']);
 
-                if (! $product || ! $product->is_active) {
+                if (! $product || ! $product->is_active || $product->stock <= 0) {
+                    unset($pruned[$key]);
+                    $changed = true;
+
                     return null;
                 }
 
-                $quantity = min($line['quantity'], max($product->stock, 0));
+                $quantity = min($line['quantity'], $product->stock);
 
                 return (object) [
                     'key' => $key,
@@ -103,10 +122,22 @@ class CartService
                     'size' => $line['size'],
                     'quantity' => $quantity,
                     'lineTotal' => round((float) $product->price * $quantity, 2),
+                    'wasCapped' => $quantity !== $line['quantity'],
                 ];
             })
             ->filter()
             ->values();
+
+        if ($changed) {
+            $this->save($pruned);
+        }
+
+        return $items;
+    }
+
+    public function hasAdjustments(): bool
+    {
+        return $this->items()->contains('wasCapped', true);
     }
 
     public function count(): int
