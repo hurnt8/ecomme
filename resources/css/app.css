@@ -1,4 +1,5 @@
-@import 'tailwindcss';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -6,6 +7,13 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Lato', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+/*
+ * Preflight (Tailwind's base reset) is intentionally excluded above: the shop and admin
+ * layouts load the shop-master template's own Bootstrap 3 stylesheet for visual fidelity,
+ * and Preflight's resets (margins, headings, form elements...) would fight it. Tailwind's
+ * utility classes are used only for new components that have no template equivalent.
+ */
