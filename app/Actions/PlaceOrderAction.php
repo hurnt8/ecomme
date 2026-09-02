@@ -58,6 +58,7 @@ class PlaceOrderAction
             $tax = $this->shipping->calculateTax($subtotal);
 
             $order = Order::create([
+                'user_id' => auth()->id(),
                 'status' => OrderStatus::Pending,
                 'customer_name' => $customer['name'],
                 'customer_email' => $customer['email'],

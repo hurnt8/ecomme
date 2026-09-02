@@ -8,12 +8,15 @@
         </div>
         <div class="row animate-box">
             <div class="col-md-8 col-md-offset-2">
-                <form class="form-inline" action="{{ url('/newsletter') }}" method="POST">
+                <form class="form-inline" action="{{ route('newsletter.store') }}" method="POST">
                     @csrf
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
-                            <label for="email" class="sr-only">Email</label>
-                            <input type="email" name="email" class="form-control" id="email" placeholder="Votre e-mail" required>
+                            <label for="newsletter-email" class="sr-only">Email</label>
+                            <input type="email" name="email" class="form-control" id="newsletter-email" placeholder="Votre e-mail" required>
+                            @error('email')
+                                <span style="display:block;color:#ffdada;font-size:12px;margin-top:4px;">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
@@ -39,6 +42,7 @@
                     <li><a href="{{ url('/contact') }}">Contact</a></li>
                     <li><a href="{{ url('/cgv') }}">CGV</a></li>
                     <li><a href="{{ url('/carrieres') }}">Carrières</a></li>
+                    <li><a href="{{ url('/presse') }}">Presse</a></li>
                 </ul>
             </div>
 
@@ -59,6 +63,7 @@
                     <li><a href="{{ url('/moyens-paiement') }}">Moyens de paiement</a></li>
                     <li><a href="{{ route('tracking.index') }}">Suivi de commande</a></li>
                     <li><a href="{{ url('/blog') }}">Blog</a></li>
+                    <li><a href="{{ auth()->check() ? route('account.index') : route('login') }}">{{ auth()->check() ? 'Mon compte' : 'Connexion' }}</a></li>
                 </ul>
             </div>
         </div>

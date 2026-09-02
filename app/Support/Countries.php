@@ -44,4 +44,19 @@ class Countries
     {
         return self::LIST[strtoupper((string) $code)] ?? null;
     }
+
+    /**
+     * French display names of the eurozone countries in {@see self::LIST},
+     * for informational copy (e.g. the shipping page).
+     *
+     * @return array<int, string>
+     */
+    public static function eurozoneLabels(): array
+    {
+        return collect(Eurozone::COUNTRY_CODES)
+            ->map(fn (string $code) => self::label($code) ?? $code)
+            ->sort()
+            ->values()
+            ->all();
+    }
 }

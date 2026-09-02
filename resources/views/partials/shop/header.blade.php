@@ -23,6 +23,11 @@
                         </form>
                     </li>
                     <li class="shopping-cart">
+                        <a href="{{ auth()->check() ? route('account.index') : route('login') }}" class="cart" title="{{ auth()->check() ? 'Mon compte' : 'Connexion' }}">
+                            <span><i class="icon-user"></i></span>
+                        </a>
+                    </li>
+                    <li class="shopping-cart">
                         <a href="{{ route('cart.index') }}" class="cart">
                             <span><small>{{ $cartCount }}</small><i class="icon-shopping-cart"></i></span>
                         </a>
