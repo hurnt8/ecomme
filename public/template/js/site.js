@@ -1,0 +1,182 @@
+/*
+ * Adapted from the shop-master template's main.js. Kept as a vendored jQuery
+ * script (not ported to Alpine) because the mobile off-canvas menu, dropdown
+ * hover and carousels are tightly coupled to animate.css/Owl/Flexslider
+ * classes already shipped with the template's CSS — reimplementing them
+ * would mean redefining that motion design, not simplifying it.
+ *
+ * Dropped from the original main.js: the page loader fade (no loader element
+ * in this build), and the scroll-triggered counter/animate-box reveal (relied
+ * on Modernizr's ".js" html class, which this build does not add).
+ */
+;(function ($) {
+    'use strict';
+
+    var mobileMenuOutsideClick = function () {
+        $(document).click(function (e) {
+            var container = $('#fh5co-offcanvas, .js-fh5co-nav-toggle');
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                if ($('body').hasClass('offcanvas')) {
+                    $('body').removeClass('offcanvas');
+                    $('.js-fh5co-nav-toggle').removeClass('active');
+                }
+            }
+        });
+    };
+
+    var offcanvasMenu = function () {
+        $('#page').prepend('<div id="fh5co-offcanvas" />');
+        $('#page').prepend('<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle fh5co-nav-white"><i></i></a>');
+
+        $('#fh5co-offcanvas').append($('.menu-1 > ul').clone());
+        $('#fh5co-offcanvas').append($('.menu-2 > ul').clone());
+
+        $('#fh5co-offcanvas .has-dropdown').addClass('offcanvas-has-dropdown');
+        $('#fh5co-offcanvas').find('li').removeClass('has-dropdown');
+
+        $('.offcanvas-has-dropdown').mouseenter(function () {
+            $(this).addClass('active').find('ul').slideDown(500, 'easeOutExpo');
+        }).mouseleave(function () {
+            $(this).removeClass('active').find('ul').slideUp(500, 'easeOutExpo');
+        });
+
+        $(window).resize(function () {
+            if ($('body').hasClass('offcanvas')) {
+                $('body').removeClass('offcanvas');
+                $('.js-fh5co-nav-toggle').removeClass('active');
+            }
+        });
+    };
+
+    var burgerMenu = function () {
+        $('body').on('click', '.js-fh5co-nav-toggle', function (event) {
+            if ($('body').hasClass('overflow offcanvas')) {
+                $('body').removeClass('overflow offcanvas');
+            } else {
+                $('body').addClass('overflow offcanvas');
+            }
+            $(this).toggleClass('active');
+            event.preventDefault();
+        });
+    };
+
+    var dropdown = function () {
+        $('.has-dropdown').mouseenter(function () {
+            $(this).find('.dropdown').css('display', 'block').addClass('animated-fast fadeInUpMenu');
+        }).mouseleave(function () {
+            $(this).find('.dropdown').css('display', 'none').removeClass('animated-fast fadeInUpMenu');
+        });
+    };
+
+    var tabs = function () {
+        var autoHeight = function () {
+            setTimeout(function () {
+                var tabContentWrap = $('.fh5co-tab-content-wrap'),
+                    tabHeight = $('.fh5co-tab-nav').outerHeight(),
+                    formActiveHeight = $('.tab-content.active').outerHeight(),
+                    totalHeight = parseInt(tabHeight + formActiveHeight + 90);
+
+                tabContentWrap.css('height', totalHeight);
+            }, 100);
+        };
+
+        autoHeight();
+        $(window).resize(autoHeight);
+
+        $('.fh5co-tab-nav a').on('click', function (event) {
+            var $this = $(this),
+                tab = $this.data('tab');
+
+            $('.tab-content').addClass('animated-fast fadeOutDown');
+            $('.fh5co-tab-nav li').removeClass('active');
+            $this.closest('li').addClass('active');
+            $this.closest('.fh5co-tabs').find('.tab-content[data-tab-content="' + tab + '"]')
+                .removeClass('animated-fast fadeOutDown')
+                .addClass('animated-fast active fadeIn');
+
+            autoHeight();
+            event.preventDefault();
+        });
+    };
+
+    var goToTop = function () {
+        $('.js-gotop').on('click', function (event) {
+            event.preventDefault();
+            $('html, body').animate({ scrollTop: $('html').offset().top }, 500, 'easeInOutExpo');
+            return false;
+        });
+
+        $(window).scroll(function () {
+            $('.js-top').toggleClass('active', $(window).scrollTop() > 200);
+        });
+    };
+
+    var sliderMain = function () {
+        var $slider = $('#fh5co-hero .flexslider');
+        if (!$slider.length) return;
+
+        $slider.flexslider({
+            animation: 'fade',
+            slideshowSpeed: 5000,
+            directionNav: true,
+            start: function () {
+                setTimeout(function () {
+                    $('.slider-text').removeClass('animated fadeInUp');
+                    $('.flex-active-slide').find('.slider-text').addClass('animated fadeInUp');
+                }, 500);
+            },
+            before: function () {
+                setTimeout(function () {
+                    $('.slider-text').removeClass('animated fadeInUp');
+                    $('.flex-active-slide').find('.slider-text').addClass('animated fadeInUp');
+                }, 500);
+            },
+        });
+
+        $('#fh5co-hero .flexslider .slides > li').css('height', $(window).height());
+        $(window).resize(function () {
+            $('#fh5co-hero .flexslider .slides > li').css('height', $(window).height());
+        });
+    };
+
+    var testimonialCarousel = function () {
+        var $owl = $('.owl-carousel-fullwidth');
+        if (!$owl.length) return;
+
+        $owl.owlCarousel({
+            items: 1,
+            loop: true,
+            margin: 0,
+            nav: false,
+            dots: true,
+            smartSpeed: 800,
+            autoHeight: true,
+        });
+    };
+
+    var productGalleryCarousel = function () {
+        var $owl = $('.product-carousel');
+        if (!$owl.length) return;
+
+        $owl.owlCarousel({
+            items: 1,
+            loop: false,
+            margin: 0,
+            nav: true,
+            dots: true,
+            smartSpeed: 500,
+        });
+    };
+
+    $(function () {
+        mobileMenuOutsideClick();
+        offcanvasMenu();
+        burgerMenu();
+        dropdown();
+        tabs();
+        goToTop();
+        sliderMain();
+        testimonialCarousel();
+        productGalleryCarousel();
+    });
+})(jQuery);

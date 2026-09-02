@@ -42,8 +42,10 @@
     @include('partials.shop.toasts')
 
     <script src="{{ asset('template/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('template/js/jquery.easing.1.3.js') }}"></script>
     <script src="{{ asset('template/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('template/js/jquery.flexslider-min.js') }}"></script>
+    <script src="{{ asset('template/js/site.js') }}"></script>
     @stack('scripts')
 </body>
 </html>
