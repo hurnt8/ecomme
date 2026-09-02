@@ -30,6 +30,25 @@ enum OrderStatus: string
         return ! in_array($this, [self::Pending, self::Cancelled], true);
     }
 
+    /**
+     * Allowed forward transitions. Completed and cancelled are terminal —
+     * an order that shipped or was cancelled by mistake gets fixed by
+     * creating a new one, not by rewinding the status.
+     */
+    public function canTransitionTo(self $next): bool
+    {
+        if ($next === $this) {
+            return true;
+        }
+
+        return match ($this) {
+            self::Pending => in_array($next, [self::Processing, self::Cancelled], true),
+            self::Processing => in_array($next, [self::Shipped, self::Cancelled], true),
+            self::Shipped => in_array($next, [self::Completed, self::Cancelled], true),
+            self::Completed, self::Cancelled => false,
+        };
+    }
+
     public static function values(): array
     {
         return array_column(self::cases(), 'value');
