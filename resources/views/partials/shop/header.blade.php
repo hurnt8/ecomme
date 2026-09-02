@@ -9,7 +9,7 @@
                     <li><a href="{{ route('catalog') }}">Boutique</a></li>
                     <li><a href="{{ url('/a-propos') }}">À propos</a></li>
                     <li><a href="{{ url('/contact') }}">Contact</a></li>
-                    <li><a href="{{ url('/suivi') }}">Suivi de commande</a></li>
+                    <li><a href="{{ route('tracking.index') }}">Suivi de commande</a></li>
                 </ul>
             </div>
             <div class="col-md-3 col-xs-4 text-right hidden-xs menu-2">

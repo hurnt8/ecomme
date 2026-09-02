@@ -57,7 +57,7 @@
                     <li><a href="{{ url('/livraison') }}">Livraison</a></li>
                     <li><a href="{{ url('/retours') }}">Retours</a></li>
                     <li><a href="{{ url('/moyens-paiement') }}">Moyens de paiement</a></li>
-                    <li><a href="{{ url('/suivi') }}">Suivi de commande</a></li>
+                    <li><a href="{{ route('tracking.index') }}">Suivi de commande</a></li>
                     <li><a href="{{ url('/blog') }}">Blog</a></li>
                 </ul>
             </div>
