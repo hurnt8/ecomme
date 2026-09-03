@@ -13,10 +13,23 @@
             @elseif ($product->is_new)
                 <x-shop.badge label="Nouveau" />
             @endif
+            {{-- Not a <p>: the HTML parser auto-closes an open <p> as soon as it sees a <form>
+                 start tag (form is on the small list of elements that implicitly end a
+                 paragraph), so a <form> nested here would silently end up as a stray sibling
+                 after </p> instead of sitting next to the eye link — see the .fh5co-quick-actions
+                 rule in app.css that gives this div the same table-cell centering .inner p had. --}}
             <div class="inner">
-                <p>
-                    <a href="{{ $url }}" class="icon"><i class="icon-eye"></i></a>
-                </p>
+                <div class="fh5co-quick-actions">
+                    <a href="{{ $url }}" class="icon" title="Voir le produit" aria-label="Voir le produit"><i class="icon-eye"></i></a>
+                    <form method="POST" action="{{ route('cart.store') }}" class="product-quick-add">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit" class="icon" title="Ajouter au panier" aria-label="Ajouter au panier">
+                            <i class="icon-shopping-cart"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="desc">

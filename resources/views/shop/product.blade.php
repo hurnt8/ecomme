@@ -59,14 +59,20 @@
                                             </select>
                                         @endif
 
-                                        <span class="input-group" style="width:120px;display:inline-flex;">
-                                            <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" @click="quantity = Math.max(1, quantity - 1)">-</button>
-                                            </span>
-                                            <input type="number" name="quantity" x-model.number="quantity" min="1" :max="max" class="form-control text-center">
-                                            <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" @click="quantity = Math.min(max, quantity + 1)">+</button>
-                                            </span>
+                                        {{-- Not Bootstrap's .input-group: it's display:table with a float:left,
+                                             width:100% .form-control designed to be sized by its .input-group-btn
+                                             siblings' table-cell auto-width — inside this row's flex-wrap container
+                                             that table structure falls apart (the .form-control loses its table
+                                             ancestor and reflows on its own), overlapping the buttons and pushing
+                                             the "+" past the edge on narrow screens. Plain flex, fully self-sized. --}}
+                                        {{-- Both .btn and .form-control carry this template's generous 10px 20px
+                                             padding by design (fine for a full-width text field, too much for a
+                                             1-2 digit stepper) — tightened here just for this control so "-"/"+"
+                                             stay comfortable to tap while leaving the number itself room to show. --}}
+                                        <span style="display:flex;width:150px;">
+                                            <button type="button" class="btn btn-default" style="flex:0 0 auto;padding-left:14px;padding-right:14px;" @click="quantity = Math.max(1, quantity - 1)">-</button>
+                                            <input type="number" name="quantity" x-model.number="quantity" min="1" :max="max" class="form-control text-center" style="flex:1 1 auto;width:0;min-width:0;padding-left:4px;padding-right:4px;">
+                                            <button type="button" class="btn btn-default" style="flex:0 0 auto;padding-left:14px;padding-right:14px;" @click="quantity = Math.min(max, quantity + 1)">+</button>
                                         </span>
                                     </div>
 

@@ -279,6 +279,14 @@ html {
     display: none;
 }
 
+/*
+ * li.search is float:left in the template (style.css), which was fine when it was the last item
+ * in the list. Un-floating li.shopping-cart below doesn't stop a floated li.search from taking
+ * itself out of normal flow — its non-floated following siblings then start at the same vertical
+ * position as if the float weren't there, overlapping it, since a float never pushes a
+ * following block box down (only wraps its inline content around it).
+ */
+#fh5co-offcanvas ul li.search,
 #fh5co-offcanvas ul li.shopping-cart {
     float: none;
     display: block;
@@ -308,12 +316,30 @@ html {
 }
 
 /*
- * Toggled by site.js's hideFloatingButtonNearFooter() once the footer scrolls into view, so the
- * fixed WhatsApp shortcut stops sitting on top of the footer's own social icons.
+ * Replaces the template's .inner p (which centered the eye-link overlay via table-cell) now that
+ * the wrapper is a div instead of a p — see product-card.blade.php for why a <form> can't nest
+ * inside a <p>. Same table-cell/vertical-align:middle centering, just under a different selector.
  */
-.js-whatsapp-button.is-hidden {
-    opacity: 0;
-    pointer-events: none;
+.product .product-grid .inner .fh5co-quick-actions {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/*
+ * The card's overlay only ever held a single <a class="icon">; a <form> is block-level by
+ * default and would stack below it rather than sit alongside it, so the quick-add form (a form
+ * is needed for a real POST, unlike the eye link) is set inline. The button itself reuses
+ * .icon's existing padding/background/hover styling; only the browser's default button chrome
+ * (border, font) needs resetting to match the <a>.
+ */
+.product-quick-add {
+    display: inline;
+}
+
+.product-quick-add button.icon {
+    border: 0;
+    font: inherit;
+    cursor: pointer;
 }
 
 #fh5co-offcanvas .offcanvas-label {

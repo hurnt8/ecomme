@@ -45,6 +45,9 @@
                         @if ($settings->contact_address)
                             <li class="address">{{ $settings->contact_address }}</li>
                         @endif
+                        @if ($settings->whatsapp_number)
+                            <li class="url"><a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings->whatsapp_number) }}" target="_blank" rel="noopener">WhatsApp</a></li>
+                        @endif
                     </ul>
                 </div>
             </div>

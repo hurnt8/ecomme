@@ -38,7 +38,6 @@
         <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
     </div>
 
-    @include('partials.shop.whatsapp-button')
     @include('partials.shop.toasts')
 
     <script src="{{ asset('template/js/jquery.min.js') }}"></script>
