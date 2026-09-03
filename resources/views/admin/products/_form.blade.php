@@ -47,7 +47,7 @@
         </div>
 
         @if ($product->exists && $product->images->isNotEmpty())
-            <div class="grid grid-cols-3 gap-2">
+            <div class="grid grid-cols-2 gap-2">
                 @foreach ($product->images as $image)
                     <div class="relative border border-neutral-200 rounded overflow-hidden">
                         <img src="{{ $image->url }}" alt="" class="w-full h-20 object-cover">

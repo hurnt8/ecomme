@@ -8,25 +8,29 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 animate-box">
-                    <div class="owl-carousel owl-carousel-fullwidth product-carousel">
-                        @forelse ($product->images as $image)
-                            <div class="item">
-                                <div class="active text-center">
-                                    <figure>
-                                        <img src="{{ $image->url }}" alt="{{ $product->name }}">
-                                    </figure>
+                    @if ($product->images->count() > 1)
+                        {{-- Owl Carousel needs 2+ slides — with exactly one it throws mid-init
+                             (reading 'clone' on undefined) and never clears its own
+                             .owl-loading state, leaving the gallery blank. A single image
+                             doesn't need slide/dot/nav machinery anyway. --}}
+                        <div class="owl-carousel owl-carousel-fullwidth product-carousel">
+                            @foreach ($product->images as $image)
+                                <div class="item">
+                                    <div class="active text-center">
+                                        <figure>
+                                            <img src="{{ $image->url }}" alt="{{ $product->name }}">
+                                        </figure>
+                                    </div>
                                 </div>
-                            </div>
-                        @empty
-                            <div class="item">
-                                <div class="active text-center">
-                                    <figure>
-                                        <img src="{{ asset('template/images/product-1.jpg') }}" alt="{{ $product->name }}">
-                                    </figure>
-                                </div>
-                            </div>
-                        @endforelse
-                    </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="text-center">
+                            <figure>
+                                <img class="img-responsive center-block" src="{{ $product->images->first()->url ?? asset('template/images/product-1.jpg') }}" alt="{{ $product->name }}">
+                            </figure>
+                        </div>
+                    @endif
 
                     <div class="row animate-box">
                         <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
