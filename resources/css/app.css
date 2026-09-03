@@ -72,3 +72,64 @@ html {
 .fh5co-nav .menu-2 li.search {
     width: 72%;
 }
+
+/*
+ * The template's `.fh5co-cover-sm` header (about/contact/product/single.html) is 600px tall —
+ * fine as a storytelling banner on those content pages, but excessive on a listing page like
+ * the catalog, where visitors want to reach the filters and products quickly. Compact variant
+ * for pages that are primarily functional rather than editorial.
+ */
+.fh5co-cover.fh5co-cover-compact,
+.fh5co-cover.fh5co-cover-compact .display-t,
+.fh5co-cover.fh5co-cover-compact .display-tc {
+    height: 260px;
+}
+
+@media (max-width: 768px) {
+    .fh5co-cover.fh5co-cover-compact,
+    .fh5co-cover.fh5co-cover-compact .display-t,
+    .fh5co-cover.fh5co-cover-compact .display-tc {
+        height: 220px;
+    }
+}
+
+/*
+ * Catalog filter bar — no template equivalent exists (product.html has no filters at all),
+ * so this reuses the template's own form-control/btn/checkbox-inline styling inside a plain
+ * bordered panel rather than introducing a new visual language.
+ */
+.fh5co-filters {
+    background: #f7f7f5;
+    border: 1px solid #ececec;
+    padding: 20px 20px 15px;
+    margin-bottom: 30px;
+}
+
+.fh5co-filters label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #8f8f8f;
+    margin-bottom: 4px;
+}
+
+.fh5co-filters .form-group {
+    margin-bottom: 15px;
+}
+
+.fh5co-filters-footer {
+    padding-top: 5px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.fh5co-filters-footer .checkbox-inline {
+    font-size: 13px;
+}
+
+@media (max-width: 768px) {
+    .fh5co-filters-footer .text-right {
+        text-align: left;
+        margin-top: 10px;
+    }
+}
