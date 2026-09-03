@@ -342,6 +342,23 @@ html {
     cursor: pointer;
 }
 
+/*
+ * "Nouveau" and "Promo" both used the template's single .sale badge color (the brand's gold
+ * accent), so a discounted card and a new-arrival card were indistinguishable at a glance and
+ * the discount itself carried no visual urgency. .sale-promo (badge.blade.php's "promo" variant)
+ * and .price-current (price.blade.php, shown only when on sale) recolor just those two spots —
+ * a warm terracotta, not the same red already used site-wide for form errors, so "reduced price"
+ * doesn't get misread as "something's wrong".
+ */
+.product .product-grid .sale.sale-promo {
+    background: #b5502e;
+}
+
+.price-current {
+    color: #b5502e;
+    font-weight: 700;
+}
+
 #fh5co-offcanvas .offcanvas-label {
     display: inline;
     margin-left: 10px;

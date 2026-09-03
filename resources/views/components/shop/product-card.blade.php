@@ -9,7 +9,7 @@
     <div class="product">
         <div class="product-grid" style="background-image:url('{{ $product->images->first()?->url }}');">
             @if ($onSale)
-                <x-shop.badge label="Promo" />
+                <x-shop.badge label="Promo" variant="promo" />
             @elseif ($product->is_new)
                 <x-shop.badge label="Nouveau" />
             @endif
