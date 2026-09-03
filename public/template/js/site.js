@@ -113,6 +113,24 @@
         });
     };
 
+    // The WhatsApp shortcut is fixed bottom-right so it stays reachable while browsing, but
+    // that also means it sits on top of the footer's own social icons once the footer scrolls
+    // into view (there's nothing below the footer for it to float over instead). Hide it for
+    // as long as the footer is on screen.
+    var hideFloatingButtonNearFooter = function () {
+        var $button = $('.js-whatsapp-button');
+        var $footer = $('#fh5co-footer');
+        if (!$button.length || !$footer.length) return;
+
+        var toggle = function () {
+            var footerVisible = $footer.offset().top < $(window).scrollTop() + $(window).height();
+            $button.toggleClass('is-hidden', footerVisible);
+        };
+
+        $(window).on('scroll resize', toggle);
+        toggle();
+    };
+
     var sliderMain = function () {
         var $slider = $('#fh5co-hero .flexslider');
         if (!$slider.length) return;
@@ -177,6 +195,7 @@
         dropdown();
         tabs();
         goToTop();
+        hideFloatingButtonNearFooter();
         sliderMain();
         testimonialCarousel();
         productGalleryCarousel();

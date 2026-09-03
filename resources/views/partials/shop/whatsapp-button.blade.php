@@ -6,8 +6,10 @@
        target="_blank"
        rel="noopener"
        aria-label="Contactez-nous sur WhatsApp"
+       class="js-whatsapp-button"
        style="position:fixed;right:20px;bottom:20px;width:52px;height:52px;border-radius:50%;background:#25D366;
-              display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.25);z-index:1000;">
+              display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.25);z-index:1000;
+              transition:opacity .2s;">
         <i class="icon-phone" style="color:#fff;font-size:22px;"></i>
     </a>
 @endif

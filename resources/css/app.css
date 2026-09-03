@@ -307,6 +307,15 @@ html {
     vertical-align: middle;
 }
 
+/*
+ * Toggled by site.js's hideFloatingButtonNearFooter() once the footer scrolls into view, so the
+ * fixed WhatsApp shortcut stops sitting on top of the footer's own social icons.
+ */
+.js-whatsapp-button.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
 #fh5co-offcanvas .offcanvas-label {
     display: inline;
     margin-left: 10px;
