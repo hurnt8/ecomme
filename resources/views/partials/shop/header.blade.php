@@ -1,7 +1,10 @@
 <nav class="fh5co-nav" role="navigation">
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-xs-2">
+            {{-- col-xs-8 (not the template's original col-xs-2, sized for its short "Shop." logo): menu-1/menu-2
+                 are display:none below 768px anyway, so this only needs to fit our longer site name before
+                 the absolutely-positioned .fh5co-nav-toggle hamburger on the right. --}}
+            <div class="col-md-3 col-xs-8">
                 <div id="fh5co-logo"><a href="{{ route('home') }}">{{ $settings->site_name }}</a></div>
             </div>
             <div class="col-md-6 col-xs-6 text-center menu-1">
