@@ -39,7 +39,7 @@
                             <input type="hidden" name="search" value="{{ request('search') }}">
 
                             <div class="row">
-                                <div class="col-sm-6 col-md-4 col-lg-2 form-group">
+                                <div class="col-sm-6 col-md-4 col-lg-3 form-group">
                                     <label for="filter-category">Catégorie</label>
                                     <select name="category" id="filter-category" class="form-control" onchange="this.form.submit()">
                                         <option value="">Toutes</option>
@@ -52,7 +52,7 @@
                                 </div>
 
                                 @if (count($sizes))
-                                    <div class="col-sm-6 col-md-4 col-lg-2 form-group">
+                                    <div class="col-sm-6 col-md-4 col-lg-3 form-group">
                                         <label for="filter-size">Taille</label>
                                         <select name="size" id="filter-size" class="form-control" onchange="this.form.submit()">
                                             <option value="">Toutes</option>
@@ -64,7 +64,7 @@
                                 @endif
 
                                 @if (count($colors))
-                                    <div class="col-sm-6 col-md-4 col-lg-2 form-group">
+                                    <div class="col-sm-6 col-md-4 col-lg-3 form-group">
                                         <label for="filter-color">Couleur</label>
                                         <select name="color" id="filter-color" class="form-control" onchange="this.form.submit()">
                                             <option value="">Toutes</option>
@@ -84,7 +84,7 @@
                                     <input type="number" name="max_price" id="filter-max-price" value="{{ request('max_price') }}" class="form-control" placeholder="—">
                                 </div>
 
-                                <div class="col-sm-6 col-md-4 col-lg-2 form-group">
+                                <div class="col-sm-6 col-md-4 col-lg-3 form-group">
                                     <label for="filter-sort">Trier par</label>
                                     <select name="sort" id="filter-sort" class="form-control" onchange="this.form.submit()">
                                         <option value="newest" @selected($sort === 'newest')>Plus récents</option>
