@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Shop;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -65,6 +66,11 @@ class CatalogController extends Controller
             'sizes' => $this->distinctValues('sizes'),
             'colors' => $this->distinctValues('colors'),
             'sort' => $sort,
+            'promoBanners' => Banner::active()
+                ->whereIn('position', ['shop_new', 'shop_sale'])
+                ->orderBy('position')
+                ->orderBy('sort_order')
+                ->get(),
         ]);
     }
 

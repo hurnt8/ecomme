@@ -133,3 +133,79 @@ html {
         margin-top: 10px;
     }
 }
+
+/*
+ * Promotional banners (shop_new / shop_sale positions, and home_secondary) — reuses the same
+ * visual language as the hero cover (background-image + dark overlay + centered white text)
+ * in card form, since the template has no dedicated promo-tile component of its own.
+ */
+.fh5co-promo-banner {
+    display: block;
+    position: relative;
+    height: 220px;
+    margin-bottom: 30px;
+    background-size: cover;
+    background-position: center;
+    text-decoration: none;
+}
+
+.fh5co-promo-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    transition: background 0.3s;
+}
+
+.fh5co-promo-banner:hover .fh5co-promo-banner-overlay {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.fh5co-promo-banner-text {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.fh5co-promo-banner-text h3 {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0 0 8px;
+}
+
+.fh5co-promo-banner-text p {
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    font-size: 13px;
+}
+
+.fh5co-countdown {
+    margin-top: 12px;
+}
+
+.fh5co-countdown-label {
+    display: block;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.fh5co-countdown-clock {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 3px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}

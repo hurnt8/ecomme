@@ -1,6 +1,6 @@
 @props(['title', 'subtitle' => null, 'image' => 'img_bg_2.jpg'])
 
-<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url({{ asset('template/images/'.$image) }});">
+<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm fh5co-cover-compact" role="banner" style="background-image:url({{ asset('template/images/'.$image) }});">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">

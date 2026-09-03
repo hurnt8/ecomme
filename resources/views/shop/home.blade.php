@@ -72,6 +72,18 @@
         </div>
     </div>
 
+    @if ($secondaryBanners->isNotEmpty())
+        <div class="container" style="margin-top:50px;">
+            <div class="row animate-box">
+                @foreach ($secondaryBanners as $banner)
+                    <div class="col-md-{{ 12 / min($secondaryBanners->count(), 3) }}">
+                        <x-shop.promo-banner :banner="$banner" />
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
+
     <div id="fh5co-product">
         <div class="container">
             <div class="row animate-box">

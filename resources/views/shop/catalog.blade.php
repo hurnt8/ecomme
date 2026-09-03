@@ -22,6 +22,16 @@
 
     <div id="fh5co-product">
         <div class="container">
+            @if ($promoBanners->isNotEmpty())
+                <div class="row animate-box">
+                    @foreach ($promoBanners as $banner)
+                        <div class="col-md-{{ $promoBanners->count() > 1 ? 6 : 12 }}">
+                            <x-shop.promo-banner :banner="$banner" :show-countdown="$banner->position === 'shop_sale'" />
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
             <div class="row animate-box">
                 <div class="col-md-12">
                     <div class="fh5co-filters">

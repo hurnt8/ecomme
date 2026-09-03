@@ -33,6 +33,7 @@ class UpdateSettingsRequest extends FormRequest
             'international_shipping_fee' => ['required', 'numeric', 'min:0'],
             'currency' => ['required', 'string', 'size:3'],
             'announcement_text' => ['nullable', 'string', 'max:255'],
+            'sale_ends_at' => ['nullable', 'date'],
             'bank_account_holder' => ['nullable', 'string', 'max:255'],
             'bank_name' => ['nullable', 'string', 'max:255'],
             'bank_iban' => ['nullable', 'string', 'max:50'],

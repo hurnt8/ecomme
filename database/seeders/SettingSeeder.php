@@ -24,7 +24,7 @@ class SettingSeeder extends Seeder
             'free_shipping_threshold' => 150,
             'international_shipping_fee' => 25,
             'currency' => 'EUR',
-            'sale_ends_at' => null,
+            'sale_ends_at' => now()->addDays(7),
             'announcement_text' => 'Livraison offerte dès 150€ d\'achat en France métropolitaine',
             'bank_account_holder' => 'Atelier Maison SAS',
             'bank_name' => 'Banque Populaire',

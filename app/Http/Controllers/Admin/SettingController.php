@@ -22,6 +22,7 @@ class SettingController extends Controller
     {
         $data = $request->validated();
         $data['notify_new_orders'] = $request->boolean('notify_new_orders');
+        $data['sale_ends_at'] = $request->filled('sale_ends_at') ? $data['sale_ends_at'] : null;
 
         if ($request->hasFile('logo')) {
             $current = $this->settings->current();

@@ -21,6 +21,11 @@
                     @endif
                 </div>
                 <x-admin.field label="Bandeau d'annonce" name="announcement_text" :value="$settings->announcement_text" />
+                <x-admin.field label="Fin de la promotion en cours (optionnel)" name="sale_ends_at" type="datetime-local"
+                                :value="$settings->sale_ends_at?->format('Y-m-d\TH:i')" />
+                <p class="text-xs text-neutral-400 -mt-2">
+                    Affiche un compte à rebours sur la bannière « Boutique — promotions ». Laissez vide pour masquer le compte à rebours.
+                </p>
             </div>
         </section>
 
