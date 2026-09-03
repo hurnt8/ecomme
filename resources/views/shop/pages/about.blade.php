@@ -26,6 +26,34 @@
                         <img class="img-responsive" src="{{ asset('template/images/img_bg_1.jpg') }}" alt="Atelier">
                     </div>
                 </div>
+                <div class="row animate-box">
+                    <div class="col-md-12">
+                        <div class="desc">
+                            <h3>Notre gamme</h3>
+                            <p>Notre catalogue s'organise en cinq univers complémentaires : <strong>Mobilier</strong> pour l'intérieur (assises, tables, rangements), <strong>Jardin &amp; Extérieur</strong> pour aménager terrasses et jardins, <strong>Décoration</strong> pour personnaliser chaque pièce, <strong>Équipement Maison</strong> pour l'électroménager et le quotidien, et <strong>Bois &amp; Chauffage</strong> pour le chauffage au bois, une activité historique de la maison que nous poursuivons en parallèle du mobilier.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row animate-box">
+                    <div class="col-md-4">
+                        <div class="desc text-center">
+                            <h3>+10 ans</h3>
+                            <p>d'expérience dans la sélection de mobilier et de bois de qualité</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="desc text-center">
+                            <h3>5 univers</h3>
+                            <p>Mobilier, Jardin &amp; Extérieur, Décoration, Équipement Maison, Bois &amp; Chauffage</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="desc text-center">
+                            <h3>France</h3>
+                            <p>expédition en zone euro, préparation et service client basés en France</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

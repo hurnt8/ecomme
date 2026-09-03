@@ -20,6 +20,10 @@
                         </p>
                     </div>
                     <div class="desc">
+                        <h3>Activité</h3>
+                        <p>{{ $settings->site_name }} exerce une activité de vente en ligne de mobilier, d'articles de jardin et d'extérieur, de décoration, d'équipement de la maison et de bois de chauffage, à destination des particuliers et professionnels.</p>
+                    </div>
+                    <div class="desc">
                         <h3>Hébergement</h3>
                         <p>Coordonnées de l'hébergeur à compléter avant la mise en production du site.</p>
                     </div>
@@ -30,6 +34,10 @@
                     <div class="desc">
                         <h3>Médiation de la consommation</h3>
                         <p>Conformément à l'article L.616-1 du Code de la consommation, tout client peut recourir gratuitement à un médiateur de la consommation en cas de litige non résolu directement avec notre service client.</p>
+                    </div>
+                    <div class="desc">
+                        <h3>Droit applicable</h3>
+                        <p>Le présent site et les présentes mentions légales sont soumis au droit français. En cas de litige et à défaut de résolution amiable, les tribunaux français seront seuls compétents.</p>
                     </div>
                 </div>
             </div>

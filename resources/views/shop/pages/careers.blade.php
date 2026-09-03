@@ -12,8 +12,12 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="desc">
                         <h3>Travailler chez {{ $settings->site_name }}</h3>
-                        <p>Nous sommes une petite équipe attachée au travail bien fait, de la sélection des matières jusqu'au service après-vente. Nous recrutons ponctuellement sur des profils liés à la logistique, au service client et à la gestion de catalogue.</p>
+                        <p>Nous sommes une petite équipe attachée au travail bien fait, de la sélection des matières jusqu'au service après-vente. Notre activité couvre à la fois le mobilier et la décoration et un métier plus traditionnel, le bois de chauffage, ce qui nous donne des profils de postes assez variés.</p>
                         <p>Aucun poste n'est ouvert pour le moment, mais nous étudions volontiers les candidatures spontanées.</p>
+                    </div>
+                    <div class="desc">
+                        <h3>Nos métiers</h3>
+                        <p>Selon les besoins, nous recrutons sur des profils liés à la <strong>logistique</strong> (préparation de commandes, manutention de charges lourdes comme le bois de chauffage ou le mobilier de jardin), au <strong>service client</strong> (suivi de commande, SAV), à la <strong>gestion de catalogue</strong> (fiches produits, photographie) et, ponctuellement, à des <strong>partenaires bûcherons</strong> pour l'approvisionnement en bois.</p>
                     </div>
                     <div class="desc">
                         <h3>Candidature spontanée</h3>

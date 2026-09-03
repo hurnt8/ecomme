@@ -36,6 +36,10 @@
                         <h3>Sécurité</h3>
                         <p>Aucune donnée bancaire n'est collectée ni stockée sur ce site : le virement s'effectue directement depuis votre espace bancaire personnel.</p>
                     </div>
+                    <div class="desc">
+                        <h3>Commandes professionnelles et grandes quantités</h3>
+                        <p>Pour les commandes de bois de chauffage en volume ou l'équipement d'un professionnel, un devis avec des modalités de paiement adaptées (acompte, paiement à la livraison) peut être établi sur demande via notre <a href="{{ route('contact.index') }}">formulaire de contact</a>.</p>
+                    </div>
                 </div>
             </div>
         </div>

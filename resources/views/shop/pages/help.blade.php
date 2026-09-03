@@ -28,7 +28,19 @@
                     </div>
                     <div class="desc">
                         <h3>Puis-je retourner un article ?</h3>
-                        <p>Oui, dans les conditions décrites sur notre page <a href="{{ url('/retours') }}">Retours</a>.</p>
+                        <p>Oui, dans les conditions décrites sur notre page <a href="{{ url('/retours') }}">Retours</a>. Le bois de chauffage entamé ou livré en vrac ne peut toutefois pas être repris, pour des raisons pratiques et d'hygiène.</p>
+                    </div>
+                    <div class="desc">
+                        <h3>Comment est livré le bois de chauffage ?</h3>
+                        <p>Le bois de chauffage est vendu au stère ou en filets, sur palette. En raison du poids et du volume, la livraison de ces produits peut nécessiter une prise de rendez-vous et se fait au pied de l'immeuble ou de la propriété (le transporteur ne monte pas les étages). Voir notre page <a href="{{ url('/livraison') }}">Livraison</a> pour le détail.</p>
+                    </div>
+                    <div class="desc">
+                        <h3>Le mobilier de jardin résiste-t-il aux intempéries ?</h3>
+                        <p>Nos références Jardin &amp; Extérieur sont sélectionnées pour un usage extérieur (bois traité, résine tressée, métal thermolaqué). Chaque fiche produit précise les matériaux et l'entretien recommandé avant l'hiver.</p>
+                    </div>
+                    <div class="desc">
+                        <h3>Proposez-vous des devis pour les professionnels ou les grosses quantités ?</h3>
+                        <p>Oui, notamment pour les commandes de bois de chauffage en volume ou l'équipement d'un commerce. Contactez-nous via le <a href="{{ route('contact.index') }}">formulaire de contact</a> en précisant votre besoin.</p>
                     </div>
                     <div class="desc">
                         <h3>Une autre question ?</h3>

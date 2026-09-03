@@ -16,7 +16,18 @@
                     </div>
                     <div class="desc">
                         <h3>Cookies utilisés sur ce site</h3>
-                        <p>Nous utilisons uniquement des cookies strictement nécessaires au fonctionnement du site : maintien de votre session, de votre panier et de votre connexion si vous possédez un compte. Ces cookies ne nécessitent pas de consentement préalable et ne sont pas utilisés à des fins publicitaires.</p>
+                        <p>Nous utilisons uniquement des cookies strictement nécessaires au fonctionnement du site. Ces cookies ne nécessitent pas de consentement préalable et ne sont jamais utilisés à des fins publicitaires ou de traçage :</p>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr><th>Cookie</th><th>Finalité</th><th>Durée</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Session</td><td>Maintien de votre navigation (panier, page courante)</td><td>Session (fermeture du navigateur)</td></tr>
+                                <tr><td>Panier</td><td>Conservation du contenu de votre panier entre deux visites</td><td>Jusqu'à 2 semaines</td></tr>
+                                <tr><td>Connexion</td><td>Maintien de votre connexion à votre compte</td><td>Jusqu'à 30 jours (selon "Se souvenir de moi")</td></tr>
+                                <tr><td>Jeton CSRF</td><td>Protection contre les attaques lors de l'envoi de formulaires</td><td>Session</td></tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="desc">
                         <h3>Gestion des cookies</h3>

@@ -23,6 +23,10 @@
                         <p>Les commandes sont préparées sous 2 à 4 jours ouvrés après validation du paiement, puis expédiées. Le délai d'acheminement varie ensuite de 2 à 7 jours ouvrés selon la destination.</p>
                     </div>
                     <div class="desc">
+                        <h3>Bois de chauffage et articles volumineux</h3>
+                        <p>Le bois de chauffage (vendu au stère ou en filets, sur palette) et certains articles de mobilier de jardin volumineux sont acheminés par un transporteur spécialisé en raison de leur poids. La livraison se fait au pied de l'immeuble ou de la propriété, avec prise de rendez-vous préalable par téléphone ou e-mail. Le délai d'acheminement pour ces produits peut être légèrement plus long, entre 5 et 10 jours ouvrés.</p>
+                    </div>
+                    <div class="desc">
                         <h3>Suivi</h3>
                         <p>Un e-mail d'expédition vous est envoyé dès que votre commande quitte notre entrepôt. Vous pouvez suivre son statut à tout moment sur notre page <a href="{{ route('tracking.index') }}">Suivi de commande</a>.</p>
                     </div>
