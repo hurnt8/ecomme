@@ -35,6 +35,7 @@
                         </div>
                     </form>
 
+                    <p><a href="{{ route('password.request') }}">Mot de passe oublié ?</a></p>
                     <p>Pas encore de compte ? <a href="{{ route('register') }}">Créer un compte</a></p>
                 </div>
             </div>

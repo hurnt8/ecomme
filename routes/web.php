@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Shop\AccountController;
 use App\Http\Controllers\Shop\BlogController;
@@ -86,6 +88,16 @@ Route::middleware('guest')->group(function () {
     Route::get('/inscription', [RegisteredUserController::class, 'create'])->name('register');
     Route::post('/inscription', [RegisteredUserController::class, 'store'])
         ->middleware('throttle:5,1');
+
+    Route::get('/mot-de-passe-oublie', [PasswordResetLinkController::class, 'create'])->name('password.request');
+    Route::post('/mot-de-passe-oublie', [PasswordResetLinkController::class, 'store'])
+        ->middleware('throttle:5,1')
+        ->name('password.email');
+
+    Route::get('/reinitialiser-mot-de-passe/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+    Route::post('/reinitialiser-mot-de-passe', [NewPasswordController::class, 'store'])
+        ->middleware('throttle:5,1')
+        ->name('password.update');
 });
 
 Route::post('/deconnexion', [AuthenticatedSessionController::class, 'destroy'])
