@@ -17,3 +17,46 @@
  * and Preflight's resets (margins, headings, form elements...) would fight it. Tailwind's
  * utility classes are used only for new components that have no template equivalent.
  */
+
+/*
+ * Bootstrap 3's own reset sets html{font-size:10px} (its normalize base — Bootstrap itself
+ * is 100% px-based and never reads this value). Tailwind v4's spacing/sizing utilities are
+ * rem-based and DO assume the standard 16px root, so without this override every Tailwind
+ * rem value silently renders at 62.5% of its intended size on any page that also loads
+ * bootstrap.css (i.e. every shop page, since this file loads after it).
+ */
+html {
+    font-size: 16px;
+}
+
+/*
+ * Tailwind v4 auto-generates a `.container` utility because that literal class name appears
+ * throughout this Bootstrap-based template's markup (it's Bootstrap's grid container, not a
+ * deliberate Tailwind usage). Both rules share identical specificity, so this file — loaded
+ * last on the shop layout — normally decides the winner; putting Tailwind's own utilities in
+ * `@layer utilities` is supposed to make them lose to unlayered CSS regardless of order, but
+ * that didn't hold up empirically here, so this re-declares Bootstrap's own breakpoint widths
+ * outright rather than depend on layer/order semantics working a particular way.
+ */
+.container {
+    width: auto;
+    max-width: none;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
