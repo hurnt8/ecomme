@@ -89,19 +89,6 @@
                 <p>
                     <small class="block">&copy; {{ now()->year }} {{ $settings->site_name }}. Tous droits réservés.</small>
                 </p>
-                <p>
-                    <ul class="fh5co-social-icons">
-                        @if ($settings->social_facebook)
-                            <li><a href="{{ $settings->social_facebook }}" target="_blank" rel="noopener"><i class="icon-facebook"></i></a></li>
-                        @endif
-                        @if ($settings->social_instagram)
-                            <li><a href="{{ $settings->social_instagram }}" target="_blank" rel="noopener"><i class="icon-instagram"></i></a></li>
-                        @endif
-                        @if ($settings->social_twitter)
-                            <li><a href="{{ $settings->social_twitter }}" target="_blank" rel="noopener"><i class="icon-twitter"></i></a></li>
-                        @endif
-                    </ul>
-                </p>
             </div>
         </div>
     </div>
