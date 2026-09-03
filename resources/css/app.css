@@ -60,3 +60,15 @@ html {
         width: 1170px;
     }
 }
+
+/*
+ * The template's header only ever had one icon on the right (cart), styled via
+ * `.menu-2 li.search { width: 83% }` leaving just enough float:right space for it. We added
+ * a second icon (account/login) reusing the same `li.shopping-cart` styling, so two floated
+ * icons now compete for the same ~17% margin. Widening the menu-2 column itself (see
+ * header.blade.php) makes most of the room; this trims the search field a bit further so
+ * both icons clear it without cramping the "Rechercher.." placeholder back down.
+ */
+.fh5co-nav .menu-2 li.search {
+    width: 72%;
+}

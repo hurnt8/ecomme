@@ -7,7 +7,9 @@
             <div class="col-md-3 col-xs-8">
                 <div id="fh5co-logo"><a href="{{ route('home') }}">{{ $settings->site_name }}</a></div>
             </div>
-            <div class="col-md-6 col-xs-6 text-center menu-1">
+            {{-- col-md-5 (not the template's original col-md-6): freed up a column for menu-2 below,
+                 which now carries two icons (account + cart) instead of the template's one. --}}
+            <div class="col-md-5 col-xs-6 text-center menu-1">
                 <ul>
                     <li><a href="{{ route('catalog') }}">Boutique</a></li>
                     <li><a href="{{ url('/a-propos') }}">À propos</a></li>
@@ -15,7 +17,8 @@
                     <li><a href="{{ route('tracking.index') }}">Suivi de commande</a></li>
                 </ul>
             </div>
-            <div class="col-md-3 col-xs-4 text-right hidden-xs menu-2">
+            {{-- col-md-4 (not the template's original col-md-3): see note on menu-1 above. --}}
+            <div class="col-md-4 col-xs-4 text-right hidden-xs menu-2">
                 <ul>
                     <li class="search">
                         <form class="input-group" action="{{ route('catalog') }}" method="GET">

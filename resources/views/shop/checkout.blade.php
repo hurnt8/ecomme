@@ -42,7 +42,7 @@
                     baseShipping: {{ \App\Services\ShippingService::BASE_SHIPPING_FEE }},
                     internationalFee: {{ (float) $settings->international_shipping_fee }},
                     taxRate: {{ (float) $settings->tax_rate }},
-                    eurozone: @json(\App\Support\Eurozone::COUNTRY_CODES),
+                    eurozone: {{ Illuminate\Support\Js::from(\App\Support\Eurozone::COUNTRY_CODES) }},
                     get shipping() {
                         const base = this.subtotal >= this.freeShippingThreshold ? 0 : this.baseShipping;
                         const intl = this.eurozone.includes(this.country) ? 0 : this.internationalFee;
