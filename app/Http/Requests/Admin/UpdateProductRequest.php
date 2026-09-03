@@ -33,7 +33,7 @@ class UpdateProductRequest extends FormRequest
             'is_new' => ['nullable', 'boolean'],
             'reviews_count' => ['nullable', 'integer', 'min:0', 'max:500'],
             'images' => ['nullable', 'array'],
-            'images.*' => ['image', 'max:4096'],
+            'images.*' => ['image', 'max:4096', 'dimensions:min_width=200,min_height=200,max_width=4000,max_height=4000'],
         ];
     }
 }

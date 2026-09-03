@@ -18,7 +18,7 @@ class UpdateSettingsRequest extends FormRequest
     {
         return [
             'site_name' => ['required', 'string', 'max:255'],
-            'logo' => ['nullable', 'image', 'max:2048'],
+            'logo' => ['nullable', 'image', 'max:2048', 'dimensions:max_width=2000,max_height=2000'],
             'tagline' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'contact_email' => ['nullable', 'email', 'max:255'],
