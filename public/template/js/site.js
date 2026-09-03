@@ -34,10 +34,12 @@
         $('#fh5co-offcanvas .has-dropdown').addClass('offcanvas-has-dropdown');
         $('#fh5co-offcanvas').find('li').removeClass('has-dropdown');
 
-        $('.offcanvas-has-dropdown').mouseenter(function () {
-            $(this).addClass('active').find('ul').slideDown(500, 'easeOutExpo');
-        }).mouseleave(function () {
-            $(this).removeClass('active').find('ul').slideUp(500, 'easeOutExpo');
+        // mouseenter/mouseleave (as used for the desktop dropdown() below) never fires on a
+        // touch device, and the off-canvas menu only ever shows below 768px — i.e. only on
+        // touch. Tap the link itself to toggle the submenu instead of following it.
+        $('#fh5co-offcanvas').on('click', '.offcanvas-has-dropdown > a', function (event) {
+            event.preventDefault();
+            $(this).parent().toggleClass('active').find('> .dropdown').slideToggle(300);
         });
 
         $(window).resize(function () {

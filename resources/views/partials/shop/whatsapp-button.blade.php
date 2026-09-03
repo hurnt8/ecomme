@@ -1,4 +1,7 @@
-@if ($settings->whatsapp_number)
+{{-- Not shown on the contact page: the same WhatsApp link already appears inline in "Nos
+     coordonnées" there, and as a fixed bottom-right element it would otherwise drift over the
+     contact form's fields as the (full-width, one-column) page is scrolled. --}}
+@if ($settings->whatsapp_number && ! request()->routeIs('contact.index'))
     <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings->whatsapp_number) }}"
        target="_blank"
        rel="noopener"

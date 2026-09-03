@@ -34,8 +34,21 @@
             <div class="col-md-4 fh5co-widget">
                 <h3>{{ $settings->site_name }}</h3>
                 <p>{{ $settings->tagline }}</p>
+                <div class="fh5co-contact-info">
+                    <ul>
+                        @if ($settings->contact_phone)
+                            <li class="phone"><a href="tel:{{ $settings->contact_phone }}">{{ $settings->contact_phone }}</a></li>
+                        @endif
+                        @if ($settings->contact_email)
+                            <li class="email"><a href="mailto:{{ $settings->contact_email }}">{{ $settings->contact_email }}</a></li>
+                        @endif
+                        @if ($settings->contact_address)
+                            <li class="address">{{ $settings->contact_address }}</li>
+                        @endif
+                    </ul>
+                </div>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+            <div class="col-md-2 col-sm-4 col-xs-4 col-md-push-1">
                 <ul class="fh5co-footer-links">
                     <li><a href="{{ url('/a-propos') }}">À propos</a></li>
                     <li><a href="{{ url('/aide') }}">Aide / FAQ</a></li>
@@ -46,7 +59,7 @@
                 </ul>
             </div>
 
-            <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+            <div class="col-md-2 col-sm-4 col-xs-4 col-md-push-1">
                 <ul class="fh5co-footer-links">
                     <li><a href="{{ route('catalog') }}">Boutique</a></li>
                     <li><a href="{{ url('/confidentialite') }}">Confidentialité</a></li>
@@ -56,7 +69,7 @@
                 </ul>
             </div>
 
-            <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+            <div class="col-md-2 col-sm-4 col-xs-4 col-md-push-1">
                 <ul class="fh5co-footer-links">
                     <li><a href="{{ url('/livraison') }}">Livraison</a></li>
                     <li><a href="{{ url('/retours') }}">Retours</a></li>
@@ -72,9 +85,6 @@
             <div class="col-md-12 text-center">
                 <p>
                     <small class="block">&copy; {{ now()->year }} {{ $settings->site_name }}. Tous droits réservés.</small>
-                    @if ($settings->contact_email)
-                        <small class="block">{{ $settings->contact_address }} — <a href="mailto:{{ $settings->contact_email }}">{{ $settings->contact_email }}</a></small>
-                    @endif
                 </p>
                 <p>
                     <ul class="fh5co-social-icons">

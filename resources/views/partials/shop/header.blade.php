@@ -14,6 +14,7 @@
                     <li class="has-dropdown">
                         <a href="{{ route('catalog') }}">Boutique</a>
                         <ul class="dropdown">
+                            <li><a href="{{ route('catalog') }}">Toute la boutique</a></li>
                             @foreach ($navCategories as $category)
                                 <li><a href="{{ route('catalog', ['category' => $category->slug]) }}">{{ $category->name }}</a></li>
                             @endforeach
@@ -39,11 +40,13 @@
                     <li class="shopping-cart">
                         <a href="{{ auth()->check() ? route('account.index') : route('login') }}" class="cart" title="{{ auth()->check() ? 'Mon compte' : 'Connexion' }}">
                             <span><i class="icon-user"></i></span>
+                            <span class="offcanvas-label">{{ auth()->check() ? 'Mon compte' : 'Connexion' }}</span>
                         </a>
                     </li>
                     <li class="shopping-cart">
                         <a href="{{ route('cart.index') }}" class="cart">
                             <span><small>{{ $cartCount }}</small><i class="icon-shopping-cart"></i></span>
+                            <span class="offcanvas-label">Panier</span>
                         </a>
                     </li>
                 </ul>

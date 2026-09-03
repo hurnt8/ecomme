@@ -232,3 +232,83 @@ html {
 #fh5co-footer .fh5co-widget {
     margin-bottom: 15px;
 }
+
+/*
+ * .fh5co-contact-info is the contact page's icon list (30px icons, 30px margin between items) —
+ * reused here for the footer's phone/email/address block, but at a much smaller scale so it
+ * doesn't blow out the footer's height the way the contact page's spacious version would.
+ */
+#fh5co-footer .fh5co-contact-info ul {
+    margin: 0;
+}
+
+#fh5co-footer .fh5co-contact-info ul li {
+    padding-left: 26px;
+    margin: 0 0 8px 0;
+    font-size: 13px;
+}
+
+#fh5co-footer .fh5co-contact-info ul li:before {
+    font-size: 15px !important;
+}
+
+#fh5co-footer .fh5co-contact-info ul li a {
+    color: #000;
+}
+
+@media (max-width: 767px) {
+    #fh5co-footer .col-xs-4 {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    #fh5co-footer .fh5co-footer-links li a {
+        font-size: 12px;
+    }
+}
+
+/*
+ * The account/cart icons (menu-2) are float:left, icon-only `li.shopping-cart` elements sized
+ * for the compact desktop header, where there's no room for a text label. site.js clones that
+ * same markup into #fh5co-offcanvas for mobile, where two bare floated icons side by side (no
+ * label, cart-count badge overlapping the next icon) read as broken rather than as menu items.
+ * Un-float them into full-width rows with a label, matching the nav links above them; the label
+ * itself is hidden everywhere else so the compact desktop header is untouched.
+ */
+.offcanvas-label {
+    display: none;
+}
+
+#fh5co-offcanvas ul li.shopping-cart {
+    float: none;
+    display: block;
+}
+
+#fh5co-offcanvas ul li a.cart {
+    margin-top: 15px;
+}
+
+/*
+ * Not flex: the offcanvas panel's content box is only 190px wide (270px panel minus its own
+ * 40px side padding), and a flex row with no wrap set overflows that box silently — the
+ * overflowing text then gets clipped by body.overflow's overflow:hidden, rendering invisible.
+ * Plain inline flow lets the label wrap onto a second line instead when space is tight.
+ */
+#fh5co-offcanvas ul li a.cart span:not(.offcanvas-label) {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#fh5co-offcanvas ul li a.cart span small {
+    position: static;
+    display: inline-block;
+    margin-right: 8px;
+    padding: 3px 7px;
+    vertical-align: middle;
+}
+
+#fh5co-offcanvas .offcanvas-label {
+    display: inline;
+    margin-left: 10px;
+    font-size: 15px;
+}
