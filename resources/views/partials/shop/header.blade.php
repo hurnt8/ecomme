@@ -11,7 +11,15 @@
                  which now carries two icons (account + cart) instead of the template's one. --}}
             <div class="col-md-5 col-xs-6 text-center menu-1">
                 <ul>
-                    <li><a href="{{ route('catalog') }}">Boutique</a></li>
+                    <li class="has-dropdown">
+                        <a href="{{ route('catalog') }}">Boutique</a>
+                        <ul class="dropdown">
+                            @foreach ($navCategories as $category)
+                                <li><a href="{{ route('catalog', ['category' => $category->slug]) }}">{{ $category->name }}</a></li>
+                            @endforeach
+                            <li><a href="{{ route('catalog', ['on_sale' => 1]) }}">Promotions</a></li>
+                        </ul>
+                    </li>
                     <li><a href="{{ url('/a-propos') }}">À propos</a></li>
                     <li><a href="{{ url('/contact') }}">Contact</a></li>
                     <li><a href="{{ route('tracking.index') }}">Suivi de commande</a></li>

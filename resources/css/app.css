@@ -209,3 +209,26 @@ html {
     font-weight: 700;
     letter-spacing: 1px;
 }
+
+/*
+ * The template gives #fh5co-started (newsletter) and #fh5co-footer 7em top+bottom padding
+ * each, plus another 4em on the footer's link row (.row-pb-md) — over 300px combined before
+ * any content. That rule is shared with #fh5co-product/#fh5co-about/#fh5co-contact too, so it
+ * can't just be lowered globally; scoped to these two, which are unique to the footer (see
+ * footer.blade.php — #fh5co-started only ever wraps the newsletter block here).
+ */
+#fh5co-started {
+    padding: 3.5em 0;
+}
+
+#fh5co-footer {
+    padding: 3em 0 2em;
+}
+
+#fh5co-footer .row-pb-md {
+    padding-bottom: 1.5em !important;
+}
+
+#fh5co-footer .fh5co-widget {
+    margin-bottom: 15px;
+}

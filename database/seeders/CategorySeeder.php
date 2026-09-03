@@ -10,14 +10,20 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'Chaises & Fauteuils', 'slug' => 'chaises-fauteuils', 'description' => 'Assises pour le salon, la salle à manger ou le bureau.', 'sort_order' => 0],
-            ['name' => 'Tables', 'slug' => 'tables', 'description' => 'Tables basses, tables à manger et bureaux.', 'sort_order' => 1],
-            ['name' => 'Rangement', 'slug' => 'rangement', 'description' => 'Buffets, armoires et meubles de rangement.', 'sort_order' => 2],
-            ['name' => 'Décoration', 'slug' => 'decoration', 'description' => 'Objets et accessoires pour sublimer votre intérieur.', 'sort_order' => 3],
+            ['name' => 'Mobilier', 'slug' => 'mobilier', 'description' => 'Chaises, tables et rangements en matières durables pour meubler chaque pièce.', 'sort_order' => 0],
+            ['name' => 'Jardin & Extérieur', 'slug' => 'jardin-exterieur', 'description' => 'Mobilier et accessoires pensés pour résister aux saisons, sur la terrasse comme au jardin.', 'sort_order' => 1],
+            ['name' => 'Décoration', 'slug' => 'decoration', 'description' => 'Objets et accessoires pour sublimer votre intérieur.', 'sort_order' => 2],
+            ['name' => 'Équipement Maison', 'slug' => 'equipement-maison', 'description' => 'Petit électroménager et objets utiles au quotidien, choisis pour durer.', 'sort_order' => 3],
+            ['name' => 'Bois & Chauffage', 'slug' => 'bois-chauffage', 'description' => 'Bois de chauffage et accessoires pour cheminée et poêle, livrés chez vous.', 'sort_order' => 4],
         ];
 
         foreach ($categories as $category) {
             Category::query()->updateOrCreate(['slug' => $category['slug']], $category + ['is_active' => true]);
         }
+
+        // Replaced by the five categories above (the catalog no longer subdivides furniture
+        // by piece type). nullOnDelete on products.category_id means this is safe even before
+        // ProductSeeder re-points every product at its new category.
+        Category::query()->whereIn('slug', ['chaises-fauteuils', 'tables', 'rangement'])->delete();
     }
 }

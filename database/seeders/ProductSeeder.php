@@ -13,14 +13,14 @@ class ProductSeeder extends Seeder
 {
     public function run(): void
     {
-        $chaises = Category::where('slug', 'chaises-fauteuils')->firstOrFail();
-        $tables = Category::where('slug', 'tables')->firstOrFail();
-        $rangement = Category::where('slug', 'rangement')->firstOrFail();
+        $mobilier = Category::where('slug', 'mobilier')->firstOrFail();
+        $jardin = Category::where('slug', 'jardin-exterieur')->firstOrFail();
         $deco = Category::where('slug', 'decoration')->firstOrFail();
+        $equipement = Category::where('slug', 'equipement-maison')->firstOrFail();
 
         $products = [
             [
-                'category_id' => $chaises->id,
+                'category_id' => $jardin->id,
                 'name' => 'Hauteville Concrete Rocking Chair',
                 'description' => "Ce fauteuil à bascule associe une coque en béton poli, légère et résistante, à des piétements en frêne massif huilé. Son galbe enveloppant et son assise généreuse en font une pièce de caractère, aussi confortable pour lire au salon que pour bercer sur la terrasse.\n\nDimensions : 68 x 90 x 95 cm. Coque en béton fibré, structure en frêne massif, finition huile naturelle.",
                 'price' => 350,
@@ -31,7 +31,7 @@ class ProductSeeder extends Seeder
                 'images' => ['product-1.jpg', 'product-single-1.jpg'],
             ],
             [
-                'category_id' => $deco->id,
+                'category_id' => $equipement->id,
                 'name' => 'Pavilion Speaker',
                 'description' => "Enceinte acoustique habillée de chêne massif et de tissu acoustique tramé, pensée pour se fondre dans un intérieur plutôt que s'y imposer. Le caisson en bois plein offre un rendu sonore chaud, sans câblage apparent grâce à la connexion sans fil.\n\nDimensions : 25 x 20 x 35 cm. Caisson en chêne massif, façade en tissu acoustique tramé, autonomie 10 heures.",
                 'price' => 600,
@@ -53,7 +53,7 @@ class ProductSeeder extends Seeder
                 'images' => ['product-3.jpg'],
             ],
             [
-                'category_id' => $rangement->id,
+                'category_id' => $mobilier->id,
                 'name' => 'Alato Cabinet',
                 'description' => "Buffet bas en noyer massif à trois portes, plaquage veiné assorti et poignées laiton brossé. Étagères intérieures réglables pour organiser vaisselle, linge de maison ou rangements de salon.\n\nDimensions : 160 x 45 x 75 cm. Noyer massif, poignées laiton brossé, étagères réglables.",
                 'price' => 800,
@@ -75,7 +75,7 @@ class ProductSeeder extends Seeder
                 'images' => ['product-5.jpg'],
             ],
             [
-                'category_id' => $tables->id,
+                'category_id' => $mobilier->id,
                 'name' => 'Sculptural Coffee Table',
                 'description' => "Table basse sculpturale au plateau en marbre veiné reposant sur un piétement en bois massif cintré. Une pièce statement pour un salon contemporain, où la table devient elle-même un objet de décoration.\n\nDimensions : 120 x 60 x 35 cm. Plateau marbre veiné, piétement bois massif cintré.",
                 'price' => 960,
@@ -86,7 +86,7 @@ class ProductSeeder extends Seeder
                 'images' => ['product-6.jpg', 'product-single-4.jpg'],
             ],
             [
-                'category_id' => $chaises->id,
+                'category_id' => $mobilier->id,
                 'name' => 'The WW Chair',
                 'description' => "Chaise au piétement bois cintré et à l'assise coque moulée, hommage aux lignes scandinaves des années 50. Empilable, elle s'installe aussi bien en salle à manger qu'en poste de bureau.\n\nDimensions : 52 x 55 x 80 cm. Piétement hêtre massif cintré, assise coque moulée.",
                 'price' => 540,
@@ -119,7 +119,7 @@ class ProductSeeder extends Seeder
                 'images' => ['product-9.jpg'],
             ],
             [
-                'category_id' => $chaises->id,
+                'category_id' => $mobilier->id,
                 'name' => 'The Haluz Rocking Chair',
                 'description' => "Rocking-chair en bois cintré et cannage tressé main, silhouette légère et aérienne. Un classique revisité pour un coin lecture chaleureux.\n\nDimensions : 65 x 95 x 90 cm. Bois cintré, cannage tressé main, finition vernis naturel.",
                 'price' => 420,

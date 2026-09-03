@@ -51,6 +51,10 @@ class CatalogController extends Controller
             $query->new();
         }
 
+        if ($request->boolean('on_sale')) {
+            $query->onSale();
+        }
+
         match ($sort) {
             'price_asc' => $query->orderBy('price'),
             'price_desc' => $query->orderByDesc('price'),

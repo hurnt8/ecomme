@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use App\Services\CartService;
 use App\Services\SettingsService;
 use Illuminate\Support\Facades\View;
@@ -27,10 +28,11 @@ class AppServiceProvider extends ServiceProvider
         // $settings without each controller passing it explicitly.
         View::composer('*', fn ($view) => $view->with('settings', app(SettingsService::class)->current()));
 
-        // The cart badge lives in the header partial, included on every shop page.
-        View::composer(
-            'partials.shop.header',
-            fn ($view) => $view->with('cartCount', app(CartService::class)->count())
-        );
+        // The cart badge and the "Boutique" dropdown's category list both live in the header
+        // partial, included on every shop page.
+        View::composer('partials.shop.header', function ($view) {
+            $view->with('cartCount', app(CartService::class)->count());
+            $view->with('navCategories', Category::active()->whereNull('parent_id')->ordered()->get());
+        });
     }
 }

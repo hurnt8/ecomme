@@ -105,10 +105,14 @@
                                         <input type="checkbox" name="is_new" value="1" @checked(request()->boolean('is_new')) onchange="this.form.submit()">
                                         Nouveautés
                                     </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="on_sale" value="1" @checked(request()->boolean('on_sale')) onchange="this.form.submit()">
+                                        En promotion
+                                    </label>
                                 </div>
                                 <div class="col-sm-6 text-right">
                                     <button type="submit" class="btn btn-primary">Filtrer</button>
-                                    @if (request()->anyFilled(['category', 'size', 'color', 'min_price', 'max_price', 'in_stock', 'is_new', 'search']))
+                                    @if (request()->anyFilled(['category', 'size', 'color', 'min_price', 'max_price', 'in_stock', 'is_new', 'on_sale', 'search']))
                                         <a href="{{ route('catalog') }}" class="btn btn-default">Réinitialiser</a>
                                     @endif
                                 </div>
