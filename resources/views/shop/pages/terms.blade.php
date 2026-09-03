@@ -4,7 +4,7 @@
 @section('meta_description', 'Conditions générales de vente de ' . $settings->site_name . '.')
 
 @section('content')
-    <x-shop.page-hero title="CGV" subtitle="Conditions générales de vente" />
+    <x-shop.page-hero title="CGV" subtitle="Conditions générales de vente" image="img_bg_1.jpg" />
 
     <div id="fh5co-about">
         <div class="container">

@@ -3,7 +3,7 @@
 @section('title', 'Mot de passe oublié')
 
 @section('content')
-    <x-shop.page-hero title="Mot de passe oublié" subtitle="Recevez un lien de réinitialisation par e-mail" />
+    <x-shop.page-hero title="Mot de passe oublié" subtitle="Recevez un lien de réinitialisation par e-mail" image="img_bg_1.jpg" />
 
     <div id="fh5co-about">
         <div class="container">

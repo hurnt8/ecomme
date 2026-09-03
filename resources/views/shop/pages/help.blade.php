@@ -4,7 +4,7 @@
 @section('meta_description', 'Questions fréquentes sur les commandes, la livraison, les retours et le paiement chez ' . $settings->site_name . '.')
 
 @section('content')
-    <x-shop.page-hero title="Aide" subtitle="Questions fréquentes" />
+    <x-shop.page-hero title="Aide" subtitle="Questions fréquentes" image="img_bg_1.jpg" />
 
     <div id="fh5co-about">
         <div class="container">

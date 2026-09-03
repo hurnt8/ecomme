@@ -4,7 +4,7 @@
 @section('meta_description', 'Conditions de retour et de remboursement chez ' . $settings->site_name . '.')
 
 @section('content')
-    <x-shop.page-hero title="Retours" />
+    <x-shop.page-hero title="Retours" image="img_bg_4.jpg" />
 
     <div id="fh5co-about">
         <div class="container">

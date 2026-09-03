@@ -4,7 +4,7 @@
 @section('meta_description', 'L\'histoire et le savoir-faire de ' . $settings->site_name . ', mobilier et décoration en matières durables.')
 
 @section('content')
-    <x-shop.page-hero title="À propos" :subtitle="$settings->site_name" />
+    <x-shop.page-hero title="À propos" :subtitle="$settings->site_name" image="img_bg_1.jpg" />
 
     <div id="fh5co-about">
         <div class="container">

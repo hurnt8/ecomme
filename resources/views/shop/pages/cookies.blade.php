@@ -4,7 +4,7 @@
 @section('meta_description', 'Utilisation des cookies sur le site ' . $settings->site_name . '.')
 
 @section('content')
-    <x-shop.page-hero title="Cookies" />
+    <x-shop.page-hero title="Cookies" image="img_bg_5.jpg" />
 
     <div id="fh5co-about">
         <div class="container">

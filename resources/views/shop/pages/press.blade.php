@@ -4,7 +4,7 @@
 @section('meta_description', 'Contact presse et ressources média pour ' . $settings->site_name . '.')
 
 @section('content')
-    <x-shop.page-hero title="Presse" subtitle="Espace média" />
+    <x-shop.page-hero title="Presse" subtitle="Espace média" image="img_bg_5.jpg" />
 
     <div id="fh5co-about">
         <div class="container">

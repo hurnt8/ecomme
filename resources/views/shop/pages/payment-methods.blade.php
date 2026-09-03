@@ -4,7 +4,7 @@
 @section('meta_description', 'Comment régler votre commande chez ' . $settings->site_name . '.')
 
 @section('content')
-    <x-shop.page-hero title="Moyens de paiement" />
+    <x-shop.page-hero title="Moyens de paiement" image="img_bg_5.jpg" />
 
     <div id="fh5co-about">
         <div class="container">

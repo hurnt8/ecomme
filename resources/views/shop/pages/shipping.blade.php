@@ -4,7 +4,7 @@
 @section('meta_description', 'Délais et frais de livraison de ' . $settings->site_name . ', en zone euro et à l\'international.')
 
 @section('content')
-    <x-shop.page-hero title="Livraison" />
+    <x-shop.page-hero title="Livraison" image="img_bg_3.jpg" />
 
     <div id="fh5co-about">
         <div class="container">

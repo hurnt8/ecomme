@@ -4,7 +4,7 @@
 @section('meta_description', 'Rejoindre l\'équipe de ' . $settings->site_name . '.')
 
 @section('content')
-    <x-shop.page-hero title="Carrières" subtitle="Rejoindre l'équipe" />
+    <x-shop.page-hero title="Carrières" subtitle="Rejoindre l'équipe" image="img_bg_4.jpg" />
 
     <div id="fh5co-about">
         <div class="container">

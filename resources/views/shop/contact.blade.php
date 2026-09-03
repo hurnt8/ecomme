@@ -4,7 +4,7 @@
 @section('meta_description', 'Contactez ' . $settings->site_name . ' pour toute question sur nos produits ou votre commande.')
 
 @section('content')
-    <x-shop.page-hero title="Contact" subtitle="Une question ? Écrivez-nous" />
+    <x-shop.page-hero title="Contact" subtitle="Une question ? Écrivez-nous" image="img_bg_4.jpg" />
 
     <div id="fh5co-contact">
         <div class="container">

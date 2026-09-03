@@ -3,7 +3,7 @@
 @section('title', 'Créer un compte')
 
 @section('content')
-    <x-shop.page-hero title="Créer un compte" subtitle="Suivez vos commandes plus facilement" />
+    <x-shop.page-hero title="Créer un compte" subtitle="Suivez vos commandes plus facilement" image="img_bg_5.jpg" />
 
     <div id="fh5co-about">
         <div class="container">
