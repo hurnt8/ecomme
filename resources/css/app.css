@@ -904,34 +904,41 @@ html {
     font-weight: bold;
 }
 
-.about-ranges ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    list-style: none;
-    padding: 0;
-    margin: 0 0 16px;
-}
-
-.about-ranges li a {
+/* Each range card is fronted by one of its own products, so the section reflects the catalogue
+   instead of a decorative photo that would need swapping as ranges are added. */
+.about-range {
     display: block;
-    padding: 14px 20px;
-    background: #f7f7f5;
+    margin-bottom: 24px;
     color: #000;
-    transition: background 0.2s;
 }
 
-.about-ranges li a:hover {
-    background: #f0ecdc;
+.about-range-image {
+    display: block;
+    aspect-ratio: 4 / 3;
+    margin-bottom: 12px;
+    background-color: #f7f7f5;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 0.2s;
 }
 
-.about-ranges li strong {
+.about-range:hover .about-range-image {
+    opacity: 0.85;
+}
+
+.about-range-body strong {
     display: block;
     font-size: 14px;
     letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
-.about-ranges li span {
+.about-range:hover .about-range-body strong {
+    color: #d1c286;
+}
+
+.about-range-body span {
     color: #9a9a9a;
     font-size: 12px;
 }

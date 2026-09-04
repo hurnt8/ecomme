@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 
 class Category extends Model
 {
@@ -27,6 +29,18 @@ class Category extends Model
         return [
             'is_active' => 'boolean',
         ];
+    }
+
+    /**
+     * Resolves the stored path to a public URL, matching Banner::imageUrl(). A category image is
+     * optional (the admin form allows saving without one), so this returns null rather than a
+     * URL pointing at nothing — callers fall back to a product photo.
+     */
+    protected function imageUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->image ? Storage::disk('public')->url($this->image) : null,
+        );
     }
 
     public function parent(): BelongsTo
