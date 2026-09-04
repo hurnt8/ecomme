@@ -250,3 +250,5 @@ Planifier également le scheduler Laravel (nettoyage des sessions expirées, etc
 - Pas de Content-Security-Policy stricte (headers de base seulement — voir `SecurityHeaders`).
 - `CACHE_STORE=database` en local (voir checklist prod pour Redis).
 - La page Mentions légales contient un espace réservé pour les coordonnées de l'hébergeur.
+#   e - m e u b l e  
+ 
