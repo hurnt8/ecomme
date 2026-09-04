@@ -70,34 +70,29 @@
         });
     };
 
+    /*
+     * Rewritten from the template's version, which absolutely positioned every panel and then
+     * measured a height for the wrapper in JS (tab nav height — counted twice, since the nav sits
+     * outside the wrapper — plus the active panel plus a flat 90px). That left a large dead gap
+     * under short panels and risked long ones overflowing into the next section. It also only
+     * cleared `.active` from the nav items, never from the panels, so every panel visited stayed
+     * active. Panels now sit in normal flow (see .fh5co-tab-content-wrap in app.css) and each
+     * .fh5co-tabs block manages only its own panels.
+     */
     var tabs = function () {
-        var autoHeight = function () {
-            setTimeout(function () {
-                var tabContentWrap = $('.fh5co-tab-content-wrap'),
-                    tabHeight = $('.fh5co-tab-nav').outerHeight(),
-                    formActiveHeight = $('.tab-content.active').outerHeight(),
-                    totalHeight = parseInt(tabHeight + formActiveHeight + 90);
-
-                tabContentWrap.css('height', totalHeight);
-            }, 100);
-        };
-
-        autoHeight();
-        $(window).resize(autoHeight);
-
         $('.fh5co-tab-nav a').on('click', function (event) {
-            var $this = $(this),
-                tab = $this.data('tab');
-
-            $('.tab-content').addClass('animated-fast fadeOutDown');
-            $('.fh5co-tab-nav li').removeClass('active');
-            $this.closest('li').addClass('active');
-            $this.closest('.fh5co-tabs').find('.tab-content[data-tab-content="' + tab + '"]')
-                .removeClass('animated-fast fadeOutDown')
-                .addClass('animated-fast active fadeIn');
-
-            autoHeight();
             event.preventDefault();
+
+            var $this = $(this),
+                tab = $this.data('tab'),
+                $tabs = $this.closest('.fh5co-tabs');
+
+            $tabs.find('.fh5co-tab-nav li').removeClass('active');
+            $this.closest('li').addClass('active');
+
+            $tabs.find('.tab-content').removeClass('active animated-fast fadeIn');
+            $tabs.find('.tab-content[data-tab-content="' + tab + '"]')
+                .addClass('active animated-fast fadeIn');
         });
     };
 

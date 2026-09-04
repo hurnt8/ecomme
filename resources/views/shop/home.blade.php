@@ -65,7 +65,7 @@
                     <div class="feature-center animate-box" data-animate-effect="fadeIn">
                         <span class="icon"><i class="icon-paper-plane"></i></span>
                         <h3>Livraison soignée</h3>
-                        <p>Emballage renforcé et suivi à chaque étape, offerte dès {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency }} d'achat.</p>
+                        <p>Emballage renforcé et suivi à chaque étape, offerte dès {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }} d'achat.</p>
                     </div>
                 </div>
             </div>
@@ -78,6 +78,27 @@
                 @foreach ($secondaryBanners as $banner)
                     <div class="col-md-{{ 12 / min($secondaryBanners->count(), 3) }}">
                         <x-shop.promo-banner :banner="$banner" />
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
+
+    @if ($bestsellerProducts->isNotEmpty())
+        <div id="fh5co-bestsellers">
+            <div class="container">
+                <div class="row animate-box">
+                    <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                        <span>Coup de cœur clients</span>
+                        <h2>Meilleures ventes.</h2>
+                        <p>Les pièces plébiscitées par nos clients, celles qui reviennent le plus souvent dans les commandes.</p>
+                    </div>
+                </div>
+                @foreach ($bestsellerProducts->chunk(3) as $row)
+                    <div class="row">
+                        @foreach ($row as $product)
+                            <x-shop.product-card :product="$product" />
+                        @endforeach
                     </div>
                 @endforeach
             </div>

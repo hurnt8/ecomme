@@ -44,6 +44,22 @@ class Setting extends Model
     }
 
     /**
+     * The display symbol for `currency`, which is stored as an ISO code. Shop pages that quote a
+     * price in running text should use this so they read "150 €" like the price component does,
+     * rather than "150 EUR". PDFs deliberately keep the ISO code (dompdf's default fonts don't
+     * carry every currency glyph).
+     */
+    public function getCurrencySymbolAttribute(): string
+    {
+        return match ($this->currency) {
+            'EUR' => '€',
+            'USD' => '$',
+            'GBP' => '£',
+            default => (string) $this->currency,
+        };
+    }
+
+    /**
      * The settings table only ever holds a single row (id=1). Prefer
      * `SettingsService::current()` in application code — it adds the cache
      * layer described in the Fondations plan; this accessor is what that

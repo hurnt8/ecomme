@@ -46,6 +46,9 @@
                             @if ($product->is_new)
                                 <span class="ml-1 text-xs text-green-700">Nouveau</span>
                             @endif
+                            @if ($product->is_bestseller)
+                                <span class="ml-1 text-xs text-amber-700">Meilleure vente</span>
+                            @endif
                         </td>
                         <td class="px-4 py-2 text-neutral-500">{{ $product->category?->name ?? '—' }}</td>
                         <td class="px-4 py-2 text-right">{{ number_format((float) $product->price, 2) }}&nbsp;€</td>

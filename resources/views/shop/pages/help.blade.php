@@ -16,7 +16,7 @@
                     </div>
                     <div class="desc">
                         <h3>Quels sont les délais et frais de livraison ?</h3>
-                        <p>La livraison est offerte à partir de {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency }} d'achat en zone euro. Hors zone euro, des frais supplémentaires s'appliquent. Détails sur notre page <a href="{{ url('/livraison') }}">Livraison</a>.</p>
+                        <p>La livraison est offerte à partir de {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }} d'achat en zone euro. Hors zone euro, des frais supplémentaires s'appliquent. Détails sur notre page <a href="{{ url('/livraison') }}">Livraison</a>.</p>
                     </div>
                     <div class="desc">
                         <h3>Comment suivre ma commande ?</h3>

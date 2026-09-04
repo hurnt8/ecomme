@@ -24,6 +24,7 @@ class Product extends Model
         'stock',
         'is_active',
         'is_new',
+        'is_bestseller',
     ];
 
     protected function casts(): array
@@ -35,6 +36,7 @@ class Product extends Model
             'colors' => 'array',
             'is_active' => 'boolean',
             'is_new' => 'boolean',
+            'is_bestseller' => 'boolean',
         ];
     }
 
@@ -72,6 +74,11 @@ class Product extends Model
     public function scopeNew(Builder $query): Builder
     {
         return $query->where('is_new', true);
+    }
+
+    public function scopeBestseller(Builder $query): Builder
+    {
+        return $query->where('is_bestseller', true);
     }
 
     public function scopeWithRatings(Builder $query): Builder

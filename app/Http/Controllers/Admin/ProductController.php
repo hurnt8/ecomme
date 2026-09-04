@@ -58,6 +58,7 @@ class ProductController extends Controller
             'stock' => $data['stock'] ?? 0,
             'is_active' => $request->boolean('is_active'),
             'is_new' => $request->boolean('is_new'),
+            'is_bestseller' => $request->boolean('is_bestseller'),
         ]);
 
         $this->storeImages($request, $product);
@@ -96,6 +97,7 @@ class ProductController extends Controller
             'stock' => $data['stock'] ?? 0,
             'is_active' => $request->boolean('is_active'),
             'is_new' => $request->boolean('is_new'),
+            'is_bestseller' => $request->boolean('is_bestseller'),
         ]);
 
         $this->storeImages($request, $product);

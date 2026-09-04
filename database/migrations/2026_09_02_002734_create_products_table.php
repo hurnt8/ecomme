@@ -21,10 +21,12 @@ return new class extends Migration
             $table->unsignedInteger('stock')->default(0);
             $table->boolean('is_active')->default(true);
             $table->boolean('is_new')->default(false);
+            $table->boolean('is_bestseller')->default(false);
             $table->timestamps();
 
             $table->index(['is_active', 'category_id']);
             $table->index(['is_active', 'is_new']);
+            $table->index(['is_active', 'is_bestseller']);
         });
     }
 

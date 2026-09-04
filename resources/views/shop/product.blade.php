@@ -3,92 +3,175 @@
 @section('title', $product->name)
 @section('meta_description', \Illuminate\Support\Str::limit(strip_tags($product->description), 150))
 
+@php
+    $galleryImages = $product->images->map(fn ($image) => $image->url)->values();
+
+    if ($galleryImages->isEmpty()) {
+        $galleryImages = collect([asset('template/images/product-1.jpg')]);
+    }
+
+    $onSale = $product->compare_at_price && (float) $product->compare_at_price > (float) $product->price;
+    $discount = $onSale
+        ? (int) round(100 - ((float) $product->price / (float) $product->compare_at_price) * 100)
+        : null;
+    $averageRating = $product->reviews->avg('rating');
+@endphp
+
 @section('content')
-    <div id="fh5co-product">
+    <div id="fh5co-product" class="product-detail">
         <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1 animate-box">
-                    @if ($product->images->count() > 1)
-                        {{-- Owl Carousel needs 2+ slides — with exactly one it throws mid-init
-                             (reading 'clone' on undefined) and never clears its own
-                             .owl-loading state, leaving the gallery blank. A single image
-                             doesn't need slide/dot/nav machinery anyway. --}}
-                        <div class="owl-carousel owl-carousel-fullwidth product-carousel">
-                            @foreach ($product->images as $image)
-                                <div class="item">
-                                    <div class="active text-center">
-                                        <figure>
-                                            <img src="{{ $image->url }}" alt="{{ $product->name }}">
-                                        </figure>
-                                    </div>
-                                </div>
+            <ol class="product-breadcrumb">
+                <li><a href="{{ route('home') }}">Accueil</a></li>
+                <li><a href="{{ route('catalog') }}">Boutique</a></li>
+                @if ($product->category)
+                    <li><a href="{{ route('catalog', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a></li>
+                @endif
+                <li class="is-current">{{ $product->name }}</li>
+            </ol>
+
+            <div class="row product-detail-main">
+                {{-- Gallery: a main image plus thumbnails rather than the template's Owl carousel.
+                     Every image is rendered server-side with a real src, so the gallery still works
+                     without JS; Alpine only swaps which one is shown. --}}
+                <div class="col-md-7">
+                    <div class="product-gallery" x-data="{ active: 0 }">
+                        <div class="product-gallery-main">
+                            @if ($onSale)
+                                <span class="product-gallery-badge product-gallery-badge-promo">-{{ $discount }}%</span>
+                            @elseif ($product->is_new)
+                                <span class="product-gallery-badge">Nouveau</span>
+                            @endif
+
+                            @foreach ($galleryImages as $index => $url)
+                                <img src="{{ $url }}"
+                                     alt="{{ $product->name }}"
+                                     @if ($index > 0) x-cloak @endif
+                                     x-show="active === {{ $index }}">
                             @endforeach
                         </div>
-                    @else
-                        <div class="text-center">
-                            <figure>
-                                <img class="img-responsive center-block" src="{{ $product->images->first()->url ?? asset('template/images/product-1.jpg') }}" alt="{{ $product->name }}">
-                            </figure>
-                        </div>
-                    @endif
 
-                    <div class="row animate-box">
-                        <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                            <h2>{{ $product->name }}</h2>
-                            <p><x-shop.price :price="$product->price" :compare-at-price="$product->compare_at_price" /></p>
+                        @if ($galleryImages->count() > 1)
+                            <div class="product-gallery-thumbs">
+                                @foreach ($galleryImages as $index => $url)
+                                    <button type="button"
+                                            class="product-gallery-thumb"
+                                            :class="{ 'is-active': active === {{ $index }} }"
+                                            @click="active = {{ $index }}"
+                                            aria-label="Voir l'image {{ $index + 1 }}">
+                                        <img src="{{ $url }}" alt="">
+                                    </button>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                </div>
 
-                            @if ($product->stock > 0)
-                                <form method="POST" action="{{ route('cart.store') }}" x-data="{ quantity: 1, max: {{ $product->stock }} }">
-                                    @csrf
-                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                <div class="col-md-5">
+                    <div class="product-summary">
+                        @if ($product->category)
+                            <a class="product-summary-category" href="{{ route('catalog', ['category' => $product->category->slug]) }}">
+                                {{ $product->category->name }}
+                            </a>
+                        @endif
 
-                                    <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:15px;">
-                                        @if ($product->sizes)
-                                            <select name="size" class="form-control" style="width:auto;display:inline-block;">
-                                                @foreach ($product->sizes as $size)
-                                                    <option value="{{ $size }}">{{ $size }}</option>
-                                                @endforeach
-                                            </select>
-                                        @endif
+                        <h1 class="product-summary-title">{{ $product->name }}</h1>
 
-                                        @if ($product->colors)
-                                            <select name="color" class="form-control" style="width:auto;display:inline-block;">
-                                                @foreach ($product->colors as $color)
-                                                    <option value="{{ $color }}">{{ $color }}</option>
-                                                @endforeach
-                                            </select>
-                                        @endif
+                        @if ($product->reviews->isNotEmpty())
+                            <div class="product-summary-rating">
+                                <span class="rate">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <i class="icon-star2" style="{{ $i > round($averageRating) ? 'opacity:.25' : '' }}"></i>
+                                    @endfor
+                                </span>
+                                <span class="product-summary-rating-count">
+                                    {{ number_format($averageRating, 1, ',', ' ') }}/5 &middot; {{ $product->reviews->count() }}
+                                    {{ \Illuminate\Support\Str::plural('avis', $product->reviews->count()) }}
+                                </span>
+                            </div>
+                        @endif
 
-                                        {{-- Not Bootstrap's .input-group: it's display:table with a float:left,
-                                             width:100% .form-control designed to be sized by its .input-group-btn
-                                             siblings' table-cell auto-width — inside this row's flex-wrap container
-                                             that table structure falls apart (the .form-control loses its table
-                                             ancestor and reflows on its own), overlapping the buttons and pushing
-                                             the "+" past the edge on narrow screens. Plain flex, fully self-sized. --}}
-                                        {{-- Both .btn and .form-control carry this template's generous 10px 20px
-                                             padding by design (fine for a full-width text field, too much for a
-                                             1-2 digit stepper) — tightened here just for this control so "-"/"+"
-                                             stay comfortable to tap while leaving the number itself room to show. --}}
-                                        <span style="display:flex;width:150px;">
-                                            <button type="button" class="btn btn-default" style="flex:0 0 auto;padding-left:14px;padding-right:14px;" @click="quantity = Math.max(1, quantity - 1)">-</button>
-                                            <input type="number" name="quantity" x-model.number="quantity" min="1" :max="max" class="form-control text-center" style="flex:1 1 auto;width:0;min-width:0;padding-left:4px;padding-right:4px;">
-                                            <button type="button" class="btn btn-default" style="flex:0 0 auto;padding-left:14px;padding-right:14px;" @click="quantity = Math.min(max, quantity + 1)">+</button>
-                                        </span>
-                                    </div>
-
-                                    <p><button type="submit" class="btn btn-primary btn-outline btn-lg">Ajouter au panier</button></p>
-                                </form>
-                                <p class="text-muted">{{ $product->stock }} en stock</p>
-                            @else
-                                <p><span class="btn btn-default btn-outline btn-lg disabled">Rupture de stock</span></p>
+                        <div class="product-summary-price">
+                            <x-shop.price :price="$product->price" :compare-at-price="$product->compare_at_price" />
+                            @if ($onSale)
+                                <span class="product-summary-discount">-{{ $discount }}%</span>
                             @endif
                         </div>
+
+                        @if ($product->description)
+                            <p class="product-summary-excerpt">
+                                {{ \Illuminate\Support\Str::limit(strip_tags(explode("\n", $product->description)[0]), 220) }}
+                            </p>
+                        @endif
+
+                        @if ($product->stock > 0)
+                            <form method="POST" action="{{ route('cart.store') }}" x-data="{ quantity: 1, max: {{ $product->stock }} }">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+                                @if ($product->sizes)
+                                    <div class="product-option">
+                                        <label for="product-size">Taille</label>
+                                        <select id="product-size" name="size" class="form-control">
+                                            @foreach ($product->sizes as $size)
+                                                <option value="{{ $size }}">{{ $size }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
+
+                                @if ($product->colors)
+                                    <div class="product-option">
+                                        <label for="product-color">Coloris</label>
+                                        <select id="product-color" name="color" class="form-control">
+                                            @foreach ($product->colors as $color)
+                                                <option value="{{ $color }}">{{ $color }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
+
+                                <div class="product-option">
+                                    <label for="product-quantity">Quantité</label>
+                                    {{-- Not Bootstrap's .input-group (display:table, with a float:left,
+                                         width:100% .form-control sized against its .input-group-btn
+                                         siblings): that construction falls apart inside a flex parent,
+                                         overlapping the buttons. Plain flex, explicitly sized. --}}
+                                    <div class="product-quantity">
+                                        <button type="button" class="btn btn-default" @click="quantity = Math.max(1, quantity - 1)" aria-label="Diminuer la quantité">&minus;</button>
+                                        <input id="product-quantity" type="number" name="quantity" x-model.number="quantity" min="1" :max="max" class="form-control text-center">
+                                        <button type="button" class="btn btn-default" @click="quantity = Math.min(max, quantity + 1)" aria-label="Augmenter la quantité">+</button>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-lg product-add-to-cart">Ajouter au panier</button>
+                            </form>
+
+                            <p class="product-stock {{ $product->stock <= 3 ? 'is-low' : '' }}">
+                                @if ($product->stock <= 3)
+                                    Plus que {{ $product->stock }} en stock — commandez vite
+                                @else
+                                    En stock ({{ $product->stock }} disponibles)
+                                @endif
+                            </p>
+                        @else
+                            <p><span class="btn btn-default btn-outline btn-lg disabled product-add-to-cart">Rupture de stock</span></p>
+                            <p class="product-stock is-out">Cet article est temporairement indisponible.</p>
+                        @endif
+
+                        <ul class="product-reassurance">
+                            <li>
+                                <i class="icon-paper-plane"></i>
+                                Livraison offerte dès {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }} d'achat
+                            </li>
+                            <li><i class="icon-wallet"></i> Retour gratuit sous 30 jours</li>
+                            <li><i class="icon-credit-card"></i> Paiement sécurisé par virement bancaire</li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-10 col-md-offset-1">
+                <div class="col-md-12">
                     <div class="fh5co-tabs animate-box">
                         <ul class="fh5co-tab-nav">
                             <li class="active"><a href="#" data-tab="1"><span class="icon visible-xs"><i class="icon-file"></i></span><span class="hidden-xs">Description</span></a></li>
@@ -98,54 +181,40 @@
 
                         <div class="fh5co-tab-content-wrap">
                             <div class="fh5co-tab-content tab-content active" data-tab-content="1">
-                                <div class="col-md-10 col-md-offset-1">
-                                    <h2>{{ $product->name }}</h2>
-                                    @if ($product->category)
-                                        <p class="text-muted">{{ $product->category->name }}</p>
-                                    @endif
-                                    <p style="white-space:pre-line;">{{ $product->description }}</p>
-                                </div>
+                                <p style="white-space:pre-line;">{{ $product->description }}</p>
                             </div>
 
                             <div class="fh5co-tab-content tab-content" data-tab-content="2">
-                                <div class="col-md-10 col-md-offset-1">
-                                    <h3>Livraison</h3>
-                                    <ul>
-                                        <li>Livraison offerte dès {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency }} d'achat, hors zone euro : frais de {{ number_format((float) $settings->international_shipping_fee, 0) }}&nbsp;{{ $settings->currency }} supplémentaires.</li>
-                                        <li>Expédition sous 2 à 5 jours ouvrés selon disponibilité.</li>
-                                    </ul>
-                                    <h3>Retours</h3>
-                                    <ul>
-                                        <li>30 jours pour changer d'avis, retour gratuit.</li>
-                                        <li>Article à retourner dans son emballage d'origine.</li>
-                                    </ul>
-                                </div>
+                                <h3>Livraison</h3>
+                                <ul>
+                                    <li>Livraison offerte dès {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }} d'achat, hors zone euro : frais de {{ number_format((float) $settings->international_shipping_fee, 0) }}&nbsp;{{ $settings->currency_symbol }} supplémentaires.</li>
+                                    <li>Expédition sous 2 à 5 jours ouvrés selon disponibilité.</li>
+                                </ul>
+                                <h3>Retours</h3>
+                                <ul>
+                                    <li>30 jours pour changer d'avis, retour gratuit.</li>
+                                    <li>Article à retourner dans son emballage d'origine.</li>
+                                </ul>
                             </div>
 
                             <div class="fh5co-tab-content tab-content" data-tab-content="3">
-                                <div class="col-md-10 col-md-offset-1">
-                                    <h3>Avis clients</h3>
-
-                                    @if ($product->reviews->isEmpty())
-                                        <p>Aucun avis pour le moment.</p>
-                                    @else
-                                        <div class="feed">
-                                            @foreach ($product->reviews as $review)
-                                                <div>
-                                                    <blockquote>
-                                                        <p>{{ $review->comment }}</p>
-                                                    </blockquote>
-                                                    <h3>&mdash; {{ $review->author_name }}</h3>
-                                                    <span class="rate">
-                                                        @for ($i = 1; $i <= 5; $i++)
-                                                            <i class="icon-star2" style="{{ $i > $review->rating ? 'opacity:.3' : '' }}"></i>
-                                                        @endfor
-                                                    </span>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    @endif
-                                </div>
+                                @if ($product->reviews->isEmpty())
+                                    <p>Aucun avis pour le moment.</p>
+                                @else
+                                    <div class="product-reviews">
+                                        @foreach ($product->reviews as $review)
+                                            <div class="product-review">
+                                                <span class="rate">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <i class="icon-star2" style="{{ $i > $review->rating ? 'opacity:.25' : '' }}"></i>
+                                                    @endfor
+                                                </span>
+                                                <p>{{ $review->comment }}</p>
+                                                <cite>{{ $review->author_name }}</cite>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

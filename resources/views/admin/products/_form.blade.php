@@ -33,6 +33,7 @@
         <div class="flex gap-6">
             <x-admin.checkbox label="Actif (visible en boutique)" name="is_active" :checked="$product->exists ? $product->is_active : true" />
             <x-admin.checkbox label="Nouveauté" name="is_new" :checked="$product->is_new" />
+            <x-admin.checkbox label="Meilleure vente" name="is_bestseller" :checked="$product->is_bestseller" />
         </div>
 
         <x-admin.field label="Nombre d'avis à afficher (générés automatiquement)" name="reviews_count" type="number" min="0" max="500"

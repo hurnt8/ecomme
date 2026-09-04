@@ -12,11 +12,11 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="desc">
                         <h3>Zone euro</h3>
-                        <p>Pour toute livraison dans un pays de la zone euro ({{ implode(', ', \App\Support\Countries::eurozoneLabels()) }}), les frais de livraison sont de {{ number_format(\App\Services\ShippingService::BASE_SHIPPING_FEE, 2) }}&nbsp;{{ $settings->currency }}, offerts dès {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency }} d'achat.</p>
+                        <p>Pour toute livraison dans un pays de la zone euro ({{ implode(', ', \App\Support\Countries::eurozoneLabels()) }}), les frais de livraison sont de {{ number_format(\App\Services\ShippingService::BASE_SHIPPING_FEE, 2) }}&nbsp;{{ $settings->currency_symbol }}, offerts dès {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }} d'achat.</p>
                     </div>
                     <div class="desc">
                         <h3>Hors zone euro</h3>
-                        <p>Pour les livraisons hors zone euro, des frais supplémentaires de {{ number_format((float) $settings->international_shipping_fee, 2) }}&nbsp;{{ $settings->currency }} s'ajoutent aux frais de livraison standards, pour couvrir les coûts de transport international.</p>
+                        <p>Pour les livraisons hors zone euro, des frais supplémentaires de {{ number_format((float) $settings->international_shipping_fee, 2) }}&nbsp;{{ $settings->currency_symbol }} s'ajoutent aux frais de livraison standards, pour couvrir les coûts de transport international.</p>
                     </div>
                     <div class="desc">
                         <h3>Délais</h3>
