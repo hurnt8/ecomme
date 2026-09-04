@@ -94,6 +94,232 @@ html {
 }
 
 /*
+ * Cart. Was a five-column <table>, which rendered 488px wide inside a 375px viewport — the
+ * total and the remove control were pushed past the edge, so an item could not be removed from
+ * a phone at all. Line items instead: they reflow at any width, and each line keeps its own
+ * stepper (the same joined control as the product page) rather than a field plus an OK button.
+ */
+.cart {
+    padding-top: 3em;
+}
+
+.cart-lines {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px;
+    border-top: 1px solid #ececec;
+}
+
+.cart-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 22px 0;
+    border-bottom: 1px solid #ececec;
+}
+
+.cart-line-image {
+    flex: 0 0 90px;
+}
+
+.cart-line-image img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    background: #f7f7f5;
+}
+
+.cart-line-body {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.cart-line-name {
+    display: block;
+    margin-bottom: 6px;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.cart-line-name:hover {
+    color: #d1c286;
+}
+
+.cart-line-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    margin-bottom: 12px;
+    color: #8f8f8f;
+    font-size: 13px;
+}
+
+.cart-line-notice {
+    margin-bottom: 10px;
+    color: #b5502e;
+    font-size: 13px;
+}
+
+.cart-line-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+}
+
+.cart-line-remove {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #8f8f8f;
+    font-size: 13px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.cart-line-remove:hover {
+    color: #b5502e;
+}
+
+.cart-line-total {
+    flex: 0 0 auto;
+    font-size: 16px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.cart-continue {
+    display: inline-block;
+    font-size: 14px;
+    color: #8f8f8f;
+}
+
+.cart-continue:hover {
+    color: #d1c286;
+}
+
+.cart-summary {
+    padding: 28px;
+    background: #f7f7f5;
+}
+
+.cart-summary h3 {
+    margin: 0 0 20px;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.cart-summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 15px;
+}
+
+.cart-summary-row.is-muted {
+    color: #8f8f8f;
+    font-size: 13px;
+}
+
+.cart-shipping-progress {
+    padding: 14px 0 18px;
+    margin-bottom: 6px;
+    border-top: 1px solid #e5e3dc;
+    font-size: 13px;
+    color: #7f7f7f;
+}
+
+.cart-shipping-progress p {
+    margin-bottom: 8px;
+}
+
+.cart-shipping-progress .is-reached {
+    margin: 0;
+    color: #6f8f6f;
+}
+
+.cart-progress-track {
+    height: 4px;
+    background: #e5e3dc;
+}
+
+.cart-progress-track span {
+    display: block;
+    height: 100%;
+    background: #d1c286;
+    transition: width 0.3s;
+}
+
+.cart-reassurance {
+    list-style: none;
+    padding: 18px 0 0;
+    margin: 18px 0 0;
+    border-top: 1px solid #e5e3dc;
+    font-size: 13px;
+    color: #7f7f7f;
+}
+
+.cart-reassurance li {
+    margin-bottom: 8px;
+}
+
+.cart-reassurance i {
+    margin-right: 8px;
+    color: #d1c286;
+}
+
+.cart-empty {
+    padding: 70px 20px;
+    text-align: center;
+}
+
+.cart-empty i {
+    font-size: 44px;
+    color: #d9d5c4;
+}
+
+.cart-empty h3 {
+    margin: 18px 0 8px;
+    font-size: 20px;
+}
+
+.cart-empty p {
+    margin-bottom: 24px;
+    color: #8f8f8f;
+}
+
+@media (max-width: 767px) {
+    .cart-line {
+        flex-wrap: wrap;
+        gap: 14px;
+    }
+
+    .cart-line-image,
+    .cart-line-image img {
+        flex-basis: 72px;
+        width: 72px;
+        height: 72px;
+    }
+
+    /* The line total moves under the controls instead of competing for width with them. */
+    .cart-line-total {
+        flex-basis: 100%;
+        padding-left: 86px;
+    }
+
+    .cart-summary {
+        margin-top: 30px;
+    }
+}
+
+/*
  * Home hero. Replaces the template's translucent white copy panel (.desc, with a 24px black
  * headline and an empty .overlay-gradient) — black text straight onto a pale photograph, with a
  * hard-edged box cutting across the image. A full-bleed gradient carries the contrast instead,

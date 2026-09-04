@@ -2,6 +2,11 @@
 
 @section('title', 'Panier')
 
+@php
+    $threshold = (float) $settings->free_shipping_threshold;
+    $missingForFreeShipping = max($threshold - $subtotal, 0);
+@endphp
+
 @section('content')
     <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm fh5co-cover-compact" role="banner" style="background-image:url('{{ asset('template/images/img_bg_3.jpg') }}');">
         <div class="overlay"></div>
@@ -18,81 +23,119 @@
         </div>
     </header>
 
-    <div id="fh5co-product">
+    <div id="fh5co-product" class="cart">
         <div class="container">
             @if ($items->isEmpty())
-                <div class="row text-center">
-                    <div class="col-md-12">
-                        <p>Votre panier est vide.</p>
-                        <p><a href="{{ route('catalog') }}" class="btn btn-primary btn-outline btn-lg">Découvrir la boutique</a></p>
-                    </div>
+                <div class="cart-empty">
+                    <i class="icon-shopping-cart"></i>
+                    <h3>Votre panier est vide</h3>
+                    <p>Parcourez la boutique et ajoutez les pièces qui vous plaisent.</p>
+                    <a href="{{ route('catalog') }}" class="btn btn-primary btn-lg">Découvrir la boutique</a>
                 </div>
             @else
                 <div class="row">
                     <div class="col-md-8">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Produit</th>
-                                    <th>Prix</th>
-                                    <th>Quantité</th>
-                                    <th>Total</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($items as $item)
-                                    <tr>
-                                        <td>
-                                            <a href="{{ route('product.show', $item->product->slug) }}" style="display:flex;align-items:center;gap:10px;color:#000;">
-                                                <img src="{{ $item->product->images->first()?->url }}" alt="{{ $item->product->name }}" style="width:60px;height:60px;object-fit:cover;">
-                                                <span>
-                                                    {{ $item->product->name }}
-                                                    @if ($item->color)
-                                                        <br><small class="text-muted">Couleur : {{ $item->color }}</small>
-                                                    @endif
-                                                    @if ($item->size)
-                                                        <br><small class="text-muted">Taille : {{ $item->size }}</small>
-                                                    @endif
-                                                    @if ($item->wasCapped)
-                                                        <br><small class="text-danger">Quantité ajustée : stock limité à {{ $item->quantity }}.</small>
-                                                    @endif
-                                                </span>
-                                            </a>
-                                        </td>
-                                        <td><x-shop.price :price="$item->product->price" /></td>
-                                        <td>
-                                            {{-- align-items: the template's .form-control is a fixed 54px tall while
-                                                 .btn-sm is roughly 34px, so without this the OK button hangs off the
-                                                 top of the field. --}}
-                                            <form method="POST" action="{{ route('cart.update', $item->key) }}" style="display:flex;gap:5px;align-items:center;">
+                        {{-- Line items rather than a <table>: the table was 488px wide on a 375px
+                             screen, so the total and the remove button were pushed off the edge
+                             entirely — you could not delete an item from a phone at all. --}}
+                        <ul class="cart-lines">
+                            @foreach ($items as $item)
+                                <li class="cart-line">
+                                    <a class="cart-line-image" href="{{ route('product.show', $item->product->slug) }}">
+                                        <img src="{{ $item->product->images->first()?->url }}" alt="{{ $item->product->name }}">
+                                    </a>
+
+                                    <div class="cart-line-body">
+                                        <a class="cart-line-name" href="{{ route('product.show', $item->product->slug) }}">
+                                            {{ $item->product->name }}
+                                        </a>
+
+                                        <p class="cart-line-meta">
+                                            <x-shop.price :price="$item->product->price" />
+                                            @if ($item->color)
+                                                <span>Coloris : {{ $item->color }}</span>
+                                            @endif
+                                            @if ($item->size)
+                                                <span>Taille : {{ $item->size }}</span>
+                                            @endif
+                                        </p>
+
+                                        @if ($item->wasCapped)
+                                            <p class="cart-line-notice">Quantité ajustée : stock limité à {{ $item->quantity }}.</p>
+                                        @endif
+
+                                        <div class="cart-line-controls">
+                                            {{-- Same joined stepper as the product page, submitting on change so the
+                                                 separate "OK" button the table needed is gone. --}}
+                                            <form method="POST" action="{{ route('cart.update', $item->key) }}"
+                                                  x-data="{ quantity: {{ $item->quantity }}, max: {{ $item->product->stock }} }">
                                                 @csrf
                                                 @method('PATCH')
-                                                <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" max="{{ $item->product->stock }}" class="form-control" style="width:70px;">
-                                                <button type="submit" class="btn btn-default btn-sm">OK</button>
+                                                <div class="product-quantity">
+                                                    <button type="button" class="btn btn-default"
+                                                            @click="quantity = Math.max(1, quantity - 1); $nextTick(() => $el.form.submit())"
+                                                            aria-label="Diminuer la quantité">&minus;</button>
+                                                    <input type="number" name="quantity" x-model.number="quantity"
+                                                           min="1" max="{{ $item->product->stock }}"
+                                                           class="form-control text-center"
+                                                           aria-label="Quantité"
+                                                           @change="$el.form.submit()">
+                                                    <button type="button" class="btn btn-default"
+                                                            @click="quantity = Math.min(max, quantity + 1); $nextTick(() => $el.form.submit())"
+                                                            aria-label="Augmenter la quantité">+</button>
+                                                </div>
                                             </form>
-                                        </td>
-                                        <td>{{ number_format($item->lineTotal, 0) }}&nbsp;€</td>
-                                        <td>
+
                                             <form method="POST" action="{{ route('cart.destroy', $item->key) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-link" aria-label="Retirer du panier" title="Retirer">&times;</button>
+                                                <button type="submit" class="cart-line-remove">Retirer</button>
                                             </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="cart-line-total">{{ number_format($item->lineTotal, 0) }}&nbsp;{{ $settings->currency_symbol }}</div>
+                                </li>
+                            @endforeach
+                        </ul>
+
+                        <a href="{{ route('catalog') }}" class="cart-continue">&larr; Continuer mes achats</a>
                     </div>
 
                     <div class="col-md-4">
-                        <div style="border:1px solid #e5e5e5;padding:25px;">
-                            <h3 style="margin-top:0;">Récapitulatif</h3>
-                            <p>Sous-total <strong style="float:right;">{{ number_format($subtotal, 0) }}&nbsp;€</strong></p>
-                            <p class="text-muted">Frais de livraison calculés à l'étape suivante.</p>
-                            <p><a href="{{ route('checkout.index') }}" class="btn btn-primary btn-block">Passer commande</a></p>
-                        </div>
+                        <aside class="cart-summary">
+                            <h3>Récapitulatif</h3>
+
+                            <div class="cart-summary-row">
+                                <span>Sous-total</span>
+                                <strong>{{ number_format($subtotal, 0) }}&nbsp;{{ $settings->currency_symbol }}</strong>
+                            </div>
+
+                            <div class="cart-summary-row is-muted">
+                                <span>Livraison</span>
+                                <span>Calculée à l'étape suivante</span>
+                            </div>
+
+                            @if ($threshold > 0)
+                                <div class="cart-shipping-progress">
+                                    @if ($missingForFreeShipping > 0)
+                                        <p>Plus que <strong>{{ number_format($missingForFreeShipping, 0) }}&nbsp;{{ $settings->currency_symbol }}</strong> pour la livraison offerte.</p>
+                                        <div class="cart-progress-track">
+                                            <span style="width: {{ min(100, round($subtotal / $threshold * 100)) }}%"></span>
+                                        </div>
+                                    @else
+                                        <p class="is-reached"><i class="icon-paper-plane"></i> Livraison offerte&nbsp;!</p>
+                                    @endif
+                                </div>
+                            @endif
+
+                            <a href="{{ route('checkout.index') }}" class="btn btn-primary btn-lg btn-block">Passer commande</a>
+
+                            <ul class="cart-reassurance">
+                                <li><i class="icon-wallet"></i> Retour gratuit sous 30 jours</li>
+                                <li><i class="icon-credit-card"></i> Paiement sécurisé par virement</li>
+                            </ul>
+                        </aside>
                     </div>
                 </div>
             @endif
@@ -104,13 +147,11 @@
                         <h2>Vous aimerez aussi</h2>
                     </div>
                 </div>
-                @foreach ($recommended->chunk(3) as $row)
-                    <div class="row">
-                        @foreach ($row as $product)
-                            <x-shop.product-card :product="$product" />
-                        @endforeach
-                    </div>
-                @endforeach
+                <div class="row">
+                    @foreach ($recommended as $product)
+                        <x-shop.product-card :product="$product" />
+                    @endforeach
+                </div>
             @endif
         </div>
     </div>

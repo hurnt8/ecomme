@@ -23,7 +23,9 @@ class CartController extends Controller
             ->with('images')
             ->whereNotIn('id', $items->pluck('product.id'))
             ->inRandomOrder()
-            ->take(4)
+            // Three, so the suggestions fill exactly one row of the 3-up grid instead of
+            // leaving a fourth card stranded on a row of its own.
+            ->take(3)
             ->get();
 
         return view('shop.cart', [
