@@ -7,6 +7,13 @@
             <div class="col-md-3 col-xs-8">
                 <div id="fh5co-logo"><a href="{{ route('home') }}">{{ $settings->site_name }}</a></div>
             </div>
+            {{-- The template let site.js inject this button at #page level, positioned absolutely
+                 against the top of the page — which landed it on the announcement bar, a line
+                 above the logo. Declared here instead so it sits in the same row as the logo and
+                 lines up with it; site.js reuses it rather than creating a second one. --}}
+            <div class="col-xs-4 fh5co-nav-toggle-col">
+                <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false"><i></i></a>
+            </div>
             {{-- col-md-5 (not the template's original col-md-6): freed up a column for menu-2 below,
                  which now carries two icons (account + cart) instead of the template's one. --}}
             <div class="col-md-5 col-xs-6 text-center menu-1">

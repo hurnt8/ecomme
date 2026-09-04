@@ -12,21 +12,44 @@
 ;(function ($) {
     'use strict';
 
+    var closeOffcanvas = function () {
+        $('body').removeClass('overflow offcanvas');
+        $('.fh5co-nav-toggle').removeClass('active').attr('aria-expanded', 'false');
+    };
+
     var mobileMenuOutsideClick = function () {
         $(document).click(function (e) {
             var container = $('#fh5co-offcanvas, .js-fh5co-nav-toggle');
             if (!container.is(e.target) && container.has(e.target).length === 0) {
                 if ($('body').hasClass('offcanvas')) {
-                    $('body').removeClass('offcanvas');
-                    $('.js-fh5co-nav-toggle').removeClass('active');
+                    closeOffcanvas();
                 }
+            }
+        });
+
+        // Escape closes it too — the panel traps the page behind body.overflow, so there needs
+        // to be a keyboard way out.
+        $(document).on('keyup', function (e) {
+            if (e.key === 'Escape' && $('body').hasClass('offcanvas')) {
+                closeOffcanvas();
             }
         });
     };
 
     var offcanvasMenu = function () {
         $('#page').prepend('<div id="fh5co-offcanvas" />');
-        $('#page').prepend('<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle fh5co-nav-white"><i></i></a>');
+
+        // The toggle is declared in the header markup so it sits on the logo's line (see
+        // header.blade.php); only fall back to injecting one if that markup isn't present.
+        if (!$('.js-fh5co-nav-toggle').length) {
+            $('#page').prepend('<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle fh5co-nav-white"><i></i></a>');
+        }
+
+        // The toggle sits behind the panel once it slides in, so the panel carries its own
+        // close control rather than relying on the burger to double as one.
+        $('#fh5co-offcanvas').append(
+            '<a href="#" class="js-fh5co-nav-toggle offcanvas-close" aria-label="Fermer le menu">&times;</a>'
+        );
 
         $('#fh5co-offcanvas').append($('.menu-1 > ul').clone());
         $('#fh5co-offcanvas').append($('.menu-2 > ul').clone());
@@ -44,21 +67,22 @@
 
         $(window).resize(function () {
             if ($('body').hasClass('offcanvas')) {
-                $('body').removeClass('offcanvas');
-                $('.js-fh5co-nav-toggle').removeClass('active');
+                closeOffcanvas();
             }
         });
     };
 
     var burgerMenu = function () {
         $('body').on('click', '.js-fh5co-nav-toggle', function (event) {
-            if ($('body').hasClass('overflow offcanvas')) {
-                $('body').removeClass('overflow offcanvas');
-            } else {
-                $('body').addClass('overflow offcanvas');
-            }
-            $(this).toggleClass('active');
             event.preventDefault();
+
+            var opening = !$('body').hasClass('offcanvas');
+
+            $('body').toggleClass('overflow offcanvas', opening);
+            // Only the burger carries the open/close animation; the panel's own close button
+            // is not the element being toggled, so target the burger explicitly.
+            $('.fh5co-nav-toggle').not('.offcanvas-close').toggleClass('active', opening)
+                .attr('aria-expanded', opening ? 'true' : 'false');
         });
     };
 

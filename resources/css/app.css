@@ -603,8 +603,102 @@ html {
  * Un-float them into full-width rows with a label, matching the nav links above them; the label
  * itself is hidden everywhere else so the compact desktop header is untouched.
  */
+/*
+ * The burger lives in the nav row (header.blade.php) instead of being injected at #page level
+ * and positioned against the top of the document, which put it on the announcement bar, a line
+ * above the logo. Static inside its column, vertically centred against the logo.
+ */
+.fh5co-nav-toggle-col {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .fh5co-nav-toggle-col {
+        display: block;
+        text-align: right;
+    }
+
+    /* Both remaining columns (logo + burger) centre on one line; menu-1/menu-2 are display:none
+       at this width so they don't take part. */
+    .fh5co-nav > .container > .row {
+        display: flex;
+        align-items: center;
+    }
+
+    .fh5co-nav .fh5co-nav-toggle {
+        position: static;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        height: 25px;
+    }
+}
+
 .offcanvas-label {
     display: none;
+}
+
+/*
+ * Off-canvas panel. The template's version was a bare black column with default-sized links;
+ * this gives the rows real tap targets, separates the navigation from the account/cart block,
+ * and adds a close control — the burger itself ends up underneath the panel once it opens.
+ */
+#fh5co-offcanvas {
+    padding: 70px 28px 40px;
+    background: #171512;
+}
+
+.offcanvas-close {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    width: 40px;
+    height: 40px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 30px;
+    color: rgba(255, 255, 255, 0.6) !important;
+    border-bottom: none !important;
+}
+
+.offcanvas-close:hover,
+.offcanvas-close:focus {
+    color: #fff !important;
+}
+
+#fh5co-offcanvas ul li a {
+    display: block;
+    padding: 11px 0;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+#fh5co-offcanvas ul li a:hover {
+    color: #d1c286;
+}
+
+#fh5co-offcanvas ul li.offcanvas-has-dropdown > a {
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+#fh5co-offcanvas ul li > ul {
+    padding-left: 14px;
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+#fh5co-offcanvas ul li > ul li a {
+    padding: 8px 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* The second cloned <ul> holds the search box and the account/cart rows; a rule above it marks
+   the break between browsing the shop and managing your own basket. */
+#fh5co-offcanvas > ul + ul {
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 /*
@@ -668,6 +762,51 @@ html {
     border: 0;
     font: inherit;
     cursor: pointer;
+}
+
+/*
+ * The two card actions were small flat icon tiles in the brand gold, sitting straight on the
+ * product photograph — on a pale product shot (most of the catalogue) they barely registered,
+ * and below 768px the template drops the dark hover veil entirely (.inner gets opacity:1 and a
+ * transparent background), so on a phone they were gold-on-white with nothing behind them.
+ * Round white buttons with a shadow read against any photo, and at 46px they are a real touch
+ * target rather than a 31px one.
+ */
+.product .product-grid .inner p .icon,
+.product .product-grid .inner .fh5co-quick-actions .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    margin: 0 4px;
+    padding: 0;
+    border-radius: 50%;
+    background: #fff;
+    color: #171512;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+    font-size: 17px;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.product .product-grid .inner .icon:hover,
+.product .product-grid .inner .icon:focus {
+    background: #d1c286;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    /* Always visible on touch (there is no hover), so they need to hold their own against the
+       photo rather than leaning on the desktop veil. */
+    .product .product-grid .inner {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.28) 100%);
+    }
+
+    .product .product-grid .inner .fh5co-quick-actions {
+        vertical-align: bottom;
+        padding-bottom: 14px;
+    }
 }
 
 /*
