@@ -6,8 +6,9 @@
 @php
     $galleryImages = $product->images->map(fn ($image) => $image->url)->values();
 
+    // thumbnail_url resolves to the neutral placeholder rather than another product's photo.
     if ($galleryImages->isEmpty()) {
-        $galleryImages = collect([asset('template/images/product-1.jpg')]);
+        $galleryImages = collect([$product->thumbnail_url]);
     }
 
     $onSale = $product->compare_at_price && (float) $product->compare_at_price > (float) $product->price;

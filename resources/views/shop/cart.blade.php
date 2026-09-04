@@ -42,7 +42,7 @@
                             @foreach ($items as $item)
                                 <li class="cart-line">
                                     <a class="cart-line-image" href="{{ route('product.show', $item->product->slug) }}">
-                                        <img src="{{ $item->product->images->first()?->url }}" alt="{{ $item->product->name }}">
+                                        <img src="{{ $item->product->thumbnail_url }}" alt="{{ $item->product->name }}">
                                     </a>
 
                                     <div class="cart-line-body">

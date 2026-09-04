@@ -25,6 +25,7 @@ class ProductSeeder extends Seeder
         $jardin = Category::where('slug', 'jardin-exterieur')->firstOrFail();
         $deco = Category::where('slug', 'decoration')->firstOrFail();
         $equipement = Category::where('slug', 'equipement-maison')->firstOrFail();
+        $bois = Category::where('slug', 'bois-chauffage')->firstOrFail();
 
         $products = [
             [
@@ -141,6 +142,234 @@ class ProductSeeder extends Seeder
                 'is_new' => true,
                 'is_bestseller' => true,
                 'images' => ['product-9.jpg'],
+            ],
+
+            /*
+             * The catalogue proper: solid-wood furniture by room, plus the firewood line. The
+             * template only ships nine photographs, all spoken for above, so these carry no
+             * image and fall back to Product's neutral placeholder until real photography is
+             * uploaded through the back office — never to another product's picture.
+             */
+
+            // ---- Salle à manger ----
+            [
+                'category_id' => $mobilier->id,
+                'name' => 'Table à manger Grand Chêne 200 cm',
+                'description' => "Table de salle à manger en chêne massif, plateau d'une seule épaisseur aux chants adoucis, posé sur un piétement en acier laqué noir en X. Le chêne est huilé, non verni : une rayure se ponce et se reprend localement.\n\nDimensions : 200 x 100 x 76 cm. Plateau chêne massif 4 cm, piétement acier laqué noir, finition huile naturelle. Convient à 8 convives. Livrée avec plateau et piétement séparés, montage 20 minutes à deux.",
+                'price' => 1290,
+                'compare_at_price' => null,
+                'colors' => ['Chêne naturel', 'Chêne fumé'],
+                'stock' => 4,
+                'is_new' => true,
+                'is_bestseller' => false,
+                'images' => [],
+            ],
+            [
+                'category_id' => $mobilier->id,
+                'name' => 'Table à manger Acacia Live Edge 180 cm',
+                'description' => "Table en acacia massif dont les deux longs chants sont laissés bruts, suivant la forme de la grume. Chaque plateau est donc unique et la largeur varie de quelques centimètres d'une table à l'autre.\n\nDimensions : 180 x 90 (±4) x 76 cm. Acacia massif 4 cm, chants naturels, piétement acier trapèze. Convient à 6 convives.",
+                'price' => 990,
+                'compare_at_price' => 1190,
+                'colors' => null,
+                'stock' => 3,
+                'is_new' => true,
+                'is_bestseller' => false,
+                'images' => [],
+            ],
+            [
+                'category_id' => $mobilier->id,
+                'name' => 'Banc de table Chêne 180 cm',
+                'description' => "Banc en chêne massif assorti à la table Grand Chêne, piétement acier en X. Se glisse entièrement sous le plateau lorsqu'il n'est pas utilisé.\n\nDimensions : 180 x 35 x 45 cm. Chêne massif, piétement acier laqué noir, finition huile naturelle. Supporte 3 personnes.",
+                'price' => 490,
+                'compare_at_price' => null,
+                'colors' => ['Chêne naturel', 'Chêne fumé'],
+                'stock' => 6,
+                'is_new' => false,
+                'is_bestseller' => false,
+                'images' => [],
+            ],
+            [
+                'category_id' => $mobilier->id,
+                'name' => 'Chaise Acacia assise tissu',
+                'description' => "Chaise à structure en acacia massif et assise garnie, habillée d'un tissu gris clair au tissage serré. Dossier légèrement incliné, pensé pour rester à table après le repas.\n\nDimensions : 46 x 55 x 82 cm, hauteur d'assise 46 cm. Acacia massif, mousse haute résilience, tissu 100 % polyester (40 000 tours Martindale). Housse non déhoussable.",
+                'price' => 249,
+                'compare_at_price' => null,
+                'colors' => ['Gris clair', 'Anthracite'],
+                'sizes' => null,
+                'stock' => 24,
+                'is_new' => false,
+                'is_bestseller' => true,
+                'images' => [],
+            ],
+
+            // ---- Salon ----
+            [
+                'category_id' => $mobilier->id,
+                'name' => 'Table basse Racine de teck 60 cm',
+                'description' => "Table basse taillée dans une souche de teck recyclée, poncée et vernie mate. Les nœuds, les fentes et les creux du bois sont conservés : deux pièces ne se ressemblent jamais et les dimensions varient légèrement.\n\nDimensions : environ 60 x 60 x 40 cm. Racine de teck massive, finition vernis mat. Pièce unique, poids 18 à 25 kg selon la souche.",
+                'price' => 320,
+                'compare_at_price' => null,
+                'colors' => null,
+                'stock' => 5,
+                'is_new' => true,
+                'is_bestseller' => false,
+                'images' => [],
+            ],
+            [
+                'category_id' => $mobilier->id,
+                'name' => 'Table basse Chêne pieds X 110 cm',
+                'description' => "Table basse en chêne massif au plateau épais, portée par un piétement acier en X qui la fait paraître plus légère qu'elle ne l'est.\n\nDimensions : 110 x 60 x 40 cm. Chêne massif 4 cm, piétement acier laqué noir, finition huile naturelle.",
+                'price' => 490,
+                'compare_at_price' => null,
+                'colors' => ['Chêne naturel', 'Chêne fumé'],
+                'stock' => 7,
+                'is_new' => false,
+                'is_bestseller' => false,
+                'images' => [],
+            ],
+            [
+                'category_id' => $mobilier->id,
+                'name' => 'Meuble TV suspendu Acacia 160 cm',
+                'description' => "Meuble TV mural en acacia massif, trois tiroirs à ouverture par poussée, sans poignée apparente. Fixation murale invisible : l'espace sous le meuble reste libre pour le passage de l'aspirateur et des câbles.\n\nDimensions : 160 x 40 x 30 cm. Acacia massif, tiroirs sur coulisses à fermeture douce, passe-câbles à l'arrière. Fixations murales fournies (chevilles pour mur plein).",
+                'price' => 690,
+                'compare_at_price' => null,
+                'colors' => null,
+                'stock' => 5,
+                'is_new' => false,
+                'is_bestseller' => false,
+                'images' => [],
+            ],
+            [
+                'category_id' => $mobilier->id,
+                'name' => 'Bibliothèque Acacia 100 cm',
+                'description' => "Bibliothèque en acacia massif à cases décalées, montée sans vis apparente. Assez profonde pour des livres grand format posés à plat.\n\nDimensions : 100 x 35 x 180 cm. Acacia massif, six cases, finition huile naturelle. Système anti-bascule fourni.",
+                'price' => 690,
+                'compare_at_price' => null,
+                'colors' => null,
+                'stock' => 4,
+                'is_new' => false,
+                'is_bestseller' => false,
+                'images' => [],
+            ],
+
+            // ---- Chambre ----
+            [
+                'category_id' => $mobilier->id,
+                'name' => 'Lit Chêne et métal 180 x 200',
+                'description' => "Lit double à structure en chêne massif et traverses métal, tête de lit pleine aux montants adoucis. Le sommier à lattes se pose directement sur le cadre, sans pieds centraux visibles.\n\nDimensions : 196 x 216 x 90 cm (couchage 180 x 200). Chêne massif et acier laqué noir, hauteur sous cadre 25 cm. Sommier et matelas non fournis.",
+                'price' => 1190,
+                'compare_at_price' => null,
+                'colors' => ['Chêne naturel', 'Chêne fumé'],
+                'stock' => 3,
+                'is_new' => true,
+                'is_bestseller' => false,
+                'images' => [],
+            ],
+            [
+                'category_id' => $mobilier->id,
+                'name' => 'Chevet Chêne et métal 40 cm',
+                'description' => "Chevet compact en chêne massif, un tiroir et une niche ouverte, piétement métal. Assorti au lit Chêne et métal.\n\nDimensions : 40 x 35 x 50 cm. Chêne massif, tiroir sur coulisses à fermeture douce, piétement acier laqué noir.",
+                'price' => 190,
+                'compare_at_price' => 225,
+                'colors' => ['Chêne naturel', 'Chêne fumé'],
+                'stock' => 12,
+                'is_new' => false,
+                'is_bestseller' => false,
+                'images' => [],
+            ],
+
+            // ---- Entrée ----
+            [
+                'category_id' => $mobilier->id,
+                'name' => 'Banc d\'entrée Branches de teck 100 cm',
+                'description' => "Banc composé de branches de teck assemblées et vernies, laissées dans leur forme d'origine. L'assise n'est jamais tout à fait plane : c'est ce qui en fait l'objet.\n\nDimensions : 100 x 35 x 45 cm. Branches de teck vernies. Pièce unique, aspect variable d'un exemplaire à l'autre.",
+                'price' => 320,
+                'compare_at_price' => null,
+                'colors' => null,
+                'stock' => 6,
+                'is_new' => true,
+                'is_bestseller' => false,
+                'images' => [],
+            ],
+
+            // ---- Jardin & Extérieur ----
+            [
+                'category_id' => $jardin->id,
+                'name' => 'Table de jardin Teck massif 180 cm',
+                'description' => "Table d'extérieur en teck massif non traité, qui prendra sa patine grise argentée en une à deux saisons. Un huilage annuel suffit à conserver la teinte miel d'origine.\n\nDimensions : 180 x 90 x 75 cm. Teck massif d'origine contrôlée, assemblages chevillés, aucune visserie apparente. Convient à 6 convives, reste dehors toute l'année.",
+                'price' => 890,
+                'compare_at_price' => null,
+                'colors' => null,
+                'stock' => 4,
+                'is_new' => true,
+                'is_bestseller' => false,
+                'images' => [],
+            ],
+            [
+                'category_id' => $jardin->id,
+                'name' => 'Fauteuil de jardin Teck et corde',
+                'description' => "Fauteuil bas d'extérieur, structure en teck massif et assise en corde marine tressée, qui sèche vite après la pluie et ne retient pas l'humidité.\n\nDimensions : 70 x 75 x 78 cm. Teck massif, corde polypropylène tressée main, traitée anti-UV. Empilable par deux.",
+                'price' => 420,
+                'compare_at_price' => null,
+                'colors' => ['Corde écrue', 'Corde anthracite'],
+                'stock' => 8,
+                'is_new' => false,
+                'is_bestseller' => false,
+                'images' => [],
+            ],
+
+            // ---- Décoration ----
+            [
+                'category_id' => $deco->id,
+                'name' => 'Grand bol Racine de teck 60 cm',
+                'description' => "Bol décoratif creusé dans une racine de teck, poncé à la main et laissé brut à l'intérieur. À poser sur une table basse ou une console ; il n'est pas étanche et ne va pas au contact alimentaire.\n\nDimensions : environ 60 cm de diamètre, 18 cm de haut. Racine de teck massive, finition cire incolore. Pièce unique.",
+                'price' => 95,
+                'compare_at_price' => null,
+                'colors' => null,
+                'stock' => 10,
+                'is_new' => true,
+                'is_bestseller' => false,
+                'images' => [],
+            ],
+
+            // ---- Bois & Chauffage ----
+            [
+                'category_id' => $bois->id,
+                'name' => 'Bûches de chêne 50 cm — 1 stère',
+                'description' => "Bois de chauffage en chêne fendu, séché deux ans sous abri ventilé. Taux d'humidité inférieur à 20 %, mesuré avant expédition : un bois plus humide encrasse le conduit et chauffe moitié moins.\n\nQuantité : 1 stère (bûches de 50 cm). Chêne français, séchage naturel 24 mois, humidité < 20 %. Livré sur palette, déchargement au pied de la propriété, sur rendez-vous.",
+                'price' => 89,
+                'compare_at_price' => null,
+                'sizes' => ['Bûches 33 cm', 'Bûches 50 cm'],
+                'colors' => null,
+                'stock' => 40,
+                'is_new' => true,
+                'is_bestseller' => false,
+                'images' => [],
+            ],
+            [
+                'category_id' => $bois->id,
+                'name' => 'Bûches de hêtre 33 cm — 1 stère',
+                'description' => "Hêtre fendu, séché deux ans. Il monte en température plus vite que le chêne et convient bien aux poêles et inserts de petite chambre de combustion.\n\nQuantité : 1 stère (bûches de 33 cm). Hêtre français, séchage naturel 24 mois, humidité < 20 %. Livré sur palette, déchargement au pied de la propriété.",
+                'price' => 95,
+                'compare_at_price' => null,
+                'sizes' => ['Bûches 33 cm', 'Bûches 50 cm'],
+                'colors' => null,
+                'stock' => 35,
+                'is_new' => true,
+                'is_bestseller' => false,
+                'images' => [],
+            ],
+            [
+                'category_id' => $bois->id,
+                'name' => 'Filet de bois d\'allumage 10 kg',
+                'description' => "Petit bois de résineux sec, prêt à l'emploi, en filet refermable. De quoi allumer une trentaine de feux sans papier ni allume-feu chimique.\n\nQuantité : filet de 10 kg. Résineux séché, longueur 20 à 25 cm, humidité < 18 %. Expédié en colis standard.",
+                'price' => 19,
+                'compare_at_price' => 24,
+                'colors' => null,
+                'stock' => 60,
+                'is_new' => false,
+                'is_bestseller' => true,
+                'images' => [],
             ],
         ];
 

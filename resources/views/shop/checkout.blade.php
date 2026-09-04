@@ -140,7 +140,7 @@
                             @foreach ($items as $item)
                                 <li>
                                     <span class="checkout-item-image">
-                                        <img src="{{ $item->product->images->first()?->url }}" alt="{{ $item->product->name }}">
+                                        <img src="{{ $item->product->thumbnail_url }}" alt="{{ $item->product->name }}">
                                         <span class="checkout-item-qty">{{ $item->quantity }}</span>
                                     </span>
                                     <span class="checkout-item-body">

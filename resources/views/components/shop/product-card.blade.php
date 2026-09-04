@@ -7,7 +7,7 @@
 
 <div class="col-md-4 text-center animate-box">
     <div class="product">
-        <div class="product-grid" style="background-image:url('{{ $product->images->first()?->url }}');">
+        <div class="product-grid" style="background-image:url('{{ $product->thumbnail_url }}');">
             @if ($onSale)
                 <x-shop.badge label="Promo" variant="promo" />
             @elseif ($product->is_new)

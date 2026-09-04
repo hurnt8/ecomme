@@ -54,7 +54,9 @@
                     <div class="row">
                         @foreach ($stockedCategories as $category)
                             @php
-                                $cover = $category->image_url ?? $category->products->first()?->images->first()?->url;
+                                // Prefer a product that actually has photography over the placeholder.
+                                $cover = $category->image_url
+                                    ?? $category->products->firstWhere(fn ($p) => $p->hasPhoto())?->thumbnail_url;
                             @endphp
                             <div class="col-sm-6 col-md-3">
                                 <a class="about-range" href="{{ route('catalog', ['category' => $category->slug]) }}">
