@@ -62,7 +62,10 @@
                                         </td>
                                         <td><x-shop.price :price="$item->product->price" /></td>
                                         <td>
-                                            <form method="POST" action="{{ route('cart.update', $item->key) }}" style="display:flex;gap:5px;">
+                                            {{-- align-items: the template's .form-control is a fixed 54px tall while
+                                                 .btn-sm is roughly 34px, so without this the OK button hangs off the
+                                                 top of the field. --}}
+                                            <form method="POST" action="{{ route('cart.update', $item->key) }}" style="display:flex;gap:5px;align-items:center;">
                                                 @csrf
                                                 @method('PATCH')
                                                 <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" max="{{ $item->product->stock }}" class="form-control" style="width:70px;">

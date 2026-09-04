@@ -66,7 +66,13 @@ class CatalogController extends Controller
 
         return view('shop.catalog', [
             'products' => $products,
-            'categories' => Category::active()->ordered()->get(),
+            // withCount so the sidebar can show how many pieces sit behind each category. Empty
+            // categories are still listed rather than hidden — the count reading 0 is the signal
+            // that the category needs stock.
+            'categories' => Category::active()
+                ->ordered()
+                ->withCount(['products' => fn ($q) => $q->active()])
+                ->get(),
             'sizes' => $this->distinctValues('sizes'),
             'colors' => $this->distinctValues('colors'),
             'sort' => $sort,

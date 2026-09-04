@@ -4,21 +4,30 @@
 @section('meta_description', $settings->description)
 
 @section('content')
+    {{-- The template put the hero copy in a translucent white panel (.desc) with a 24px black
+         headline and no overlay, so the text sat on the photo with almost no contrast and the
+         panel cut a hard rectangle across the image. Full-bleed gradient over the photo instead,
+         with the copy sized to carry the page. .slider-text / .slider-text-inner are kept: the
+         flexslider callbacks in site.js animate those classes. --}}
     <aside id="fh5co-hero" class="js-fullheight">
         <div class="flexslider js-fullheight">
             <ul class="slides">
                 @forelse ($heroBanners as $banner)
                     <li style="background-image: url('{{ $banner->image_url }}');">
-                        <div class="overlay-gradient"></div>
+                        <div class="hero-overlay"></div>
                         <div class="container">
-                            <div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text">
+                            <div class="col-md-7 js-fullheight slider-text">
                                 <div class="slider-text-inner">
-                                    <div class="desc">
-                                        <h2>{{ $banner->title }}</h2>
-                                        <p>{{ $banner->subtitle }}</p>
-                                        @if ($banner->link_url)
-                                            <p><a href="{{ $banner->link_url }}" class="btn btn-primary btn-outline btn-lg">Découvrir</a></p>
+                                    <div class="hero-content">
+                                        <span class="hero-kicker">{{ $banner->subtitle ? $settings->site_name : 'Nouvelle collection' }}</span>
+                                        <h2 class="hero-title">{{ $banner->title }}</h2>
+                                        @if ($banner->subtitle)
+                                            <p class="hero-lead">{{ $banner->subtitle }}</p>
                                         @endif
+                                        <div class="hero-actions">
+                                            <a href="{{ $banner->link_url ?: route('catalog') }}" class="btn btn-primary btn-lg">Découvrir la collection</a>
+                                            <a href="{{ route('catalog', ['on_sale' => 1]) }}" class="hero-link">Voir les promotions</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -26,14 +35,18 @@
                     </li>
                 @empty
                     <li style="background-image: url('{{ asset('template/images/img_bg_1.jpg') }}');">
-                        <div class="overlay-gradient"></div>
+                        <div class="hero-overlay"></div>
                         <div class="container">
-                            <div class="col-md-6 col-md-offset-3 col-md-pull-3 js-fullheight slider-text">
+                            <div class="col-md-7 js-fullheight slider-text">
                                 <div class="slider-text-inner">
-                                    <div class="desc">
-                                        <h2>{{ $settings->site_name }}</h2>
-                                        <p>{{ $settings->tagline }}</p>
-                                        <p><a href="{{ route('catalog') }}" class="btn btn-primary btn-outline btn-lg">Découvrir</a></p>
+                                    <div class="hero-content">
+                                        <span class="hero-kicker">{{ $settings->site_name }}</span>
+                                        <h2 class="hero-title">{{ $settings->tagline }}</h2>
+                                        <p class="hero-lead">{{ $settings->description }}</p>
+                                        <div class="hero-actions">
+                                            <a href="{{ route('catalog') }}" class="btn btn-primary btn-lg">Découvrir la collection</a>
+                                            <a href="{{ route('catalog', ['on_sale' => 1]) }}" class="hero-link">Voir les promotions</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -42,6 +55,11 @@
                 @endforelse
             </ul>
         </div>
+
+        <a href="#fh5co-services" class="hero-scroll" aria-label="Faire défiler vers le contenu">
+            <span>Découvrir</span>
+            <i class="icon-arrow-down"></i>
+        </a>
     </aside>
 
     <div id="fh5co-services" class="fh5co-bg-section">

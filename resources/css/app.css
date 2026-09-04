@@ -94,43 +94,371 @@ html {
 }
 
 /*
- * Catalog filter bar — no template equivalent exists (product.html has no filters at all),
- * so this reuses the template's own form-control/btn/checkbox-inline styling inside a plain
- * bordered panel rather than introducing a new visual language.
+ * Home hero. Replaces the template's translucent white copy panel (.desc, with a 24px black
+ * headline and an empty .overlay-gradient) — black text straight onto a pale photograph, with a
+ * hard-edged box cutting across the image. A full-bleed gradient carries the contrast instead,
+ * so the copy stays legible whatever photo the shop uploads, and the headline is sized to hold
+ * a full-height hero.
  */
-.fh5co-filters {
-    background: #f7f7f5;
-    border: 1px solid #ececec;
-    padding: 20px 20px 15px;
-    margin-bottom: 30px;
+#fh5co-hero {
+    position: relative;
 }
 
-.fh5co-filters label {
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(100deg, rgba(20, 18, 14, 0.82) 0%, rgba(20, 18, 14, 0.6) 45%, rgba(20, 18, 14, 0.15) 100%);
+}
+
+#fh5co-hero .flexslider .slides li .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content {
+    max-width: 620px;
+}
+
+.hero-kicker {
     display: block;
-    font-size: 11px;
+    margin-bottom: 18px;
+    color: #d1c286;
+    font-size: 12px;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+}
+
+/* Overrides the template's #fh5co-hero ... h2 (24px, #000, and oddly larger on mobile than on
+   desktop). Fluid so it stays on two or three lines from phone to desktop. */
+#fh5co-hero .flexslider .slider-text > .slider-text-inner h2.hero-title {
+    margin: 0 0 20px;
+    color: #fff;
+    font-size: clamp(32px, 5vw, 60px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.hero-lead {
+    margin-bottom: 32px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 26px;
+}
+
+.hero-link {
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    padding-bottom: 3px;
+}
+
+.hero-link:hover,
+.hero-link:focus {
+    color: #d1c286;
+    border-bottom-color: #d1c286;
+}
+
+/* An explicit invitation to keep going rather than leaving the fold as a dead end. */
+.hero-scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 70px;
+    z-index: 3;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.hero-scroll:hover,
+.hero-scroll:focus {
+    color: #fff;
+}
+
+.hero-scroll i {
+    font-size: 18px;
+    animation: hero-scroll-bounce 2s ease-in-out infinite;
+}
+
+@keyframes hero-scroll-bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(6px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-scroll i {
+        animation: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-overlay {
+        background: linear-gradient(180deg, rgba(20, 18, 14, 0.55) 0%, rgba(20, 18, 14, 0.8) 100%);
+    }
+
+    .hero-lead {
+        font-size: 15px;
+        margin-bottom: 26px;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* The scroll cue would land on top of the buttons on a short phone screen. */
+    .hero-scroll {
+        display: none;
+    }
+}
+
+/*
+ * Catalog. The template has no listing page of its own (product.html is a single product), so
+ * this is built from scratch: filters in a sidebar with the grid beside them, rather than the
+ * full-width filter slab this page used to open with, which pushed the products themselves most
+ * of the way down the screen before anything could be seen.
+ */
+.catalog {
+    padding-top: 3em;
+}
+
+.catalog-filters h3 {
+    margin: 0 0 12px;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.catalog-filter-group {
+    padding-bottom: 22px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid #ececec;
+}
+
+.catalog-filter-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.catalog-filter-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    color: #5f5f5f;
+    font-size: 14px;
+}
+
+.catalog-filter-list a:hover {
+    color: #d1c286;
+}
+
+.catalog-filter-list a.is-active {
+    color: #000;
+    font-weight: bold;
+}
+
+.catalog-filter-qty {
+    color: #b5b5b5;
+    font-size: 12px;
+}
+
+.catalog-filter-price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.catalog-filter-price .form-control {
+    height: 42px;
+    min-width: 0;
+    padding: 6px 10px;
+    font-size: 14px;
+}
+
+.catalog-filter-price span {
+    color: #b5b5b5;
+}
+
+.catalog-filter-check {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: normal;
+    color: #5f5f5f;
+    cursor: pointer;
+}
+
+.catalog-filter-check input {
+    margin-right: 8px;
+}
+
+.catalog-filters-reset {
+    display: block;
+    margin-top: 12px;
+    text-align: center;
+    font-size: 13px;
     color: #8f8f8f;
-    margin-bottom: 4px;
+    text-decoration: underline;
 }
 
-.fh5co-filters .form-group {
+/* Below the sidebar breakpoint the filters would otherwise sit between the header and the
+   products; collapsed behind a toggle they stay one tap away without displacing the grid. */
+.catalog-filters-toggle {
+    display: none;
+    width: 100%;
     margin-bottom: 15px;
+    padding: 12px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    background: #fff;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
-.fh5co-filters-footer {
-    padding-top: 5px;
-    border-top: 1px solid #e5e5e5;
+.catalog-filters-count {
+    display: inline-block;
+    min-width: 20px;
+    margin-left: 6px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    background: #d1c286;
+    color: #fff;
+    font-size: 11px;
 }
 
-.fh5co-filters-footer .checkbox-inline {
+.catalog-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #ececec;
+}
+
+.catalog-count {
+    margin: 0;
+    font-size: 14px;
+    color: #7f7f7f;
+}
+
+.catalog-count strong {
+    color: #000;
+}
+
+.catalog-sort {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.catalog-sort label {
+    margin: 0;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #8f8f8f;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+.catalog-sort .form-control {
+    height: 42px;
+    width: auto;
+    padding: 6px 10px;
+    font-size: 14px;
+}
+
+.catalog-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.catalog-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    background: #f4f2ea;
+    color: #5f5f5f;
     font-size: 13px;
 }
 
-@media (max-width: 768px) {
-    .fh5co-filters-footer .text-right {
-        text-align: left;
-        margin-top: 10px;
+.catalog-chip span {
+    font-size: 15px;
+    line-height: 1;
+    color: #a9a9a9;
+}
+
+.catalog-chip:hover {
+    background: #ece8d8;
+    color: #000;
+}
+
+.catalog-chip:hover span {
+    color: #b5502e;
+}
+
+.catalog-empty {
+    padding: 60px 20px;
+    text-align: center;
+    background: #f7f7f5;
+}
+
+.catalog-empty h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.catalog-empty p {
+    margin-bottom: 20px;
+    color: #8f8f8f;
+}
+
+@media (max-width: 991px) {
+    .catalog-filters-toggle {
+        display: block;
+    }
+
+    .catalog-filters {
+        display: none;
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+        border-bottom: 1px solid #ececec;
+    }
+
+    .catalog-filters.is-open {
+        display: block;
     }
 }
 
@@ -550,25 +878,63 @@ html {
     max-width: 260px;
 }
 
+/*
+ * One joined control rather than three loose boxes. .btn and .form-control disagree on height
+ * (the template gives .form-control a fixed 54px, .btn ends up 50px from its padding), so the
+ * buttons sat 4px shorter than the field, with a 4px gap on one side and none on the other. The
+ * border now lives on the wrapper and each segment is flat and stretched to a shared height.
+ */
 .product-quantity {
-    display: flex;
-    width: 150px;
+    display: inline-flex;
+    align-items: stretch;
+    height: 48px;
+    background: #fff;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.product-quantity .btn,
+.product-quantity .form-control {
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    line-height: 1;
 }
 
 .product-quantity .btn {
-    flex: 0 0 auto;
-    padding-left: 14px;
-    padding-right: 14px;
+    flex: 0 0 44px;
+    font-size: 18px;
+    color: #000;
+    transition: background 0.2s;
 }
 
-/* flex-basis 0 + min-width 0: without both, the field's own intrinsic width wins and the
-   "+" button is pushed outside the 150px box (clipped entirely on narrow screens). */
+.product-quantity .btn:hover,
+.product-quantity .btn:focus {
+    background: #f4f2ea;
+}
+
 .product-quantity .form-control {
-    flex: 1 1 auto;
-    width: 0;
+    flex: 0 0 58px;
     min-width: 0;
-    padding-left: 4px;
-    padding-right: 4px;
+    font-size: 16px;
+    text-align: center;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* The native spinners crowd a field this narrow and duplicate the -/+ buttons. */
+.product-quantity input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.product-quantity input[type='number']::-webkit-outer-spin-button,
+.product-quantity input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .product-add-to-cart {

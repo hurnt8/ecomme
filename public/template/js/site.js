@@ -130,10 +130,19 @@
             },
         });
 
-        $('#fh5co-hero .flexslider .slides > li').css('height', $(window).height());
-        $(window).resize(function () {
-            $('#fh5co-hero .flexslider .slides > li').css('height', $(window).height());
-        });
+        // The template sized each slide to the full window height, ignoring the announcement bar
+        // and nav sitting above it — so the hero always ran past the fold by exactly the height
+        // of that chrome, pushing anything anchored to its bottom edge off screen. Subtract it
+        // (floored, so the hero stays usable on very short windows).
+        var sizeSlides = function () {
+            var above = $('#fh5co-hero').offset().top;
+            var height = Math.max($(window).height() - above, 420);
+
+            $('#fh5co-hero .flexslider .slides > li').css('height', height);
+        };
+
+        sizeSlides();
+        $(window).resize(sizeSlides);
     };
 
     var testimonialCarousel = function () {
