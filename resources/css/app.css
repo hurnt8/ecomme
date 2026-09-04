@@ -637,6 +637,208 @@ html {
 }
 
 /*
+ * Order confirmation. Reuses the checkout's step bar, line items and totals rather than the
+ * <table> and float:right paragraphs it had, which shared the cart's problem of not fitting a
+ * phone. The order number is the payment reference, so it is called out and copyable instead of
+ * being buried in a sentence.
+ */
+.confirmation {
+    padding-top: 3em;
+}
+
+.confirmation-hero {
+    padding: 34px 26px;
+    margin-bottom: 34px;
+    background: #f7f7f5;
+    text-align: center;
+}
+
+.confirmation-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 16px;
+    border-radius: 50%;
+    background: #d1c286;
+    color: #fff;
+    font-size: 24px;
+}
+
+.confirmation-hero h2 {
+    margin: 0 0 10px;
+    font-size: 22px;
+    line-height: 1.35;
+}
+
+.confirmation-hero p {
+    margin-bottom: 22px;
+    color: #7f7f7f;
+}
+
+.confirmation-reference {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 14px;
+    padding: 12px 20px;
+    background: #fff;
+    border: 1px dashed #d5cfae;
+}
+
+.confirmation-reference-label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #9a9a9a;
+}
+
+.confirmation-reference strong {
+    font-size: 17px;
+    letter-spacing: 1px;
+}
+
+.confirmation-reference button {
+    padding: 4px 12px;
+    border: 1px solid #d5cfae;
+    background: none;
+    color: #8f7f4f;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.confirmation-reference button:hover {
+    background: #d1c286;
+    border-color: #d1c286;
+    color: #fff;
+}
+
+.confirmation-panel {
+    padding-bottom: 26px;
+    margin-bottom: 26px;
+    border-bottom: 1px solid #ececec;
+}
+
+.confirmation-panel h3,
+.confirmation-payment h3,
+.confirmation-next h4 {
+    margin: 0 0 18px;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.confirmation-address {
+    margin: 0;
+    color: #5f5f5f;
+    font-style: normal;
+    line-height: 1.8;
+    white-space: pre-line;
+}
+
+.confirmation-invoice {
+    margin-top: 22px;
+}
+
+.confirmation-payment {
+    padding: 26px;
+    margin-bottom: 26px;
+    background: #f7f7f5;
+    border-left: 3px solid #d1c286;
+}
+
+.confirmation-payment p {
+    color: #5f5f5f;
+    font-size: 14px;
+}
+
+.confirmation-bank {
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+.confirmation-bank dt {
+    float: left;
+    clear: left;
+    width: 80px;
+    color: #9a9a9a;
+    font-weight: normal;
+}
+
+.confirmation-bank dd {
+    margin-left: 90px;
+    margin-bottom: 8px;
+    color: #000;
+}
+
+/* An IBAN has no spaces to break on, so it has to be told it may wrap mid-string or it pushes
+   the panel wider than the screen. */
+.confirmation-iban {
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    word-break: break-all;
+}
+
+.confirmation-note {
+    margin: 18px 0 0;
+    color: #8f8f8f;
+    font-size: 12px;
+}
+
+.confirmation-next {
+    padding: 26px;
+    border: 1px solid #ececec;
+}
+
+.confirmation-next ol {
+    padding-left: 18px;
+    margin-bottom: 22px;
+    color: #5f5f5f;
+    font-size: 14px;
+}
+
+.confirmation-next li {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 991px) {
+    .confirmation-payment {
+        margin-top: 26px;
+    }
+}
+
+@media (max-width: 767px) {
+    .confirmation-hero {
+        padding: 26px 18px;
+    }
+
+    .confirmation-hero h2 {
+        font-size: 19px;
+    }
+
+    .confirmation-reference {
+        display: flex;
+    }
+
+    /* Stacked labels: side-by-side dt/dd leaves too little room for an IBAN on a phone. */
+    .confirmation-bank dt {
+        float: none;
+        width: auto;
+        margin-bottom: 2px;
+    }
+
+    .confirmation-bank dd {
+        margin-left: 0;
+        margin-bottom: 12px;
+    }
+}
+
+/*
  * Home hero. Replaces the template's translucent white copy panel (.desc, with a 24px black
  * headline and an empty .overlay-gradient) — black text straight onto a pale photograph, with a
  * hard-edged box cutting across the image. A full-bleed gradient carries the contrast instead,

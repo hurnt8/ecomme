@@ -57,7 +57,10 @@ class CheckoutController extends Controller
     public function confirmation(Request $request): View|RedirectResponse
     {
         $orderId = $request->session()->get('checkout.last_order_id');
-        $order = $orderId ? Order::with('items')->find($orderId) : null;
+        // items.product.images so the recap can show a thumbnail per line without a query each.
+        // The relation is nullable — a product can be deleted after being ordered — so the view
+        // falls back to the name snapshot stored on the line.
+        $order = $orderId ? Order::with('items.product.images')->find($orderId) : null;
 
         if (! $order) {
             return redirect()->route('home');
