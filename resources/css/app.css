@@ -320,6 +320,289 @@ html {
 }
 
 /*
+ * Checkout. The confirm button was a pale outline — the faintest element on the page for the
+ * single most important action in the shop, while the cart's own "Passer commande" was solid.
+ * The summary also had no thumbnails and, on mobile, sat below the entire form: you filled in
+ * every field before seeing what you were paying for.
+ */
+.checkout {
+    padding-top: 3em;
+}
+
+.checkout-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    list-style: none;
+    padding: 0 0 22px;
+    margin: 0 0 32px;
+    border-bottom: 1px solid #ececec;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    color: #b5b5b5;
+}
+
+.checkout-steps li,
+.checkout-steps a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: inherit;
+}
+
+.checkout-steps span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+.checkout-steps .is-done {
+    color: #8f8f8f;
+}
+
+.checkout-steps .is-done a:hover {
+    color: #d1c286;
+}
+
+.checkout-steps .is-current {
+    color: #000;
+    font-weight: bold;
+}
+
+.checkout-steps .is-current span {
+    background: #d1c286;
+    border-color: #d1c286;
+    color: #fff;
+}
+
+.checkout-section {
+    padding-bottom: 26px;
+    margin-bottom: 26px;
+    border-bottom: 1px solid #ececec;
+}
+
+.checkout-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 18px;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.checkout-section-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #f4f2ea;
+    color: #8f7f4f;
+    font-size: 12px;
+    letter-spacing: 0;
+}
+
+.checkout-hint {
+    display: block;
+    margin-top: 6px;
+    color: #9a9a9a;
+    font-size: 12px;
+}
+
+.checkout-hint-warning {
+    color: #b5502e;
+}
+
+.checkout-payment {
+    padding: 18px 20px;
+    background: #f7f7f5;
+    border-left: 3px solid #d1c286;
+}
+
+.checkout-payment strong {
+    display: block;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+.checkout-payment p {
+    margin: 0;
+    color: #7f7f7f;
+    font-size: 14px;
+}
+
+.checkout-submit {
+    display: block;
+    width: 100%;
+    max-width: 380px;
+}
+
+.checkout-back {
+    display: inline-block;
+    margin-top: 16px;
+    color: #8f8f8f;
+    font-size: 14px;
+}
+
+.checkout-back:hover {
+    color: #d1c286;
+}
+
+.checkout-summary {
+    padding: 26px;
+    background: #f7f7f5;
+    /* Stays with the shopper down a long form rather than scrolling away at the top. */
+    position: sticky;
+    top: 20px;
+}
+
+.checkout-summary h3 {
+    margin: 0 0 20px;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.checkout-items {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+}
+
+.checkout-items li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #e5e3dc;
+}
+
+.checkout-item-image {
+    position: relative;
+    flex: 0 0 56px;
+}
+
+.checkout-item-image img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    background: #fff;
+}
+
+.checkout-item-qty {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background: #171512;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+}
+
+.checkout-item-body {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.checkout-item-name {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.checkout-item-body small {
+    display: block;
+    margin-top: 3px;
+    color: #9a9a9a;
+    font-size: 12px;
+}
+
+.checkout-item-notice {
+    color: #b5502e !important;
+}
+
+.checkout-item-total {
+    flex: 0 0 auto;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.checkout-total-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #5f5f5f;
+}
+
+.checkout-total-row.is-grand {
+    padding-top: 14px;
+    margin-top: 4px;
+    border-top: 1px solid #e5e3dc;
+    color: #000;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.checkout-reassurance {
+    list-style: none;
+    padding: 16px 0 0;
+    margin: 18px 0 0;
+    border-top: 1px solid #e5e3dc;
+    font-size: 12px;
+    color: #8f8f8f;
+}
+
+.checkout-reassurance li {
+    margin-bottom: 7px;
+}
+
+.checkout-reassurance i {
+    margin-right: 7px;
+    color: #d1c286;
+}
+
+@media (max-width: 991px) {
+    /* Summary above the form on a phone, so what you are paying for is settled before the
+       fields rather than after them. */
+    .checkout-row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .checkout-summary-col {
+        order: -1;
+        margin-bottom: 30px;
+    }
+
+    .checkout-summary {
+        position: static;
+    }
+
+    .checkout-submit {
+        max-width: none;
+    }
+}
+
+/*
  * Home hero. Replaces the template's translucent white copy panel (.desc, with a 24px black
  * headline and an empty .overlay-gradient) — black text straight onto a pale photograph, with a
  * hard-edged box cutting across the image. A full-bleed gradient carries the contrast instead,
