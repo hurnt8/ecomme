@@ -51,37 +51,47 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-4 col-md-push-1">
-                <ul class="fh5co-footer-links">
-                    <li><a href="{{ url('/a-propos') }}">À propos</a></li>
-                    <li><a href="{{ url('/aide') }}">Aide / FAQ</a></li>
-                    <li><a href="{{ url('/contact') }}">Contact</a></li>
-                    <li><a href="{{ url('/cgv') }}">CGV</a></li>
-                    <li><a href="{{ url('/carrieres') }}">Carrières</a></li>
-                    <li><a href="{{ url('/presse') }}">Presse</a></li>
-                </ul>
-            </div>
-
-            <div class="col-md-2 col-sm-4 col-xs-4 col-md-push-1">
-                <ul class="fh5co-footer-links">
-                    <li><a href="{{ route('catalog') }}">Boutique</a></li>
-                    <li><a href="{{ url('/confidentialite') }}">Confidentialité</a></li>
-                    <li><a href="{{ url('/cookies') }}">Cookies</a></li>
-                    <li><a href="{{ url('/mentions-legales') }}">Mentions légales</a></li>
-                    <li><a href="{{ url('/accessibilite') }}">Accessibilité</a></li>
-                </ul>
-            </div>
-
-            <div class="col-md-2 col-sm-4 col-xs-4 col-md-push-1">
-                <ul class="fh5co-footer-links">
-                    <li><a href="{{ url('/livraison') }}">Livraison</a></li>
-                    <li><a href="{{ url('/retours') }}">Retours</a></li>
-                    <li><a href="{{ url('/moyens-paiement') }}">Moyens de paiement</a></li>
-                    <li><a href="{{ route('tracking.index') }}">Suivi de commande</a></li>
-                    <li><a href="{{ url('/blog') }}">Blog</a></li>
-                    <li><a href="{{ auth()->check() ? route('account.index') : route('login') }}">{{ auth()->check() ? 'Mon compte' : 'Connexion' }}</a></li>
-                </ul>
-            </div>
+            {{-- Three unlabelled columns of 12px links squeezed to a third of a phone screen was
+                 unreadable, and giving each its full width instead would make an already long
+                 footer far longer. Headed groups that collapse below the sidebar breakpoint: one
+                 tap to open the one you want, nothing to scroll past if you don't. --}}
+            @foreach ([
+                ['title' => 'La maison', 'links' => [
+                    ['À propos', url('/a-propos')],
+                    ['Aide / FAQ', url('/aide')],
+                    ['Contact', url('/contact')],
+                    ['CGV', url('/cgv')],
+                    ['Carrières', url('/carrieres')],
+                    ['Presse', url('/presse')],
+                ]],
+                ['title' => 'Boutique', 'links' => [
+                    ['Toute la boutique', route('catalog')],
+                    ['Confidentialité', url('/confidentialite')],
+                    ['Cookies', url('/cookies')],
+                    ['Mentions légales', url('/mentions-legales')],
+                    ['Accessibilité', url('/accessibilite')],
+                ]],
+                ['title' => 'Commande & aide', 'links' => [
+                    ['Livraison', url('/livraison')],
+                    ['Retours', url('/retours')],
+                    ['Moyens de paiement', url('/moyens-paiement')],
+                    ['Suivi de commande', route('tracking.index')],
+                    ['Blog', url('/blog')],
+                    [auth()->check() ? 'Mon compte' : 'Connexion', auth()->check() ? route('account.index') : route('login')],
+                ]],
+            ] as $group)
+                <div class="col-md-2 col-sm-4 col-md-push-1 fh5co-footer-group" x-data="{ open: false }">
+                    <h4 class="fh5co-footer-heading" @click="open = !open" role="button" :aria-expanded="open ? 'true' : 'false'">
+                        {{ $group['title'] }}
+                        <i class="icon-arrow-down" :class="{ 'is-open': open }" aria-hidden="true"></i>
+                    </h4>
+                    <ul class="fh5co-footer-links" :class="{ 'is-open': open }">
+                        @foreach ($group['links'] as [$label, $href])
+                            <li><a href="{{ $href }}">{{ $label }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endforeach
         </div>
 
         <div class="row copyright">

@@ -54,6 +54,10 @@
         $('#fh5co-offcanvas').append($('.menu-1 > ul').clone());
         $('#fh5co-offcanvas').append($('.menu-2 > ul').clone());
 
+        // The basket sits in the mobile header itself, so drop the cloned row rather than
+        // offering it twice.
+        $('#fh5co-offcanvas .js-cart-item').remove();
+
         $('#fh5co-offcanvas .has-dropdown').addClass('offcanvas-has-dropdown');
         $('#fh5co-offcanvas').find('li').removeClass('has-dropdown');
 

@@ -12,6 +12,14 @@
                  above the logo. Declared here instead so it sits in the same row as the logo and
                  lines up with it; site.js reuses it rather than creating a second one. --}}
             <div class="col-xs-4 fh5co-nav-toggle-col">
+                {{-- Kept out of the burger menu: the basket count is the one thing a shopper needs
+                     to see at a glance, and inside the panel it was invisible until opened. --}}
+                <a href="{{ route('cart.index') }}" class="fh5co-mobile-cart" aria-label="Panier ({{ $cartCount }})">
+                    <i class="icon-shopping-cart"></i>
+                    @if ($cartCount > 0)
+                        <span class="fh5co-mobile-cart-count">{{ $cartCount }}</span>
+                    @endif
+                </a>
                 <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false"><i></i></a>
             </div>
             {{-- col-md-5 (not the template's original col-md-6): freed up a column for menu-2 below,
@@ -50,7 +58,9 @@
                             <span class="offcanvas-label">{{ auth()->check() ? 'Mon compte' : 'Connexion' }}</span>
                         </a>
                     </li>
-                    <li class="shopping-cart">
+                    {{-- js-cart-item: site.js drops this row from the off-canvas clone, since the
+                         mobile header already carries a basket link of its own. --}}
+                    <li class="shopping-cart js-cart-item">
                         <a href="{{ route('cart.index') }}" class="cart">
                             <span><small>{{ $cartCount }}</small><i class="icon-shopping-cart"></i></span>
                             <span class="offcanvas-label">Panier</span>

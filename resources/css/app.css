@@ -584,14 +584,66 @@ html {
     color: #000;
 }
 
-@media (max-width: 767px) {
-    #fh5co-footer .col-xs-4 {
-        padding-left: 5px;
-        padding-right: 5px;
+.fh5co-footer-heading {
+    margin: 0 0 14px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.fh5co-footer-heading i {
+    display: none;
+}
+
+#fh5co-footer .fh5co-footer-links li a {
+    display: block;
+    padding: 3px 0;
+}
+
+/*
+ * Below the sidebar breakpoint the three link groups collapse. Squeezed into a third of a phone
+ * screen they were an unreadable 12px wall; at full width they would triple the footer's height
+ * on the very screen where that hurts most. Headed and collapsed, they cost three rows until
+ * someone actually wants one.
+ */
+@media (max-width: 991px) {
+    .fh5co-footer-group {
+        border-top: 1px solid #e2e2e2;
+    }
+
+    .fh5co-footer-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0;
+        padding: 14px 0;
+        cursor: pointer;
+    }
+
+    .fh5co-footer-heading i {
+        display: inline-block;
+        font-size: 14px;
+        color: #9a9a9a;
+        transition: transform 0.25s;
+    }
+
+    .fh5co-footer-heading i.is-open {
+        transform: rotate(180deg);
+    }
+
+    #fh5co-footer .fh5co-footer-links {
+        display: none;
+        padding-bottom: 12px;
+    }
+
+    #fh5co-footer .fh5co-footer-links.is-open {
+        display: block;
     }
 
     #fh5co-footer .fh5co-footer-links li a {
-        font-size: 12px;
+        padding: 7px 0;
+        font-size: 14px;
     }
 }
 
@@ -612,10 +664,48 @@ html {
     display: none;
 }
 
+/* Basket in the mobile header rather than inside the burger panel, so the count is readable
+   without opening anything. */
+.fh5co-mobile-cart {
+    position: relative;
+    display: none;
+    margin-right: 22px;
+    color: #000;
+    font-size: 21px;
+    vertical-align: middle;
+}
+
+.fh5co-mobile-cart:hover,
+.fh5co-mobile-cart:focus {
+    color: #d1c286;
+}
+
+.fh5co-mobile-cart-count {
+    position: absolute;
+    top: -7px;
+    right: -11px;
+    min-width: 19px;
+    height: 19px;
+    padding: 0 5px;
+    border-radius: 10px;
+    background: #b5502e;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 19px;
+    text-align: center;
+}
+
 @media (max-width: 768px) {
     .fh5co-nav-toggle-col {
         display: block;
         text-align: right;
+        white-space: nowrap;
+    }
+
+    .fh5co-mobile-cart {
+        display: inline-block;
     }
 
     /* Both remaining columns (logo + burger) centre on one line; menu-1/menu-2 are display:none
