@@ -58,7 +58,7 @@
                     get total() { return Math.round((this.subtotal + this.shipping + this.tax) * 100) / 100; },
                  }">
                 <div class="col-md-7 checkout-form-col">
-                    <form method="POST" action="{{ route('checkout.store') }}">
+                    <form method="POST" action="{{ route('checkout.store') }}" id="checkout-form">
                         @csrf
 
                         <section class="checkout-section">
@@ -118,17 +118,25 @@
                             </div>
                         </section>
 
-                        <button type="submit" class="btn btn-primary btn-lg checkout-submit">Valider ma commande</button>
-
-                        <a href="{{ route('cart.index') }}" class="checkout-back">&larr; Retour au panier</a>
                     </form>
                 </div>
 
                 <div class="col-md-5 checkout-summary-col">
-                    <aside class="checkout-summary">
-                        <h3>Votre commande</h3>
+                    {{-- The lines fold away so the totals stay reachable without scrolling past
+                         every product; open by default where the sidebar has the room, closed on
+                         a phone, where the recap sits under the form. --}}
+                    <aside class="checkout-summary" x-data="{ itemsOpen: window.matchMedia('(min-width: 992px)').matches }">
+                        <button type="button" class="checkout-summary-toggle"
+                                @click="itemsOpen = !itemsOpen"
+                                :aria-expanded="itemsOpen ? 'true' : 'false'">
+                            <span>
+                                Votre commande
+                                <small>({{ $items->sum('quantity') }} article{{ $items->sum('quantity') > 1 ? 's' : '' }})</small>
+                            </span>
+                            <i class="icon-arrow-down" :class="{ 'is-open': itemsOpen }" aria-hidden="true"></i>
+                        </button>
 
-                        <ul class="checkout-items">
+                        <ul class="checkout-items" x-show="itemsOpen" x-cloak>
                             @foreach ($items as $item)
                                 <li>
                                     <span class="checkout-item-image">
@@ -173,6 +181,16 @@
                             <li><i class="icon-credit-card"></i> Aucune donnée bancaire stockée sur le site</li>
                         </ul>
                     </aside>
+                </div>
+
+                {{-- Outside the <form>, bound back to it with the form attribute, so it can sit
+                     after the recap: the fields come first as asked, but the shopper still meets
+                     the totals before confirming rather than after. A col-md-7 following the
+                     col-md-5 recap wraps onto its own line, landing back under the form column on
+                     desktop. --}}
+                <div class="col-md-7 checkout-actions-col">
+                    <button type="submit" form="checkout-form" class="btn btn-primary btn-lg checkout-submit">Valider ma commande</button>
+                    <a href="{{ route('cart.index') }}" class="checkout-back">&larr; Retour au panier</a>
                 </div>
             </div>
         </div>

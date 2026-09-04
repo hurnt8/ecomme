@@ -30,6 +30,16 @@ html {
 }
 
 /*
+ * x-cloak was used in several templates (the product gallery's inactive images, the checkout's
+ * out-of-eurozone hint, the toast stack) but the rule that makes it do anything was never
+ * defined, so it was inert: every one of those elements painted before Alpine booted and then
+ * disappeared — most visibly the gallery, which showed all of a product's images stacked.
+ */
+[x-cloak] {
+    display: none !important;
+}
+
+/*
  * Tailwind v4 auto-generates a `.container` utility because that literal class name appears
  * throughout this Bootstrap-based template's markup (it's Bootstrap's grid container, not a
  * deliberate Tailwind usage). Both rules share identical specificity, so this file — loaded
@@ -464,12 +474,41 @@ html {
     top: 20px;
 }
 
-.checkout-summary h3 {
-    margin: 0 0 20px;
+.checkout-summary-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 0 0 18px;
+    margin-bottom: 18px;
+    border: 0;
+    border-bottom: 1px solid #e5e3dc;
+    background: none;
     font-size: 15px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+}
+
+.checkout-summary-toggle small {
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #9a9a9a;
+}
+
+.checkout-summary-toggle i {
+    font-size: 14px;
+    color: #9a9a9a;
+    transition: transform 0.25s;
+}
+
+.checkout-summary-toggle i.is-open {
+    transform: rotate(180deg);
 }
 
 .checkout-items {
@@ -581,16 +620,11 @@ html {
 }
 
 @media (max-width: 991px) {
-    /* Summary above the form on a phone, so what you are paying for is settled before the
-       fields rather than after them. */
-    .checkout-row {
-        display: flex;
-        flex-direction: column;
-    }
-
+    /* Form first, recap after it: the shopper fills the form and meets the totals at the end,
+       just before confirming. The recap's product lines start folded there (see the toggle in
+       checkout.blade.php) so the totals are not buried behind the whole basket. */
     .checkout-summary-col {
-        order: -1;
-        margin-bottom: 30px;
+        margin-top: 30px;
     }
 
     .checkout-summary {
