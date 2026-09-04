@@ -34,7 +34,7 @@
                         </div>
                     </li>
                 @empty
-                    <li style="background-image: url('{{ asset('template/images/img_bg_1.jpg') }}');">
+                    <li style="background-image: url('{{ asset('images/hero-maison.jpg') }}');">
                         <div class="hero-overlay"></div>
                         <div class="container">
                             <div class="col-md-7 js-fullheight slider-text">

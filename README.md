@@ -1,12 +1,13 @@
 # Atelier Maison
 
-Boutique en ligne de mobilier et décoration — monolithe Laravel 12 (Blade + Vite + Tailwind CSS + Alpine.js), construit à partir du template statique [`shop-master`](https://freehtml5.co/) et calqué sur le schéma de données et les règles métier du projet de référence BloomShop.
+Boutique en ligne de mobilier, décoration, salle de bain et bois de chauffage — monolithe Laravel 12 (Blade + Vite + Tailwind CSS + Alpine.js), construit à partir du template statique [`shop-master`](https://freehtml5.co/) et calqué sur le schéma de données et les règles métier du projet de référence BloomShop.
 
 ## Stack
 
 - PHP 8.2+, Laravel 12
 - MySQL 8 (utf8mb4_unicode_ci)
-- Node 20+, Vite, Tailwind CSS (back-office), Alpine.js
+- Node 20+, Vite, Tailwind CSS 4 (back-office), Alpine.js 3
+- Bootstrap 3 + jQuery vendorisés dans `public/template/` (front public, hérité du template)
 - Pest 3 pour les tests
 - `barryvdh/laravel-dompdf` pour les factures/reçus PDF
 
@@ -20,33 +21,44 @@ Boutique en ligne de mobilier et décoration — monolithe Laravel 12 (Blade + V
 
 ## Installation locale — XAMPP
 
-1. **Cloner le projet dans `htdocs`**, puis installer les dépendances :
-
-   ```bash
-   composer install
-   npm install
-   ```
-
-2. **Configurer l'environnement** :
-
-   ```bash
-   cp .env.example .env
-   php artisan key:generate
-   ```
-
-   Dans `.env`, renseigner les identifiants MySQL de votre instance XAMPP (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`) et créer la base :
+1. **Cloner le projet dans `htdocs`**, puis créer la base :
 
    ```sql
    CREATE DATABASE atelier_maison CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
    ```
 
-3. **Migrer et peupler la base** (catalogue de démo, réglages, compte admin) :
+2. **Installation en une commande** — `composer setup` enchaîne `composer install`, la copie de `.env`, `key:generate`, `migrate` et le build des assets :
 
    ```bash
-   php artisan migrate --seed
+   composer setup
    ```
 
-4. **Lien symbolique de stockage** (obligatoire pour que les images uploadées soient servies) :
+   Renseigner ensuite les identifiants MySQL dans `.env` (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`) si les valeurs par défaut ne conviennent pas. Pour une installation manuelle :
+
+   ```bash
+   composer install
+   npm install
+   cp .env.example .env
+   php artisan key:generate
+   php artisan migrate
+   npm run build
+   ```
+
+3. **Peupler la base** (catalogue, réglages, bannières, blog, compte admin) :
+
+   ```bash
+   php artisan db:seed
+   ```
+
+   Les seeders sont **idempotents** (`updateOrCreate`) : on peut les relancer sans dupliquer les données. `ProductSeeder` et `BlogPostSeeder` suppriment en fin d'exécution les entrées qui ne figurent plus dans leur tableau, pour qu'un ancien catalogue ne survive pas à un re-seed. L'historique de commandes n'est pas affecté : `order_items` conserve un instantané de `product_name` et `unit_price`, et sa clé `product_id` est en `nullOnDelete`.
+
+   Pour ne rejouer qu'un seeder :
+
+   ```bash
+   php artisan db:seed --class=ProductSeeder
+   ```
+
+4. **Lien symbolique de stockage** (obligatoire pour que les images produits et bannières soient servies) :
 
    ```bash
    php artisan storage:link
@@ -94,15 +106,59 @@ cp .env.example .env
 
 L'application est servie sur `http://localhost` (port configurable via `APP_PORT`).
 
+## Catalogue et photographies
+
+Le catalogue livré par les seeders compte **58 références réparties sur 6 catégories**, dont **44 disposent d'une photographie**.
+
+| Catégorie          | Références | Avec photo |
+|--------------------|-----------:|-----------:|
+| Mobilier           |         24 |         24 |
+| Salle de bain      |         11 |         11 |
+| Décoration         |          9 |          9 |
+| Bois & Chauffage   |          8 |          0 |
+| Jardin & Extérieur |          3 |          0 |
+| Équipement Maison  |          3 |          0 |
+
+### Origine des données
+
+Les **noms et prix** des gammes Mobilier, Décoration et Salle de bain proviennent du catalogue du fournisseur `meuble-passion.com`, ainsi que leur **photographie** (800 × 800). Les **descriptions sont rédigées en interne** — elles ne sont pas reprises du fournisseur.
+
+Les fichiers sources vivent dans `database/seeders/assets/products/`, nommés `mp-<id fournisseur>.<ext>` : le nom de fichier du fournisseur n'est pas un identifiant fiable (plusieurs produits différents partagent le même nom d'image chez lui). L'extension suit le **type MIME réel** — certaines URL en `.jpg` renvoient en fait du WebP ou du PNG. `ProductSeeder` recopie ces fichiers vers `storage/app/public/products/` au premier seed.
+
+Deux autres fournisseurs n'ont pas fourni d'imagerie exploitable :
+
+- **`meublespin.fr`** (bureaux en pin massif) — aucune photo par produit : toute la catégorie partage un même montage.
+- **`chthibois.fr`** (bois de chauffage, granulés) — le site répond **403** aux requêtes automatisées. Les caractéristiques des produits Bois & Chauffage suivent donc les normes courantes du marché français (granulés 6 mm, humidité < 10 %, cendres < 0,7 %, ~4,8 kWh/kg, palette de 66 sacs). **Les prix et conditionnements doivent être confirmés auprès du fournisseur avant mise en production.**
+
+### Produits sans photographie
+
+`Product::thumbnail_url` retourne un **SVG neutre en `data:` URI** lorsqu'un produit n'a aucune image (`Product::hasPhoto()`), plutôt que d'emprunter la photo d'un autre article. Le comportement est verrouillé par `tests/Feature/ProductPhotoPlaceholderTest.php`. Pour ajouter une photo, soit l'uploader via `/admin/produits`, soit déposer le fichier dans `database/seeders/assets/products/` et le nommer dans le tableau `images` du produit dans `ProductSeeder`.
+
+### Visuels éditoriaux
+
+Les héros de page, les 5 bannières et les 5 couvertures d'articles sont dérivés de cette même photographie fournisseur :
+
+- `public/images/hero-{boutique,maison,objets}.jpg` — triptyques 2400 × 800 servis par le composant `<x-shop.page-hero>`.
+- `database/seeders/assets/banners/` — bannières recopiées vers `storage/app/public/banners/` par `BannerSeeder`.
+
+Les images `public/template/images/img_bg_*.jpg` du template d'origine ne sont **plus référencées** : ce sont des photos des produits de démonstration du template (rocking-chair en béton, méridienne tressée…), qui ne figurent pas au catalogue.
+
+> Les visuels fournisseurs sont réutilisés dans le cadre de l'accord commercial du marchand avec ses fournisseurs. À confirmer par écrit avant mise en production.
+
 ## Tests
 
-Suite Pest — Feature (checkout, contrôle d'accès admin, CRUD produits, réinitialisation de mot de passe) et Unit (`ShippingService`, `CartService`, `SettingsService`) :
+Suite Pest — **79 tests** (`77 passed`, `2 risky`) :
 
 ```bash
-php artisan test
+php artisan test          # ou : composer test
 ```
 
-La configuration `phpunit.xml` utilise SQLite en mémoire : aucune base dédiée aux tests n'est nécessaire.
+- **Feature** — accueil et meilleures ventes, catalogue et filtres, fiche produit, placeholder photo, panier, tunnel de commande, confirmation, suivi de commande, page À propos, formulaire de contact, bannières promo, contrôle d'accès admin, CRUD admin, réinitialisation de mot de passe.
+- **Unit** — `CartService`, `SettingsService`, `ShippingService`.
+
+`phpunit.xml` force SQLite en mémoire (`DB_CONNECTION=sqlite`, `DB_DATABASE=:memory:`) : aucune base dédiée aux tests n'est nécessaire.
+
+> Les 2 tests marqués *risky* (« did not close its own output buffer ») sont ceux qui frappent `/`. Leurs assertions passent ; le diagnostic vient du harnais de test, et aucune erreur n'apparaît sur la page réelle. Voir « Dette technique connue ».
 
 Style de code (Laravel Pint) :
 
@@ -113,30 +169,42 @@ vendor/bin/pint --test   # vérifie sans modifier
 
 ## Structure du projet
 
-```
+```text
 app/
-├── Actions/            Logique métier unitaire (PlaceOrderAction…)
-├── Services/            Orchestration (CartService, CheckoutService, ShippingService, SettingsService, ReviewGenerator)
-├── Enums/               OrderStatus, UserRole
+├── Actions/             Logique métier unitaire (PlaceOrderAction)
+├── Services/            Orchestration (CartService, CheckoutService, ShippingService,
+│                        SettingsService, ReviewGenerator)
+├── Enums/               OrderStatus (+ trackingSteps/trackingPosition), UserRole
 ├── Http/
 │   ├── Controllers/
-│   │   ├── Shop/        Accueil, catalogue, produit, panier, commande, compte, pages…
+│   │   ├── Shop/        Accueil, catalogue, produit, panier, commande, compte, PDF, pages…
 │   │   └── Admin/       Tableau de bord, produits, catégories, bannières, commandes, réglages
-│   ├── Middleware/       EnsureUserIsAdmin, SecurityHeaders
-│   └── Requests/         Form Requests (Shop/, Admin/, Auth/)
+│   ├── Middleware/      EnsureUserIsAdmin, SecurityHeaders
+│   └── Requests/        Form Requests (Shop/, Admin/, Auth/)
+├── Mail/                ContactMessage, OrderConfirmation, NewOrderAlert
 ├── Models/
-├── Notifications/        OrderStatusChanged, NewOrderPlaced
-└── Support/              Countries, Eurozone
+├── Notifications/
+└── Support/             Countries, Eurozone
+database/
+├── migrations/          14 migrations
+└── seeders/
+    ├── assets/          Sources d'images versionnées (products/, banners/)
+    └── *Seeder.php      Admin, Setting, Category, Product, Banner, Review, BlogPost
+lang/fr/                 validation, auth, passwords, pagination (publiés puis traduits —
+                         Laravel 11+ ne livre plus de dossier lang/)
 resources/
 ├── views/
 │   ├── layouts/{shop,admin}.blade.php
-│   ├── partials/shop/    header, footer, announcement-bar, whatsapp-button, toasts
-│   ├── components/shop/   product-card, price, badge, page-hero
-│   ├── shop/              home, catalog, product, cart, checkout, account, blog, pages/*
-│   ├── admin/              dashboard, products, categories, banners, orders, settings
-│   └── pdf/                invoice, receipt
-├── css/app.css, js/app.js
-public/template/          Assets vendorisés du template shop-master (CSS/JS/images), pour fidélité visuelle
+│   ├── partials/shop/   header, footer, announcement-bar, whatsapp-button, toasts
+│   ├── components/shop/ product-card, price, badge, page-hero
+│   ├── shop/            home, catalog, product, cart, checkout, tracking, account, blog, pages/*
+│   ├── admin/           dashboard, products, categories, banners, orders, settings
+│   └── pdf/             invoice, receipt
+├── css/app.css          Surcharges du template (~2 700 lignes, commentées par motif)
+└── js/app.js
+public/
+├── images/              Héros de page (non issus du template)
+└── template/            Assets vendorisés du template shop-master, pour fidélité visuelle
 routes/{web.php,admin.php}
 tests/{Feature,Unit}/
 ```
@@ -145,9 +213,16 @@ L'architecture sépare volontairement la logique métier (Actions/Services) des 
 
 ## Fonctionnalités
 
-**Boutique publique** : accueil (bannières dynamiques, produits vedettes, bandeau d'annonce), catalogue avec filtres/tri/recherche/pagination, fiche produit (galerie, variantes taille/couleur, avis, produits liés), panier persistant en session, tunnel de commande (livraison zone euro/international pilotée par les réglages, paiement par virement), facture/reçu PDF via lien signé, suivi de commande par numéro + e-mail, compte client (inscription, connexion, historique de commandes, profil, réinitialisation de mot de passe), blog, pages institutionnelles (mentions légales, confidentialité, cookies, accessibilité, livraison, retours, moyens de paiement, CGV, à propos, carrières, presse, aide), formulaire de contact, newsletter, sitemap.xml.
+**Boutique publique** : accueil (bannières dynamiques, meilleures ventes, bandeau d'annonce), catalogue avec filtres latéraux / tri / recherche / pagination, fiche produit (galerie Alpine, variantes taille/couleur, avis, produits liés), panier persistant en session, tunnel de commande (livraison zone euro/international pilotée par les réglages, paiement par virement), facture et reçu PDF, suivi de commande par numéro + e-mail avec frise de statuts, compte client (inscription, connexion, historique, profil, réinitialisation de mot de passe), blog, pages institutionnelles (mentions légales, confidentialité, cookies, accessibilité, livraison, retours, moyens de paiement, CGV, à propos, carrières, presse, aide), formulaire de contact, newsletter, `sitemap.xml`.
 
-**Back-office** (`/admin`, réservé au rôle admin) : tableau de bord (CA, panier moyen, stock faible, meilleures ventes), CRUD produits (upload multi-image, image principale, tailles/couleurs, avis générés), CRUD catégories (hiérarchie, ordre), CRUD bannières, gestion des commandes (changement de statut avec machine à états et notification client), réglages boutique (devise, taxes, livraison, coordonnées bancaires, réseaux sociaux, bandeau d'annonce).
+L'ensemble du front est **responsive** et a été vérifié à 1440 px et 375 px. Deux partis pris structurants sur mobile :
+
+- sur le tunnel de commande et la page contact, le **formulaire précède le récapitulatif / les coordonnées** dans le DOM, pour être atteint en premier une fois les colonnes empilées ;
+- les listes de produits (panier, commande, suivi) sont des **lignes flex, jamais des `<table>`** — le tableau d'origine mesurait 488 px de large dans un viewport de 375 px et rendait le bouton de suppression inatteignable.
+
+La page **À propos** se construit à partir du catalogue réel (nombre de références, gammes en stock, gammes encore vides) : elle ne peut pas annoncer plus que ce que la boutique propose réellement.
+
+**Back-office** (`/admin`, réservé au rôle admin) : tableau de bord (CA, panier moyen, stock faible, meilleures ventes), CRUD produits (upload multi-image, image principale, tailles/couleurs, indicateur meilleure vente, avis générés), CRUD catégories (hiérarchie, ordre), CRUD bannières, gestion des commandes (changement de statut avec machine à états et notification client), réglages boutique (devise, taxes, livraison, coordonnées bancaires, réseaux sociaux, bandeau d'annonce).
 
 ## Écarts assumés par rapport au cahier des charges générique
 
@@ -163,7 +238,7 @@ Décisions prises en phase d'analyse pour rester fidèle au projet de référenc
 ### Apache / PHP-FPM
 
 - Vhost pointant sur `public/` (jamais la racine du projet).
-- PHP-FPM avec `opcache` activé (`opcache.validate_timestamps=0` en prod, à vider via `php artisan opcache:clear` — ou un déploiement zero-downtime — après chaque déploiement).
+- PHP-FPM avec `opcache` activé (`opcache.validate_timestamps=0` en prod, à vider après chaque déploiement — ou déploiement zero-downtime).
 - `mod_rewrite` activé pour le `.htaccess` de `public/`.
 
 ### Nginx + PHP-FPM (exemple)
@@ -195,7 +270,7 @@ server {
 }
 ```
 
-Terminer TLS en amont (Nginx ou load balancer) — `SecurityHeaders` envoie déjà `Strict-Transport-Security`.
+Terminer TLS en amont (Nginx ou load balancer) — `SecurityHeaders` envoie déjà `Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` et `Permissions-Policy`.
 
 ### Supervisor pour la file d'attente
 
@@ -225,30 +300,40 @@ supervisorctl start atelier-maison-worker:*
 
 Planifier également le scheduler Laravel (nettoyage des sessions expirées, etc.) via cron :
 
-```
+```text
 * * * * * cd /var/www/atelier-maison && php artisan schedule:run >> /dev/null 2>&1
 ```
 
 ## Checklist avant mise en production
 
+### Configuration
+
 - [ ] `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL` sur le domaine réel.
 - [ ] `APP_KEY` régénérée pour l'environnement de prod (`php artisan key:generate`), jamais celle du dépôt/dev.
-- [ ] Remplacer les identifiants admin, coordonnées bancaires et informations de contact de démonstration (`SettingSeeder`, `AdminSeeder`) par les vraies données, ou reconfigurer entièrement via `/admin/reglages` après déploiement.
-- [ ] `MAIL_MAILER` configuré sur un vrai transport SMTP/API (le seeder utilise `log` en local).
-- [ ] `CACHE_STORE` et `QUEUE_CONNECTION` sur **Redis** en production (le projet tourne sur le driver `database` en local pour rester simple sous XAMPP ; Redis réduit la charge DB pour les réglages/catégories mises en cache et les jobs).
-- [ ] Un worker Supervisor actif pour `queue:work` (voir ci-dessus) — sans lui, aucun e-mail ne part.
-- [ ] `php artisan storage:link` exécuté sur le serveur de prod (les images uploadées ne seront pas servies sinon).
+- [ ] `MAIL_MAILER` configuré sur un vrai transport SMTP/API (le local utilise `log`).
+- [ ] `CACHE_STORE` et `QUEUE_CONNECTION` sur **Redis** (le projet tourne sur le driver `database` en local pour rester simple sous XAMPP).
+- [ ] Un worker Supervisor actif pour `queue:work` — sans lui, **aucun e-mail ne part**.
+- [ ] `php artisan storage:link` exécuté sur le serveur de prod.
 - [ ] `php artisan config:cache`, `route:cache`, `view:cache` après chaque déploiement.
 - [ ] Sauvegardes automatisées de la base de données.
-- [ ] HTTPS forcé (redirection HTTP→HTTPS en amont) — `Strict-Transport-Security` est déjà envoyé par le middleware `SecurityHeaders`.
+- [ ] HTTPS forcé (redirection HTTP→HTTPS en amont).
+- [ ] Revoir les limites `throttle:` des routes sensibles (connexion, inscription, contact, commande, suivi — actuellement `5,1` et `10,1`) selon le trafic réel.
+- [ ] Envisager une Content-Security-Policy explicite si des scripts tiers sont ajoutés (aucun n'est chargé par défaut).
+
+### Données et contenu
+
+- [ ] Remplacer les identifiants admin, coordonnées bancaires et informations de contact de démonstration (`SettingSeeder`, `AdminSeeder`), ou tout reconfigurer via `/admin/reglages` après déploiement.
+- [ ] **Confirmer les prix et conditionnements du bois de chauffage et des granulés** auprès de `chthibois.fr` (voir « Catalogue et photographies »).
+- [ ] **Ajouter le SIRET et le numéro de TVA intracommunautaire du vendeur sur les factures** — obligatoire en France, et **aucun champ n'existe aujourd'hui** dans `settings` (voir « Dette technique connue »).
+- [ ] Confirmer par écrit l'accord de réutilisation des visuels fournisseurs.
 - [ ] Compléter la section « Hébergement » de la page Mentions légales (`/mentions-legales`) avec les coordonnées réelles de l'hébergeur.
-- [ ] Envisager une Content-Security-Policy explicite si des scripts tiers sont ajoutés (aucun n'est chargé par défaut : tous les assets sont vendorisés/servis en local).
-- [ ] Revoir le taux de limitation (`throttle:*`) des routes sensibles (connexion, inscription, contact, commande, suivi) selon le trafic réel attendu.
+- [ ] Photographier les 14 références sans visuel (Bois & Chauffage, Jardin & Extérieur, Équipement Maison), qui s'affichent aujourd'hui avec un placeholder.
 
 ## Dette technique connue
 
+- **Factures incomplètes au regard de la loi française** : `settings` ne comporte ni SIRET, ni numéro de TVA intracommunautaire, ni forme juridique / capital social. Les gabarits `resources/views/pdf/{invoice,receipt}.blade.php` ne peuvent donc pas les afficher. Nécessite une migration ajoutant ces colonnes, les champs correspondants dans `/admin/reglages`, et leur rendu dans les PDF.
+- **14 produits sans photographie** — placeholder SVG en attendant (voir plus haut).
+- **2 tests *risky*** (« did not close its own output buffer ») sur les tests frappant `/`. Les assertions passent et la page réelle ne produit aucune erreur ; l'origine n'a pas été isolée (ce n'est ni les requêtes, ni le contenu de la vue, ni la route, ni l'ordre d'exécution) et pointe vers le harnais de test.
 - Pas de Content-Security-Policy stricte (headers de base seulement — voir `SecurityHeaders`).
 - `CACHE_STORE=database` en local (voir checklist prod pour Redis).
-- La page Mentions légales contient un espace réservé pour les coordonnées de l'hébergeur.
-#   e - m e u b l e  
- 
+- Le front public repose encore sur **Bootstrap 3 + jQuery** vendorisés, avec les contraintes que cela impose (`.input-group` en `display:table`, grille non-flex) ; les surcharges nécessaires sont regroupées et commentées dans `resources/css/app.css`.

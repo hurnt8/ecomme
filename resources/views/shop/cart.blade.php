@@ -8,7 +8,7 @@
 @endphp
 
 @section('content')
-    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm fh5co-cover-compact" role="banner" style="background-image:url('{{ asset('template/images/img_bg_3.jpg') }}');">
+    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm fh5co-cover-compact" role="banner" style="background-image:url('{{ asset('images/hero-objets.jpg') }}');">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">

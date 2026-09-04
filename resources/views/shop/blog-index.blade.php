@@ -4,7 +4,7 @@
 @section('meta_description', 'Conseils matières, entretien du mobilier et actualités de l\'atelier ' . $settings->site_name . '.')
 
 @section('content')
-    <x-shop.page-hero title="Blog" subtitle="Conseils, matières et actualités de l'atelier" image="img_bg_3.jpg" />
+    <x-shop.page-hero title="Blog" subtitle="Conseils, matières et actualités de l'atelier" image="hero-objets.jpg" />
 
     <div id="fh5co-product">
         <div class="container">

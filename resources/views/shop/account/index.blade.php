@@ -3,7 +3,7 @@
 @section('title', 'Mon compte')
 
 @section('content')
-    <x-shop.page-hero title="Mon compte" :subtitle="auth()->user()->name" image="img_bg_4.jpg" />
+    <x-shop.page-hero title="Mon compte" :subtitle="auth()->user()->name" image="hero-maison.jpg" />
 
     <div id="fh5co-product">
         <div class="container">

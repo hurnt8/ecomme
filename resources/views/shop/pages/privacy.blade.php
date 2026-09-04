@@ -4,7 +4,7 @@
 @section('meta_description', 'Comment ' . $settings->site_name . ' collecte et utilise vos données personnelles.')
 
 @section('content')
-    <x-shop.page-hero title="Confidentialité" subtitle="Protection des données personnelles" image="img_bg_4.jpg" />
+    <x-shop.page-hero title="Confidentialité" subtitle="Protection des données personnelles" image="hero-maison.jpg" />
 
     <div id="fh5co-about">
         <div class="container">

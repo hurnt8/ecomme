@@ -6,7 +6,7 @@
     {{-- Short, fixed hero title: the previous one interpolated the customer's name and the order
          number into the cover headings, which overflowed the banner on a phone as soon as either
          ran long. The personal thank-you moved into the page body, where it can wrap freely. --}}
-    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm fh5co-cover-compact" role="banner" style="background-image:url('{{ asset('template/images/img_bg_5.jpg') }}');">
+    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm fh5co-cover-compact" role="banner" style="background-image:url('{{ asset('images/hero-objets.jpg') }}');">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">

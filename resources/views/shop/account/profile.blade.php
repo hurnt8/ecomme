@@ -3,7 +3,7 @@
 @section('title', 'Mon profil')
 
 @section('content')
-    <x-shop.page-hero title="Mon profil" image="img_bg_5.jpg" />
+    <x-shop.page-hero title="Mon profil" image="hero-objets.jpg" />
 
     <div id="fh5co-about">
         <div class="container">

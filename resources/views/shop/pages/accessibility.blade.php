@@ -4,7 +4,7 @@
 @section('meta_description', 'Engagement d\'accessibilité du site ' . $settings->site_name . '.')
 
 @section('content')
-    <x-shop.page-hero title="Accessibilité" image="img_bg_1.jpg" />
+    <x-shop.page-hero title="Accessibilité" image="hero-maison.jpg" />
 
     <div id="fh5co-about">
         <div class="container">

@@ -4,7 +4,7 @@
 @section('meta_description', 'Mentions légales de ' . $settings->site_name . '.')
 
 @section('content')
-    <x-shop.page-hero title="Mentions légales" image="img_bg_3.jpg" />
+    <x-shop.page-hero title="Mentions légales" image="hero-objets.jpg" />
 
     <div id="fh5co-about">
         <div class="container">

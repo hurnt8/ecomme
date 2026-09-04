@@ -3,7 +3,7 @@
 @section('title', 'Réinitialiser le mot de passe')
 
 @section('content')
-    <x-shop.page-hero title="Nouveau mot de passe" image="img_bg_3.jpg" />
+    <x-shop.page-hero title="Nouveau mot de passe" image="hero-objets.jpg" />
 
     <div id="fh5co-about">
         <div class="container">

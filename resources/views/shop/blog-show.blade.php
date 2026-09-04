@@ -4,7 +4,7 @@
 @section('meta_description', $post->excerpt)
 
 @section('content')
-    <x-shop.page-hero :title="$post->title" :subtitle="$post->published_at->translatedFormat('d F Y')" image="img_bg_3.jpg" />
+    <x-shop.page-hero :title="$post->title" :subtitle="$post->published_at->translatedFormat('d F Y')" image="hero-objets.jpg" />
 
     <div id="fh5co-about">
         <div class="container">

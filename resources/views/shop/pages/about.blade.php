@@ -4,7 +4,7 @@
 @section('meta_description', 'Qui nous sommes : ' . $settings->site_name . ', boutique en ligne de mobilier, décoration, équipement de la maison et bois de chauffage.')
 
 @section('content')
-    <x-shop.page-hero title="À propos" :subtitle="$settings->site_name" image="img_bg_1.jpg" />
+    <x-shop.page-hero title="À propos" :subtitle="$settings->site_name" image="hero-maison.jpg" />
 
     <div id="fh5co-about" class="about">
         <div class="container">

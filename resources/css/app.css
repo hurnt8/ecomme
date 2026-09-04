@@ -104,6 +104,22 @@ html {
 }
 
 /*
+ * The template's hero scrim is a flat rgba(0,0,0,.2), which was enough over its own dim, mostly
+ * grey stock photography. The heroes now carry real product photography — white bedding, a lit
+ * lamp, a white basin — and at .2 the title washed out to pale grey against them. Strongest in
+ * the middle band where the h1 and h2 sit, lighter top and bottom so the photograph still reads
+ * at the edges.
+ */
+.fh5co-cover .overlay {
+    background: linear-gradient(
+        180deg,
+        rgba(18, 16, 13, 0.34) 0%,
+        rgba(18, 16, 13, 0.54) 50%,
+        rgba(18, 16, 13, 0.38) 100%
+    );
+}
+
+/*
  * Cart. Was a five-column <table>, which rendered 488px wide inside a 375px viewport — the
  * total and the remove control were pushed past the edge, so an item could not be removed from
  * a phone at all. Line items instead: they reflow at any width, and each line keeps its own
@@ -1212,7 +1228,9 @@ html {
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(100deg, rgba(20, 18, 14, 0.82) 0%, rgba(20, 18, 14, 0.6) 45%, rgba(20, 18, 14, 0.15) 100%);
+    /* Deepened along with the page-hero scrim above: the home hero photograph is a lit bedroom,
+       and the headline sits over the brightest part of it. */
+    background: linear-gradient(100deg, rgba(20, 18, 14, 0.88) 0%, rgba(20, 18, 14, 0.7) 45%, rgba(20, 18, 14, 0.28) 100%);
 }
 
 #fh5co-hero .flexslider .slides li .container {
@@ -1947,12 +1965,17 @@ html {
  * desktop against 345x350 (0.99) on a phone. The same product was framed differently on each —
  * and since the catalogue photos run from 1.00 to 1.51, cover in a portrait box cut roughly half
  * the width off the wide pieces (the daybed, the coffee table, the chairs lost their ends).
- * A fixed 4:3 box with contain frames every product identically at every width and never crops;
- * the tile's own background stands in for the photos' near-white studio backdrop.
+ * A fixed box with contain frames every product identically at every width and never crops.
+ *
+ * The box is square because the supplier's photography is: all 44 catalogue shots are 800x800,
+ * so 1:1 + contain fills the tile edge to edge with no letterboxing — the studio shots on white
+ * and the full-bleed room shots alike. A 4:3 box left a visible band down both sides of every
+ * card, since the tile's warm grey never matched the photos' pure white. The tile background
+ * still shows for the products awaiting photography, which is what the placeholder is for.
  */
 .product .product-grid {
     height: auto;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1 / 1;
     background-color: #f7f7f5;
     background-size: contain;
     background-position: center;
@@ -1969,14 +1992,15 @@ html {
 }
 
 /*
- * The gallery's main image took its own natural ratio, so switching between the rocking chair's
- * shots (1.00, 1.26 and 1.50) resized the whole column and shifted the buy panel down the page.
+ * The gallery's main image took its own natural ratio, so switching between shots of different
+ * proportions resized the whole column and shifted the buy panel down the page. Square, to match
+ * the catalogue photography and the cards it is opened from.
  */
 .product-gallery-main {
     display: flex;
     align-items: center;
     justify-content: center;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1 / 1;
 }
 
 .product-gallery-main img {
@@ -2432,4 +2456,270 @@ html {
     display: inline;
     margin-left: 10px;
     font-size: 15px;
+}
+
+/* =========================================================================================
+ * Contact page.
+ *
+ * This page was still the template's original markup: two bare Bootstrap columns, an icon list,
+ * and four placeholder-only inputs. Next to the checkout and cart — which use panels, real
+ * <label>s and a section heading — it read as a different site. The information column also ran
+ * out after four lines and left roughly 500px of empty page below it.
+ *
+ * Rebuilt on the same vocabulary as the checkout (panel, .form-group + label, .alert for the
+ * error summary), with the form first in the source so it comes before the coordinates when the
+ * columns stack on a phone — the order asked for on the checkout for the same reason.
+ * ====================================================================================== */
+
+.contact-intro {
+    margin-bottom: 50px;
+}
+
+.contact-intro p {
+    max-width: 620px;
+    margin: 0 auto;
+    color: #6f6f6f;
+}
+
+.contact-panel {
+    padding: 32px;
+    border: 1px solid #ececea;
+    background: #fff;
+    margin-bottom: 30px;
+}
+
+.contact-panel-muted {
+    background: #faf9f7;
+}
+
+.contact-panel h3 {
+    margin: 0 0 24px;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+}
+
+.contact-panel .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-panel label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #3a3a3a;
+}
+
+.contact-panel textarea.form-control {
+    height: auto;
+    padding-top: 12px;
+    resize: vertical;
+}
+
+/* The template signalled a rejected field only through the message text under it. */
+.contact-panel .form-control.is-invalid {
+    border-color: #b5502e;
+}
+
+.field-error {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #b5502e;
+}
+
+.contact-hint {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #8a8a8a;
+}
+
+.contact-submit {
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid #f0efec;
+}
+
+.contact-submit small {
+    display: block;
+    margin-top: 14px;
+    font-size: 12px;
+    color: #8a8a8a;
+}
+
+/* --- Coordinates and hours -------------------------------------------------------------- */
+
+.contact-details,
+.contact-hours {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.contact-details li {
+    padding: 14px 0;
+    border-bottom: 1px solid #eeece8;
+}
+
+.contact-details li:first-child {
+    padding-top: 0;
+}
+
+.contact-details li:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.contact-details-label {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9a9a9a;
+}
+
+.contact-details a,
+.contact-details span:not(.contact-details-label) {
+    font-size: 16px;
+    color: #1a1a1a;
+}
+
+.contact-details a:hover {
+    color: #b5502e;
+}
+
+.contact-hours li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 9px 0;
+    border-bottom: 1px solid #eeece8;
+    font-size: 14px;
+}
+
+.contact-hours li:last-child {
+    border-bottom: 0;
+}
+
+.contact-hours li span {
+    color: #6f6f6f;
+}
+
+.contact-hours li strong {
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.contact-hours-note {
+    margin: 16px 0 0;
+    font-size: 12px;
+    color: #8a8a8a;
+}
+
+/* --- Self-service shortcuts, which fill the space the old page left empty ---------------- */
+
+.contact-shortcuts {
+    margin-top: 30px;
+    padding-top: 50px;
+    border-top: 1px solid #ececea;
+}
+
+.contact-shortcuts > h3 {
+    margin: 0 0 28px;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    color: #1a1a1a;
+}
+
+.contact-shortcut {
+    display: block;
+    height: 100%;
+    padding: 26px;
+    border: 1px solid #ececea;
+    background: #fff;
+    margin-bottom: 24px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.contact-shortcut:hover,
+.contact-shortcut:focus {
+    border-color: #d8d3c8;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.contact-shortcut strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #1a1a1a;
+}
+
+.contact-shortcut span {
+    display: block;
+    margin-bottom: 14px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #6f6f6f;
+}
+
+.contact-shortcut em {
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #b5502e;
+}
+
+/* Bootstrap 3 floats these columns, so each card was only as tall as its own text and the three
+   bottom edges landed at three different heights. Flex on the row stretches them to match. */
+@media (min-width: 768px) {
+    .contact-shortcuts .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .contact-shortcuts .row > [class*="col-"] {
+        display: flex;
+    }
+
+    .contact-shortcut {
+        width: 100%;
+    }
+}
+
+@media (max-width: 991px) {
+    .contact-panel {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-intro {
+        margin-bottom: 34px;
+    }
+
+    .contact-panel {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .contact-shortcuts {
+        padding-top: 34px;
+    }
+
+    .contact-shortcut {
+        padding: 20px;
+        margin-bottom: 16px;
+    }
 }

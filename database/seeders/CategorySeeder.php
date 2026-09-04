@@ -13,8 +13,9 @@ class CategorySeeder extends Seeder
             ['name' => 'Mobilier', 'slug' => 'mobilier', 'description' => 'Chaises, tables et rangements en matières durables pour meubler chaque pièce.', 'sort_order' => 0],
             ['name' => 'Jardin & Extérieur', 'slug' => 'jardin-exterieur', 'description' => 'Mobilier et accessoires pensés pour résister aux saisons, sur la terrasse comme au jardin.', 'sort_order' => 1],
             ['name' => 'Décoration', 'slug' => 'decoration', 'description' => 'Objets et accessoires pour sublimer votre intérieur.', 'sort_order' => 2],
-            ['name' => 'Équipement Maison', 'slug' => 'equipement-maison', 'description' => 'Petit électroménager et objets utiles au quotidien, choisis pour durer.', 'sort_order' => 3],
-            ['name' => 'Bois & Chauffage', 'slug' => 'bois-chauffage', 'description' => 'Bois de chauffage et accessoires pour cheminée et poêle, livrés chez vous.', 'sort_order' => 4],
+            ['name' => 'Salle de bain', 'slug' => 'salle-de-bain', 'description' => 'Meubles sous-vasque, miroirs et vasques en teck massif et pierre naturelle, choisis pour tenir dans une pièce humide.', 'sort_order' => 3],
+            ['name' => 'Équipement Maison', 'slug' => 'equipement-maison', 'description' => 'Petit électroménager et objets utiles au quotidien, choisis pour durer.', 'sort_order' => 4],
+            ['name' => 'Bois & Chauffage', 'slug' => 'bois-chauffage', 'description' => 'Bois de chauffage et accessoires pour cheminée et poêle, livrés chez vous.', 'sort_order' => 5],
         ];
 
         foreach ($categories as $category) {

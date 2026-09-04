@@ -14,7 +14,7 @@ class BannerSeeder extends Seeder
             [
                 'title' => 'La collection automne',
                 'subtitle' => 'Des pièces en bois massif et matières naturelles pour réchauffer votre intérieur.',
-                'image' => 'banners/img_bg_1.jpg',
+                'image' => 'banners/banner-home.jpg',
                 'link_url' => '/boutique',
                 'position' => 'home_hero',
                 'sort_order' => 0,
@@ -22,7 +22,7 @@ class BannerSeeder extends Seeder
             [
                 'title' => 'Nouveautés',
                 'subtitle' => 'De nouvelles pièces chaque mois, sélectionnées par notre atelier.',
-                'image' => 'banners/img_bg_2.jpg',
+                'image' => 'banners/banner-nouveautes-home.jpg',
                 'link_url' => '/boutique?is_new=1',
                 'position' => 'home_secondary',
                 'sort_order' => 0,
@@ -30,7 +30,7 @@ class BannerSeeder extends Seeder
             [
                 'title' => 'Livraison offerte dès 150€',
                 'subtitle' => 'Sur toute la France métropolitaine.',
-                'image' => 'banners/img_bg_3.jpg',
+                'image' => 'banners/banner-livraison.jpg',
                 'link_url' => '/livraison',
                 'position' => 'home_secondary',
                 'sort_order' => 1,
@@ -38,7 +38,10 @@ class BannerSeeder extends Seeder
             [
                 'title' => 'Les nouveautés du mois',
                 'subtitle' => 'Découvrez les dernières pièces arrivées en atelier.',
-                'image' => 'banners/img_bg_4.jpg',
+                // Recut from the supplier's own photography. The template's img_bg_4 and
+                // img_bg_5 were stock shots of things the shop does not sell — a generic chair,
+                // and a man crouching beside a boat above the word "Promotions".
+                'image' => 'banners/banner-nouveautes.jpg',
                 'link_url' => null,
                 'position' => 'shop_new',
                 'sort_order' => 0,
@@ -46,7 +49,8 @@ class BannerSeeder extends Seeder
             [
                 'title' => 'Promotions',
                 'subtitle' => "Jusqu'à 20% sur une sélection de pièces.",
-                'image' => 'banners/img_bg_5.jpg',
+                // The table basse BOATWOOD, which is itself on promotion.
+                'image' => 'banners/banner-promotions.jpg',
                 'link_url' => null,
                 'position' => 'shop_sale',
                 'sort_order' => 0,
