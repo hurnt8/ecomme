@@ -1064,6 +1064,49 @@ html {
 }
 
 /*
+ * Card images. The template fixed the tile at 350px tall and filled it with background-size:
+ * cover, so the crop followed whatever width the column happened to be: 262x350 (ratio 0.75) on
+ * desktop against 345x350 (0.99) on a phone. The same product was framed differently on each —
+ * and since the catalogue photos run from 1.00 to 1.51, cover in a portrait box cut roughly half
+ * the width off the wide pieces (the daybed, the coffee table, the chairs lost their ends).
+ * A fixed 4:3 box with contain frames every product identically at every width and never crops;
+ * the tile's own background stands in for the photos' near-white studio backdrop.
+ */
+.product .product-grid {
+    height: auto;
+    aspect-ratio: 4 / 3;
+    background-color: #f7f7f5;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.product .product-grid .inner {
+    height: 100%;
+}
+
+/* Same reasoning for the basket thumbnails, so a line matches the card it came from. */
+.cart-line-image img {
+    object-fit: contain;
+}
+
+/*
+ * The gallery's main image took its own natural ratio, so switching between the rocking chair's
+ * shots (1.00, 1.26 and 1.50) resized the whole column and shifted the buy panel down the page.
+ */
+.product-gallery-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 3;
+}
+
+.product-gallery-main img {
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/*
  * The card's overlay only ever held a single <a class="icon">; a <form> is block-level by
  * default and would stack below it rather than sit alongside it, so the quick-add form (a form
  * is needed for a real POST, unlike the eye link) is set inline. The button itself reuses
