@@ -839,6 +839,215 @@ html {
 }
 
 /*
+ * Order tracking. The result was a status printed as one line of text plus the same <table>
+ * used elsewhere. A tracking page's job is to show where the order sits on its path, so the
+ * status is a timeline built from OrderStatus::trackingSteps(); the lines reuse the checkout
+ * item and total rows, which fit a phone.
+ */
+.tracking {
+    padding-top: 3em;
+}
+
+.tracking-form {
+    padding: 30px;
+    margin-bottom: 34px;
+    background: #f7f7f5;
+}
+
+.tracking-form h2 {
+    margin: 0 0 8px;
+    font-size: 20px;
+}
+
+.tracking-form > p {
+    margin-bottom: 22px;
+    color: #7f7f7f;
+}
+
+.tracking-submit {
+    width: 100%;
+    max-width: 280px;
+}
+
+.tracking-error {
+    display: block;
+    margin-top: 5px;
+    color: #c0392b;
+    font-size: 12px;
+}
+
+.tracking-result-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #ececec;
+}
+
+.tracking-result-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #9a9a9a;
+}
+
+.tracking-result-header strong {
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.tracking-badge {
+    padding: 6px 14px;
+    background: #d1c286;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.tracking-badge.is-cancelled {
+    background: #b5502e;
+}
+
+.tracking-placed {
+    margin: 14px 0 26px;
+    color: #8f8f8f;
+    font-size: 13px;
+}
+
+.tracking-timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 34px;
+}
+
+.tracking-timeline li {
+    position: relative;
+    padding: 0 0 26px 34px;
+    color: #b5b5b5;
+}
+
+/* The connector stops at the last step so the line does not dangle past it. */
+.tracking-timeline li:not(:last-child):before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 8px;
+    bottom: 0;
+    width: 2px;
+    background: #ececec;
+}
+
+.tracking-timeline li.is-done:not(:last-child):before {
+    background: #d1c286;
+}
+
+.tracking-timeline-dot {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ececec;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.tracking-timeline li.is-done .tracking-timeline-dot {
+    border-color: #d1c286;
+    background: #d1c286;
+}
+
+.tracking-timeline li.is-current .tracking-timeline-dot {
+    border-color: #d1c286;
+    box-shadow: 0 0 0 4px rgba(209, 194, 134, 0.25);
+}
+
+.tracking-timeline li.is-done,
+.tracking-timeline li.is-current {
+    color: #000;
+}
+
+.tracking-timeline-body strong {
+    display: block;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.tracking-timeline-body small {
+    display: block;
+    margin-top: 4px;
+    color: #7f7f7f;
+    font-size: 13px;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.tracking-cancelled {
+    padding: 16px 18px;
+    margin-bottom: 30px;
+    background: #fbf0ec;
+    border-left: 3px solid #b5502e;
+    color: #8f4526;
+}
+
+.tracking-result h3 {
+    margin: 0 0 18px;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.tracking-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 22px;
+    margin-top: 26px;
+}
+
+.tracking-help {
+    color: #8f8f8f;
+    font-size: 14px;
+}
+
+.tracking-help:hover {
+    color: #d1c286;
+}
+
+.tracking-notfound {
+    padding: 34px 26px;
+    text-align: center;
+    background: #f7f7f5;
+}
+
+.tracking-notfound h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+}
+
+.tracking-notfound p {
+    max-width: 480px;
+    margin: 0 auto 20px;
+    color: #7f7f7f;
+}
+
+@media (max-width: 767px) {
+    .tracking-form {
+        padding: 22px 18px;
+    }
+
+    .tracking-submit {
+        max-width: none;
+    }
+}
+
+/*
  * Home hero. Replaces the template's translucent white copy panel (.desc, with a 24px black
  * headline and an empty .overlay-gradient) — black text straight onto a pale photograph, with a
  * hard-edged box cutting across the image. A full-bleed gradient carries the contrast instead,

@@ -11,7 +11,6 @@
                     <div class="display-t">
                         <div class="display-tc animate-box" data-animate-effect="fadeIn">
                             <h1>Suivi de commande</h1>
-                            <h2>Retrouvez le statut de votre commande avec son numéro et votre e-mail</h2>
                         </div>
                     </div>
                 </div>
@@ -19,57 +18,136 @@
         </div>
     </header>
 
-    <div id="fh5co-product">
+    <div id="fh5co-product" class="tracking">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <form method="POST" action="{{ route('tracking.search') }}">
-                        @csrf
-                        <div class="form-group">
-                            <label for="order_number">Numéro de commande</label>
-                            <input type="text" name="order_number" id="order_number" value="{{ old('order_number') }}" class="form-control" placeholder="AM-20260101-XXXX" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">E-mail utilisé lors de la commande</label>
-                            <input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control" required>
-                        </div>
-                        @error('order_number')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                        @error('email')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                        <button type="submit" class="btn btn-primary btn-outline btn-lg">Suivre ma commande</button>
-                    </form>
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="tracking-form">
+                        <h2>Où en est ma commande&nbsp;?</h2>
+                        <p>Saisissez votre numéro de commande et l'e-mail utilisé lors de l'achat.</p>
+
+                        <form method="POST" action="{{ route('tracking.search') }}">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="order_number">Numéro de commande</label>
+                                        <input type="text" name="order_number" id="order_number" value="{{ old('order_number') }}" class="form-control" placeholder="AM-20260101-XXXX" required>
+                                        @error('order_number')
+                                            <small class="tracking-error">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="email">E-mail de la commande</label>
+                                        <input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control" required>
+                                        @error('email')
+                                            <small class="tracking-error">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg tracking-submit">Suivre ma commande</button>
+                        </form>
+                    </div>
 
                     @if ($searched)
-                        <div style="margin-top:30px;">
-                            @if ($order)
-                                <h3>Commande {{ $order->order_number }}</h3>
-                                <p>Statut : <strong>{{ $order->status->label() }}</strong></p>
-                                <table class="table">
-                                    <thead><tr><th>Produit</th><th>Qté</th><th>Total</th></tr></thead>
-                                    <tbody>
-                                        @foreach ($order->items as $item)
-                                            <tr>
-                                                <td>{{ $item->product_name }}</td>
-                                                <td>{{ $item->quantity }}</td>
-                                                <td>{{ number_format((float) $item->unit_price * $item->quantity, 2) }}&nbsp;€</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                <p><strong>Total : {{ number_format((float) $order->total, 2) }}&nbsp;€</strong></p>
-                                <p>
-                                    <a href="{{ \Illuminate\Support\Facades\URL::signedRoute('orders.invoice', ['order' => $order->order_number]) }}"
-                                       class="btn btn-default" target="_blank">
-                                        Télécharger la facture
-                                    </a>
+                        @if ($order)
+                            @php
+                                $steps = \App\Enums\OrderStatus::trackingSteps();
+                                $position = $order->status->trackingPosition();
+                                $isCancelled = $order->status === \App\Enums\OrderStatus::Cancelled;
+                            @endphp
+
+                            <section class="tracking-result">
+                                <header class="tracking-result-header">
+                                    <div>
+                                        <span class="tracking-result-label">Commande</span>
+                                        <strong>{{ $order->order_number }}</strong>
+                                    </div>
+                                    <span class="tracking-badge {{ $isCancelled ? 'is-cancelled' : '' }}">{{ $order->status->label() }}</span>
+                                </header>
+
+                                <p class="tracking-placed">
+                                    Passée le {{ $order->created_at->translatedFormat('j F Y') }}
+                                    @if ($order->paid_at)
+                                        · Paiement reçu le {{ $order->paid_at->translatedFormat('j F Y') }}
+                                    @endif
                                 </p>
-                            @else
-                                <p class="text-danger">Aucune commande ne correspond à ce numéro et cet e-mail. Vérifiez ces informations ou contactez notre service client.</p>
-                            @endif
-                        </div>
+
+                                {{-- A timeline rather than the single line of text this page used to
+                                     show: the point of a tracking page is where the order sits on
+                                     the path, not just the name of the current state. --}}
+                                @if ($isCancelled)
+                                    <p class="tracking-cancelled">{{ $order->status->description() }}</p>
+                                @else
+                                    <ol class="tracking-timeline">
+                                        @foreach ($steps as $index => $step)
+                                            <li class="{{ $index < $position ? 'is-done' : ($index === $position ? 'is-current' : '') }}">
+                                                <span class="tracking-timeline-dot" aria-hidden="true"></span>
+                                                <span class="tracking-timeline-body">
+                                                    <strong>{{ $step->label() }}</strong>
+                                                    @if ($index === $position)
+                                                        <small>{{ $step->description() }}</small>
+                                                    @endif
+                                                </span>
+                                            </li>
+                                        @endforeach
+                                    </ol>
+                                @endif
+
+                                <h3>Détail</h3>
+                                <ul class="checkout-items">
+                                    @foreach ($order->items as $item)
+                                        <li>
+                                            <span class="checkout-item-image">
+                                                <img src="{{ $item->product?->images->first()?->url ?? asset('template/images/product-1.jpg') }}" alt="{{ $item->product_name }}">
+                                                <span class="checkout-item-qty">{{ $item->quantity }}</span>
+                                            </span>
+                                            <span class="checkout-item-body">
+                                                <span class="checkout-item-name">{{ $item->product_name }}</span>
+                                                <small>{{ number_format((float) $item->unit_price, 2) }}&nbsp;{{ $settings->currency_symbol }} l'unité</small>
+                                            </span>
+                                            <span class="checkout-item-total">{{ number_format((float) $item->unit_price * $item->quantity, 2) }}&nbsp;{{ $settings->currency_symbol }}</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+
+                                <div class="checkout-totals">
+                                    <div class="checkout-total-row">
+                                        <span>Sous-total</span>
+                                        <span>{{ number_format((float) $order->subtotal, 2) }}&nbsp;{{ $settings->currency_symbol }}</span>
+                                    </div>
+                                    <div class="checkout-total-row">
+                                        <span>Livraison</span>
+                                        <span>{{ (float) $order->shipping === 0.0 ? 'Offerte' : number_format((float) $order->shipping, 2).' '.$settings->currency_symbol }}</span>
+                                    </div>
+                                    <div class="checkout-total-row is-grand">
+                                        <span>Total</span>
+                                        <span>{{ number_format((float) $order->total, 2) }}&nbsp;{{ $settings->currency_symbol }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="tracking-actions">
+                                    <a href="{{ \Illuminate\Support\Facades\URL::signedRoute('orders.invoice', ['order' => $order->order_number]) }}"
+                                       class="btn btn-primary btn-outline" target="_blank" rel="noopener">
+                                        Télécharger la facture (PDF)
+                                    </a>
+                                    <a href="{{ route('contact.index') }}" class="tracking-help">Une question sur cette commande&nbsp;?</a>
+                                </div>
+                            </section>
+                        @else
+                            <div class="tracking-notfound">
+                                <h3>Aucune commande trouvée</h3>
+                                <p>
+                                    Ce numéro et cet e-mail ne correspondent à aucune commande. Vérifiez le numéro
+                                    figurant dans votre e-mail de confirmation — il commence par
+                                    <strong>AM-</strong> — et l'adresse utilisée lors de l'achat.
+                                </p>
+                                <a href="{{ route('contact.index') }}" class="btn btn-primary btn-outline">Contacter le service client</a>
+                            </div>
+                        @endif
                     @endif
                 </div>
             </div>
