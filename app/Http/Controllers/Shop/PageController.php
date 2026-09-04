@@ -3,13 +3,25 @@
 namespace App\Http\Controllers\Shop;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\View\View;
 
 class PageController extends Controller
 {
     public function about(): View
     {
-        return view('shop.pages.about');
+        // Counted rather than written into the copy: the page used to advertise "+10 ans
+        // d'expérience" and five universes including one with nothing in it. Reading the figures
+        // off the catalogue means the page cannot claim more than the shop actually carries.
+        return view('shop.pages.about', [
+            'productCount' => Product::query()->active()->count(),
+            'categories' => Category::active()
+                ->ordered()
+                ->withCount(['products' => fn ($q) => $q->active()])
+                ->get()
+                ->filter(fn ($category) => $category->products_count > 0),
+        ]);
     }
 
     public function careers(): View
