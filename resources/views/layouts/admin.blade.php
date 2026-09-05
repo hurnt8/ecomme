@@ -6,7 +6,10 @@
     <title>@yield('title', 'Tableau de bord') — Administration {{ $settings->site_name }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-neutral-50 text-neutral-900">
+{{-- `admin-ui` carries the back-office base reset — fonts, links, form controls, focus rings.
+     The admin loads no stylesheet but app.css, and Tailwind's Preflight is excluded there for
+     the shop's sake, so without this class everything renders in Times New Roman. --}}
+<body class="admin-ui bg-neutral-50 text-neutral-900">
     <div class="min-h-screen flex">
         @include('partials.admin.sidebar')
 
@@ -15,7 +18,7 @@
 
             <main class="flex-1 p-6">
                 @if (session('status'))
-                    <div class="mb-4 rounded-md bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-700">
+                    <div class="mb-5 rounded-md border border-sage-100 bg-sage-50 px-4 py-3 text-sm text-sage-700">
                         {{ session('status') }}
                     </div>
                 @endif

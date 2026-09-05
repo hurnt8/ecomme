@@ -40,7 +40,7 @@
 
     <x-admin.checkbox label="Active" name="is_active" :checked="$banner->exists ? $banner->is_active : true" />
 
-    <button type="submit" class="rounded-md bg-neutral-900 text-white text-sm px-5 py-2 hover:bg-neutral-800">
+    <button type="submit" class="rounded-md bg-brand-400 px-5 py-2 text-sm font-medium text-neutral-900 transition-colors hover:bg-brand-500">
         {{ $banner->exists ? 'Enregistrer' : 'Créer la bannière' }}
     </button>
 </div>

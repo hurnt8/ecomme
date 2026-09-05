@@ -16,7 +16,7 @@
             <button type="submit" class="rounded-md border border-neutral-300 px-3 py-1.5 text-sm">Filtrer</button>
         </form>
 
-        <a href="{{ route('admin.produits.create') }}" class="rounded-md bg-neutral-900 text-white text-sm px-4 py-2 hover:bg-neutral-800">
+        <a href="{{ route('admin.produits.create') }}" class="rounded-md bg-brand-400 px-4 py-2 text-sm font-medium text-neutral-900 transition-colors hover:bg-brand-500">
             + Nouveau produit
         </a>
     </div>
@@ -44,18 +44,18 @@
                         <td class="px-4 py-2">
                             <a href="{{ route('admin.produits.edit', $product) }}" class="font-medium hover:underline">{{ $product->name }}</a>
                             @if ($product->is_new)
-                                <span class="ml-1 text-xs text-green-700">Nouveau</span>
+                                <span class="ml-1 text-xs text-sage-700">Nouveau</span>
                             @endif
                             @if ($product->is_bestseller)
-                                <span class="ml-1 text-xs text-amber-700">Meilleure vente</span>
+                                <span class="ml-1 text-xs text-brand-700">Meilleure vente</span>
                             @endif
                         </td>
                         <td class="px-4 py-2 text-neutral-500">{{ $product->category?->name ?? '—' }}</td>
                         <td class="px-4 py-2 text-right">{{ number_format((float) $product->price, 2) }}&nbsp;€</td>
-                        <td class="px-4 py-2 text-right {{ $product->stock <= 5 ? 'text-red-600' : '' }}">{{ $product->stock }}</td>
+                        <td class="px-4 py-2 text-right {{ $product->stock <= 5 ? 'text-clay-600' : '' }}">{{ $product->stock }}</td>
                         <td class="px-4 py-2 text-center">
                             @if ($product->is_active)
-                                <span class="inline-block px-2 py-0.5 rounded-full bg-green-100 text-green-700 text-xs">Actif</span>
+                                <span class="inline-block px-2 py-0.5 rounded-full bg-sage-100 text-sage-700 text-xs">Actif</span>
                             @else
                                 <span class="inline-block px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 text-xs">Inactif</span>
                             @endif
@@ -66,7 +66,7 @@
                                   onsubmit="return confirm('Supprimer ce produit ?');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-neutral-400 hover:text-red-600">Supprimer</button>
+                                <button type="submit" class="text-neutral-400 hover:text-clay-600">Supprimer</button>
                             </form>
                         </td>
                     </tr>

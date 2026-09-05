@@ -41,11 +41,11 @@
                         <td class="px-4 py-2 text-center">
                             <span class="inline-block px-2 py-0.5 rounded-full text-xs
                                 {{ match($order->status) {
-                                    \App\Enums\OrderStatus::Pending => 'bg-yellow-100 text-yellow-700',
-                                    \App\Enums\OrderStatus::Processing => 'bg-blue-100 text-blue-700',
-                                    \App\Enums\OrderStatus::Shipped => 'bg-indigo-100 text-indigo-700',
-                                    \App\Enums\OrderStatus::Completed => 'bg-green-100 text-green-700',
-                                    \App\Enums\OrderStatus::Cancelled => 'bg-red-100 text-red-700',
+                                    \App\Enums\OrderStatus::Pending => 'bg-brand-100 text-brand-700',
+                                    \App\Enums\OrderStatus::Processing => 'bg-steel-100 text-steel-700',
+                                    \App\Enums\OrderStatus::Shipped => 'bg-steel-50 text-steel-700',
+                                    \App\Enums\OrderStatus::Completed => 'bg-sage-100 text-sage-700',
+                                    \App\Enums\OrderStatus::Cancelled => 'bg-clay-100 text-clay-700',
                                 } }}">
                                 {{ $order->status->label() }}
                             </span>

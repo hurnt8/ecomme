@@ -82,9 +82,9 @@ Boutique en ligne de mobilier, décoration, salle de bain et bois de chauffage �
 
 ### Comptes de démonstration
 
-| Rôle  | E-mail                       | Mot de passe |
-|-------|-------------------------------|---------------|
-| Admin | `admin@atelier-maison.test`   | `password`    |
+| Rôle  | E-mail                      | Mot de passe |
+|-------|-----------------------------|--------------|
+| Admin | `admin@atelier-maison.test` | `password`   |
 
 > ⚠️ Identifiants et coordonnées bancaires de démonstration (`SettingSeeder`) — à remplacer avant toute mise en production.
 
@@ -223,6 +223,13 @@ L'ensemble du front est **responsive** et a été vérifié à 1440 px et 375 px
 La page **À propos** se construit à partir du catalogue réel (nombre de références, gammes en stock, gammes encore vides) : elle ne peut pas annoncer plus que ce que la boutique propose réellement.
 
 **Back-office** (`/admin`, réservé au rôle admin) : tableau de bord (CA, panier moyen, stock faible, meilleures ventes), CRUD produits (upload multi-image, image principale, tailles/couleurs, indicateur meilleure vente, avis générés), CRUD catégories (hiérarchie, ordre), CRUD bannières, gestion des commandes (changement de statut avec machine à états et notification client), réglages boutique (devise, taxes, livraison, coordonnées bancaires, réseaux sociaux, bandeau d'annonce).
+
+### Thème du back-office
+
+L'admin est la seule partie du projet qui utilise les utilitaires Tailwind — le front public est du CSS écrit à la main par-dessus le Bootstrap 3 vendorisé. Deux conséquences, toutes deux gérées dans `resources/css/app.css` :
+
+- La palette `neutral` de Tailwind est **redéfinie dans `@theme`** vers une échelle chaude tirée des couleurs de la boutique (`#d1c286` or, `#b5502e` terracotta, gris chauds). Comme aucun utilitaire Tailwind n'est employé hors de l'admin, cette redéfinition retint tout le back-office sans toucher un seul fichier Blade et ne peut pas atteindre la boutique. Les statuts de commande gardent quatre teintes distinctes (`brand`, `steel`, `sage`, `clay`) pour rester lisibles d'un coup d'œil.
+- Le Preflight de Tailwind étant volontairement exclu (il entrerait en conflit avec Bootstrap sur le front), l'admin n'avait **aucun reset** : tout s'affichait en Times New Roman, les `<textarea>` en monospace, les liens en `rgb(0,0,238)` souligné, et `box-sizing: border-box` manquait — chaque champ `w-full` débordait sa carte de 5 px. Le reset qui manquait est écrit dans `@layer base`, portée par la classe `.admin-ui` du `<body>` admin. L'ordre des couches est déclaré explicitement en tête de fichier (`@layer theme, base, utilities;`) pour que ce reset perde face aux utilitaires Tailwind.
 
 ## Écarts assumés par rapport au cahier des charges générique
 

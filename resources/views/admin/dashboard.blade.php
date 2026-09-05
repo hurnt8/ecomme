@@ -31,7 +31,7 @@
             <p class="text-xs text-neutral-500 uppercase tracking-wide mb-1">Produits actifs</p>
             <p class="text-2xl font-semibold">{{ $productsCount }}</p>
             @if ($outOfStockCount > 0)
-                <p class="text-xs text-red-600 mt-1">{{ $outOfStockCount }} en rupture</p>
+                <p class="text-xs text-clay-600 mt-1">{{ $outOfStockCount }} en rupture</p>
             @endif
         </div>
         <div class="bg-white rounded-lg border border-neutral-200 p-5">

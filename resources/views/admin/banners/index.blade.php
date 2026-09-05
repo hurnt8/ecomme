@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="flex justify-end mb-4">
-        <a href="{{ route('admin.bannieres.create') }}" class="rounded-md bg-neutral-900 text-white text-sm px-4 py-2 hover:bg-neutral-800">
+        <a href="{{ route('admin.bannieres.create') }}" class="rounded-md bg-brand-400 px-4 py-2 text-sm font-medium text-neutral-900 transition-colors hover:bg-brand-500">
             + Nouvelle bannière
         </a>
     </div>
@@ -34,7 +34,7 @@
                         <td class="px-4 py-2 text-right">{{ $banner->sort_order }}</td>
                         <td class="px-4 py-2 text-center">
                             @if ($banner->is_active)
-                                <span class="inline-block px-2 py-0.5 rounded-full bg-green-100 text-green-700 text-xs">Active</span>
+                                <span class="inline-block px-2 py-0.5 rounded-full bg-sage-100 text-sage-700 text-xs">Active</span>
                             @else
                                 <span class="inline-block px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 text-xs">Inactive</span>
                             @endif
@@ -44,7 +44,7 @@
                                   onsubmit="return confirm('Supprimer cette bannière ?');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-neutral-400 hover:text-red-600">Supprimer</button>
+                                <button type="submit" class="text-neutral-400 hover:text-clay-600">Supprimer</button>
                             </form>
                         </td>
                     </tr>

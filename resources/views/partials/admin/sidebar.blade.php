@@ -1,7 +1,7 @@
 <aside class="w-60 shrink-0 bg-neutral-900 text-neutral-100 flex flex-col">
-    <div class="px-5 py-5 text-sm font-semibold border-b border-neutral-800">
-        {{ $settings->site_name }}
-        <span class="block text-xs font-normal text-neutral-400">Administration</span>
+    <div class="px-5 py-5 border-b border-neutral-800">
+        <span class="block text-sm font-semibold text-white">{{ $settings->site_name }}</span>
+        <span class="mt-1 block text-[11px] uppercase tracking-[0.16em] text-brand-400">Administration</span>
     </div>
 
     @php
@@ -17,14 +17,20 @@
 
     <nav class="flex-1 py-4 text-sm">
         @foreach ($links as $link)
+            {{-- The active item is marked by a gold rule rather than by background alone: on a
+                 near-black sidebar a one-step background change is barely perceptible. --}}
             <a href="{{ route($link['route']) }}"
-               class="block px-5 py-2.5 {{ request()->routeIs($link['active']) ? 'bg-neutral-800 text-white' : 'text-neutral-300 hover:bg-neutral-800 hover:text-white' }}">
+               @class([
+                   'block border-l-2 px-5 py-2.5 transition-colors',
+                   'border-brand-400 bg-neutral-800 font-medium text-white' => request()->routeIs($link['active']),
+                   'border-transparent text-neutral-400 hover:border-neutral-700 hover:bg-neutral-800 hover:text-white' => ! request()->routeIs($link['active']),
+               ])>
                 {{ $link['label'] }}
             </a>
         @endforeach
     </nav>
 
-    <a href="{{ route('home') }}" target="_blank" class="px-5 py-3 text-xs text-neutral-400 border-t border-neutral-800 hover:text-white">
+    <a href="{{ route('home') }}" target="_blank" class="border-t border-neutral-800 px-5 py-3 text-xs text-neutral-400 transition-colors hover:text-brand-400">
         Voir la boutique →
     </a>
 </aside>

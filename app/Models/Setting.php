@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Setting extends Model
 {
@@ -41,6 +43,19 @@ class Setting extends Model
             'sale_ends_at' => 'datetime',
             'notify_new_orders' => 'boolean',
         ];
+    }
+
+    /**
+     * Resolves the uploaded logo to a public URL, matching Category::imageUrl(). The column and
+     * the admin upload field both already existed, but nothing ever read them: the shop header
+     * printed site_name as text whatever had been uploaded, so a logo could be saved from the
+     * back-office and never appear anywhere on the public site.
+     */
+    protected function logoUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->logo ? Storage::disk('public')->url($this->logo) : null,
+        );
     }
 
     /**

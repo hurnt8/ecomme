@@ -67,7 +67,7 @@
                                   onsubmit="return confirm('Supprimer cette image ?');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="w-full py-1 text-red-600 hover:bg-red-50">Retirer</button>
+                                <button type="submit" class="w-full py-1 text-clay-600 hover:bg-clay-50">Retirer</button>
                             </form>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
 </div>
 
 <div class="mt-6">
-    <button type="submit" class="rounded-md bg-neutral-900 text-white text-sm px-5 py-2 hover:bg-neutral-800">
+    <button type="submit" class="rounded-md bg-brand-400 px-5 py-2 text-sm font-medium text-neutral-900 transition-colors hover:bg-brand-500">
         {{ $product->exists ? 'Enregistrer' : 'Créer le produit' }}
     </button>
 </div>

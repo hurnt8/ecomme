@@ -5,7 +5,17 @@
                  are display:none below 768px anyway, so this only needs to fit our longer site name before
                  the absolutely-positioned .fh5co-nav-toggle hamburger on the right. --}}
             <div class="col-md-3 col-xs-8">
-                <div id="fh5co-logo"><a href="{{ route('home') }}">{{ $settings->site_name }}</a></div>
+                {{-- The uploaded logo already carries the wordmark, so it replaces the text rather
+                     than sitting next to it. Text remains the fallback when none is uploaded. --}}
+                <div id="fh5co-logo" @class(['has-logo-image' => $settings->logo_url])>
+                    <a href="{{ route('home') }}">
+                        @if ($settings->logo_url)
+                            <img src="{{ $settings->logo_url }}" alt="{{ $settings->site_name }}" class="fh5co-logo-image">
+                        @else
+                            {{ $settings->site_name }}
+                        @endif
+                    </a>
+                </div>
             </div>
             {{-- The template let site.js inject this button at #page level, positioned absolutely
                  against the top of the page — which landed it on the announcement bar, a line
