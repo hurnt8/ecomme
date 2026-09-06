@@ -23,7 +23,7 @@
                     </div>
                     <div class="desc">
                         <h3>Notre positionnement</h3>
-                        <p>{{ $settings->site_name }} se distingue par un catalogue resserré organisé autour de six rayons — Tronçonneuses &amp; Élagage, Tracteurs tondeuses &amp; Autoportées, Outils pour tracteur, Tondeuses &amp; Robots, Débroussailleuses &amp; Motoculture et Bois &amp; Chauffage — plutôt qu'une offre généraliste démesurée. Cette double identité, entre motoculture et bois de chauffage, couvre le cycle complet d'un terrain : le couper, le broyer, puis le brûler.</p>
+                        <p>{{ $settings->site_name }} se distingue par un catalogue resserré organisé autour de sept rayons — Tronçonneuses &amp; Élagage, Tracteurs tondeuses &amp; Autoportées, Outils pour tracteur, Tondeuses, Robots tondeuses, Débroussailleuses &amp; Motoculture et Bois &amp; Chauffage — plutôt qu'une offre généraliste démesurée. Cette double identité, entre motoculture et bois de chauffage, couvre le cycle complet d'un terrain : le couper, le broyer, puis le brûler.</p>
                     </div>
                     <div class="desc">
                         <h3>Kit presse</h3>
