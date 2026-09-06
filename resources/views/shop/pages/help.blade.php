@@ -35,8 +35,8 @@
                         <p>Le bois de chauffage est vendu au stère ou en filets, sur palette. En raison du poids et du volume, la livraison de ces produits peut nécessiter une prise de rendez-vous et se fait au pied de l'immeuble ou de la propriété (le transporteur ne monte pas les étages). Voir notre page <a href="{{ url('/livraison') }}">Livraison</a> pour le détail.</p>
                     </div>
                     <div class="desc">
-                        <h3>Le mobilier de jardin résiste-t-il aux intempéries ?</h3>
-                        <p>Nos références Jardin &amp; Extérieur sont sélectionnées pour un usage extérieur (bois traité, résine tressée, métal thermolaqué). Chaque fiche produit précise les matériaux et l'entretien recommandé avant l'hiver.</p>
+                        <h3>Comment savoir si un outil porté convient à mon tracteur ?</h3>
+                        <p>Chaque broyeur, benne ou fourche indique sur sa fiche la puissance de tracteur conseillée, le poids et le type d'attelage. Restez dans la plage annoncée : en dessous, la prise de force peine et le rotor ne monte pas en régime ; au-dessus, c'est la transmission de l'outil qui souffre. En cas de doute, indiquez-nous le modèle de votre tracteur avant de commander.</p>
                     </div>
                     <div class="desc">
                         <h3>Proposez-vous des devis pour les professionnels ou les grosses quantités ?</h3>

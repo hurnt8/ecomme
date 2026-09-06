@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
- * The blog that came with the template described a different shop: it advised on maintaining a
- * concrete armchair, compared frêne and noyer, and announced open days at "our manufacturing
- * workshops". None of that survives contact with this catalogue — there is no concrete furniture,
- * no ash or walnut, and the About page states plainly that we select rather than manufacture.
+ * The blog follows the catalogue. It previously advised on oak, teak and cane for a furniture
+ * shop; none of that survives the change of trade.
  *
- * Rewritten around what is actually sold: oak, teak, cane, reclaimed boat wood, stone, and
- * firewood. Covers are the supplier's own product photography, like the rest of the site.
+ * Rewritten around what is actually sold: choosing between a ride-on, a self-propelled mower and
+ * a robot; battery versus petrol; sizing a flail mower to the tractor you already own; and the
+ * two things buyers get wrong about firewood and pellets. Covers are the supplier's own product
+ * photography, like the rest of the site.
  */
 class BlogPostSeeder extends Seeder
 {
@@ -22,38 +22,38 @@ class BlogPostSeeder extends Seeder
     {
         $posts = [
             [
-                'title' => 'Chêne, teck ou bois recyclé : quelle essence pour quelle pièce ?',
-                'excerpt' => 'Trois familles de bois traversent notre sélection, et elles ne servent pas aux mêmes usages. Comment choisir selon la pièce, la lumière et l\'humidité.',
-                'body' => "Le chêne massif est le bois des pièces de vie. Dense, clair, il se patine lentement et supporte l'huile plutôt que le vernis — une rayure se reprend à l'endroit exact, sans reponcer le meuble entier. C'est l'essence de nos lits, commodes et bibliothèques : des meubles qu'on garde vingt ans et qu'on déplace de logement en logement.\n\nLe teck est un cas à part. Ses huiles naturelles le rendent insensible à l'humidité permanente, ce qui explique qu'on le retrouve à la fois sur les terrasses et dans les salles de bain. Un meuble sous-vasque en panneau mélaminé gonfle et cloque au bout de deux ou trois ans ; en teck massif, non.\n\nLe bois recyclé — vieilles charpentes indiennes, bordages de bateaux de pêche — n'est pas choisi pour ses performances mais pour ce qu'il raconte. Trous de cheville, fentes de séchage, anciennes peintures : ce sont des marques d'usage conservées volontairement. Deux pièces ne sont jamais identiques, et c'est le principe.\n\nEn pratique : chêne pour ce qui doit durer et rester sobre, teck pour ce qui prend l'eau, bois recyclé pour la pièce qui donne le caractère d'une pièce.",
-                'cover_image' => 'mp-12718.jpg',
+                'title' => 'Autoportée, tondeuse tractée ou robot : choisir selon la surface',
+                'excerpt' => 'La surface décide, mais pas seule : la forme du terrain et le nombre d\'obstacles comptent autant. Comment trancher entre les trois familles.',
+                'body' => "En dessous de 500 m², une tondeuse poussée suffit et tout le reste est du confort payé cher. Entre 500 et 1 500 m², la question devient celle du dos : une tondeuse tractée avance toute seule, on la guide au lieu de la pousser, et c'est ce qui change une corvée en promenade.\n\nAu-delà de 2 000 m², l'autoportée s'impose — mais pas n'importe laquelle. Le réflexe est de prendre le plateau le plus large possible ; c'est souvent une erreur. Sur un terrain planté d'arbres et bordé de massifs, une machine de 61 cm qui contourne les obstacles tond plus vite qu'une machine de 102 cm qui oblige à finir chaque contour à la débroussailleuse. Comptez les obstacles avant de compter les mètres carrés.\n\nLe robot est une autre logique : il ne tond pas mieux, il tond tout le temps. L'herbe ne dépasse jamais, il n'y a jamais rien à ramasser, et le temps de tonte devient nul. Sa vraie limite n'est pas la surface — les modèles récents gèrent plusieurs milliers de mètres carrés — mais le relief et le morcellement du terrain. Les générations sans fil périphérique, qui cartographient au LiDAR, ont largement levé la contrainte d'installation.\n\nEn pratique : tractée jusqu'à 1 500 m², autoportée au-delà si le terrain est ouvert, robot si le terrain est clos et que l'on veut cesser d'y penser.",
+                'cover_image' => 'gb-30459.jpg',
                 'published_at' => now()->subMonths(3),
             ],
             [
-                'title' => 'Le teck en salle de bain : pourquoi il ne craint pas l\'humidité',
-                'excerpt' => 'La salle de bain est la pièce qui détruit les meubles. Le teck y tient là où le mélaminé cède — voici ce qui se passe dans la matière.',
-                'body' => "Un meuble de salle de bain vit dans une vapeur quotidienne, avec des cycles d'humidité et de séchage plusieurs fois par jour. C'est ce cycle, plus que l'eau elle-même, qui détruit les meubles : le panneau de particules absorbe, gonfle, et le placage se décolle par le chant. Deux à trois ans suffisent.\n\nLe teck contient naturellement des huiles et de la silice qui limitent fortement cette absorption. Il n'a pas besoin d'un traitement d'étanchéité rapporté qui finirait par s'écailler : la protection est dans la fibre. C'est pour cette raison que nos meubles sous-vasque sont massifs sur toutes leurs faces, y compris le dessous — la partie qui prend le plus d'humidité et que personne ne regarde.\n\nL'entretien tient en une phrase : essuyer l'eau stagnante, et passer une huile pour teck une fois par an si vous voulez garder la teinte miel. Sans huilage, le bois grisera lentement — ce qui n'enlève rien à sa résistance, seulement à sa couleur.\n\nÀ éviter en revanche : les détartrants et les nettoyants acides, surtout à proximité d'une vasque en pierre ou en marbre, qu'ils matent définitivement.",
-                'cover_image' => 'mp-16211.webp',
+                'title' => 'Batterie ou thermique : ce qui a vraiment changé en motoculture',
+                'excerpt' => 'La batterie n\'est plus le second choix qu\'elle était. Où elle a pris l\'avantage, et où le thermique reste indiscutable.',
+                'body' => "Sur les outils portés à bout de bras — élagueuses, débroussailleuses légères, taille-haies — la batterie a gagné. Pas pour l'écologie : pour le poids et le démarrage. Une perche élagueuse à batterie n'a pas de moteur en haut de la perche, et l'on ne tire pas un lanceur en équilibre sous une branche. À cela s'ajoute ce que personne ne mentionne dans les fiches techniques : le silence. On entend la branche craquer avant qu'elle ne tombe.\n\nSur les tondeuses jusqu'à 1 000 m², la batterie a gagné aussi. Plus de mélange, plus de bougie, plus de filtre à air, plus de vidange, et une machine que l'on peut ranger dans un garage attenant sans odeur de carburant.\n\nLe thermique garde deux terrains. Le premier est la durée : une journée entière de débroussaillage ou de broyage demande une réserve d'énergie qu'aucune batterie raisonnable ne porte encore. Le second est le couple bas régime — un motoculteur qui entre dans une terre lourde, une tronçonneuse d'abattage dans un tronc de chêne. C'est là que le diesel et le 2 temps restent sans équivalent.\n\nUn conseil qui vaut plus que le débat : quand vous achetez à batterie, achetez dans une seule gamme. La valeur d'un outil sans fil tient à ce que sa batterie serve aussi aux trois autres.",
+                'cover_image' => 'gb-29006.png',
                 'published_at' => now()->subMonths(2),
             ],
             [
-                'title' => 'Composer un salon avec peu de pièces, mais les bonnes',
-                'excerpt' => 'Un salon réussi n\'est pas un salon rempli. Notre méthode pour composer un espace avec un nombre volontairement limité de meubles.',
-                'body' => "Partez d'une seule pièce forte — une table basse en bois de bateau, un meuble TV en cannage, une bibliothèque en chêne — et construisez le reste en retenue. Laisser du vide autour d'un meuble le met en valeur bien plus efficacement que de l'entourer d'autres meubles.\n\nC'est aussi une question d'usage. Un salon avec moins de meubles se range plus vite, se réagence sans déménagement, et vieillit mieux visuellement : les compositions chargées datent, les compositions simples non.\n\nUne règle utile quand on hésite entre deux pièces : choisissez celle dont la matière est massive. Entre deux meubles au même prix, celui en bois massif sera encore là quand l'autre aura été remplacé, et c'est lui qui déterminera la longévité réelle de la pièce.\n\nDernier point, souvent négligé : la hauteur. Trois meubles bas dans une pièce donnent une impression de plafond écrasé. Une seule verticale — une bibliothèque colonne, une armoire — suffit à rééquilibrer l'ensemble.",
-                'cover_image' => 'mp-12994.jpg',
+                'title' => 'Choisir un broyeur pour son tracteur : largeur, série, chevaux',
+                'excerpt' => 'L\'erreur la plus fréquente n\'est pas d\'acheter trop petit, mais trop lourd pour le tracteur que l\'on a. Les trois chiffres à regarder.',
+                'body' => "Premier chiffre : la puissance demandée. Chaque broyeur annonce une plage de tracteur — de 10 à 20 CV pour un modèle de 93 cm, de 30 à 45 CV pour un 130 cm, de 50 à 80 CV pour un 180 cm de série lourde. Ce n'est pas une indication commerciale. En dessous de la plage, la prise de force peine et le rotor ne monte pas en régime ; au-dessus, on casse la transmission du broyeur.\n\nDeuxième chiffre : le poids. Un broyeur porté travaille en porte-à-faux au bout du relevage. 110 kg sur un micro-tracteur, c'est déjà sensible ; 495 kg demandent une machine qui a le contrepoids et les pneus pour. Beaucoup d'acheteurs choisissent la largeur d'abord et découvrent ensuite que l'avant de leur tracteur se lève.\n\nTroisième chiffre : la série. Légère pour l'herbe, les sarments et les petits arbustes — l'entretien courant d'un pré. Médium pour ce qui traîne au sol après une taille, avec marteaux dentés, contre-lame et tiges de ramassage. Lourde pour un usage d'exploitation, plusieurs heures par jour, des années durant.\n\nReste le déport. Manuel, il se règle à l'arrêt, une fois par chantier : suffisant si vous broyez surtout des surfaces ouvertes. Hydraulique, il se commande du siège en travaillant : indispensable dès que l'on longe des rangs, des clôtures ou des fossés, où il fait gagner près d'une heure par hectare.",
+                'cover_image' => 'gb-17885.jpg',
                 'published_at' => now()->subMonth(),
             ],
             [
-                'title' => 'Cannage, racine de teck, bois de bateau : d\'où viennent nos matières',
-                'excerpt' => 'Nous ne fabriquons pas : nous choisissons. Voici ce que nous regardons avant de retenir une pièce, et ce que ces matières impliquent.',
-                'body' => "Le cannage est un rotin tressé main, panneau par panneau. Sur une armoire ou un meuble TV, il n'est pas seulement décoratif : il ventile. Du linge rangé derrière une façade pleine prend l'odeur de renfermé ; derrière du cannage, non. Un décodeur enfermé chauffe ; derrière du rotin, il respire.\n\nLa racine de teck est ce qui reste après l'abattage. La souche est arrachée, séchée deux ans, puis tranchée à plat en haut et en bas — le reste, les creux et les entrelacs, est laissé tel quel. Aucune pièce ne ressemble à la suivante, ce qui veut dire concrètement que la photo montre l'esprit de la sélection, pas l'exemplaire exact qui partira.\n\nLe bois de bateau vient de bateaux de pêche indonésiens démontés. Chaque planche garde sa peinture d'origine, poncée juste assez pour être lisse sous la main sans effacer l'usure. C'est la matière la plus colorée de notre sélection, et celle qui dispense d'ajouter quoi que ce soit d'autre dans la pièce.\n\nCe que nous regardons avant de retenir une pièce, dans l'ordre : que le bois soit massif et non plaqué ; que la finition soit une huile ou une cire, réparable à la maison ; et que les assemblages tiennent sans dépendre d'une seule vis.",
-                'cover_image' => 'mp-8227.jpg',
+                'title' => 'Bois de chauffage : le stère, l\'humidité et la longueur de bûche',
+                'excerpt' => 'Trois notions expliquent presque tous les malentendus à la livraison. Une fois comprises, on compare enfin les offres entre elles.',
+                'body' => "Le stère est un volume apparent, bûches empilées, vides compris — et il dépend de la longueur de coupe. Un stère de bûches de 50 cm occupe environ 0,80 m³ ; le même stère coupé en 33 cm n'occupe plus que 0,60 m³, parce que le bois court s'empile mieux et laisse moins de vide. La quantité de bois est identique. C'est la source d'à peu près toutes les disputes à la livraison : comparez des stères, jamais des mètres cubes.\n\nL'humidité décide du reste. À 23 %, un bois n'est pas prêt : il chauffe environ deux fois moins parce qu'une partie de l'énergie part à évaporer l'eau, et il encrasse le conduit — c'est-à-dire qu'il coûte un ramonage supplémentaire et augmente le risque de feu de cheminée. En dessous de 20 %, il est utilisable ; autour de 15 %, il est bon. Un bois vendu à sécher n'est pas un mauvais bois : c'est le moyen le moins cher de se chauffer, à condition d'avoir l'abri ventilé et surélevé, et dix-huit mois devant soi.\n\nLa longueur, enfin, se choisit sur le foyer et non sur le prix au stère. 50 cm pour un foyer ouvert ou un grand insert, 33 cm pour la plupart des poêles, 25 cm pour les petits. Le bois trop long que l'on recoupe soi-même annule l'économie réalisée à l'achat.\n\nEt si vous n'avez pas d'abri : les bûches densifiées tiennent dans un coin de garage, quatre fois moins encombrantes pour trois fois plus d'énergie.",
+                'cover_image' => 'gb-29689.webp',
                 'published_at' => now()->subWeeks(2),
             ],
             [
-                'title' => 'Rangement : penser un intérieur qui évolue avec vous',
-                'excerpt' => 'Un bon meuble de rangement se choisit pour les dix prochaines années, pas pour la déco du moment. Nos critères.',
-                'body' => "Avant la couleur ou le style, regardez la structure. Un caisson en bois massif vieillira mieux qu'un panneau plaqué, même si la différence ne saute pas aux yeux sur une photo. Regardez aussi le fond du meuble : un fond en panneau de particules agrafé derrière un meuble massif trahit l'économie faite là où personne ne regarde — sauf quand le meuble est vu de trois quarts.\n\nSur les tiroirs, un seul critère compte vraiment : la sortie totale. Un tiroir qui ne s'ouvre qu'aux deux tiers oblige à vider le devant pour atteindre le fond, et le fond finit par ne plus servir.\n\nPensez à la modularité. Des étagères réglables, des tiroirs réorganisables, permettent au meuble de suivre les usages de la pièce : un bureau qui devient une bibliothèque, une commode qui migre de la chambre à l'entrée.\n\nEnfin, mesurez les portes et les paliers avant de commander une armoire ou un lit en 180. Un meuble massif livré monté ne se démonte pas facilement, et c'est le motif de retour le plus fréquent — celui qu'un mètre ruban évite.",
-                'cover_image' => 'mp-12706.jpg',
+                'title' => 'Granulés : lire une étiquette DIN Plus ou EN Plus A1',
+                'excerpt' => 'Cinq chiffres séparent un granulé qui encrasse d\'un granulé qui dure. Ce que les certifications garantissent réellement.',
+                'body' => "Le pouvoir calorifique vient en premier : entre 4,6 et 5 kWh/kg pour un bon granulé. C'est ce que vous achetez réellement, et l'écart entre 4,6 et 4,9 se traduit directement en nombre de sacs sur une saison.\n\nL'humidité doit rester sous 10 %, et sous 8 % c'est mieux. Un granulé humide gonfle, colle et finit par bloquer la vis sans fin du poêle — la panne la plus banale et la plus évitable. C'est aussi pourquoi une palette se stocke au sec, jamais contre un mur de garage qui suinte.\n\nLe taux de cendres, sous 0,7 % en EN Plus A1 et souvent sous 0,5 % chez les meilleurs, décide de la fréquence à laquelle vous videz le cendrier. Le taux de fines, sous 0,5 %, décide de la propreté de la vitre et de l'encrassement de l'alimentation : un sac transparent permet de le juger à l'œil avant même d'ouvrir.\n\nLa durabilité mécanique, enfin — au moins 98 % — est le chiffre que personne ne regarde et qui explique les autres. Elle mesure la résistance du granulé à la casse pendant le transport et le passage dans la vis. Un granulé fragile arrive en poussière, et cette poussière est exactement ce que l'on ne veut pas.\n\nRésineux ou feuillus : les résineux montent plus vite en température et laissent moins de cendres, les feuillus tiennent plus longtemps. Les deux fonctionnent ; regardez les cinq chiffres avant l'essence.",
+                'cover_image' => 'gb-9315.jpg',
                 'published_at' => null,
             ],
         ];
@@ -81,8 +81,8 @@ class BlogPostSeeder extends Seeder
             );
         }
 
-        // The template's five posts described a different shop (a concrete armchair, ash and
-        // walnut, open days at workshops we do not have) and would otherwise still be listed.
+        // Posts from the furniture catalogue (oak versus teak, composing a living room) would
+        // otherwise still be listed under a shop that now sells chainsaws.
         BlogPost::query()
             ->whereNotIn('slug', array_map(fn ($p) => Str::slug($p['title']), $posts))
             ->delete();

@@ -1,7 +1,7 @@
 @extends('layouts.shop')
 
 @section('title', 'À propos')
-@section('meta_description', 'Qui nous sommes : ' . $settings->site_name . ', boutique en ligne de mobilier, décoration, équipement de la maison et bois de chauffage.')
+@section('meta_description', 'Qui nous sommes : ' . $settings->site_name . ', boutique en ligne de matériel de motoculture, outils portés pour tracteur et bois de chauffage.')
 
 @section('content')
     <x-shop.page-hero title="À propos" :subtitle="$settings->site_name" image="hero-maison.jpg" />
@@ -10,20 +10,20 @@
         <div class="container">
             <div class="row about-intro">
                 <div class="col-md-8 col-md-offset-2 text-center">
-                    <h2>Une sélection courte, choisie pièce par pièce.</h2>
+                    <h2>Une sélection courte, choisie machine par machine.</h2>
                     <p class="about-lead">{{ $settings->tagline }}</p>
                     <p>
                         {{ $settings->site_name }} est une boutique en ligne. Nous ne fabriquons pas :
-                        nous choisissons, auprès d'éditeurs et d'ateliers, ce que nous aurions envie
-                        d'avoir chez nous — du mobilier en matières massives qui se répare plutôt que
-                        de se remplacer, quelques objets pour l'habiller, et de quoi chauffer la pièce
-                        où on les pose.
+                        nous choisissons, chez des constructeurs qui tiennent leurs pièces détachées,
+                        le matériel que nous utiliserions sur notre propre terrain — des machines qui
+                        se réparent plutôt qu'elles ne se remplacent, et de quoi se chauffer une fois
+                        le bois coupé.
                     </p>
                     <p>
                         Le catalogue compte aujourd'hui <strong>{{ $productCount }}&nbsp;{{ $productCount > 1 ? 'références' : 'référence' }}</strong>.
-                        Chacune est retenue pour sa fabrication autant que pour son dessin : nous
-                        préférons une sélection que nous connaissons vraiment à un catalogue que
-                        personne ne peut parcourir.
+                        Chacune est retenue pour sa mécanique autant que pour son prix : nous
+                        préférons une sélection que nous connaissons vraiment, et sur laquelle nous
+                        savons répondre au téléphone, à un catalogue que personne ne peut parcourir.
                     </p>
                 </div>
             </div>
@@ -40,8 +40,8 @@
                     <span>le seuil de livraison offerte en zone euro</span>
                 </div>
                 <div class="col-sm-4">
-                    <strong>30 jours</strong>
-                    <span>pour changer d'avis, retour gratuit</span>
+                    <strong>14 jours</strong>
+                    <span>de rétractation sur tout le catalogue</span>
                 </div>
             </div>
 
@@ -84,19 +84,19 @@
                 <div class="col-md-4">
                     <h3>Ce que nous regardons</h3>
                     <p>
-                        Des matières massives et des finitions naturelles — huile, cire, émail — plutôt
-                        que des placages et des vernis synthétiques. Pour le bois de chauffage, la même
-                        exigence appliquée autrement : essences dures, séchage maîtrisé, taux d'humidité
-                        contrôlé.
+                        Des moteurs répandus — Honda, Kawasaki, Briggs &amp; Stratton, Kohler, Loncin —
+                        parce qu'on en trouve les pièces partout, et des transmissions dimensionnées
+                        pour l'usage annoncé. Pour le bois de chauffage, la même exigence appliquée
+                        autrement : essences dures, séchage maîtrisé, taux d'humidité contrôlé.
                     </p>
                 </div>
                 <div class="col-md-4">
                     <h3>Comment nous expédions</h3>
                     <p>
-                        Emballage renforcé et suivi à chaque étape. Livraison offerte dès
+                        Sur palette filmée, avec suivi à chaque étape. Livraison offerte dès
                         {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }}
-                        d'achat en zone euro ; les pièces volumineuses et le bois passent par un
-                        transporteur dédié, sur rendez-vous.
+                        d'achat en zone euro ; les machines lourdes et le bois passent par un camion à
+                        hayon, sur rendez-vous, avec dépose au pied de la propriété sur sol stabilisé.
                     </p>
                 </div>
                 <div class="col-md-4">

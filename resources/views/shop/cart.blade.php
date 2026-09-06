@@ -132,7 +132,7 @@
                             <a href="{{ route('checkout.index') }}" class="btn btn-primary btn-lg btn-block">Passer commande</a>
 
                             <ul class="cart-reassurance">
-                                <li><i class="icon-wallet"></i> Retour gratuit sous 30 jours</li>
+                                <li><i class="icon-wallet"></i> 14 jours pour changer d'avis</li>
                                 <li><i class="icon-credit-card"></i> Paiement sécurisé par virement</li>
                             </ul>
                         </aside>

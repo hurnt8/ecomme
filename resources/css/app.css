@@ -2929,7 +2929,7 @@ html {
 /*
  * Shop logo. The header printed the site name as text whatever had been uploaded through
  * /admin/reglages — Setting::logo was written but never read (see Setting::logoUrl). The
- * uploaded mark is square and already contains the "Atelier Maison" wordmark, so it replaces
+ * uploaded mark is square and is expected to contain the wordmark itself, so it replaces
  * the text rather than sitting beside it, and needs enough height for that wordmark to stay
  * legible. .fh5co-nav's own 18px vertical padding does the rest.
  */

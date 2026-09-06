@@ -15,7 +15,7 @@
 
         <div class="grid grid-cols-2 gap-4">
             <x-admin.field label="Tailles (séparées par des virgules)" name="sizes" :value="$product->sizes ? implode(', ', $product->sizes) : null" placeholder="S, M, L" />
-            <x-admin.field label="Couleurs (séparées par des virgules)" name="colors" :value="$product->colors ? implode(', ', $product->colors) : null" placeholder="Noir, Chêne naturel" />
+            <x-admin.field label="Couleurs (séparées par des virgules)" name="colors" :value="$product->colors ? implode(', ', $product->colors) : null" placeholder="Rouge, Vert" />
         </div>
 
         <div>

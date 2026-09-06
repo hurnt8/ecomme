@@ -164,7 +164,7 @@
                                 <i class="icon-paper-plane"></i>
                                 Livraison offerte dès {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }} d'achat
                             </li>
-                            <li><i class="icon-wallet"></i> Retour gratuit sous 30 jours</li>
+                            <li><i class="icon-wallet"></i> 14 jours pour changer d'avis</li>
                             <li><i class="icon-credit-card"></i> Paiement sécurisé par virement bancaire</li>
                         </ul>
                     </div>
@@ -193,7 +193,7 @@
                                 </ul>
                                 <h3>Retours</h3>
                                 <ul>
-                                    <li>30 jours pour changer d'avis, retour gratuit.</li>
+                                    <li>14 jours pour changer d'avis, selon les conditions de retour.</li>
                                     <li>Article à retourner dans son emballage d'origine.</li>
                                 </ul>
                             </div>

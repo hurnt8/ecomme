@@ -177,7 +177,7 @@
                         </div>
 
                         <ul class="checkout-reassurance">
-                            <li><i class="icon-wallet"></i> Retour gratuit sous 30 jours</li>
+                            <li><i class="icon-wallet"></i> 14 jours pour changer d'avis</li>
                             <li><i class="icon-credit-card"></i> Aucune donnée bancaire stockée sur le site</li>
                         </ul>
                     </aside>

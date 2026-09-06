@@ -10,21 +10,31 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'Mobilier', 'slug' => 'mobilier', 'description' => 'Chaises, tables et rangements en matières durables pour meubler chaque pièce.', 'sort_order' => 0],
-            ['name' => 'Jardin & Extérieur', 'slug' => 'jardin-exterieur', 'description' => 'Mobilier et accessoires pensés pour résister aux saisons, sur la terrasse comme au jardin.', 'sort_order' => 1],
-            ['name' => 'Décoration', 'slug' => 'decoration', 'description' => 'Objets et accessoires pour sublimer votre intérieur.', 'sort_order' => 2],
-            ['name' => 'Salle de bain', 'slug' => 'salle-de-bain', 'description' => 'Meubles sous-vasque, miroirs et vasques en teck massif et pierre naturelle, choisis pour tenir dans une pièce humide.', 'sort_order' => 3],
-            ['name' => 'Équipement Maison', 'slug' => 'equipement-maison', 'description' => 'Petit électroménager et objets utiles au quotidien, choisis pour durer.', 'sort_order' => 4],
-            ['name' => 'Bois & Chauffage', 'slug' => 'bois-chauffage', 'description' => 'Bois de chauffage et accessoires pour cheminée et poêle, livrés chez vous.', 'sort_order' => 5],
+            ['name' => 'Tronçonneuses & Élagage', 'slug' => 'tronconneuses-elagage', 'description' => 'Tronçonneuses, élagueuses et perches télescopiques pour couper en hauteur sans échelle, du verger à la coupe de bois de chauffage.', 'sort_order' => 0],
+            ['name' => 'Tracteurs tondeuses & Autoportées', 'slug' => 'tracteurs-autoportees', 'description' => 'Autoportées à éjection arrière, latérale ou avec bac, pour les terrains que l\'on ne tond plus raisonnablement à pied.', 'sort_order' => 1],
+            ['name' => 'Outils pour tracteur', 'slug' => 'outils-tracteur', 'description' => 'Broyeurs, bennes, fourches et charrues à atteler en trois points, choisis pour la puissance de tracteur que vous avez déjà.', 'sort_order' => 2],
+            ['name' => 'Tondeuses & Robots', 'slug' => 'tondeuses-robots', 'description' => 'Tondeuses thermiques, à batterie et robots de tonte, du petit jardin de ville au terrain de plusieurs milliers de mètres carrés.', 'sort_order' => 3],
+            ['name' => 'Débroussailleuses & Motoculture', 'slug' => 'motoculture', 'description' => 'Débroussailleuses, motobineuses et motoculteurs pour reprendre une friche, préparer un potager ou entretenir un terrain en pente.', 'sort_order' => 4],
+            ['name' => 'Bois & Chauffage', 'slug' => 'bois-chauffage', 'description' => 'Bûches, granulés et poêles livrés chez vous — le prolongement naturel d\'une saison passée à couper et à débroussailler.', 'sort_order' => 5],
         ];
 
         foreach ($categories as $category) {
             Category::query()->updateOrCreate(['slug' => $category['slug']], $category + ['is_active' => true]);
         }
 
-        // Replaced by the five categories above (the catalog no longer subdivides furniture
-        // by piece type). nullOnDelete on products.category_id means this is safe even before
-        // ProductSeeder re-points every product at its new category.
-        Category::query()->whereIn('slug', ['chaises-fauteuils', 'tables', 'rangement'])->delete();
+        // Ranges from the furniture catalogue this shop used to sell. Bois & Chauffage is the one
+        // that survives the change of trade, so its slug is deliberately reused above rather than
+        // recreated. nullOnDelete on products.category_id means dropping the rest is safe even
+        // before ProductSeeder replaces every product.
+        Category::query()->whereIn('slug', [
+            'mobilier',
+            'jardin-exterieur',
+            'decoration',
+            'salle-de-bain',
+            'equipement-maison',
+            'chaises-fauteuils',
+            'tables',
+            'rangement',
+        ])->delete();
     }
 }

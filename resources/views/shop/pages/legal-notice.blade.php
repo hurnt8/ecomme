@@ -21,7 +21,7 @@
                     </div>
                     <div class="desc">
                         <h3>Activité</h3>
-                        <p>{{ $settings->site_name }} exerce une activité de vente en ligne de mobilier, d'articles de jardin et d'extérieur, de décoration, d'équipement de la maison et de bois de chauffage, à destination des particuliers et professionnels.</p>
+                        <p>{{ $settings->site_name }} exerce une activité de vente en ligne de matériel de motoculture (tronçonneuses et élagueuses, tondeuses et robots de tonte, tracteurs tondeuses et autoportées, débroussailleuses, motobineuses et motoculteurs), d'outils portés pour tracteur et de bois de chauffage, à destination des particuliers et professionnels.</p>
                     </div>
                     <div class="desc">
                         <h3>Hébergement</h3>

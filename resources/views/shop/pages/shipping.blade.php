@@ -24,7 +24,7 @@
                     </div>
                     <div class="desc">
                         <h3>Bois de chauffage et articles volumineux</h3>
-                        <p>Le bois de chauffage (vendu au stère ou en filets, sur palette) et certains articles de mobilier de jardin volumineux sont acheminés par un transporteur spécialisé en raison de leur poids. La livraison se fait au pied de l'immeuble ou de la propriété, avec prise de rendez-vous préalable par téléphone ou e-mail. Le délai d'acheminement pour ces produits peut être légèrement plus long, entre 5 et 10 jours ouvrés.</p>
+                        <p>Le bois de chauffage (vendu au stère ou en filets, sur palette) ainsi que les machines lourdes — autoportées, broyeurs, motoculteurs et outils portés — sont acheminés par un transporteur spécialisé en raison de leur poids. La livraison se fait par camion à hayon, au pied de l'immeuble ou de la propriété et sur sol stabilisé, avec prise de rendez-vous préalable par téléphone ou e-mail. Prévoyez une aide à la manutention pour les colis de plus de 150 kg. Le délai d'acheminement pour ces produits peut être légèrement plus long, entre 5 et 10 jours ouvrés.</p>
                     </div>
                     <div class="desc">
                         <h3>Suivi</h3>

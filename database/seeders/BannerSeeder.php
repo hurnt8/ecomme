@@ -12,8 +12,8 @@ class BannerSeeder extends Seeder
     {
         $banners = [
             [
-                'title' => 'La collection automne',
-                'subtitle' => 'Des pièces en bois massif et matières naturelles pour réchauffer votre intérieur.',
+                'title' => 'La saison commence ici',
+                'subtitle' => 'Tondeuses autoportées, broyeurs, tronçonneuses : le matériel qui tient un terrain toute l\'année.',
                 'image' => 'banners/banner-home.jpg',
                 'link_url' => '/boutique',
                 'position' => 'home_hero',
@@ -21,15 +21,15 @@ class BannerSeeder extends Seeder
             ],
             [
                 'title' => 'Nouveautés',
-                'subtitle' => 'De nouvelles pièces chaque mois, sélectionnées par notre atelier.',
+                'subtitle' => 'Robots de tonte sans fil périphérique, autoportées à batterie et outils portés.',
                 'image' => 'banners/banner-nouveautes-home.jpg',
                 'link_url' => '/boutique?is_new=1',
                 'position' => 'home_secondary',
                 'sort_order' => 0,
             ],
             [
-                'title' => 'Livraison offerte dès 150€',
-                'subtitle' => 'Sur toute la France métropolitaine.',
+                'title' => 'Livraison offerte dès 500€',
+                'subtitle' => 'Sur palette, dans toute la France métropolitaine.',
                 'image' => 'banners/banner-livraison.jpg',
                 'link_url' => '/livraison',
                 'position' => 'home_secondary',
@@ -37,10 +37,10 @@ class BannerSeeder extends Seeder
             ],
             [
                 'title' => 'Les nouveautés du mois',
-                'subtitle' => 'Découvrez les dernières pièces arrivées en atelier.',
-                // Recut from the supplier's own photography. The template's img_bg_4 and
-                // img_bg_5 were stock shots of things the shop does not sell — a generic chair,
-                // and a man crouching beside a boat above the word "Promotions".
+                'subtitle' => 'Les dernières machines entrées en stock.',
+                // Recut from the supplier's own product photography — see the banners.php note in
+                // assets/banners: the square studio shots are composited onto a canvas flood-filled
+                // with their own ground colour rather than cropped, so no machine loses its top.
                 'image' => 'banners/banner-nouveautes.jpg',
                 'link_url' => null,
                 'position' => 'shop_new',
@@ -48,8 +48,8 @@ class BannerSeeder extends Seeder
             ],
             [
                 'title' => 'Promotions',
-                'subtitle' => "Jusqu'à 20% sur une sélection de pièces.",
-                // The table basse BOATWOOD, which is itself on promotion.
+                'subtitle' => "Jusqu'à 20% sur une sélection de machines.",
+                // The Ceccato Trincione 400, which is itself on promotion.
                 'image' => 'banners/banner-promotions.jpg',
                 'link_url' => null,
                 'position' => 'shop_sale',
@@ -72,5 +72,12 @@ class BannerSeeder extends Seeder
                 $banner + ['is_active' => true]
             );
         }
+
+        // Banners from the furniture catalogue, whose titles no longer appear above and which
+        // would otherwise keep showing a sideboard on the home page.
+        Banner::query()->whereIn('title', [
+            'La collection automne',
+            'Livraison offerte dès 150€',
+        ])->delete();
     }
 }

@@ -146,7 +146,7 @@
                     <div class="col-sm-4">
                         <a class="contact-shortcut" href="{{ route('pages.returns') }}">
                             <strong>Retourner un article</strong>
-                            <span>30 jours pour changer d'avis, retour gratuit.</span>
+                            <span>14 jours pour changer d'avis, selon les conditions de retour.</span>
                             <em>Retours</em>
                         </a>
                     </div>

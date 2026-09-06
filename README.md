@@ -1,6 +1,6 @@
-# Atelier Maison
+# Sillon & Bûche
 
-Boutique en ligne de mobilier, décoration, salle de bain et bois de chauffage — monolithe Laravel 12 (Blade + Vite + Tailwind CSS + Alpine.js), construit à partir du template statique [`shop-master`](https://freehtml5.co/) et calqué sur le schéma de données et les règles métier du projet de référence BloomShop.
+Boutique en ligne de matériel de motoculture, d'outils portés pour tracteur et de bois de chauffage — monolithe Laravel 12 (Blade + Vite + Tailwind CSS + Alpine.js), construit à partir du template statique [`shop-master`](https://freehtml5.co/) et calqué sur le schéma de données et les règles métier du projet de référence BloomShop.
 
 ## Stack
 
@@ -84,7 +84,7 @@ Boutique en ligne de mobilier, décoration, salle de bain et bois de chauffage �
 
 | Rôle  | E-mail                      | Mot de passe |
 |-------|-----------------------------|--------------|
-| Admin | `admin@atelier-maison.test` | `password`   |
+| Admin | `admin@sillon-buche.test`    | `password`   |
 
 > ⚠️ Identifiants et coordonnées bancaires de démonstration (`SettingSeeder`) — à remplacer avant toute mise en production.
 

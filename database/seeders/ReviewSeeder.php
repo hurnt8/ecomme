@@ -13,12 +13,12 @@ class ReviewSeeder extends Seeder
      * decision) — this is admin-curated social proof, seeded directly.
      */
     private const REVIEWS = [
-        ['author' => 'Camille D.', 'country' => 'FR', 'rating' => 5, 'comment' => "Très belle finition, le bois est encore plus beau en vrai qu'en photo. Livraison soignée, emballage impeccable."],
-        ['author' => 'Julien M.', 'country' => 'BE', 'rating' => 4, 'comment' => "Bon rapport qualité-prix, le montage était simple. Un petit bémol sur le délai de livraison, un peu plus long qu'annoncé."],
-        ['author' => 'Sophie L.', 'country' => 'FR', 'rating' => 5, 'comment' => 'Exactement ce que je cherchais pour compléter mon salon. Le service client a été très réactif à mes questions avant achat.'],
-        ['author' => 'Antoine R.', 'country' => 'CH', 'rating' => 4, 'comment' => 'Belle pièce, conforme à la description. Je recommande, même si le prix reste un investissement.'],
-        ['author' => 'Marie-Claire P.', 'country' => 'FR', 'rating' => 5, 'comment' => 'Coup de cœur ! La qualité des matériaux se sent tout de suite. Deuxième commande chez Atelier Maison et toujours aussi satisfaite.'],
-        ['author' => 'Thomas B.', 'country' => 'LU', 'rating' => 4, 'comment' => "Très satisfait de mon achat, le produit est solide et bien fini. L'assemblage a pris un peu de temps mais le résultat en vaut la peine."],
+        ['author' => 'Camille D.', 'country' => 'FR', 'rating' => 5, 'comment' => "Machine bien emballée, livrée sur palette au jour annoncé. Montage rapide, elle a démarré au premier essai et le rendu est conforme à la fiche."],
+        ['author' => 'Julien M.', 'country' => 'BE', 'rating' => 4, 'comment' => "Bon rapport qualité-prix pour un usage régulier. Un petit bémol sur le délai de livraison, un peu plus long qu'annoncé, mais rien de rédhibitoire."],
+        ['author' => 'Sophie L.', 'country' => 'FR', 'rating' => 5, 'comment' => 'Exactement ce qu\'il me fallait pour mon terrain. J\'ai appelé avant de commander pour vérifier la compatibilité, le conseil a été précis et honnête.'],
+        ['author' => 'Antoine R.', 'country' => 'CH', 'rating' => 4, 'comment' => 'Matériel solide, conforme à la description. Je recommande, même si le prix reste un investissement à ce niveau de gamme.'],
+        ['author' => 'Marie-Claire P.', 'country' => 'FR', 'rating' => 5, 'comment' => 'Deuxième commande chez Sillon & Bûche et toujours aussi satisfaite. La finition se sent tout de suite par rapport à ce qu\'on trouve en grande surface.'],
+        ['author' => 'Thomas B.', 'country' => 'LU', 'rating' => 4, 'comment' => "Très satisfait de mon achat, la machine encaisse bien. La prise en main a demandé une matinée, mais le manuel est clair et le résultat en vaut la peine."],
     ];
 
     public function run(): void
