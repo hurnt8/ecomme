@@ -18,8 +18,8 @@ class SettingSeeder extends Seeder
             // The header falls back to the site name as text until a new mark is uploaded
             // through /admin/reglages.
             'logo' => null,
-            'tagline' => 'Motoculture et bois de chauffage pour ceux qui entretiennent leur terrain',
-            'description' => 'Sillon & Bûche vend le matériel qui tient un terrain toute l\'année : tronçonneuses et élagueuses, tracteurs tondeuses, broyeurs et outils portés, débroussailleuses et motoculteurs — puis le bois et les granulés pour l\'hiver. Machines choisies pour être réparables, conseil avant achat, livraison sur palette.',
+            'tagline' => 'Tout ce qui entretient un terrain, du printemps au coin du feu',
+            'description' => 'Sillon & Bûche vend le matériel qui tient un terrain toute l\'année : tondeuses et robots, autoportées, tronçonneuses et élagueuses, broyeurs et outils portés, débroussailleuses et motoculteurs, pompes et pulvérisateurs — puis les barbecues et les piscines pour l\'été, et le bois et les granulés pour l\'hiver. Machines choisies pour être réparables, conseil avant achat, livraison sur palette.',
             'contact_email' => 'contact@sillon-buche.test',
             'contact_phone' => '+33 2 38 30 41 12',
             'contact_address' => 'Zone artisanale des Ormes, 45300 Pithiviers',

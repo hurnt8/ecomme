@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
+use App\Models\Review;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ReviewSeeder extends Seeder
 {
@@ -23,17 +25,34 @@ class ReviewSeeder extends Seeder
 
     public function run(): void
     {
-        Product::query()->each(function (Product $product) {
-            $reviews = collect(self::REVIEWS)->shuffle()->take(random_int(2, 4));
+        // Re-seeding would otherwise stack a fresh batch of reviews on top of the previous one
+        // every run, and the ratings shown on a product would drift upward for no reason.
+        Review::query()->delete();
 
-            foreach ($reviews as $review) {
-                $product->reviews()->create([
-                    'author_name' => $review['author'],
-                    'country' => $review['country'],
-                    'rating' => $review['rating'],
-                    'comment' => $review['comment'],
-                ]);
+        // Written per product but inserted in batches: the catalogue runs to several thousand
+        // items, so a save() per review turns a few seconds of seeding into several minutes.
+        $rows = [];
+        $now = now();
+
+        Product::query()->select('id')->chunkById(500, function ($products) use (&$rows, $now) {
+            foreach ($products as $product) {
+                foreach (collect(self::REVIEWS)->shuffle()->take(random_int(2, 4)) as $review) {
+                    $rows[] = [
+                        'product_id' => $product->id,
+                        'author_name' => $review['author'],
+                        'country' => $review['country'],
+                        'rating' => $review['rating'],
+                        'comment' => $review['comment'],
+                        'created_at' => $now,
+                        'updated_at' => $now,
+                    ];
+                }
             }
+
+            foreach (array_chunk($rows, 1000) as $batch) {
+                DB::table('reviews')->insert($batch);
+            }
+            $rows = [];
         });
     }
 }

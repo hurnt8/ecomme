@@ -1,6 +1,6 @@
 @extends('layouts.shop')
 
-@section('title', 'Motoculture & bois de chauffage')
+@section('title', 'Motoculture, jardin & chauffage au bois')
 @section('meta_description', $settings->description)
 
 @section('content')

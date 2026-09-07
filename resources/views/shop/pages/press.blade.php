@@ -23,7 +23,7 @@
                     </div>
                     <div class="desc">
                         <h3>Notre positionnement</h3>
-                        <p>{{ $settings->site_name }} se distingue par un catalogue resserré organisé autour de sept rayons — Tronçonneuses &amp; Élagage, Tracteurs tondeuses &amp; Autoportées, Outils pour tracteur, Tondeuses, Robots tondeuses, Débroussailleuses &amp; Motoculture et Bois &amp; Chauffage — plutôt qu'une offre généraliste démesurée. Cette double identité, entre motoculture et bois de chauffage, couvre le cycle complet d'un terrain : le couper, le broyer, puis le brûler.</p>
+                        <p>{{ $settings->site_name }} couvre l'extérieur d'un bout à l'autre de l'année, réparti en douze rayons — Tondeuses, Robots tondeuses, Tracteurs tondeuses &amp; Autoportées, Tronçonneuses &amp; Élagage, Débroussailleuses &amp; Motoculture, Taille-haies &amp; Souffleurs, Outils pour tracteur, Pompes &amp; Pulvérisation, Bois &amp; Chauffage, Barbecues &amp; Fours d'extérieur, Piscines &amp; Spas et Jardin &amp; Extérieur. La cohérence n'est pas dans la famille de produits mais dans la saison : on tond et on arrose l'été, on broie et on taille à l'automne, on brûle l'hiver, et la piscine et le barbecue occupent les mois où la tondeuse se repose.</p>
                     </div>
                     <div class="desc">
                         <h3>Kit presse</h3>

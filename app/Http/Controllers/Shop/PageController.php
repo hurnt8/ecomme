@@ -14,19 +14,35 @@ class PageController extends Controller
         // Counted rather than written into the copy: the page used to advertise "+10 ans
         // d'expérience" and five universes including one with nothing in it. Reading the figures
         // off the catalogue means the page cannot claim more than the shop actually carries, and
-        // a range that gets stocked later (Bois & Chauffage) appears on its own.
+        // a range that gets stocked later appears on its own.
         $categories = Category::active()
             ->ordered()
             ->withCount(['products' => fn ($q) => $q->active()])
-            // Only nine products in total, so eager loading them whole to pick one image each is
-            // cheaper than a per-category lookup.
-            ->with(['products' => fn ($q) => $q->active()->with('images')])
             ->get();
+
+        // One cover per range, resolved in two small queries. This used to eager load every
+        // product with its images and pick one each, which was fair enough when the whole
+        // catalogue was nine items; the shop now carries several thousand products and roughly
+        // four times as many photographs, so that would drag the entire catalogue into memory to
+        // render twelve thumbnails.
+        $coverIds = Product::query()
+            ->active()
+            ->has('images')
+            ->selectRaw('MIN(id) as id, category_id')
+            ->groupBy('category_id')
+            ->pluck('id');
+
+        $covers = Product::query()
+            ->whereIn('id', $coverIds)
+            ->with('images')
+            ->get()
+            ->keyBy('category_id');
 
         return view('shop.pages.about', [
             'productCount' => Product::query()->active()->count(),
             'stockedCategories' => $categories->filter(fn ($c) => $c->products_count > 0),
             'emptyCategories' => $categories->filter(fn ($c) => $c->products_count === 0),
+            'covers' => $covers,
         ]);
     }
 

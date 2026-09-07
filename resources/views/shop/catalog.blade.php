@@ -1,7 +1,7 @@
 @extends('layouts.shop')
 
 @section('title', 'Boutique')
-@section('meta_description', 'Découvrez notre sélection de matériel de motoculture, d\'outils portés pour tracteur et de bois de chauffage.')
+@section('meta_description', 'Tondeuses, robots, autoportées, tronçonneuses, outils portés pour tracteur, pompes, bois de chauffage, barbecues et piscines : tout le catalogue.')
 
 @php
     // Links that keep the rest of the query intact, so changing one filter never silently

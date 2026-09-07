@@ -1,7 +1,7 @@
 @extends('layouts.shop')
 
 @section('title', 'À propos')
-@section('meta_description', 'Qui nous sommes : ' . $settings->site_name . ', boutique en ligne de matériel de motoculture, outils portés pour tracteur et bois de chauffage.')
+@section('meta_description', 'Qui nous sommes : ' . $settings->site_name . ', boutique en ligne de motoculture, d\'outils pour tracteur, de bois de chauffage et d\'équipement d\'extérieur.')
 
 @section('content')
     <x-shop.page-hero title="À propos" :subtitle="$settings->site_name" image="hero-maison.jpg" />
@@ -10,20 +10,21 @@
         <div class="container">
             <div class="row about-intro">
                 <div class="col-md-8 col-md-offset-2 text-center">
-                    <h2>Une sélection courte, choisie machine par machine.</h2>
+                    <h2>Un catalogue large, un conseil qui reste court.</h2>
                     <p class="about-lead">{{ $settings->tagline }}</p>
                     <p>
                         {{ $settings->site_name }} est une boutique en ligne. Nous ne fabriquons pas :
-                        nous choisissons, chez des constructeurs qui tiennent leurs pièces détachées,
-                        le matériel que nous utiliserions sur notre propre terrain — des machines qui
-                        se réparent plutôt qu'elles ne se remplacent, et de quoi se chauffer une fois
-                        le bois coupé.
+                        nous revendons, chez des constructeurs qui tiennent leurs pièces détachées, le
+                        matériel que nous utiliserions sur notre propre terrain — des machines qui se
+                        réparent plutôt qu'elles ne se remplacent, de quoi se chauffer une fois le bois
+                        coupé, et de quoi profiter du terrain le reste de l'année.
                     </p>
                     <p>
-                        Le catalogue compte aujourd'hui <strong>{{ $productCount }}&nbsp;{{ $productCount > 1 ? 'références' : 'référence' }}</strong>.
-                        Chacune est retenue pour sa mécanique autant que pour son prix : nous
-                        préférons une sélection que nous connaissons vraiment, et sur laquelle nous
-                        savons répondre au téléphone, à un catalogue que personne ne peut parcourir.
+                        Le catalogue compte aujourd'hui <strong>{{ number_format($productCount, 0, ',', ' ') }}&nbsp;{{ $productCount > 1 ? 'références' : 'référence' }}</strong>.
+                        C'est beaucoup, et personne ne parcourt une telle liste : servez-vous des
+                        rayons et des filtres pour dégrossir, puis appelez-nous. Le tri, c'est notre
+                        travail — dites-nous la surface, la pente et ce que vous avez déjà, on vous
+                        indique les deux ou trois machines qui conviennent.
                     </p>
                 </div>
             </div>
@@ -55,8 +56,12 @@
                         @foreach ($stockedCategories as $category)
                             @php
                                 // Prefer a product that actually has photography over the placeholder.
-                                $cover = $category->image_url
-                                    ?? $category->products->firstWhere(fn ($p) => $p->hasPhoto())?->thumbnail_url;
+                                // The cover is resolved in the controller rather than by scanning
+                                // $category->products, which would mean loading the whole catalogue.
+                                // ->get(), not [] : a range whose products all lack photography has
+                                // no entry here, and Collection's array access throws on a missing
+                                // key rather than returning null.
+                                $cover = $category->image_url ?? $covers->get($category->id)?->thumbnail_url;
                             @endphp
                             <div class="col-sm-6 col-md-3">
                                 <a class="about-range" href="{{ route('catalog', ['category' => $category->slug]) }}">
@@ -87,7 +92,9 @@
                         Des moteurs répandus — Honda, Kawasaki, Briggs &amp; Stratton, Kohler, Loncin —
                         parce qu'on en trouve les pièces partout, et des transmissions dimensionnées
                         pour l'usage annoncé. Pour le bois de chauffage, la même exigence appliquée
-                        autrement : essences dures, séchage maîtrisé, taux d'humidité contrôlé.
+                        autrement : essences dures, séchage maîtrisé, taux d'humidité contrôlé. Et pour
+                        tout ce qui passe l'hiver dehors — abris, barbecues, piscines — des matériaux
+                        qui tiennent une saison de plus que la garantie.
                     </p>
                 </div>
                 <div class="col-md-4">

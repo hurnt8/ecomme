@@ -21,7 +21,7 @@
                     </div>
                     <div class="desc">
                         <h3>Activité</h3>
-                        <p>{{ $settings->site_name }} exerce une activité de vente en ligne de matériel de motoculture (tronçonneuses et élagueuses, tondeuses et robots de tonte, tracteurs tondeuses et autoportées, débroussailleuses, motobineuses et motoculteurs), d'outils portés pour tracteur et de bois de chauffage, à destination des particuliers et professionnels.</p>
+                        <p>{{ $settings->site_name }} exerce une activité de vente en ligne de matériel de motoculture (tronçonneuses et élagueuses, tondeuses et robots de tonte, tracteurs tondeuses et autoportées, débroussailleuses, motobineuses et motoculteurs, taille-haies et souffleurs), d'outils portés pour tracteur, de pompes et de matériel de pulvérisation, de bois de chauffage et d'appareils de chauffage au bois, ainsi que d'équipement d'extérieur (barbecues, fours d'extérieur, piscines et abris de jardin), à destination des particuliers et professionnels.</p>
                     </div>
                     <div class="desc">
                         <h3>Hébergement</h3>

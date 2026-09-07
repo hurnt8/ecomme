@@ -16,7 +16,7 @@
                     </div>
                     <div class="desc">
                         <h3>2. Produits</h3>
-                        <p>Notre catalogue est organisé en sept rayons : Tronçonneuses &amp; Élagage, Tracteurs tondeuses &amp; Autoportées, Outils pour tracteur, Tondeuses, Robots tondeuses, Débroussailleuses &amp; Motoculture et Bois &amp; Chauffage. Les produits sont proposés dans la limite des stocks disponibles ; en cas d'indisponibilité après commande, le client en est informé et remboursé le cas échéant. Les machines thermiques sont livrées sans carburant et, sauf mention contraire sur la fiche produit, huile à niveau. Le bois de chauffage, vendu au stère ou en filets, peut faire l'objet de légères variations d'essence, d'humidité ou de coloris liées à son caractère naturel.</p>
+                        <p>Notre catalogue est organisé en douze rayons : Tondeuses, Robots tondeuses, Tracteurs tondeuses &amp; Autoportées, Tronçonneuses &amp; Élagage, Débroussailleuses &amp; Motoculture, Taille-haies &amp; Souffleurs, Outils pour tracteur, Pompes &amp; Pulvérisation, Bois &amp; Chauffage, Barbecues &amp; Fours d'extérieur, Piscines &amp; Spas et Jardin &amp; Extérieur. Les produits sont proposés dans la limite des stocks disponibles ; en cas d'indisponibilité après commande, le client en est informé et remboursé le cas échéant. Les machines thermiques sont livrées sans carburant et, sauf mention contraire sur la fiche produit, huile à niveau. Le bois de chauffage, vendu au stère ou en filets, peut faire l'objet de légères variations d'essence, d'humidité ou de coloris liées à son caractère naturel.</p>
                     </div>
                     <div class="desc">
                         <h3>3. Prix</h3>
