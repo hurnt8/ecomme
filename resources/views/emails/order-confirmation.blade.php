@@ -34,7 +34,7 @@
         <strong>Total : {{ number_format((float) $order->total, 2) }}&nbsp;€</strong>
     </p>
 
-    <p><a href="{{ $invoiceUrl }}" style="display:inline-block;padding:10px 20px;background:#d1c286;color:#fff;text-decoration:none;">Télécharger la facture (PDF)</a></p>
+    <p><a href="{{ $invoiceUrl }}" style="display:inline-block;padding:10px 20px;background:#c90000;color:#fff;text-decoration:none;">Télécharger la facture (PDF)</a></p>
 
     <h2 style="font-size:16px;margin-top:25px;">Paiement par virement bancaire</h2>
     <p>Merci d'effectuer un virement du montant total ci-dessus en indiquant la référence <strong>{{ $order->order_number }}</strong>. Votre commande sera préparée dès réception et validation du virement.</p>

@@ -18,7 +18,7 @@
             x-show="true"
             x-transition
             :style="{
-                background: item.type === 'error' ? '#d9534f' : '#d1c286',
+                background: item.type === 'error' ? 'var(--shop-accent)' : 'var(--shop-ink)',
                 color: '#fff', padding: '12px 18px', borderRadius: '4px',
                 boxShadow: '0 4px 12px rgba(0,0,0,.2)', minWidth: '240px', fontSize: '14px',
             }"

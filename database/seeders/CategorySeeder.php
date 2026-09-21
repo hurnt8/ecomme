@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class CategorySeeder extends Seeder
 {
@@ -27,8 +28,22 @@ class CategorySeeder extends Seeder
             ['name' => 'Jardin & Extérieur', 'slug' => 'jardin-exterieur', 'description' => 'Abris de jardin, accessoires et pièces détachées : ce qui complète le reste du catalogue.', 'sort_order' => 11],
         ];
 
+        // Tile artwork for the home page's "Acheter par catégorie" carousel, from the matching ranges
+        // on guerrinibois.fr. Only written when the category has no image yet, so one uploaded from
+        // the back office survives a reseed; the others fall back to a product photo.
+        $images = [
+            'bois-chauffage' => 'categories/bois-chauffage.jpg',
+            'jardin-exterieur' => 'categories/jardin-exterieur.jpg',
+        ];
+
         foreach ($categories as $category) {
-            Category::query()->updateOrCreate(['slug' => $category['slug']], $category + ['is_active' => true]);
+            $model = Category::query()->updateOrCreate(['slug' => $category['slug']], $category + ['is_active' => true]);
+            $image = $images[$category['slug']] ?? null;
+
+            if ($image && ! $model->image) {
+                Storage::disk('public')->put($image, file_get_contents(__DIR__.'/assets/'.$image));
+                $model->update(['image' => $image]);
+            }
         }
 
         // Ranges retired along the way: the furniture catalogue this shop sold before the change

@@ -11,27 +11,40 @@ class BannerSeeder extends Seeder
     public function run(): void
     {
         $banners = [
+            // The home hero slides and the two promo tiles reproduce guerrinibois.fr: its artwork
+            // (recompressed from PNG to JPEG) and its slide copy.
             [
-                'title' => 'La saison commence ici',
-                'subtitle' => 'Tondeuses autoportées, broyeurs, tronçonneuses : le matériel qui tient un terrain toute l\'année.',
-                'image' => 'banners/banner-home.jpg',
-                'link_url' => '/boutique',
+                'title' => 'Chauffez votre maison naturellement',
+                'subtitle' => 'Qualité • Confort • Énergie durable',
+                'image' => 'banners/hero-bois-chauffage.jpg',
+                'link_url' => '/boutique?category=bois-chauffage',
                 'position' => 'home_hero',
                 'sort_order' => 0,
             ],
             [
-                'title' => 'Nouveautés',
-                'subtitle' => 'Robots de tonte sans fil périphérique, autoportées à batterie et outils portés.',
-                'image' => 'banners/banner-nouveautes-home.jpg',
-                'link_url' => '/boutique?is_new=1',
+                'title' => 'L\'expert du bois et du chauffage',
+                'subtitle' => 'Chaleur, confort & authenticité',
+                'image' => 'banners/hero-expert-bois.jpg',
+                'link_url' => '/boutique?category=bois-chauffage',
+                'position' => 'home_hero',
+                'sort_order' => 1,
+            ],
+            [
+                'title' => 'Abris de jardin en bois',
+                'subtitle' => 'Jardin & Extérieur',
+                // Photo on the left, solid black panel on the right, where the home page sets the copy.
+                'image' => 'banners/promo-abri-jardin.jpg',
+                'link_url' => '/boutique?category=jardin-exterieur',
                 'position' => 'home_secondary',
                 'sort_order' => 0,
             ],
             [
-                'title' => 'Livraison offerte dès 500€',
-                'subtitle' => 'Sur palette, dans toute la France métropolitaine.',
-                'image' => 'banners/banner-livraison.jpg',
-                'link_url' => '/livraison',
+                'title' => 'Aménagez votre extérieur',
+                'subtitle' => 'Structures en bois',
+                // Red panel on the left. The Guerrini tile linked to the carport pictured, which this
+                // shop does not sell, so it opens the garden range instead.
+                'image' => 'banners/promo-carport.jpg',
+                'link_url' => '/boutique?category=jardin-exterieur',
                 'position' => 'home_secondary',
                 'sort_order' => 1,
             ],
@@ -78,6 +91,13 @@ class BannerSeeder extends Seeder
         Banner::query()->whereIn('title', [
             'La collection automne',
             'Livraison offerte dès 150€',
+        ])->delete();
+
+        // The home banners the guerrinibois.fr slides and tiles above replaced.
+        Banner::query()->whereIn('position', ['home_hero', 'home_secondary'])->whereIn('title', [
+            'La saison commence ici',
+            'Nouveautés',
+            'Livraison offerte dès 500€',
         ])->delete();
     }
 }

@@ -98,14 +98,16 @@
                             @endif
                         </div>
 
+                        {{-- A teaser of a sentence or two, as on guerrinibois.fr: the full text is in
+                             the Description tab below. --}}
                         @if ($product->description)
                             <p class="product-summary-excerpt">
-                                {{ \Illuminate\Support\Str::limit(strip_tags(explode("\n", $product->description)[0]), 220) }}
+                                {{ \Illuminate\Support\Str::limit(strip_tags(explode("\n", $product->description)[0]), 160, preserveWords: true) }}
                             </p>
                         @endif
 
                         @if ($product->stock > 0)
-                            <form method="POST" action="{{ route('cart.store') }}" x-data="{ quantity: 1, max: {{ $product->stock }} }">
+                            <form method="POST" action="{{ route('cart.store') }}" data-cart-form x-data="{ quantity: 1, max: {{ $product->stock }} }">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
 
@@ -182,7 +184,19 @@
 
                         <div class="fh5co-tab-content-wrap">
                             <div class="fh5co-tab-content tab-content active" data-tab-content="1">
-                                <p style="white-space:pre-line;">{{ $product->description }}</p>
+                                {{-- Supplier descriptions run to several thousand characters, mostly in a
+                                     single paragraph, which pushed the reviews and related products
+                                     thousands of pixels down. Long ones are folded to a few lines behind
+                                     "Lire la suite". Alpine applies the folded class, so without JS the
+                                     text simply stays whole. --}}
+                                @if (mb_strlen($product->description) > 600)
+                                    <div class="product-description" x-data="{ open: false }" :class="{ 'is-collapsed': ! open }">
+                                        <div class="product-description-text">{{ $product->description }}</div>
+                                        <button type="button" class="product-description-toggle" x-cloak @click="open = ! open" :aria-expanded="open.toString()" x-text="open ? 'Réduire' : 'Lire la suite'">Lire la suite</button>
+                                    </div>
+                                @else
+                                    <p style="white-space:pre-line;">{{ $product->description }}</p>
+                                @endif
                             </div>
 
                             <div class="fh5co-tab-content tab-content" data-tab-content="2">

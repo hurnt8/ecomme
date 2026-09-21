@@ -14,17 +14,17 @@
         .layout td { border: none; padding: 0; vertical-align: top; }
 
         .brand { font-size: 17px; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; }
-        .doc-type { font-size: 22px; font-weight: bold; letter-spacing: 3px; text-transform: uppercase; color: #b7a86a; }
+        .doc-type { font-size: 22px; font-weight: bold; letter-spacing: 3px; text-transform: uppercase; color: #c90000; }
         .doc-meta { margin-top: 4px; }
         .doc-meta strong { font-size: 13px; letter-spacing: 1px; }
 
-        .rule { height: 2px; background: #d1c286; margin: 14px 0 20px; font-size: 0; line-height: 0; }
+        .rule { height: 2px; background: #c90000; margin: 14px 0 20px; font-size: 0; line-height: 0; }
 
         .panel { background: #f7f7f5; padding: 12px 14px; }
         .panel-title { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: #8a8a8a; margin-bottom: 6px; }
 
-        .badge { display: inline-block; padding: 3px 9px; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: #fff; background: #b7a86a; }
-        .badge-due { background: #b5502e; }
+        .badge { display: inline-block; padding: 3px 9px; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: #fff; background: #1a1a1a; }
+        .badge-due { background: #c90000; }
 
         .items { width: 100%; border-collapse: collapse; margin-top: 24px; }
         .items th { padding: 8px 10px; text-align: left; font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
@@ -36,9 +36,9 @@
         .totals td { padding: 5px 10px; border: none; }
         .totals .grand td { border-top: 2px solid #232323; font-size: 14px; font-weight: bold; padding-top: 9px; }
 
-        .bank { margin-top: 26px; padding: 14px 16px; background: #f9f7f0; border-left: 3px solid #d1c286; }
+        .bank { margin-top: 26px; padding: 14px 16px; background: #f7f7f7; border-left: 3px solid #c90000; }
         .bank-title { font-weight: bold; margin-bottom: 8px; }
-        .bank-ref { display: inline-block; margin-top: 8px; padding: 5px 10px; background: #fff; border: 1px dashed #d1c286; font-weight: bold; }
+        .bank-ref { display: inline-block; margin-top: 8px; padding: 5px 10px; background: #fff; border: 1px dashed #c90000; font-weight: bold; }
 
         .footer { margin-top: 30px; padding-top: 10px; border-top: 1px solid #e8e8e8; font-size: 9px; color: #8a8a8a; }
     </style>

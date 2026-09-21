@@ -96,6 +96,22 @@ html {
 }
 
 /*
+ * Shop palette. One accent — the red of the guerrinibois.fr artwork the home page reuses — on
+ * near-black and neutral greys. It replaces the template gold (#d1c286) and the terracotta
+ * (#b5502e) used for promotions and errors, which had ended up side by side with that red. The
+ * vendored template stylesheet reads the same properties (with these values as fallbacks), so
+ * a change here reaches both. The back office keeps its own palette (@theme above).
+ */
+:root {
+    --shop-accent: #c90000;
+    --shop-accent-dark: #a30000;
+    /* The accent lightened enough to stay legible on the dark header. */
+    --shop-accent-on-dark: #ff6b6b;
+    --shop-ink: #1a1a1a;
+    --shop-dark: #111;
+}
+
+/*
  * Tailwind v4 auto-generates a `.container` utility because that literal class name appears
  * throughout this Bootstrap-based template's markup (it's Bootstrap's grid container, not a
  * deliberate Tailwind usage). Both rules share identical specificity, so this file — loaded
@@ -227,7 +243,7 @@ html {
 }
 
 .cart-line-name:hover {
-    color: #d1c286;
+    color: var(--shop-accent);
 }
 
 .cart-line-meta {
@@ -241,7 +257,7 @@ html {
 
 .cart-line-notice {
     margin-bottom: 10px;
-    color: #b5502e;
+    color: var(--shop-accent);
     font-size: 13px;
 }
 
@@ -263,7 +279,7 @@ html {
 }
 
 .cart-line-remove:hover {
-    color: #b5502e;
+    color: var(--shop-accent);
 }
 
 .cart-line-total {
@@ -280,7 +296,7 @@ html {
 }
 
 .cart-continue:hover {
-    color: #d1c286;
+    color: var(--shop-accent);
 }
 
 .cart-summary {
@@ -335,7 +351,7 @@ html {
 .cart-progress-track span {
     display: block;
     height: 100%;
-    background: #d1c286;
+    background: var(--shop-accent);
     transition: width 0.3s;
 }
 
@@ -354,7 +370,7 @@ html {
 
 .cart-reassurance i {
     margin-right: 8px;
-    color: #d1c286;
+    color: var(--shop-accent);
 }
 
 .cart-empty {
@@ -364,7 +380,7 @@ html {
 
 .cart-empty i {
     font-size: 44px;
-    color: #d9d5c4;
+    color: #d9d9d9;
 }
 
 .cart-empty h3 {
@@ -448,7 +464,7 @@ html {
 }
 
 .checkout-steps .is-done a:hover {
-    color: #d1c286;
+    color: var(--shop-accent);
 }
 
 .checkout-steps .is-current {
@@ -457,8 +473,8 @@ html {
 }
 
 .checkout-steps .is-current span {
-    background: #d1c286;
-    border-color: #d1c286;
+    background: var(--shop-accent);
+    border-color: var(--shop-accent);
     color: #fff;
 }
 
@@ -486,8 +502,8 @@ html {
     width: 26px;
     height: 26px;
     border-radius: 50%;
-    background: #f4f2ea;
-    color: #8f7f4f;
+    background: #f2f2f2;
+    color: var(--shop-ink);
     font-size: 12px;
     letter-spacing: 0;
 }
@@ -500,13 +516,13 @@ html {
 }
 
 .checkout-hint-warning {
-    color: #b5502e;
+    color: var(--shop-accent);
 }
 
 .checkout-payment {
     padding: 18px 20px;
     background: #f7f7f5;
-    border-left: 3px solid #d1c286;
+    border-left: 3px solid var(--shop-accent);
 }
 
 .checkout-payment strong {
@@ -535,7 +551,7 @@ html {
 }
 
 .checkout-back:hover {
-    color: #d1c286;
+    color: var(--shop-accent);
 }
 
 .checkout-summary {
@@ -617,7 +633,7 @@ html {
     min-width: 20px;
     height: 20px;
     border-radius: 10px;
-    background: #171512;
+    background: var(--shop-dark);
     color: #fff;
     font-size: 11px;
     font-weight: 700;
@@ -646,7 +662,7 @@ html {
 }
 
 .checkout-item-notice {
-    color: #b5502e !important;
+    color: var(--shop-accent) !important;
 }
 
 .checkout-item-total {
@@ -688,7 +704,7 @@ html {
 
 .checkout-reassurance i {
     margin-right: 7px;
-    color: #d1c286;
+    color: var(--shop-accent);
 }
 
 @media (max-width: 991px) {
@@ -733,7 +749,7 @@ html {
     height: 56px;
     margin-bottom: 16px;
     border-radius: 50%;
-    background: #d1c286;
+    background: var(--shop-accent);
     color: #fff;
     font-size: 24px;
 }
@@ -757,7 +773,7 @@ html {
     gap: 6px 14px;
     padding: 12px 20px;
     background: #fff;
-    border: 1px dashed #d5cfae;
+    border: 1px dashed #dcdcdc;
 }
 
 .confirmation-reference-label {
@@ -774,9 +790,9 @@ html {
 
 .confirmation-reference button {
     padding: 4px 12px;
-    border: 1px solid #d5cfae;
+    border: 1px solid #dcdcdc;
     background: none;
-    color: #8f7f4f;
+    color: var(--shop-ink);
     font-size: 12px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
@@ -784,8 +800,8 @@ html {
 }
 
 .confirmation-reference button:hover {
-    background: #d1c286;
-    border-color: #d1c286;
+    background: var(--shop-accent);
+    border-color: var(--shop-accent);
     color: #fff;
 }
 
@@ -821,7 +837,7 @@ html {
     padding: 26px;
     margin-bottom: 26px;
     background: #f7f7f5;
-    border-left: 3px solid #d1c286;
+    border-left: 3px solid var(--shop-accent);
 }
 
 .confirmation-payment p {
@@ -930,7 +946,7 @@ html {
 
 .about-lead {
     margin-bottom: 18px;
-    color: #8f7f4f;
+    color: var(--shop-ink);
     font-size: 17px;
     font-style: italic;
 }
@@ -1007,7 +1023,7 @@ html {
 }
 
 .about-range:hover .about-range-body strong {
-    color: #d1c286;
+    color: var(--shop-accent);
 }
 
 .about-range-body span {
@@ -1094,7 +1110,7 @@ html {
 .tracking-error {
     display: block;
     margin-top: 5px;
-    color: #c0392b;
+    color: var(--shop-accent);
     font-size: 12px;
 }
 
@@ -1123,7 +1139,7 @@ html {
 
 .tracking-badge {
     padding: 6px 14px;
-    background: #d1c286;
+    background: var(--shop-accent);
     color: #fff;
     font-size: 12px;
     letter-spacing: 1px;
@@ -1131,7 +1147,7 @@ html {
 }
 
 .tracking-badge.is-cancelled {
-    background: #b5502e;
+    background: var(--shop-accent);
 }
 
 .tracking-placed {
@@ -1164,7 +1180,7 @@ html {
 }
 
 .tracking-timeline li.is-done:not(:last-child):before {
-    background: #d1c286;
+    background: var(--shop-accent);
 }
 
 .tracking-timeline-dot {
@@ -1179,12 +1195,12 @@ html {
 }
 
 .tracking-timeline li.is-done .tracking-timeline-dot {
-    border-color: #d1c286;
-    background: #d1c286;
+    border-color: var(--shop-accent);
+    background: var(--shop-accent);
 }
 
 .tracking-timeline li.is-current .tracking-timeline-dot {
-    border-color: #d1c286;
+    border-color: var(--shop-accent);
     box-shadow: 0 0 0 4px rgba(209, 194, 134, 0.25);
 }
 
@@ -1212,9 +1228,9 @@ html {
 .tracking-cancelled {
     padding: 16px 18px;
     margin-bottom: 30px;
-    background: #fbf0ec;
-    border-left: 3px solid #b5502e;
-    color: #8f4526;
+    background: #fdeeee;
+    border-left: 3px solid var(--shop-accent);
+    color: var(--shop-accent-dark);
 }
 
 .tracking-result h3 {
@@ -1239,7 +1255,7 @@ html {
 }
 
 .tracking-help:hover {
-    color: #d1c286;
+    color: var(--shop-accent);
 }
 
 .tracking-notfound {
@@ -1301,7 +1317,7 @@ html {
 .hero-kicker {
     display: block;
     margin-bottom: 18px;
-    color: #d1c286;
+    color: var(--shop-accent);
     font-size: 12px;
     letter-spacing: 4px;
     text-transform: uppercase;
@@ -1344,8 +1360,8 @@ html {
 
 .hero-link:hover,
 .hero-link:focus {
-    color: #d1c286;
-    border-bottom-color: #d1c286;
+    color: var(--shop-accent);
+    border-bottom-color: var(--shop-accent);
 }
 
 /* An explicit invitation to keep going rather than leaving the fold as a dead end. */
@@ -1453,7 +1469,7 @@ html {
 }
 
 .catalog-filter-list a:hover {
-    color: #d1c286;
+    color: var(--shop-accent);
 }
 
 .catalog-filter-list a.is-active {
@@ -1526,7 +1542,7 @@ html {
     margin-left: 6px;
     padding: 1px 6px;
     border-radius: 10px;
-    background: #d1c286;
+    background: var(--shop-accent);
     color: #fff;
     font-size: 11px;
 }
@@ -1587,7 +1603,7 @@ html {
     align-items: center;
     gap: 8px;
     padding: 5px 12px;
-    background: #f4f2ea;
+    background: #f2f2f2;
     color: #5f5f5f;
     font-size: 13px;
 }
@@ -1599,12 +1615,12 @@ html {
 }
 
 .catalog-chip:hover {
-    background: #ece8d8;
+    background: #e5e5e5;
     color: #000;
 }
 
 .catalog-chip:hover span {
-    color: #b5502e;
+    color: var(--shop-accent);
 }
 
 .catalog-empty {
@@ -1855,7 +1871,7 @@ html {
 
 .fh5co-mobile-cart:hover,
 .fh5co-mobile-cart:focus {
-    color: #d1c286;
+    color: var(--shop-accent);
 }
 
 .fh5co-mobile-cart-count {
@@ -1866,7 +1882,7 @@ html {
     height: 19px;
     padding: 0 5px;
     border-radius: 10px;
-    background: #b5502e;
+    background: var(--shop-accent);
     color: #fff;
     font-family: 'Lato', sans-serif;
     font-size: 11px;
@@ -1913,7 +1929,7 @@ html {
  */
 #fh5co-offcanvas {
     padding: 70px 28px 40px;
-    background: #171512;
+    background: var(--shop-dark);
 }
 
 .offcanvas-close {
@@ -1942,7 +1958,7 @@ html {
 }
 
 #fh5co-offcanvas ul li a:hover {
-    color: #d1c286;
+    color: var(--shop-accent);
 }
 
 #fh5co-offcanvas ul li.offcanvas-has-dropdown > a {
@@ -2100,7 +2116,7 @@ html {
     padding: 0;
     border-radius: 50%;
     background: #fff;
-    color: #171512;
+    color: var(--shop-dark);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
     font-size: 17px;
     transition: background 0.2s, color 0.2s, transform 0.2s;
@@ -2108,7 +2124,7 @@ html {
 
 .product .product-grid .inner .icon:hover,
 .product .product-grid .inner .icon:focus {
-    background: #d1c286;
+    background: var(--shop-accent);
     color: #fff;
     transform: translateY(-2px);
 }
@@ -2135,11 +2151,11 @@ html {
  * doesn't get misread as "something's wrong".
  */
 .product .product-grid .sale.sale-promo {
-    background: #b5502e;
+    background: var(--shop-accent);
 }
 
 .price-current {
-    color: #b5502e;
+    color: var(--shop-accent);
     font-weight: 700;
 }
 
@@ -2178,7 +2194,7 @@ html {
 }
 
 .product-breadcrumb a:hover {
-    color: #d1c286;
+    color: var(--shop-accent);
 }
 
 .product-breadcrumb .is-current {
@@ -2208,7 +2224,7 @@ html {
     left: 15px;
     z-index: 2;
     padding: 8px 14px;
-    background: #d1c286;
+    background: var(--shop-ink);
     color: #fff;
     font-size: 12px;
     letter-spacing: 1px;
@@ -2216,7 +2232,7 @@ html {
 }
 
 .product-gallery-badge-promo {
-    background: #b5502e;
+    background: var(--shop-accent);
 }
 
 .product-gallery-thumbs {
@@ -2243,11 +2259,11 @@ html {
 }
 
 .product-gallery-thumb:hover {
-    border-color: #e0d9bd;
+    border-color: #d9d9d9;
 }
 
 .product-gallery-thumb.is-active {
-    border-color: #d1c286;
+    border-color: var(--shop-accent);
 }
 
 .product-summary-category {
@@ -2275,7 +2291,7 @@ html {
 }
 
 .product-summary-rating .rate i {
-    color: #d1c286;
+    color: var(--shop-accent);
     font-size: 13px;
 }
 
@@ -2304,7 +2320,7 @@ html {
 
 .product-summary-discount {
     padding: 3px 9px;
-    background: #b5502e;
+    background: var(--shop-accent);
     color: #fff;
     font-size: 12px;
     font-weight: 700;
@@ -2369,7 +2385,7 @@ html {
 
 .product-quantity .btn:hover,
 .product-quantity .btn:focus {
-    background: #f4f2ea;
+    background: #f2f2f2;
 }
 
 .product-quantity .form-control {
@@ -2407,7 +2423,7 @@ html {
 }
 
 .product-stock.is-low {
-    color: #b5502e;
+    color: var(--shop-accent);
 }
 
 .product-stock.is-out {
@@ -2429,7 +2445,7 @@ html {
 
 .product-reassurance i {
     margin-right: 8px;
-    color: #d1c286;
+    color: var(--shop-accent);
 }
 
 .product-reviews .product-review {
@@ -2443,7 +2459,7 @@ html {
 }
 
 .product-review .rate i {
-    color: #d1c286;
+    color: var(--shop-accent);
     font-size: 13px;
 }
 
@@ -2554,7 +2570,7 @@ html {
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #1a1a1a;
+    color: var(--shop-ink);
 }
 
 .contact-panel .form-group {
@@ -2578,14 +2594,14 @@ html {
 
 /* The template signalled a rejected field only through the message text under it. */
 .contact-panel .form-control.is-invalid {
-    border-color: #b5502e;
+    border-color: var(--shop-accent);
 }
 
 .field-error {
     display: block;
     margin-top: 6px;
     font-size: 12px;
-    color: #b5502e;
+    color: var(--shop-accent);
 }
 
 .contact-hint {
@@ -2643,11 +2659,11 @@ html {
 .contact-details a,
 .contact-details span:not(.contact-details-label) {
     font-size: 16px;
-    color: #1a1a1a;
+    color: var(--shop-ink);
 }
 
 .contact-details a:hover {
-    color: #b5502e;
+    color: var(--shop-accent);
 }
 
 .contact-hours li {
@@ -2668,7 +2684,7 @@ html {
 }
 
 .contact-hours li strong {
-    color: #1a1a1a;
+    color: var(--shop-ink);
     font-weight: 600;
 }
 
@@ -2693,7 +2709,7 @@ html {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     text-align: center;
-    color: #1a1a1a;
+    color: var(--shop-ink);
 }
 
 .contact-shortcut {
@@ -2708,7 +2724,7 @@ html {
 
 .contact-shortcut:hover,
 .contact-shortcut:focus {
-    border-color: #d8d3c8;
+    border-color: #d9d9d9;
     transform: translateY(-2px);
     text-decoration: none;
 }
@@ -2717,7 +2733,7 @@ html {
     display: block;
     margin-bottom: 8px;
     font-size: 16px;
-    color: #1a1a1a;
+    color: var(--shop-ink);
 }
 
 .contact-shortcut span {
@@ -2734,7 +2750,7 @@ html {
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #b5502e;
+    color: var(--shop-accent);
 }
 
 /* Bootstrap 3 floats these columns, so each card was only as tall as its own text and the three
@@ -2974,4 +2990,815 @@ html {
     .fh5co-logo-image {
         height: 44px;
     }
+}
+
+/*
+ * Home page, rebuilt after guerrinibois.fr. Its red became the shop-wide accent (--shop-accent, see
+ * the palette at the top of this file): the promo artwork has it baked into its panels.
+ *
+ * Hero: the slides are wide 1903×650 banners, so they are shown at their own proportions (650px
+ * tall on a wide screen, scaling down with the width, floored per breakpoint so the copy still
+ * fits) instead of the template's full-window slides, which cropped them to a narrow slice.
+ */
+#fh5co-hero,
+#fh5co-hero .flexslider .slides li,
+#fh5co-hero .flexslider .slider-text,
+#fh5co-hero .flexslider .slider-text > .slider-text-inner {
+    min-height: 0;
+}
+
+#fh5co-hero .flexslider .slides li {
+    height: 360px;
+}
+
+@media (min-width: 768px) {
+    #fh5co-hero .flexslider .slides li {
+        height: clamp(420px, 34.16vw, 650px);
+    }
+}
+
+@media (min-width: 1024px) {
+    #fh5co-hero .flexslider .slides li {
+        height: clamp(460px, 34.16vw, 650px);
+    }
+}
+
+#fh5co-hero .flexslider .slides li .container,
+#fh5co-hero .flexslider .slider-text {
+    height: 100%;
+}
+
+/* The banners are bright on their left half, where the copy sits; a short scrim keeps it
+   legible without dimming the rest of the picture. */
+.hero-overlay {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.3) 45%, rgba(0, 0, 0, 0) 75%);
+}
+
+#fh5co-hero .flexslider .slider-text > .slider-text-inner h2.hero-title {
+    max-width: 11em;
+    margin-bottom: 16px;
+    font-size: clamp(30px, 3.5vw, 66px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.hero-tagline {
+    margin: 0 0 26px;
+    color: #fff;
+    font-size: clamp(15px, 1.1vw, 20px);
+}
+
+/* The template gives every link `transition: 0.5s` on all properties, and its fadeInUp keyframes
+   start the slide copy at `visibility: hidden` — so the button eased that inherited visibility
+   and showed up well after the headline. Only the colours transition here. */
+.hero-btn {
+    display: inline-block;
+    padding: 10px 26px;
+    border-radius: 3px;
+    background: var(--shop-accent);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.hero-btn:hover,
+.hero-btn:focus {
+    background: #fff;
+    color: var(--shop-accent);
+}
+
+#fh5co-hero .flexslider .flex-control-nav {
+    bottom: 20px;
+}
+
+#fh5co-hero .flexslider .flex-control-nav li a {
+    width: 14px;
+    height: 14px;
+    background: #fff;
+}
+
+#fh5co-hero .flexslider .flex-control-nav li a.flex-active {
+    background: var(--shop-accent);
+}
+
+@media (max-width: 767px) {
+    .hero-overlay {
+        background: rgba(0, 0, 0, 0.45);
+    }
+}
+
+/* Section rows. The ids keep the template's 7em padding otherwise, far too loose between rows. */
+.home-section,
+#fh5co-product.home-section,
+#fh5co-bestsellers.home-section {
+    padding: 60px 0 0;
+}
+
+.home-services {
+    margin-top: 60px;
+}
+
+.home-heading {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.home-heading h2 {
+    margin: 0 0 14px;
+    color: var(--shop-ink);
+    font-size: 30px;
+}
+
+.home-heading::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    margin: 0 auto;
+    background: var(--shop-accent);
+}
+
+.home-more {
+    margin-top: 30px;
+}
+
+/*
+ * Carousel arrows: round buttons over the row's edges. The template's Owl build (2.0 beta) adds
+ * .owl-theme to every carousel on its own, and owl.theme.default's
+ * `.owl-theme .owl-controls .owl-nav [class*=owl-]` would otherwise turn them into small grey
+ * squares — hence the selectors going through .owl-theme .owl-controls to outrank it.
+ */
+.home-carousel {
+    position: relative;
+}
+
+.home-carousel.owl-theme .owl-controls {
+    margin-top: 0;
+}
+
+.home-carousel.owl-theme .owl-controls .owl-nav .owl-prev,
+.home-carousel.owl-theme .owl-controls .owl-nav .owl-next {
+    position: absolute;
+    top: 35%;
+    z-index: 5;
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    color: var(--shop-ink);
+    font-size: 28px;
+    line-height: 38px;
+    text-align: center;
+    transform: translateY(-50%);
+}
+
+.home-carousel.owl-theme .owl-controls .owl-nav .owl-prev {
+    left: -20px;
+}
+
+.home-carousel.owl-theme .owl-controls .owl-nav .owl-next {
+    right: -20px;
+}
+
+.home-carousel.owl-theme .owl-controls .owl-nav .owl-prev:hover,
+.home-carousel.owl-theme .owl-controls .owl-nav .owl-next:hover {
+    background: var(--shop-accent);
+    color: #fff;
+}
+
+/* At either end of a row that does not loop. */
+.home-carousel.owl-theme .owl-controls .owl-nav .disabled {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Below the container's gutter the arrows would hang off the screen and scroll the page sideways. */
+@media (max-width: 1260px) {
+    .home-carousel.owl-theme .owl-controls .owl-nav .owl-prev {
+        left: 4px;
+    }
+
+    .home-carousel.owl-theme .owl-controls .owl-nav .owl-next {
+        right: 4px;
+    }
+}
+
+/* Category tiles. */
+.home-cat {
+    text-align: center;
+}
+
+.home-cat-image {
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 5 / 3;
+    border-radius: 8px;
+    background: #f2f2f2;
+}
+
+.home-carousel .home-cat-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+/* Most categories have no artwork and borrow a product photo — a machine on white, which a
+   cover crop would cut in half. */
+.home-cat-image.is-product-photo {
+    border: 1px solid #eee;
+    background: #fff;
+}
+
+.home-carousel .home-cat-image.is-product-photo img {
+    padding: 8px;
+    object-fit: contain;
+}
+
+.home-cat:hover .home-cat-image img {
+    transform: scale(1.06);
+}
+
+.home-cat-title {
+    margin-top: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.home-cat-title a {
+    color: var(--shop-ink);
+}
+
+.home-cat-title a:hover,
+.home-cat-title a:focus {
+    color: var(--shop-accent);
+}
+
+.home-cat-total {
+    margin-top: 2px;
+    color: #777;
+    font-size: 13px;
+}
+
+/* Product tiles. */
+.home-product {
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.home-product-thumb {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.home-product-image {
+    display: block;
+    aspect-ratio: 1;
+}
+
+.home-carousel .home-product-image img {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    object-fit: contain;
+}
+
+.home-product-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    padding: 3px 9px;
+    border-radius: 3px;
+    background: var(--shop-accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.home-product-tag.is-new {
+    background: var(--shop-ink);
+}
+
+/* Faded out as well as slid down: translated alone, sub-pixel rounding left a red hairline along
+   the bottom of every tile. Opacity (not visibility) keeps it reachable by keyboard, which
+   :focus-within then reveals. */
+.home-product-add {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.home-product-thumb:hover .home-product-add,
+.home-product-thumb:focus-within .home-product-add {
+    opacity: 1;
+    transform: none;
+}
+
+/* No hover on touch screens: keep the button in view. */
+@media (hover: none) {
+    .home-product-add {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.home-product-add button {
+    width: 100%;
+    padding: 10px;
+    border: 0;
+    background: var(--shop-accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.home-product-add button:hover,
+.home-product-add button:focus {
+    background: var(--shop-ink);
+}
+
+.home-product-title {
+    display: -webkit-box;
+    overflow: hidden;
+    min-height: 2.8em;
+    margin: 14px 0 6px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.home-product-title a {
+    color: var(--shop-ink);
+}
+
+.home-product-title a:hover,
+.home-product-title a:focus {
+    color: var(--shop-accent);
+}
+
+.home-product .price-current {
+    color: var(--shop-accent);
+}
+
+/* Promo tiles. */
+.home-promos .col-sm-6 {
+    margin-bottom: 30px;
+}
+
+.home-promo {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.home-promo > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease;
+}
+
+.home-promo:hover > img {
+    transform: scale(1.04);
+}
+
+.home-promo-text {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 16px 22px;
+    color: #fff;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.home-promo.is-text-right .home-promo-text {
+    right: 0;
+    width: 56%;
+}
+
+.home-promo.is-text-left .home-promo-text {
+    left: 0;
+    width: 44%;
+}
+
+.home-promo-kicker {
+    margin-bottom: 6px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.home-promo-title {
+    margin-bottom: 14px;
+    font-size: clamp(17px, 2vw, 24px);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.home-promo-btn {
+    padding: 7px 16px;
+    border-radius: 3px;
+    background: #fff;
+    color: var(--shop-ink);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-shadow: none;
+    text-transform: uppercase;
+}
+
+.home-promo:hover .home-promo-btn,
+.home-promo:focus .home-promo-btn {
+    background: var(--shop-ink);
+    color: #fff;
+}
+
+/* Blog cards. */
+.home-blog {
+    padding-bottom: 60px;
+}
+
+.home-post-thumb {
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 616 / 405;
+    border-radius: 8px;
+    background: #f2f2f2;
+}
+
+.home-carousel .home-post-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.home-post:hover .home-post-thumb img {
+    transform: scale(1.05);
+}
+
+.home-post-meta {
+    margin-top: 14px;
+    color: #777;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.home-post-title {
+    margin: 6px 0 8px;
+    font-size: 18px;
+    line-height: 1.35;
+}
+
+.home-post-title a {
+    color: var(--shop-ink);
+}
+
+.home-post-title a:hover,
+.home-post-title a:focus {
+    color: var(--shop-accent);
+}
+
+.home-post-excerpt {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+/* =========================================================================================
+ * Header, after guerrinibois.fr: a dark main row (logo, catalogue search with a category picker,
+ * account and basket) over a menu bar with the phone number. The template's .fh5co-nav rules — a
+ * white bar, grey uppercase links padded 30px, a floated search box — are outranked here rather
+ * than edited, like the rest of this file.
+ * ====================================================================================== */
+.fh5co-nav.site-header {
+    padding: 0;
+    background: var(--shop-dark);
+}
+
+.site-header-main {
+    padding: 16px 0;
+}
+
+.site-header-main-row,
+.site-header-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.fh5co-nav .site-header-logo {
+    flex: 0 0 auto;
+}
+
+.fh5co-nav .site-header-logo a {
+    padding: 0;
+    color: #fff;
+}
+
+.site-header-search {
+    display: flex;
+    flex: 1 1 auto;
+    max-width: 580px;
+    height: 44px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 3px;
+    background: #f2f2f2;
+}
+
+.site-header-search select,
+.site-header-search input {
+    height: 100%;
+    border: 0;
+    background: transparent;
+    color: var(--shop-ink);
+    font-size: 14px;
+}
+
+.site-header-search select {
+    flex: 0 0 auto;
+    max-width: 190px;
+    padding: 0 10px 0 14px;
+    border-right: 1px solid #dcdcdc;
+}
+
+.site-header-search input {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0 14px;
+}
+
+.site-header-search input:focus,
+.site-header-search select:focus {
+    outline: 2px solid var(--shop-accent);
+    outline-offset: -2px;
+}
+
+.site-header-search button {
+    flex: 0 0 auto;
+    padding: 0 20px;
+    border: 0;
+    background: var(--shop-accent);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.site-header-search button:hover,
+.site-header-search button:focus {
+    background: var(--shop-accent-dark);
+}
+
+.site-header-actions {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 22px;
+}
+
+.fh5co-nav .site-header-account,
+.fh5co-nav .site-header-cart {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+    color: #fff;
+}
+
+.fh5co-nav .site-header-account:hover,
+.fh5co-nav .site-header-account:focus,
+.fh5co-nav .site-header-cart:hover,
+.fh5co-nav .site-header-cart:focus {
+    color: var(--shop-accent-on-dark);
+}
+
+.site-header-account i,
+.site-header-cart i {
+    font-size: 22px;
+}
+
+.site-header-account small,
+.site-header-account strong {
+    display: block;
+    line-height: 1.3;
+}
+
+.site-header-account small {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 12px;
+}
+
+.site-header-account strong {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.site-header-actions .site-header-cart {
+    padding-left: 22px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.site-header-cart-count {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 9px;
+    background: var(--shop-accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+}
+
+.site-header-bar {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--shop-ink);
+}
+
+.site-header-bar-row {
+    justify-content: space-between;
+}
+
+.fh5co-nav .site-header-bar .menu-1 > ul > li {
+    margin-right: 34px;
+}
+
+.fh5co-nav .site-header-bar .menu-1 > ul > li > a {
+    display: block;
+    padding: 15px 0;
+    color: #fff;
+    font-size: 15px;
+    letter-spacing: 0.3px;
+    text-transform: none;
+}
+
+/* !important only to beat the template's own `li.active > a { color: #000 !important }`. */
+.fh5co-nav .site-header-bar .menu-1 > ul > li:hover > a,
+.fh5co-nav .site-header-bar .menu-1 > ul > li > a:focus,
+.fh5co-nav .site-header-bar .menu-1 > ul > li.active > a {
+    color: #fff !important;
+    box-shadow: inset 0 -3px 0 var(--shop-accent);
+}
+
+.fh5co-nav .site-header-bar .menu-1 li.has-dropdown .dropdown {
+    top: 100%;
+    width: 250px;
+    border-radius: 0 0 4px 4px;
+}
+
+.fh5co-nav .site-header-bar .menu-1 li.has-dropdown .dropdown:before {
+    display: none;
+}
+
+.fh5co-nav .site-header-phone {
+    padding: 0;
+    color: #fff;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.fh5co-nav .site-header-phone:hover,
+.fh5co-nav .site-header-phone:focus {
+    color: var(--shop-accent-on-dark);
+}
+
+/* Only rendered for site.js to clone into the off-canvas panel (see header.blade.php). */
+.fh5co-nav .menu-2 {
+    display: none;
+}
+
+@media (max-width: 991px) {
+    .site-header-search select,
+    .site-header-account span,
+    .fh5co-nav .site-header-phone {
+        display: none;
+    }
+
+    .fh5co-nav .site-header-bar .menu-1 > ul > li {
+        margin-right: 22px;
+    }
+}
+
+@media (max-width: 768px) {
+    .site-header-main {
+        padding: 12px 0;
+    }
+
+    .site-header-search,
+    .site-header-actions,
+    .site-header-bar {
+        display: none;
+    }
+
+    .site-header-main-row {
+        justify-content: space-between;
+    }
+
+    .fh5co-nav.site-header .fh5co-mobile-cart {
+        color: #fff;
+    }
+
+    /* The template draws the burger's lines near-black (#252525), invisible on this bar. Once
+       open, the template's own white cross takes over. */
+    .fh5co-nav.site-header .fh5co-nav-toggle:not(.active) i,
+    .fh5co-nav.site-header .fh5co-nav-toggle i::before,
+    .fh5co-nav.site-header .fh5co-nav-toggle i::after {
+        background: #fff;
+    }
+}
+
+/* =========================================================================================
+ * Product page.
+ * ====================================================================================== */
+/* The template's #fh5co-product padding (7em) outranks .product-detail's own and left a ~110px
+   blank band between the header and the breadcrumb. */
+#fh5co-product.product-detail {
+    padding-top: 30px;
+}
+
+.product-description-text {
+    white-space: pre-line;
+}
+
+.product-description.is-collapsed .product-description-text {
+    position: relative;
+    max-height: 12em;
+    overflow: hidden;
+}
+
+.product-description.is-collapsed .product-description-text::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 5em;
+    background: linear-gradient(rgba(255, 255, 255, 0), #fff);
+}
+
+.product-description-toggle {
+    margin-top: 16px;
+    padding: 9px 22px;
+    border: 1px solid var(--shop-ink);
+    border-radius: 3px;
+    background: transparent;
+    color: var(--shop-ink);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.product-description-toggle:hover,
+.product-description-toggle:focus {
+    background: var(--shop-ink);
+    color: #fff;
+}
+
+/* The cart's lines and summary while a change sent in the background is on its way (see
+   resources/js/modules/cart.js). */
+[data-cart-body] {
+    transition: opacity 0.2s ease;
+}
+
+[data-cart-body].is-updating {
+    opacity: 0.6;
 }

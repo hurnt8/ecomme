@@ -21,7 +21,7 @@
             <div class="inner">
                 <div class="fh5co-quick-actions">
                     <a href="{{ $url }}" class="icon" title="Voir le produit" aria-label="Voir le produit"><i class="icon-eye"></i></a>
-                    <form method="POST" action="{{ route('cart.store') }}" class="product-quick-add">
+                    <form method="POST" action="{{ route('cart.store') }}" class="product-quick-add" data-cart-form>
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <input type="hidden" name="quantity" value="1">

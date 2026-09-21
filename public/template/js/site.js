@@ -140,9 +140,11 @@
         var $slider = $('#fh5co-hero .flexslider');
         if (!$slider.length) return;
 
+        // Slide height is set in app.css from the banners' own proportions, so there is no
+        // window-height sizing here any more. 9s per slide, as on guerrinibois.fr.
         $slider.flexslider({
             animation: 'fade',
-            slideshowSpeed: 5000,
+            slideshowSpeed: 9000,
             directionNav: true,
             start: function () {
                 setTimeout(function () {
@@ -158,19 +160,35 @@
             },
         });
 
-        // The template sized each slide to the full window height, ignoring the announcement bar
-        // and nav sitting above it — so the hero always ran past the fold by exactly the height
-        // of that chrome, pushing anything anchored to its bottom edge off screen. Subtract it
-        // (floored, so the hero stays usable on very short windows).
-        var sizeSlides = function () {
-            var above = $('#fh5co-hero').offset().top;
-            var height = Math.max($(window).height() - above, 420);
+    };
 
-            $('#fh5co-hero .flexslider .slides > li').css('height', height);
-        };
+    /*
+     * The home page rows (categories, deals, best sellers, new arrivals, blog) — the carousels
+     * guerrinibois.fr runs on Splide, rebuilt on the Owl build the template already ships. Each
+     * row sets its own column counts through data-items / -laptop / -tablet / -mobile.
+     */
+    var homeCarousels = function () {
+        $('.js-home-carousel').each(function () {
+            var $owl = $(this),
+                desktop = $owl.data('items') || 4,
+                gap = $owl.data('gap');
 
-        sizeSlides();
-        $(window).resize(sizeSlides);
+            $owl.owlCarousel({
+                // Looping a row that already fits would show the same tiles twice side by side.
+                loop: $owl.children().length > desktop,
+                margin: gap === undefined ? 20 : gap,
+                nav: true,
+                dots: false,
+                navText: ['<span aria-hidden="true">&lsaquo;</span>', '<span aria-hidden="true">&rsaquo;</span>'],
+                smartSpeed: 600,
+                responsive: {
+                    0: { items: $owl.data('items-mobile') || 1 },
+                    768: { items: $owl.data('items-tablet') || 2 },
+                    992: { items: $owl.data('items-laptop') || desktop },
+                    1200: { items: desktop },
+                },
+            });
+        });
     };
 
     var testimonialCarousel = function () {
@@ -210,6 +228,7 @@
         tabs();
         goToTop();
         sliderMain();
+        homeCarousels();
         testimonialCarousel();
         productGalleryCarousel();
     });

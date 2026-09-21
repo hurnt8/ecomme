@@ -10,7 +10,7 @@
             <div class="row animate-box">
                 <div class="col-md-6 col-md-offset-3">
                     @if ($errors->any())
-                        <p style="color:#c0392b;">{{ $errors->first() }}</p>
+                        <p style="color:var(--shop-accent);">{{ $errors->first() }}</p>
                     @endif
 
                     <form method="POST" action="{{ route('login') }}">

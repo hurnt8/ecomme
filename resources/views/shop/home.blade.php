@@ -4,30 +4,26 @@
 @section('meta_description', $settings->description)
 
 @section('content')
-    {{-- The template put the hero copy in a translucent white panel (.desc) with a 24px black
-         headline and no overlay, so the text sat on the photo with almost no contrast and the
-         panel cut a hard rectangle across the image. Full-bleed gradient over the photo instead,
-         with the copy sized to carry the page. .slider-text / .slider-text-inner are kept: the
-         flexslider callbacks in site.js animate those classes. --}}
-    <aside id="fh5co-hero" class="js-fullheight">
-        <div class="flexslider js-fullheight">
+    {{-- Laid out like guerrinibois.fr: the hero slider, then one carousel per row (categories,
+         deals, best sellers, new arrivals, blog) with the two promo tiles between them. Each row
+         is an Owl carousel sized by its data-items* attributes — see homeCarousels() in site.js.
+         .slider-text / .slider-text-inner are kept on the hero: the flexslider callbacks in
+         site.js animate those classes. --}}
+    <aside id="fh5co-hero">
+        <div class="flexslider">
             <ul class="slides">
                 @forelse ($heroBanners as $banner)
                     <li style="background-image: url('{{ $banner->image_url }}');">
                         <div class="hero-overlay"></div>
                         <div class="container">
-                            <div class="col-md-7 js-fullheight slider-text">
+                            <div class="col-md-8 slider-text">
                                 <div class="slider-text-inner">
                                     <div class="hero-content">
-                                        <span class="hero-kicker">{{ $banner->subtitle ? $settings->site_name : 'Nouvelle saison' }}</span>
                                         <h2 class="hero-title">{{ $banner->title }}</h2>
                                         @if ($banner->subtitle)
-                                            <p class="hero-lead">{{ $banner->subtitle }}</p>
+                                            <p class="hero-tagline">{{ $banner->subtitle }}</p>
                                         @endif
-                                        <div class="hero-actions">
-                                            <a href="{{ $banner->link_url ?: route('catalog') }}" class="btn btn-primary btn-lg">Découvrir le catalogue</a>
-                                            <a href="{{ route('catalog', ['on_sale' => 1]) }}" class="hero-link">Voir les promotions</a>
-                                        </div>
+                                        <a href="{{ $banner->link_url ?: route('catalog') }}" class="hero-btn">Achetez maintenant</a>
                                     </div>
                                 </div>
                             </div>
@@ -37,16 +33,12 @@
                     <li style="background-image: url('{{ asset('images/hero-maison.jpg') }}');">
                         <div class="hero-overlay"></div>
                         <div class="container">
-                            <div class="col-md-7 js-fullheight slider-text">
+                            <div class="col-md-8 slider-text">
                                 <div class="slider-text-inner">
                                     <div class="hero-content">
-                                        <span class="hero-kicker">{{ $settings->site_name }}</span>
                                         <h2 class="hero-title">{{ $settings->tagline }}</h2>
-                                        <p class="hero-lead">{{ $settings->description }}</p>
-                                        <div class="hero-actions">
-                                            <a href="{{ route('catalog') }}" class="btn btn-primary btn-lg">Découvrir le catalogue</a>
-                                            <a href="{{ route('catalog', ['on_sale' => 1]) }}" class="hero-link">Voir les promotions</a>
-                                        </div>
+                                        <p class="hero-tagline">{{ $settings->site_name }}</p>
+                                        <a href="{{ route('catalog') }}" class="hero-btn">Achetez maintenant</a>
                                     </div>
                                 </div>
                             </div>
@@ -55,14 +47,109 @@
                 @endforelse
             </ul>
         </div>
-
-        <a href="#fh5co-services" class="hero-scroll" aria-label="Faire défiler vers le contenu">
-            <span>Découvrir</span>
-            <i class="icon-arrow-down"></i>
-        </a>
     </aside>
 
-    <div id="fh5co-services" class="fh5co-bg-section">
+    @if ($categories->isNotEmpty())
+        <section class="home-section">
+            <div class="container">
+                <div class="home-heading">
+                    <h2>Acheter par catégorie</h2>
+                </div>
+                <div class="owl-carousel home-carousel js-home-carousel" data-items="6" data-items-laptop="5" data-items-tablet="4" data-items-mobile="2">
+                    @foreach ($categories as $category)
+                        @php
+                            $url = route('catalog', ['category' => $category->slug]);
+                            $image = $category->image_url ?? $category->products->first()?->thumbnail_url;
+                        @endphp
+                        <div class="home-cat">
+                            <a href="{{ $url }}" @class(['home-cat-image', 'is-product-photo' => ! $category->image_url])>
+                                @if ($image)
+                                    <img src="{{ $image }}" alt="{{ $category->name }}" loading="lazy">
+                                @endif
+                            </a>
+                            <div class="home-cat-title"><a href="{{ $url }}">{{ $category->name }}</a></div>
+                            <div class="home-cat-total">{{ $category->products_count }} {{ $category->products_count > 1 ? 'Produits' : 'Produit' }}</div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
+    @if ($saleProducts->isNotEmpty())
+        <section class="home-section">
+            <div class="container">
+                <div class="home-heading">
+                    <h2>Nos offres du jour</h2>
+                </div>
+                <div class="owl-carousel home-carousel js-home-carousel" data-items="5" data-items-laptop="4" data-items-tablet="3" data-items-mobile="2">
+                    @foreach ($saleProducts as $product)
+                        <x-shop.product-slide :product="$product" />
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
+    @if ($secondaryBanners->isNotEmpty())
+        <section class="home-section home-promos">
+            <div class="container">
+                <div class="row">
+                    @foreach ($secondaryBanners as $banner)
+                        {{-- The artwork is half photo, half solid panel, and the two tiles mirror
+                             each other (panel on the right, then on the left): the copy goes on
+                             the panel. --}}
+                        <div class="col-sm-6">
+                            <a href="{{ $banner->link_url ?: route('catalog') }}" class="home-promo {{ $loop->even ? 'is-text-left' : 'is-text-right' }}">
+                                <img src="{{ $banner->image_url }}" alt="" loading="lazy">
+                                <span class="home-promo-text">
+                                    @if ($banner->subtitle)
+                                        <span class="home-promo-kicker">{{ $banner->subtitle }}</span>
+                                    @endif
+                                    <span class="home-promo-title">{{ $banner->title }}</span>
+                                    <span class="home-promo-btn">Achetez maintenant</span>
+                                </span>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
+    @if ($bestsellerProducts->isNotEmpty())
+        <section id="fh5co-bestsellers" class="home-section">
+            <div class="container">
+                <div class="home-heading">
+                    <h2>Meilleures ventes</h2>
+                </div>
+                <div class="owl-carousel home-carousel js-home-carousel" data-items="5" data-items-laptop="4" data-items-tablet="3" data-items-mobile="2">
+                    @foreach ($bestsellerProducts as $product)
+                        <x-shop.product-slide :product="$product" />
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
+    <section id="fh5co-product" class="home-section">
+        <div class="container">
+            <div class="home-heading">
+                <h2>Nouveaux produits</h2>
+            </div>
+            <div class="owl-carousel home-carousel js-home-carousel" data-items="4" data-items-laptop="4" data-items-tablet="3" data-items-mobile="2">
+                @foreach ($latestProducts as $product)
+                    <x-shop.product-slide :product="$product" />
+                @endforeach
+            </div>
+
+            <div class="text-center home-more">
+                <a href="{{ route('catalog') }}" class="btn btn-primary btn-outline btn-lg">Voir toute la boutique</a>
+            </div>
+        </div>
+    </section>
+
+    <div id="fh5co-services" class="fh5co-bg-section home-services">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-sm-4 text-center">
@@ -90,63 +177,32 @@
         </div>
     </div>
 
-    @if ($secondaryBanners->isNotEmpty())
-        <div class="container" style="margin-top:50px;">
-            <div class="row animate-box">
-                @foreach ($secondaryBanners as $banner)
-                    <div class="col-md-{{ 12 / min($secondaryBanners->count(), 3) }}">
-                        <x-shop.promo-banner :banner="$banner" />
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    @endif
-
-    @if ($bestsellerProducts->isNotEmpty())
-        <div id="fh5co-bestsellers">
+    @if ($blogPosts->isNotEmpty())
+        <section class="home-section home-blog">
             <div class="container">
-                <div class="row animate-box">
-                    <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                        <span>Coup de cœur clients</span>
-                        <h2>Meilleures ventes.</h2>
-                        <p>Les machines qui reviennent le plus souvent dans les commandes, saison après saison.</p>
-                    </div>
+                <div class="home-heading">
+                    <h2>Du blog</h2>
                 </div>
-                @foreach ($bestsellerProducts->chunk(3) as $row)
-                    <div class="row">
-                        @foreach ($row as $product)
-                            <x-shop.product-card :product="$product" />
-                        @endforeach
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    @endif
-
-    <div id="fh5co-product">
-        <div class="container">
-            <div class="row animate-box">
-                <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                    <span>Sélection</span>
-                    <h2>Nos machines.</h2>
-                    <p>Du matériel choisi pour être réparable, avec les pièces et le service qui vont avec.</p>
-                </div>
-            </div>
-            @foreach ($products->chunk(3) as $row)
-                <div class="row">
-                    @foreach ($row as $product)
-                        <x-shop.product-card :product="$product" />
+                <div class="owl-carousel home-carousel js-home-carousel" data-items="3" data-items-laptop="3" data-items-tablet="2" data-items-mobile="1" data-gap="30">
+                    @foreach ($blogPosts as $post)
+                        @php($url = route('blog.show', $post->slug))
+                        <article class="home-post">
+                            <a href="{{ $url }}" class="home-post-thumb">
+                                @if ($post->cover_image_url)
+                                    <img src="{{ $post->cover_image_url }}" alt="" loading="lazy">
+                                @endif
+                            </a>
+                            <div class="home-post-meta">{{ $post->published_at->translatedFormat('j F Y') }}</div>
+                            <h3 class="home-post-title"><a href="{{ $url }}">{{ $post->title }}</a></h3>
+                            @if ($post->excerpt)
+                                <p class="home-post-excerpt">{{ Str::limit($post->excerpt, 110) }}</p>
+                            @endif
+                        </article>
                     @endforeach
                 </div>
-            @endforeach
-
-            <div class="row">
-                <div class="col-md-12 text-center" style="margin-top:20px;">
-                    <a href="{{ route('catalog') }}" class="btn btn-primary btn-outline btn-lg">Voir toute la boutique</a>
-                </div>
             </div>
-        </div>
-    </div>
+        </section>
+    @endif
 
     @if ($bestReviews->isNotEmpty())
         <div id="fh5co-testimonial" class="fh5co-bg-section">

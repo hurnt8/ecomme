@@ -19,7 +19,7 @@
                             <div class="col-md-12">
                                 <label for="name">Nom</label>
                                 <input id="name" type="text" name="name" value="{{ old('name', auth()->user()->name) }}" class="form-control" required>
-                                @error('name')<span style="color:#c0392b;font-size:12px;">{{ $message }}</span>@enderror
+                                @error('name')<span style="color:var(--shop-accent);font-size:12px;">{{ $message }}</span>@enderror
                             </div>
                         </div>
 
@@ -27,7 +27,7 @@
                             <div class="col-md-12">
                                 <label for="email">E-mail</label>
                                 <input id="email" type="email" name="email" value="{{ old('email', auth()->user()->email) }}" class="form-control" required>
-                                @error('email')<span style="color:#c0392b;font-size:12px;">{{ $message }}</span>@enderror
+                                @error('email')<span style="color:var(--shop-accent);font-size:12px;">{{ $message }}</span>@enderror
                             </div>
                         </div>
 
@@ -38,7 +38,7 @@
                             <div class="col-md-12">
                                 <label for="current_password">Mot de passe actuel</label>
                                 <input id="current_password" type="password" name="current_password" class="form-control">
-                                @error('current_password')<span style="color:#c0392b;font-size:12px;">{{ $message }}</span>@enderror
+                                @error('current_password')<span style="color:var(--shop-accent);font-size:12px;">{{ $message }}</span>@enderror
                             </div>
                         </div>
 
@@ -46,7 +46,7 @@
                             <div class="col-md-12">
                                 <label for="password">Nouveau mot de passe</label>
                                 <input id="password" type="password" name="password" class="form-control">
-                                @error('password')<span style="color:#c0392b;font-size:12px;">{{ $message }}</span>@enderror
+                                @error('password')<span style="color:var(--shop-accent);font-size:12px;">{{ $message }}</span>@enderror
                             </div>
                         </div>
 

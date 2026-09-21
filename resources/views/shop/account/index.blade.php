@@ -14,7 +14,7 @@
                         &middot;
                         <form action="{{ route('logout') }}" method="POST" style="display:inline;">
                             @csrf
-                            <button type="submit" class="btn-link" style="background:none;border:none;padding:0;color:#d1c286;cursor:pointer;">Se déconnecter</button>
+                            <button type="submit" class="btn-link" style="background:none;border:none;padding:0;color:var(--shop-accent);cursor:pointer;">Se déconnecter</button>
                         </form>
                     </p>
 

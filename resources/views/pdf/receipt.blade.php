@@ -14,11 +14,11 @@
         .layout td { border: none; padding: 0; vertical-align: top; }
 
         .brand { font-size: 17px; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; }
-        .doc-type { font-size: 22px; font-weight: bold; letter-spacing: 3px; text-transform: uppercase; color: #b7a86a; }
+        .doc-type { font-size: 22px; font-weight: bold; letter-spacing: 3px; text-transform: uppercase; color: #c90000; }
         .doc-meta { margin-top: 4px; }
         .doc-meta strong { font-size: 13px; letter-spacing: 1px; }
 
-        .rule { height: 2px; background: #d1c286; margin: 14px 0 20px; font-size: 0; line-height: 0; }
+        .rule { height: 2px; background: #c90000; margin: 14px 0 20px; font-size: 0; line-height: 0; }
 
         .panel { background: #f7f7f5; padding: 12px 14px; }
         .panel-title { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: #8a8a8a; margin-bottom: 6px; }
