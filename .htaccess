@@ -1,0 +1,48 @@
+# =====================================================================
+#  À DÉPOSER DANS public_html/ SOUS LE NOM EXACT :  .htaccess
+#  (avec le point de début, et sans extension .txt)
+#
+#  Rôle : envoyer toutes les requêtes vers index.php, la passerelle qui
+#  sert les fichiers de public/ et de storage/, puis appelle Laravel.
+# =====================================================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Hérité d'une éventuelle configuration de l'hébergeur
+    RewriteBase /
+
+    # Laisser passer l'authentification HTTP (utile aux API)
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Retirer les barres obliques finales des dossiers
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Tout le reste part vers index.php (notre passerelle).
+    # Les fichiers réels sont servis par la passerelle, pas par Apache :
+    # c'est elle qui vérifie qu'ils sont dans public/ ou storage/app/public/.
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# ---------------------------------------------------------------------
+#  Sécurité : interdire l'accès direct aux fichiers du projet.
+#  La passerelle refuse déjà ces fichiers, ceci est une deuxième barrière
+#  au cas où mod_rewrite serait désactivé.
+# ---------------------------------------------------------------------
+
+# Fichiers sensibles à la racine
+<FilesMatch "^(\.env.*|\.git.*|composer\.(json|lock)|package(-lock)?\.json|artisan|phpunit\.xml|compose\.yaml|README\.md|server\.php|\.editorconfig|\.gitignore|\.gitattributes)$">
+    Require all denied
+</FilesMatch>
+
+# Empêcher la lecture des dossiers internes
+RedirectMatch 404 ^/(app|bootstrap|config|database|lang|resources|routes|storage/(?!app/public)|tests|vendor|node_modules)(/|$)
+
+# Pas de listage de répertoire
+Options -Indexes
+
+# Page d'accueil
+DirectoryIndex index.php
