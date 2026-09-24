@@ -120,7 +120,19 @@
     </table>
 
     <div class="footer">
-        {{ $settings->site_name }}@if ($settings->contact_address) — {{ $settings->contact_address }}@endif<br>
+        {{-- Built as one expression rather than chained @if/@endif pairs: Blade does not parse a
+             directive that starts immediately after @endif, and the stray text lands in the PDF. --}}
+        @php
+            $issuer = array_filter([
+                $settings->site_name,
+                $settings->legal_name !== $settings->site_name ? $settings->legal_name : null,
+                $settings->registered_address ?: $settings->contact_address,
+            ]);
+        @endphp
+        {{ implode(' — ', $issuer) }}<br>
+        @if ($settings->siret || $settings->siren)
+            {{ $settings->siret ? 'SIRET : '.$settings->siret : 'SIREN : '.$settings->siren }}<br>
+        @endif
         Reçu généré automatiquement, valable sans signature.
     </div>
 </body>

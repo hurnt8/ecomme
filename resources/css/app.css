@@ -16,8 +16,16 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Lato', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    /*
+     * Montserrat, not Lato: it is what the shop's own stylesheet asks for on every heading and
+     * every body copy. Neither family was ever loaded, so both sides fell back to the system
+     * sans-serif and the mismatch stayed invisible — the layouts now load them for real.
+     */
+    --font-sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* The shop reserves Playfair for display headings; the admin uses it in the same places. */
+    --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
 
     /*
      * The back-office palette. Tailwind utilities are used ONLY in the admin (the shop front is
@@ -2830,6 +2838,30 @@ html {
         line-height: 1.5;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    /*
+     * Page titles in Playfair, as on the shop front. Scoped to the page heading only: applying it
+     * to every h1–h6 would put a display serif on section labels and table captions, where the
+     * shop uses Montserrat too.
+     */
+    .admin-ui .admin-page-title {
+        font-family: var(--font-display);
+        font-weight: 500;
+        letter-spacing: -0.01em;
+    }
+
+    /*
+     * The shop spaces its small caps labels widely (see .fh5co-heading in the template). Table
+     * headers are the back-office equivalent, so they get the same treatment instead of the
+     * tighter default.
+     */
+    .admin-ui thead th {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-neutral-500);
     }
 
     /* Form controls do not inherit the document font on their own. */

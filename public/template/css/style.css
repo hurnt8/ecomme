@@ -1175,6 +1175,55 @@ h1, h2, h3, h4, h5, h6, figure {
   display: block;
 }
 
+/* Staff-only bar above the header: the way back to the back-office, which the storefront
+   otherwise never links to. Gold on near-black, so it reads as a tool rather than as shop
+   furniture, and it is never shown to customers. */
+.admin-return-bar {
+  background: #1c1915;
+  color: #a59e8d;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 8px 0;
+  border-bottom: 1px solid #2b2721;
+}
+.admin-return-bar .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.admin-return-bar strong {
+  color: #f4f2ed;
+  font-weight: 600;
+}
+.admin-return-bar a {
+  color: #d1c286;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.admin-return-bar a:hover,
+.admin-return-bar a:focus {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Legal identity sits above the copyright: required on every page, but secondary to the
+   navigation, so it is set smaller and dimmer than the surrounding footer text. */
+#fh5co-footer .fh5co-legal-identity {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+#fh5co-footer .fh5co-legal-identity .block {
+  display: block;
+  font-size: 12px;
+  line-height: 1.7;
+  opacity: 0.6;
+}
+
 #map {
   height: 500px;
   width: 100%;

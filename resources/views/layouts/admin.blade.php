@@ -4,6 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Tableau de bord') — Administration {{ $settings->site_name }}</title>
+
+    {{-- Same two families as the shop front, so the back-office reads as the same product rather
+         than as a separate tool bolted on. --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 {{-- `admin-ui` carries the back-office base reset — fonts, links, form controls, focus rings.

@@ -76,6 +76,29 @@
         </section>
     @endif
 
+    {{-- Placed above the deals carousel for the cold season: heating is what the shop is named
+         after and what customers come for from October. Drop this section back down, or remove
+         it, when the mowing season starts again. --}}
+    @if ($heatingProducts->isNotEmpty())
+        <section id="fh5co-heating" class="home-section">
+            <div class="container">
+                <div class="home-heading">
+                    <h2>La saison du chauffage au bois</h2>
+                    <p>Bûches, granulés et poêles — avec les tronçonneuses pour préparer l'hiver.</p>
+                </div>
+                <div class="owl-carousel home-carousel js-home-carousel" data-items="5" data-items-laptop="4" data-items-tablet="3" data-items-mobile="2">
+                    @foreach ($heatingProducts as $product)
+                        <x-shop.product-slide :product="$product" />
+                    @endforeach
+                </div>
+
+                <div class="text-center home-more">
+                    <a href="{{ route('catalog', ['category' => 'bois-chauffage']) }}" class="btn btn-primary btn-outline btn-lg">Voir tout le bois &amp; chauffage</a>
+                </div>
+            </div>
+        </section>
+    @endif
+
     @if ($saleProducts->isNotEmpty())
         <section class="home-section">
             <div class="container">

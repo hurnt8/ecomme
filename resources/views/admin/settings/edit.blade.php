@@ -16,6 +16,10 @@
                 'label' => 'Contact & réseaux',
                 'fields' => ['contact_email', 'contact_phone', 'contact_address', 'whatsapp_number', 'social_facebook', 'social_instagram', 'social_twitter'],
             ],
+            'legal' => [
+                'label' => 'Identité légale',
+                'fields' => ['legal_name', 'legal_form', 'siren', 'siret', 'vat_number', 'naf_code', 'naf_label', 'registered_address', 'publication_director', 'host_details'],
+            ],
             'commerce' => [
                 'label' => 'Taxes & livraison',
                 'fields' => ['currency', 'tax_rate', 'free_shipping_threshold', 'international_shipping_fee'],
@@ -103,6 +107,26 @@
                             <x-admin.field label="Facebook (URL)" name="social_facebook" :value="$settings->social_facebook" />
                             <x-admin.field label="Instagram (URL)" name="social_instagram" :value="$settings->social_instagram" />
                             <x-admin.field label="Twitter / X (URL)" name="social_twitter" :value="$settings->social_twitter" />
+                        </div>
+                    </section>
+
+                    <section x-show="tab === 'legal'" @style(['display:none' => $openTab !== 'legal'])
+                             class="rounded-lg border border-neutral-200 bg-white p-5">
+                        <h2 class="mb-4 text-sm font-semibold">Identité légale</h2>
+                        <p class="mb-4 text-xs text-neutral-500">
+                            Reprises sur les mentions légales, les CGV, les factures et les reçus. Un champ laissé vide n'est pas affiché.
+                        </p>
+                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            <x-admin.field label="Raison sociale (nom de l'exploitant)" name="legal_name" :value="$settings->legal_name" placeholder="Frédéric SOUVILLE" />
+                            <x-admin.field label="Forme juridique" name="legal_form" :value="$settings->legal_form" placeholder="Entrepreneur individuel" />
+                            <x-admin.field label="SIREN" name="siren" :value="$settings->siren" placeholder="981 826 803" />
+                            <x-admin.field label="SIRET du siège social" name="siret" :value="$settings->siret" placeholder="981 826 803 00018" />
+                            <x-admin.field label="N° TVA intracommunautaire" name="vat_number" :value="$settings->vat_number" placeholder="Laisser vide si non assujetti" />
+                            <x-admin.field label="Code NAF/APE" name="naf_code" :value="$settings->naf_code" placeholder="46.71Z" />
+                            <x-admin.field label="Libellé NAF/APE" name="naf_label" :value="$settings->naf_label" />
+                            <x-admin.field label="Adresse du siège social" name="registered_address" :value="$settings->registered_address" placeholder="Hourquette, 32300 Estipouy" />
+                            <x-admin.field label="Directeur de la publication" name="publication_director" :value="$settings->publication_director" />
+                            <x-admin.field label="Hébergeur (nom et adresse)" name="host_details" :value="$settings->host_details" />
                         </div>
                     </section>
 

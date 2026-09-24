@@ -14,14 +14,23 @@ class AdminSeeder extends Seeder
      * open a second one: the original admin owns order history, and a shop with two
      * administrators — one of them still branded for the previous trade — is worse than either.
      */
-    private const LEGACY_EMAIL = 'admin@atelier-maison.test';
+    private const LEGACY_EMAILS = [
+        'admin@atelier-maison.test',
+        'admin@sillon-buche.test',
+    ];
 
-    private const EMAIL = 'admin@sillon-buche.test';
+    private const EMAIL = 'admin@expediva.online';
 
     public function run(): void
     {
         if (! User::query()->where('email', self::EMAIL)->exists()) {
-            User::query()->where('email', self::LEGACY_EMAIL)->update(['email' => self::EMAIL]);
+            // Only the most recent legacy address can still be in use, but renaming whichever one
+            // is present keeps a database seeded at any past identity on a single admin account.
+            User::query()
+                ->whereIn('email', self::LEGACY_EMAILS)
+                ->orderByDesc('id')
+                ->limit(1)
+                ->update(['email' => self::EMAIL]);
         }
 
         User::query()->updateOrCreate(

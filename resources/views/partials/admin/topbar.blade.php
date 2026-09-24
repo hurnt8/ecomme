@@ -1,5 +1,5 @@
 <header class="h-14 flex items-center justify-between px-6 border-b border-neutral-200 bg-white">
-    <h1 class="text-[15px] font-semibold text-neutral-900">@yield('title', 'Tableau de bord')</h1>
+    <h1 class="admin-page-title text-lg text-neutral-900">@yield('title', 'Tableau de bord')</h1>
 
     <form method="POST" action="{{ route('logout') }}">
         @csrf

@@ -40,6 +40,20 @@ class User extends Authenticatable
         return $this->role === UserRole::Admin;
     }
 
+    public function isSupervisor(): bool
+    {
+        return $this->role === UserRole::Supervisor;
+    }
+
+    /**
+     * May open the back-office at all. Which pages they then see is decided per route: a
+     * supervisor reaching /admin/produits is refused by the `admin` middleware, not by this.
+     */
+    public function isStaff(): bool
+    {
+        return in_array($this->role, UserRole::staff(), true);
+    }
+
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);

@@ -5,12 +5,15 @@ use App\Models\Category;
 use App\Models\Product;
 
 it('lays the homepage out as carousels: categories, deals, new arrivals and blog', function () {
-    $category = Category::factory()->create(['name' => 'Bois & Chauffage', 'is_active' => true]);
+    // The slug, not the name, is what the deals carousel filters on for the cold season, and the
+    // price has to clear HomeController::MIN_DEAL_PRICE — a cheaper discount is held back so the
+    // row does not read as a clearance bin.
+    $category = Category::factory()->create(['name' => 'Bois & Chauffage', 'slug' => 'bois-chauffage', 'is_active' => true]);
     Product::factory()->create([
         'name' => 'Granulés en promotion',
         'category_id' => $category->id,
-        'price' => 75,
-        'compare_at_price' => 100,
+        'price' => 300,
+        'compare_at_price' => 400,
         'stock' => 5,
         'is_active' => true,
     ]);

@@ -156,7 +156,23 @@
     @endif
 
     <div class="footer">
-        {{ $settings->site_name }}@if ($settings->contact_address) — {{ $settings->contact_address }}@endif<br>
+        {{-- Built as one expression rather than chained @if/@endif pairs: Blade does not parse a
+             directive that starts immediately after @endif, and the stray text lands in the PDF.
+             An invoice must carry the seller's registration number; the VAT line is printed only
+             when one exists, since this seller has no valid intracommunity number on record. --}}
+        @php
+            $issuer = array_filter([
+                $settings->site_name,
+                $settings->legal_name !== $settings->site_name ? $settings->legal_name : null,
+                $settings->registered_address ?: $settings->contact_address,
+            ]);
+            $registration = array_filter([
+                $settings->siret ? 'SIRET : '.$settings->siret : ($settings->siren ? 'SIREN : '.$settings->siren : null),
+                $settings->vat_number ? 'TVA : '.$settings->vat_number : null,
+            ]);
+        @endphp
+        {{ implode(' — ', $issuer) }}<br>
+        @if ($registration){{ implode(' — ', $registration) }}<br>@endif
         Facture générée automatiquement, valable sans signature.
     </div>
 </body>

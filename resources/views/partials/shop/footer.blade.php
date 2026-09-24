@@ -94,6 +94,36 @@
             @endforeach
         </div>
 
+        {{-- Registered identity, repeated here so it is reachable from every page rather than only
+             from the mentions légales. Each line collapses when its column is empty: a fresh
+             install has none of them filled in, and a dangling "SIREN :" label reads as a bug. --}}
+        @php
+            $legalIdentity = array_filter([
+                $settings->legal_name && $settings->legal_name !== $settings->site_name ? $settings->legal_name : null,
+                $settings->legal_form,
+                $settings->registered_address ?: $settings->contact_address,
+            ]);
+            $legalNumbers = array_filter([
+                $settings->siren ? 'SIREN : '.$settings->siren : null,
+                $settings->siret ? 'SIRET : '.$settings->siret : null,
+                $settings->naf_code ? 'NAF/APE : '.$settings->naf_code : null,
+                $settings->vat_number ? 'TVA : '.$settings->vat_number : null,
+            ]);
+        @endphp
+
+        @if ($legalIdentity || $legalNumbers)
+            <div class="row fh5co-legal-identity">
+                <div class="col-md-12 text-center">
+                    @if ($legalIdentity)
+                        <small class="block">{{ implode(' — ', $legalIdentity) }}</small>
+                    @endif
+                    @if ($legalNumbers)
+                        <small class="block">{{ implode(' · ', $legalNumbers) }}</small>
+                    @endif
+                </div>
+            </div>
+        @endif
+
         <div class="row copyright">
             <div class="col-md-12 text-center">
                 <p>

@@ -3,6 +3,22 @@
      are kept because site.js clones `.menu-1 > ul` and `.menu-2 > ul` into the mobile off-canvas
      panel. data-cart-count seeds $store.cart (resources/js/modules/cart.js), which keeps both
      basket badges current when items are added in the background. --}}
+{{-- Staff came here from the back-office through "Voir la boutique →", which opens a new tab and
+     leaves no way back: the storefront carries no admin link anywhere, so the only route back was
+     typing /admin by hand. This bar is that way back, and it is shown to staff alone. --}}
+@auth
+    @if (auth()->user()->isStaff())
+        <div class="admin-return-bar">
+            <div class="container">
+                <span>Connecté en tant que <strong>{{ auth()->user()->name }}</strong> — {{ auth()->user()->role->label() }}</span>
+                <a href="{{ auth()->user()->isSupervisor() ? route('admin.commandes.index') : route('admin.dashboard') }}">
+                    ← Retour à l'administration
+                </a>
+            </div>
+        </div>
+    @endif
+@endauth
+
 <nav class="fh5co-nav site-header" role="navigation" data-cart-count="{{ $cartCount }}">
     <div class="site-header-main">
         <div class="container">

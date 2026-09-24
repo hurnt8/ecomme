@@ -1,10 +1,26 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Product;
 
+/**
+ * The bestsellers carousel is scoped to the cold-season ranges, so both fixtures have to sit in
+ * one of them — a bestseller filed under any other category is filtered out before it reaches
+ * the homepage, and this test would fail for a reason that has nothing to do with what it checks.
+ */
+function seasonalCategory(): Category
+{
+    return Category::query()->firstOrCreate(
+        ['slug' => 'bois-chauffage'],
+        Category::factory()->make(['slug' => 'bois-chauffage', 'is_active' => true])->getAttributes(),
+    );
+}
+
 it('shows bestseller products on the homepage', function () {
-    $bestseller = Product::factory()->create(['name' => 'Fauteuil vedette', 'is_bestseller' => true, 'stock' => 5]);
-    $regular = Product::factory()->create(['name' => 'Chaise ordinaire', 'is_bestseller' => false, 'stock' => 5]);
+    $category = seasonalCategory();
+
+    $bestseller = Product::factory()->create(['category_id' => $category->id, 'name' => 'Fauteuil vedette', 'is_bestseller' => true, 'stock' => 5]);
+    $regular = Product::factory()->create(['category_id' => $category->id, 'name' => 'Chaise ordinaire', 'is_bestseller' => false, 'stock' => 5]);
 
     $response = $this->get(route('home'));
 

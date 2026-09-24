@@ -19,7 +19,7 @@ class ReviewSeeder extends Seeder
         ['author' => 'Julien M.', 'country' => 'BE', 'rating' => 4, 'comment' => "Bon rapport qualité-prix pour un usage régulier. Un petit bémol sur le délai de livraison, un peu plus long qu'annoncé, mais rien de rédhibitoire."],
         ['author' => 'Sophie L.', 'country' => 'FR', 'rating' => 5, 'comment' => 'Exactement ce qu\'il me fallait pour mon terrain. J\'ai appelé avant de commander pour vérifier la compatibilité, le conseil a été précis et honnête.'],
         ['author' => 'Antoine R.', 'country' => 'CH', 'rating' => 4, 'comment' => 'Matériel solide, conforme à la description. Je recommande, même si le prix reste un investissement à ce niveau de gamme.'],
-        ['author' => 'Marie-Claire P.', 'country' => 'FR', 'rating' => 5, 'comment' => 'Deuxième commande chez Sillon & Bûche et toujours aussi satisfaite. La finition se sent tout de suite par rapport à ce qu\'on trouve en grande surface.'],
+        ['author' => 'Marie-Claire P.', 'country' => 'FR', 'rating' => 5, 'comment' => 'Deuxième commande chez Souville et toujours aussi satisfaite. La finition se sent tout de suite par rapport à ce qu\'on trouve en grande surface.'],
         ['author' => 'Thomas B.', 'country' => 'LU', 'rating' => 4, 'comment' => "Très satisfait de mon achat, la machine encaisse bien. La prise en main a demandé une matinée, mais le manuel est clair et le résultat en vaut la peine."],
     ];
 

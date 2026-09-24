@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('site_name')->default('Sillon & Bûche');
+            $table->string('site_name')->default('Souville Bois de Chauffage');
             $table->string('logo')->nullable();
             $table->string('tagline')->nullable();
             $table->text('description')->nullable();

@@ -1,18 +1,25 @@
 <aside class="w-60 shrink-0 bg-neutral-900 text-neutral-100 flex flex-col">
     <div class="px-5 py-5 border-b border-neutral-800">
-        <span class="block text-sm font-semibold text-white">{{ $settings->site_name }}</span>
+        {{-- The shop wordmark is Playfair on the storefront header; the sidebar carries the same
+             mark so the back-office opens on a familiar name rather than on a generic label. --}}
+        <span class="admin-page-title block text-base text-white">{{ $settings->site_name }}</span>
         <span class="mt-1 block text-[11px] uppercase tracking-[0.16em] text-brand-400">Administration</span>
     </div>
 
     @php
+        // 'admin' marks the entries a supervisor cannot reach. The routes refuse them anyway —
+        // this only keeps the menu honest about what the person in front of it can actually open.
         $links = [
-            ['route' => 'admin.dashboard', 'active' => 'admin.dashboard', 'label' => 'Tableau de bord'],
-            ['route' => 'admin.produits.index', 'active' => 'admin.produits.*', 'label' => 'Produits'],
-            ['route' => 'admin.categories.index', 'active' => 'admin.categories.*', 'label' => 'Catégories'],
-            ['route' => 'admin.bannieres.index', 'active' => 'admin.bannieres.*', 'label' => 'Bannières'],
-            ['route' => 'admin.commandes.index', 'active' => 'admin.commandes.*', 'label' => 'Commandes'],
-            ['route' => 'admin.reglages.edit', 'active' => 'admin.reglages.*', 'label' => 'Réglages'],
+            ['route' => 'admin.dashboard', 'active' => 'admin.dashboard', 'label' => 'Tableau de bord', 'admin' => true],
+            ['route' => 'admin.commandes.index', 'active' => 'admin.commandes.*', 'label' => 'Commandes', 'admin' => false],
+            ['route' => 'admin.produits.index', 'active' => 'admin.produits.*', 'label' => 'Produits', 'admin' => true],
+            ['route' => 'admin.categories.index', 'active' => 'admin.categories.*', 'label' => 'Catégories', 'admin' => true],
+            ['route' => 'admin.bannieres.index', 'active' => 'admin.bannieres.*', 'label' => 'Bannières', 'admin' => true],
+            ['route' => 'admin.utilisateurs.index', 'active' => 'admin.utilisateurs.*', 'label' => 'Utilisateurs', 'admin' => true],
+            ['route' => 'admin.reglages.edit', 'active' => 'admin.reglages.*', 'label' => 'Réglages', 'admin' => true],
         ];
+
+        $links = array_filter($links, fn ($link) => ! $link['admin'] || auth()->user()->isAdmin());
     @endphp
 
     <nav class="flex-1 py-4 text-sm">

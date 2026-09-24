@@ -110,4 +110,6 @@ Route::middleware('auth')->prefix('mon-compte')->name('account.')->group(functio
     Route::put('/profil', [AccountController::class, 'updateProfile'])->name('profile.update');
 });
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(base_path('routes/admin.php'));
+// `staff` opens the door to admins and supervisors alike; routes/admin.php then re-applies
+// `admin` to everything a supervisor must not reach.
+Route::middleware(['auth', 'staff'])->prefix('admin')->name('admin.')->group(base_path('routes/admin.php'));

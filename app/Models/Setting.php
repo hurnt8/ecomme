@@ -10,6 +10,16 @@ class Setting extends Model
 {
     protected $fillable = [
         'site_name',
+        'legal_name',
+        'legal_form',
+        'siren',
+        'siret',
+        'vat_number',
+        'naf_code',
+        'naf_label',
+        'registered_address',
+        'publication_director',
+        'host_details',
         'logo',
         'tagline',
         'description',

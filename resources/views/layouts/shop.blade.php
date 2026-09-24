@@ -13,6 +13,14 @@
     <meta property="og:site_name" content="{{ $settings->site_name }}">
     <meta property="og:url" content="{{ url()->current() }}">
 
+    {{-- The vendored stylesheet asks for Montserrat and Playfair Display but never loaded them,
+         so every page fell back to the system sans-serif — and the back-office, asking for Lato,
+         fell back to the same one. Loading them here is what actually makes the two look related;
+         `display=swap` keeps text readable while they arrive. --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap">
+
     {{-- shop-master template stylesheet, kept as static vendor assets for pixel fidelity (see resources/css/app.css) --}}
     <link rel="stylesheet" href="{{ asset('template/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('template/css/icomoon.css') }}">

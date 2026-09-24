@@ -13,19 +13,36 @@
                     <div class="desc">
                         <h3>Éditeur du site</h3>
                         <p>
-                            {{ $settings->site_name }}<br>
-                            @if ($settings->contact_address){{ $settings->contact_address }}<br>@endif
+                            {{ $settings->site_name }}@if ($settings->legal_name && $settings->legal_name !== $settings->site_name) — {{ $settings->legal_name }}@endif<br>
+                            @if ($settings->legal_form){{ $settings->legal_form }}<br>@endif
+                            @if ($settings->registered_address ?: $settings->contact_address){{ $settings->registered_address ?: $settings->contact_address }}<br>@endif
                             @if ($settings->contact_email)E-mail : <a href="mailto:{{ $settings->contact_email }}">{{ $settings->contact_email }}</a><br>@endif
-                            @if ($settings->contact_phone)Téléphone : {{ $settings->contact_phone }}@endif
+                            @if ($settings->contact_phone)Téléphone : {{ $settings->contact_phone }}<br>@endif
+                            @if ($settings->publication_director)Directeur de la publication : {{ $settings->publication_director }}@endif
                         </p>
                     </div>
+                    @if ($settings->siren || $settings->siret || $settings->vat_number || $settings->naf_code)
+                        <div class="desc">
+                            <h3>Immatriculation</h3>
+                            <p>
+                                @if ($settings->siren)SIREN : {{ $settings->siren }}<br>@endif
+                                @if ($settings->siret)SIRET du siège social : {{ $settings->siret }}<br>@endif
+                                @if ($settings->naf_code)Code NAF/APE : {{ $settings->naf_code }}@if ($settings->naf_label) — {{ $settings->naf_label }}@endif<br>@endif
+                                {{-- Printed only when a number exists. The wording for a business without
+                                     one depends on which regime applies (franchise en base, exonération,
+                                     autoliquidation), and asserting the wrong article on a public legal
+                                     page is a liability — so nothing is claimed here by default. --}}
+                                @if ($settings->vat_number)N° TVA intracommunautaire : {{ $settings->vat_number }}@endif
+                            </p>
+                        </div>
+                    @endif
                     <div class="desc">
                         <h3>Activité</h3>
                         <p>{{ $settings->site_name }} exerce une activité de vente en ligne de matériel de motoculture (tronçonneuses et élagueuses, tondeuses et robots de tonte, tracteurs tondeuses et autoportées, débroussailleuses, motobineuses et motoculteurs, taille-haies et souffleurs), d'outils portés pour tracteur, de pompes et de matériel de pulvérisation, de bois de chauffage et d'appareils de chauffage au bois, ainsi que d'équipement d'extérieur (barbecues, fours d'extérieur, piscines et abris de jardin), à destination des particuliers et professionnels.</p>
                     </div>
                     <div class="desc">
                         <h3>Hébergement</h3>
-                        <p>Coordonnées de l'hébergeur à compléter avant la mise en production du site.</p>
+                        <p>{{ $settings->host_details ?: "Coordonnées de l'hébergeur à compléter avant la mise en production du site." }}</p>
                     </div>
                     <div class="desc">
                         <h3>Propriété intellectuelle</h3>
