@@ -31,7 +31,7 @@
 
             <div class="confirmation-hero">
                 <i class="icon-check confirmation-check" aria-hidden="true"></i>
-                <h2>Merci {{ $order->customer_name }}, votre commande est enregistrée.</h2>
+                <h2>Vielen Dank, {{ $order->customer_name }} — Ihre Bestellung ist erfasst.</h2>
                 <p>Eine Bestätigungs-E-Mail wurde soeben gesendet an <strong>{{ $order->customer_email }}</strong>.</p>
 
                 <div class="confirmation-reference" x-data="{ copied: false }">
@@ -103,9 +103,8 @@
                     <aside class="confirmation-payment" x-data="{ copied: false }">
                         <h3>Jetzt zu erledigen: Ihre Überweisung</h3>
                         <p>
-                            Effectuez un virement de <strong>{{ number_format((float) $order->total, 2) }}&nbsp;{{ $settings->currency_symbol }}</strong>
-                            en indiquant la référence <strong>{{ $order->order_number }}</strong>. Votre commande est
-                            préparée dès réception et validation du virement.
+                            Überweisen Sie <strong>{{ number_format((float) $order->total, 2) }}&nbsp;{{ $settings->currency_symbol }}</strong>
+                            unter Angabe der Referenz <strong>{{ $order->order_number }}</strong>. Ihre Bestellung wird bearbeitet, sobald die Überweisung eingegangen und bestätigt ist.
                         </p>
 
                         @if ($settings->bank_iban)
@@ -145,8 +144,7 @@
                             <li>Ihre Bestellung wird vorbereitet und versandt.</li>
                             <li>
                                 Suivez-la à tout moment depuis la page
-                                <a href="{{ route('tracking.index') }}">Sendungsverfolgung</a>, avec votre numéro et
-                                votre e-mail.
+                                <a href="{{ route('tracking.index') }}">Sendungsverfolgung</a> — mit Ihrer Bestellnummer und Ihrer E-Mail-Adresse.
                             </li>
                         </ol>
                         <a href="{{ route('catalog') }}" class="btn btn-primary btn-block">Weiter einkaufen</a>

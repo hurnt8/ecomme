@@ -13,11 +13,11 @@ enum OrderStatus: string
     public function label(): string
     {
         return match ($this) {
-            self::Pending => 'En attente',
-            self::Processing => 'En préparation',
-            self::Shipped => 'Expédiée',
-            self::Completed => 'Terminée',
-            self::Cancelled => 'Annulée',
+            self::Pending => 'Ausstehend',
+            self::Processing => 'In Bearbeitung',
+            self::Shipped => 'Versandt',
+            self::Completed => 'Abgeschlossen',
+            self::Cancelled => 'Storniert',
         };
     }
 
@@ -27,11 +27,11 @@ enum OrderStatus: string
     public function description(): string
     {
         return match ($this) {
-            self::Pending => 'Nous attendons la réception de votre virement.',
-            self::Processing => 'Votre virement est validé, la commande est en cours de préparation.',
-            self::Shipped => 'Votre commande a quitté notre atelier.',
-            self::Completed => 'Votre commande vous a été livrée.',
-            self::Cancelled => 'Cette commande a été annulée. Contactez-nous pour toute question.',
+            self::Pending => 'Wir warten auf den Eingang Ihrer Überweisung.',
+            self::Processing => 'Ihre Überweisung ist bestätigt, die Bestellung wird vorbereitet.',
+            self::Shipped => 'Ihre Bestellung hat unser Lager verlassen.',
+            self::Completed => 'Ihre Bestellung wurde zugestellt.',
+            self::Cancelled => 'Diese Bestellung wurde storniert. Bei Fragen wenden Sie sich gerne an uns.',
         };
     }
 
