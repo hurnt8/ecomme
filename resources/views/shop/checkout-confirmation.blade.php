@@ -61,7 +61,7 @@
                                     </span>
                                     <span class="checkout-item-body">
                                         <span class="checkout-item-name">{{ $item->product_name }}</span>
-                                        <small>{{ number_format((float) $item->unit_price, 2) }}&nbsp;{{ $settings->currency_symbol }} l'unité</small>
+                                        <small>{{ number_format((float) $item->unit_price, 2) }}&nbsp;{{ $settings->currency_symbol }} pro Einheit</small>
                                     </span>
                                     <span class="checkout-item-total">{{ number_format((float) $item->unit_price * $item->quantity, 2) }}&nbsp;{{ $settings->currency_symbol }}</span>
                                 </li>

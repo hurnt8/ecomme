@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Facture {{ $order->order_number }}</title>
+    <title>Rechnung {{ $order->order_number }}</title>
     {{-- DejaVu Sans is dompdf's bundled Unicode font and does carry U+20AC, so amounts can use
          the € sign here rather than the ISO code. --}}
     <style>
@@ -53,14 +53,14 @@
                 @if ($settings->contact_phone)<div class="muted">{{ $settings->contact_phone }}</div>@endif
             </td>
             <td class="right">
-                <div class="doc-type">Facture</div>
+                <div class="doc-type">Rechnung</div>
                 <div class="doc-meta">
                     <strong>{{ $order->order_number }}</strong><br>
-                    <span class="muted">Émise le {{ $order->created_at->translatedFormat('j F Y') }}</span>
+                    <span class="muted">Ausgestellt am {{ $order->created_at->translatedFormat('j. F Y') }}</span>
                 </div>
                 <div style="margin-top:8px;">
                     <span class="badge {{ $order->status->isPaid() ? '' : 'badge-due' }}">
-                        {{ $order->status->isPaid() ? 'Payée' : 'En attente de paiement' }}
+                        {{ $order->status->isPaid() ? 'Bezahlt' : 'Zahlung ausstehend' }}
                     </span>
                 </div>
             </td>
@@ -73,7 +73,7 @@
         <tr>
             <td style="width:48%;">
                 <div class="panel">
-                    <div class="panel-title">Facturé à</div>
+                    <div class="panel-title">Rechnungsempfänger</div>
                     <strong>{{ $order->customer_name }}</strong><br>
                     <span class="muted">{{ $order->customer_email }}</span><br>
                     <span style="white-space:pre-line;">{{ $order->shipping_address }}</span>
@@ -82,11 +82,11 @@
             <td style="width:4%;"></td>
             <td style="width:48%;">
                 <div class="panel">
-                    <div class="panel-title">Paiement</div>
-                    <strong>Virement bancaire</strong><br>
-                    <span class="muted">Statut de la commande : {{ $order->status->label() }}</span>
+                    <div class="panel-title">Zahlung</div>
+                    <strong>Banküberweisung</strong><br>
+                    <span class="muted">Bestellstatus: {{ $order->status->label() }}</span>
                     @if ($order->paid_at)
-                        <br><span class="muted">Réglée le {{ $order->paid_at->translatedFormat('j F Y') }}</span>
+                        <br><span class="muted">Beglichen am {{ $order->paid_at->translatedFormat('j F Y') }}</span>
                     @endif
                 </div>
             </td>
@@ -96,10 +96,10 @@
     <table class="items">
         <thead>
             <tr>
-                <th>Article</th>
-                <th class="right">Prix unitaire</th>
-                <th class="right">Qté</th>
-                <th class="right">Total</th>
+                <th>Artikel</th>
+                <th class="right">Einzelpreis</th>
+                <th class="right">Menge</th>
+                <th class="right">Gesamt</th>
             </tr>
         </thead>
         <tbody>
@@ -116,21 +116,21 @@
 
     <table class="totals">
         <tr>
-            <td>Sous-total</td>
+            <td>Zwischensumme</td>
             <td class="right">{{ number_format((float) $order->subtotal, 2, ',', ' ') }}&nbsp;{{ $settings->currency_symbol }}</td>
         </tr>
         <tr>
-            <td>Livraison</td>
+            <td>Versand</td>
             <td class="right">
-                {{ (float) $order->shipping === 0.0 ? 'Offerte' : number_format((float) $order->shipping, 2, ',', ' ').' '.$settings->currency_symbol }}
+                {{ (float) $order->shipping === 0.0 ? 'Kostenlos' : number_format((float) $order->shipping, 2, ',', ' ').' '.$settings->currency_symbol }}
             </td>
         </tr>
         <tr>
-            <td>TVA{{ (float) $settings->tax_rate > 0 ? ' ('.rtrim(rtrim(number_format((float) $settings->tax_rate * 100, 1, ',', ' '), '0'), ',').'%)' : '' }}</td>
+            <td>MwSt.{{ (float) $settings->tax_rate > 0 ? ' ('.rtrim(rtrim(number_format((float) $settings->tax_rate * 100, 1, ',', ' '), '0'), ',').'%)' : '' }}</td>
             <td class="right">{{ number_format((float) $order->tax, 2, ',', ' ') }}&nbsp;{{ $settings->currency_symbol }}</td>
         </tr>
         <tr class="grand">
-            <td>Total TTC</td>
+            <td>Gesamt inkl. MwSt.</td>
             <td class="right">{{ number_format((float) $order->total, 2, ',', ' ') }}&nbsp;{{ $settings->currency_symbol }}</td>
         </tr>
     </table>
@@ -145,8 +145,8 @@
                 @endif
             </div>
             <div>
-                @if ($settings->bank_account_holder)Titulaire : {{ $settings->bank_account_holder }}<br>@endif
-                @if ($settings->bank_name)Banque : {{ $settings->bank_name }}<br>@endif
+                @if ($settings->bank_account_holder)Kontoinhaber: {{ $settings->bank_account_holder }}<br>@endif
+                @if ($settings->bank_name)Bank: {{ $settings->bank_name }}<br>@endif
                 IBAN : {{ $settings->bank_iban }}
                 @if ($settings->bank_bic)<br>BIC : {{ $settings->bank_bic }}@endif
             </div>
@@ -167,13 +167,13 @@
                 $settings->registered_address ?: $settings->contact_address,
             ]);
             $registration = array_filter([
-                $settings->siret ? 'SIRET : '.$settings->siret : ($settings->siren ? 'SIREN : '.$settings->siren : null),
-                $settings->vat_number ? 'TVA : '.$settings->vat_number : null,
+                $settings->siret ? 'SIRET: '.$settings->siret : ($settings->siren ? 'SIREN: '.$settings->siren : null),
+                $settings->vat_number ? 'USt-IdNr.: '.$settings->vat_number : null,
             ]);
         @endphp
         {{ implode(' — ', $issuer) }}<br>
         @if ($registration){{ implode(' — ', $registration) }}<br>@endif
-        Facture générée automatiquement, valable sans signature.
+        Automatisch erstellte Rechnung, ohne Unterschrift gültig.
     </div>
 </body>
 </html>

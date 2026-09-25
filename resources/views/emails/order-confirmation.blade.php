@@ -39,6 +39,37 @@
     <h2 style="font-size:16px;margin-top:25px;">Zahlung per Banküberweisung</h2>
     <p>Bitte überweisen Sie den oben genannten Gesamtbetrag unter Angabe der Referenz <strong>{{ $order->order_number }}</strong>. Ihre Bestellung wird bearbeitet, sobald die Überweisung eingegangen und bestätigt ist.</p>
 
+    {{-- The bank details were missing here: the mail asked for a transfer without saying where to.
+         A customer who closes the confirmation page has nothing left to pay with, so they are
+         repeated in the mail. Hidden entirely when no IBAN is on file, rather than printing an
+         empty "IBAN:" line. --}}
+    @if ($settings->bank_iban)
+        <table style="border-collapse:collapse;margin:14px 0;font-size:14px;">
+            @if ($settings->bank_account_holder)
+                <tr>
+                    <td style="padding:3px 16px 3px 0;color:#777;">Kontoinhaber</td>
+                    <td style="padding:3px 0;">{{ $settings->bank_account_holder }}</td>
+                </tr>
+            @endif
+            @if ($settings->bank_name)
+                <tr>
+                    <td style="padding:3px 16px 3px 0;color:#777;">Bank</td>
+                    <td style="padding:3px 0;">{{ $settings->bank_name }}</td>
+                </tr>
+            @endif
+            <tr>
+                <td style="padding:3px 16px 3px 0;color:#777;">IBAN</td>
+                <td style="padding:3px 0;font-family:monospace;"><strong>{{ $settings->bank_iban }}</strong></td>
+            </tr>
+            @if ($settings->bank_bic)
+                <tr>
+                    <td style="padding:3px 16px 3px 0;color:#777;">BIC</td>
+                    <td style="padding:3px 0;font-family:monospace;">{{ $settings->bank_bic }}</td>
+                </tr>
+            @endif
+        </table>
+    @endif
+
     <p style="color:#777;font-size:13px;">
         Den Status Ihrer Bestellung können Sie jederzeit auf unserer Seite zur Sendungsverfolgung einsehen, mit Ihrer
         Bestellnummer und Ihrer E-Mail-Adresse.

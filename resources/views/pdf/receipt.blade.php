@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Reçu {{ $order->receipt_reference }}</title>
+    <title>Beleg {{ $order->receipt_reference }}</title>
     {{-- Same sheet as the invoice, so the two documents a customer receives look like they come
          from the same shop. DejaVu Sans carries U+20AC, so amounts use the € sign. --}}
     <style>
@@ -49,11 +49,11 @@
                 @if ($settings->contact_phone)<div class="muted">{{ $settings->contact_phone }}</div>@endif
             </td>
             <td class="right">
-                <div class="doc-type">Reçu</div>
+                <div class="doc-type">Beleg</div>
                 <div class="doc-meta">
                     <strong>{{ $order->receipt_reference }}</strong><br>
                     <span class="muted">Commande {{ $order->order_number }}</span><br>
-                    <span class="muted">Payée le {{ $order->paid_at->translatedFormat('j F Y') }}</span>
+                    <span class="muted">Bezahlt am {{ $order->paid_at->translatedFormat('j. F Y') }}</span>
                 </div>
             </td>
         </tr>
@@ -65,7 +65,7 @@
         <tr>
             <td style="width:48%;">
                 <div class="panel">
-                    <div class="panel-title">Client</div>
+                    <div class="panel-title">Kunde</div>
                     <strong>{{ $order->customer_name }}</strong><br>
                     <span class="muted">{{ $order->customer_email }}</span>
                 </div>
@@ -81,9 +81,9 @@
         <thead>
             <tr>
                 <th>Article</th>
-                <th class="right">Prix unitaire</th>
-                <th class="right">Qté</th>
-                <th class="right">Total</th>
+                <th class="right">Einzelpreis</th>
+                <th class="right">Menge</th>
+                <th class="right">Gesamt</th>
             </tr>
         </thead>
         <tbody>
@@ -100,21 +100,21 @@
 
     <table class="totals">
         <tr>
-            <td>Sous-total</td>
+            <td>Zwischensumme</td>
             <td class="right">{{ number_format((float) $order->subtotal, 2, ',', ' ') }}&nbsp;{{ $settings->currency_symbol }}</td>
         </tr>
         <tr>
-            <td>Livraison</td>
+            <td>Versand</td>
             <td class="right">
-                {{ (float) $order->shipping === 0.0 ? 'Offerte' : number_format((float) $order->shipping, 2, ',', ' ').' '.$settings->currency_symbol }}
+                {{ (float) $order->shipping === 0.0 ? 'Kostenlos' : number_format((float) $order->shipping, 2, ',', ' ').' '.$settings->currency_symbol }}
             </td>
         </tr>
         <tr>
-            <td>TVA{{ (float) $settings->tax_rate > 0 ? ' ('.rtrim(rtrim(number_format((float) $settings->tax_rate * 100, 1, ',', ' '), '0'), ',').'%)' : '' }}</td>
+            <td>MwSt.{{ (float) $settings->tax_rate > 0 ? ' ('.rtrim(rtrim(number_format((float) $settings->tax_rate * 100, 1, ',', ' '), '0'), ',').'%)' : '' }}</td>
             <td class="right">{{ number_format((float) $order->tax, 2, ',', ' ') }}&nbsp;{{ $settings->currency_symbol }}</td>
         </tr>
         <tr class="grand">
-            <td>Total payé</td>
+            <td>Gezahlter Betrag</td>
             <td class="right">{{ number_format((float) $order->total, 2, ',', ' ') }}&nbsp;{{ $settings->currency_symbol }}</td>
         </tr>
     </table>
@@ -131,9 +131,9 @@
         @endphp
         {{ implode(' — ', $issuer) }}<br>
         @if ($settings->siret || $settings->siren)
-            {{ $settings->siret ? 'SIRET : '.$settings->siret : 'SIREN : '.$settings->siren }}<br>
+            {{ $settings->siret ? 'SIRET: '.$settings->siret : 'SIREN: '.$settings->siren }}<br>
         @endif
-        Reçu généré automatiquement, valable sans signature.
+        Automatisch erstellter Beleg, ohne Unterschrift gültig.
     </div>
 </body>
 </html>
