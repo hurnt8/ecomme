@@ -24,9 +24,9 @@
     <div id="fh5co-product" class="confirmation">
         <div class="container">
             <ol class="checkout-steps">
-                <li class="is-done"><span>1</span> Panier</li>
-                <li class="is-done"><span>2</span> Livraison &amp; paiement</li>
-                <li class="is-current"><span>3</span> Confirmation</li>
+                <li class="is-done"><span>1</span> Warenkorb</li>
+                <li class="is-done"><span>2</span> Lieferung &amp; Zahlung</li>
+                <li class="is-current"><span>3</span> Bestätigung</li>
             </ol>
 
             <div class="confirmation-hero">
