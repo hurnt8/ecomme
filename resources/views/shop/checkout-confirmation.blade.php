@@ -89,7 +89,7 @@
 
                         <a href="{{ \Illuminate\Support\Facades\URL::signedRoute('orders.invoice', ['order' => $order->order_number]) }}"
                            class="btn btn-primary btn-outline confirmation-invoice" target="_blank" rel="noopener">
-                            Télécharger la facture (PDF)
+                            Rechnung herunterladen (PDF)
                         </a>
                     </section>
 
@@ -133,7 +133,7 @@
                         @endif
 
                         <p class="confirmation-note">
-                            La facture envoyée par e-mail reprend nos coordonnées bancaires et le montant exact à virer.
+                            Die von uns per E-Mail gesendete Rechnung enthält unsere Bankverbindung und den genauen Betrag zur Überweisung.
                         </p>
                     </aside>
 
@@ -143,7 +143,7 @@
                             <li>Wir bestätigen den Eingang Ihrer Überweisung.</li>
                             <li>Ihre Bestellung wird vorbereitet und versandt.</li>
                             <li>
-                                Suivez-la à tout moment depuis la page
+                                Verfolgen Sie Ihre Bestellung jederzeit über die Seite
                                 <a href="{{ route('tracking.index') }}">Sendungsverfolgung</a> — mit Ihrer Bestellnummer und Ihrer E-Mail-Adresse.
                             </li>
                         </ol>
