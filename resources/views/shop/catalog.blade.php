@@ -26,13 +26,13 @@
         ]);
     }
     if (request()->boolean('in_stock')) {
-        $activeFilters->push(['label' => 'En stock', 'remove' => route('catalog', collect($baseQuery)->except('in_stock')->all())]);
+        $activeFilters->push(['label' => 'Auf Lager', 'remove' => route('catalog', collect($baseQuery)->except('in_stock')->all())]);
     }
     if (request()->boolean('is_new')) {
-        $activeFilters->push(['label' => 'Nouveautés', 'remove' => route('catalog', collect($baseQuery)->except('is_new')->all())]);
+        $activeFilters->push(['label' => 'Neuheiten', 'remove' => route('catalog', collect($baseQuery)->except('is_new')->all())]);
     }
     if (request()->boolean('on_sale')) {
-        $activeFilters->push(['label' => 'En promotion', 'remove' => route('catalog', collect($baseQuery)->except('on_sale')->all())]);
+        $activeFilters->push(['label' => 'Im Angebot', 'remove' => route('catalog', collect($baseQuery)->except('on_sale')->all())]);
     }
     if ($value = request('search')) {
         $activeFilters->push(['label' => '« '.$value.' »', 'remove' => route('catalog', collect($baseQuery)->except('search')->all())]);
@@ -48,7 +48,7 @@
                     <div class="display-t">
                         <div class="display-tc animate-box" data-animate-effect="fadeIn">
                             <h1>Shop</h1>
-                            <h2>{{ $products->total() }} pièce{{ $products->total() > 1 ? 's' : '' }} sélectionnée{{ $products->total() > 1 ? 's' : '' }}</h2>
+                            <h2>{{ $products->total() }} Artikel ausgewählt</h2>
                         </div>
                     </div>
                 </div>
@@ -70,14 +70,21 @@
 
             {{-- One form spanning both columns: the sidebar inputs and the toolbar's sort control
                  submit together, so sorting never drops the active filters and vice versa. --}}
-            <form method="GET" action="{{ route('catalog') }}" x-data="{ filtersOpen: false }">
-                <input type="hidden" name="search" value="{{ request('search') }}">
-                <input type="hidden" name="category" value="{{ request('category') }}">
+            {{-- The filter form wrapped the product grid, which put every card's add-to-cart form
+                 inside it. Nested forms are invalid HTML: the parser drops the inner one, so the
+                 button posted the filter form (a GET reload) instead of adding to the basket.
+                 The form is now an empty shell and every control joins it by `form="…"`, which
+                 lets the filters and the cards be siblings rather than nested. --}}
+            <form id="catalog-filters" method="GET" action="{{ route('catalog') }}"></form>
+
+            <div x-data="{ filtersOpen: false }">
+                <input type="hidden" name="search" value="{{ request('search') }}" form="catalog-filters">
+                <input type="hidden" name="category" value="{{ request('category') }}" form="catalog-filters">
 
                 <div class="row">
                     <div class="col-md-3">
                         <button type="button" class="catalog-filters-toggle" @click="filtersOpen = !filtersOpen">
-                            <span x-text="filtersOpen ? 'Masquer les filtres' : 'Filtrer'">Filtern</span>
+                            <span x-text="filtersOpen ? 'Filter ausblenden' : 'Filtern'">Filtern</span>
                             @if ($activeFilters->isNotEmpty())
                                 <span class="catalog-filters-count">{{ $activeFilters->count() }}</span>
                             @endif
@@ -108,17 +115,17 @@
                             <div class="catalog-filter-group">
                                 <h3>Preis</h3>
                                 <div class="catalog-filter-price">
-                                    <input type="number" name="min_price" value="{{ request('min_price') }}" class="form-control" placeholder="Min" aria-label="Mindestpreis">
+                                    <input type="number" name="min_price" value="{{ request('min_price') }}" form="catalog-filters" class="form-control" placeholder="Min" aria-label="Mindestpreis">
                                     <span>–</span>
-                                    <input type="number" name="max_price" value="{{ request('max_price') }}" class="form-control" placeholder="Max" aria-label="Höchstpreis">
+                                    <input type="number" name="max_price" value="{{ request('max_price') }}" form="catalog-filters" class="form-control" placeholder="Max" aria-label="Höchstpreis">
                                 </div>
                             </div>
 
                             @if (count($colors))
                                 <div class="catalog-filter-group">
                                     <h3>Farben</h3>
-                                    <select name="color" class="form-control" onchange="this.form.submit()">
-                                        <option value="">Tous</option>
+                                    <select name="color" form="catalog-filters" class="form-control" onchange="this.form.submit()">
+                                        <option value="">Alle</option>
                                         @foreach ($colors as $color)
                                             <option value="{{ $color }}" @selected(request('color') === $color)>{{ $color }}</option>
                                         @endforeach
@@ -129,7 +136,7 @@
                             @if (count($sizes))
                                 <div class="catalog-filter-group">
                                     <h3>Größe</h3>
-                                    <select name="size" class="form-control" onchange="this.form.submit()">
+                                    <select name="size" form="catalog-filters" class="form-control" onchange="this.form.submit()">
                                         <option value="">Alle</option>
                                         @foreach ($sizes as $size)
                                             <option value="{{ $size }}" @selected(request('size') === $size)>{{ $size }}</option>
@@ -141,20 +148,20 @@
                             <div class="catalog-filter-group">
                                 <h3>Verfügbarkeit</h3>
                                 <label class="catalog-filter-check">
-                                    <input type="checkbox" name="in_stock" value="1" @checked(request()->boolean('in_stock')) onchange="this.form.submit()">
-                                    En stock uniquement
+                                    <input type="checkbox" name="in_stock" value="1" form="catalog-filters" @checked(request()->boolean('in_stock')) onchange="this.form.submit()">
+                                    Nur auf Lager
                                 </label>
                                 <label class="catalog-filter-check">
-                                    <input type="checkbox" name="is_new" value="1" @checked(request()->boolean('is_new')) onchange="this.form.submit()">
-                                    Nouveautés
+                                    <input type="checkbox" name="is_new" value="1" form="catalog-filters" @checked(request()->boolean('is_new')) onchange="this.form.submit()">
+                                    Neuheiten
                                 </label>
                                 <label class="catalog-filter-check">
-                                    <input type="checkbox" name="on_sale" value="1" @checked(request()->boolean('on_sale')) onchange="this.form.submit()">
-                                    En promotion
+                                    <input type="checkbox" name="on_sale" value="1" form="catalog-filters" @checked(request()->boolean('on_sale')) onchange="this.form.submit()">
+                                    Im Angebot
                                 </label>
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-block">Anwenden</button>
+                            <button type="submit" form="catalog-filters" class="btn btn-primary btn-block">Anwenden</button>
                             @if ($activeFilters->isNotEmpty())
                                 <a href="{{ route('catalog') }}" class="catalog-filters-reset">Alles zurücksetzen</a>
                             @endif
@@ -165,15 +172,15 @@
                         <div class="catalog-toolbar">
                             <p class="catalog-count">
                                 <strong>{{ $products->total() }}</strong>
-                                {{ $products->total() > 1 ? 'pièces' : 'pièce' }}
+                                Artikel
                                 @if ($activeFilters->isNotEmpty())
-                                    correspondant à votre sélection
+                                    passend zu Ihrer Auswahl
                                 @endif
                             </p>
 
                             <div class="catalog-sort">
                                 <label for="filter-sort">Sortieren nach</label>
-                                <select name="sort" id="filter-sort" class="form-control" onchange="this.form.submit()">
+                                <select name="sort" id="filter-sort" form="catalog-filters" class="form-control" onchange="this.form.submit()">
                                     <option value="newest" @selected($sort === 'newest')>Neueste</option>
                                     <option value="price_asc" @selected($sort === 'price_asc')>Preis aufsteigend</option>
                                     <option value="price_desc" @selected($sort === 'price_desc')>Preis absteigend</option>
@@ -215,7 +222,7 @@
                         @endif
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 @endsection

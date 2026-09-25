@@ -67,4 +67,20 @@ class Category extends Model
     {
         return $query->orderBy('sort_order')->orderBy('name');
     }
+
+    /**
+     * The ranges the shop promotes while it is cold: wood and pellets to burn, the saws that cut
+     * them, and the stoves and outdoor fires they feed.
+     *
+     * It lives on the model because the homepage carousels and the catalogue's default ordering
+     * both key off it. A spring reshuffle changes this one list, not a copy in each controller —
+     * and a copy that drifts is exactly how a shop ends up promoting pellets in July on one page
+     * and mowers on another.
+     *
+     * @return array<int, string>
+     */
+    public static function coldSeasonSlugs(): array
+    {
+        return ['bois-chauffage', 'tronconneuses-elagage', 'barbecues-fours'];
+    }
 }

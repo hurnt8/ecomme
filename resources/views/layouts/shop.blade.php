@@ -42,6 +42,20 @@
         @include('partials.shop.footer')
     </div>
 
+    {{-- Sits above .gototop (bottom: 20px, see the vendored stylesheet), not over it. Rendered
+         only when an address is on file: a mailto: with nothing after it opens an empty compose
+         window, which is worse than no button at all. --}}
+    @if ($settings->contact_email)
+        <a href="mailto:{{ $settings->contact_email }}" class="floating-email" aria-label="Schreiben Sie uns eine E-Mail">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                 stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                <polyline points="3,7 12,13 21,7"></polyline>
+            </svg>
+        </a>
+    @endif
+
     <div class="gototop js-top">
         <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
     </div>

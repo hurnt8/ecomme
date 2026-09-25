@@ -48,7 +48,7 @@
         // The toggle sits behind the panel once it slides in, so the panel carries its own
         // close control rather than relying on the burger to double as one.
         $('#fh5co-offcanvas').append(
-            '<a href="#" class="js-fh5co-nav-toggle offcanvas-close" aria-label="Fermer le menu">&times;</a>'
+            '<a href="#" class="js-fh5co-nav-toggle offcanvas-close" aria-label="Menü schließen">&times;</a>'
         );
 
         $('#fh5co-offcanvas').append($('.menu-1 > ul').clone());

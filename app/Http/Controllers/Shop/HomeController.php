@@ -12,16 +12,9 @@ use Illuminate\View\View;
 
 class HomeController extends Controller
 {
-    /**
-     * The ranges the homepage promotes while it is cold: wood and pellets to burn, the saws that
-     * cut them, and the stoves and outdoor fires they feed. Listed once because three carousels
-     * key off it — a spring reshuffle changes this constant, not three separate queries.
-     */
-    private const COLD_SEASON_CATEGORIES = [
-        'bois-chauffage',
-        'tronconneuses-elagage',
-        'barbecues-fours',
-    ];
+    // The cold-season ranges now live on Category::coldSeasonSlugs(), because the catalogue's
+    // default ordering keys off the same list. Two copies would drift the first time one is
+    // edited, and the shop would promote different ranges on the two pages.
 
     /**
      * Cheap discounted items read as clearance next to a pallet of pellets, so the deals carousel
@@ -52,13 +45,13 @@ class HomeController extends Controller
                 ->get(),
             'saleProducts' => Product::active()->inStock()->onSale()
                 ->where('price', '>=', self::MIN_DEAL_PRICE)
-                ->whereHas('category', fn ($query) => $query->whereIn('slug', self::COLD_SEASON_CATEGORIES))
+                ->whereHas('category', fn ($query) => $query->whereIn('slug', Category::coldSeasonSlugs()))
                 ->with(['images', 'category'])
                 ->latest()
                 ->take(10)
                 ->get(),
             'bestsellerProducts' => Product::active()->inStock()->bestseller()
-                ->whereHas('category', fn ($query) => $query->whereIn('slug', self::COLD_SEASON_CATEGORIES))
+                ->whereHas('category', fn ($query) => $query->whereIn('slug', Category::coldSeasonSlugs()))
                 ->with(['images', 'category'])
                 ->latest()
                 ->take(8)
