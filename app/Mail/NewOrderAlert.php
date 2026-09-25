@@ -19,7 +19,7 @@ class NewOrderAlert extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: "Nouvelle commande {$this->order->order_number}",
+            subject: "Neue Bestellung {$this->order->order_number}",
         );
     }
 

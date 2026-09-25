@@ -27,7 +27,7 @@ class ContactMessage extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: "[Contact] {$this->messageSubject}",
+            subject: "[Kontakt] {$this->messageSubject}",
             replyTo: [new Address($this->senderEmail, $this->senderName)],
         );
     }

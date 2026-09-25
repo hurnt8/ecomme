@@ -19,15 +19,15 @@ it('sends the contact message to the configured contact address', function () {
         && $mail->senderEmail === 'camille@example.com');
 });
 
-it('rejects an empty contact submission with real French messages, not raw translation keys', function () {
+it('rejects an empty contact submission with real German messages, not raw translation keys', function () {
     $response = $this->from(route('contact.index'))->post(route('contact.store'), []);
 
     $response->assertRedirect(route('contact.index'))->assertSessionHasErrors(['name', 'email', 'subject', 'message']);
 
     $errors = session('errors')->getBag('default');
 
-    expect($errors->first('name'))->toBe('Le champ nom est obligatoire.')
-        ->and($errors->first('email'))->toBe('Le champ adresse e-mail est obligatoire.')
-        ->and($errors->first('subject'))->toBe('Le champ sujet est obligatoire.')
-        ->and($errors->first('message'))->toBe('Le champ message est obligatoire.');
+    expect($errors->first('name'))->toBe('Das Feld Name muss ausgefüllt werden.')
+        ->and($errors->first('email'))->toBe('Das Feld E-Mail-Adresse muss ausgefüllt werden.')
+        ->and($errors->first('subject'))->toBe('Das Feld Betreff muss ausgefüllt werden.')
+        ->and($errors->first('message'))->toBe('Das Feld Nachricht muss ausgefüllt werden.');
 });

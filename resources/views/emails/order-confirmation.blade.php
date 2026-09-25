@@ -5,15 +5,15 @@
     <title>Bestellbestätigung</title>
 </head>
 <body style="font-family: Arial, sans-serif; color:#222; max-width:600px; margin:0 auto;">
-    <h1 style="font-size:20px;">Vielen Dank für Ihre Bestellung, {{ $order->customer_name }} !</h1>
+    <h1 style="font-size:20px;">Vielen Dank für Ihre Bestellung, {{ $order->customer_name }}!</h1>
     <p>Ihre Bestellung <strong>{{ $order->order_number }}</strong> wurde erfasst am {{ $order->created_at->translatedFormat('d. F Y \u\m H:i') }}.</p>
 
     <table style="width:100%;border-collapse:collapse;margin-top:15px;">
         <thead>
             <tr>
                 <th style="text-align:left;border-bottom:1px solid #ddd;padding:6px 0;">Artikel</th>
-                <th style="text-align:right;border-bottom:1px solid #ddd;padding:6px 0;">Qté</th>
-                <th style="text-align:right;border-bottom:1px solid #ddd;padding:6px 0;">Total</th>
+                <th style="text-align:right;border-bottom:1px solid #ddd;padding:6px 0;">Menge</th>
+                <th style="text-align:right;border-bottom:1px solid #ddd;padding:6px 0;">Gesamt</th>
             </tr>
         </thead>
         <tbody>
@@ -30,8 +30,8 @@
     <p style="text-align:right;margin-top:10px;">
         Zwischensumme: {{ number_format((float) $order->subtotal, 2) }}&nbsp;€<br>
         Versand: {{ number_format((float) $order->shipping, 2) }}&nbsp;€<br>
-        Taxes : {{ number_format((float) $order->tax, 2) }}&nbsp;€<br>
-        <strong>Total : {{ number_format((float) $order->total, 2) }}&nbsp;€</strong>
+        Steuern: {{ number_format((float) $order->tax, 2) }}&nbsp;€<br>
+        <strong>Gesamt: {{ number_format((float) $order->total, 2) }}&nbsp;€</strong>
     </p>
 
     <p><a href="{{ $invoiceUrl }}" style="display:inline-block;padding:10px 20px;background:#c90000;color:#fff;text-decoration:none;">Rechnung herunterladen (PDF)</a></p>

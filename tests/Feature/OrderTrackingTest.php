@@ -48,7 +48,7 @@ it('shows a cancelled order outside the timeline', function () {
         'email' => 'camille@example.com',
     ])
         ->assertOk()
-        ->assertSee('Annulée')
+        ->assertSee('Storniert')
         ->assertSee('tracking-cancelled', false)
         ->assertDontSee('tracking-timeline', false);
 });

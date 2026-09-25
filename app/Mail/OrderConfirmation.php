@@ -20,7 +20,7 @@ class OrderConfirmation extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: "Confirmation de votre commande {$this->order->order_number}",
+            subject: "Bestellbestätigung {$this->order->order_number}",
         );
     }
 
