@@ -22,15 +22,15 @@ it('lays the homepage out as carousels: categories, deals, new arrivals and blog
     $this->get(route('home'))
         ->assertOk()
         ->assertSeeInOrder([
-            'Acheter par catégorie', 'Bois & Chauffage', '1 Produit',
-            'Nos offres du jour', '-25%', 'Granulés en promotion',
-            'Nouveaux produits', 'Granulés en promotion',
-            'Du blog', 'Choisir ses granulés',
+            'Nach Kategorie einkaufen', 'Bois & Chauffage', '1 Produkt',
+            'Unsere Angebote des Tages', '-25%', 'Granulés en promotion',
+            'Neue Produkte', 'Granulés en promotion',
+            'Aus dem Blog', 'Choisir ses granulés',
         ]);
 });
 
 it('leaves the deals carousel out when nothing is on sale', function () {
     Product::factory()->create(['price' => 100, 'compare_at_price' => null, 'stock' => 5, 'is_active' => true]);
 
-    $this->get(route('home'))->assertOk()->assertDontSee('Nos offres du jour');
+    $this->get(route('home'))->assertOk()->assertDontSee('Unsere Angebote des Tages');
 });

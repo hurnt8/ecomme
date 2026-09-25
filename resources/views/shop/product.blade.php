@@ -22,8 +22,8 @@
     <div id="fh5co-product" class="product-detail">
         <div class="container">
             <ol class="product-breadcrumb">
-                <li><a href="{{ route('home') }}">Accueil</a></li>
-                <li><a href="{{ route('catalog') }}">Boutique</a></li>
+                <li><a href="{{ route('home') }}">Startseite</a></li>
+                <li><a href="{{ route('catalog') }}">Shop</a></li>
                 @if ($product->category)
                     <li><a href="{{ route('catalog', ['category' => $product->category->slug]) }}">{{ $product->category->name }}</a></li>
                 @endif
@@ -40,7 +40,7 @@
                             @if ($onSale)
                                 <span class="product-gallery-badge product-gallery-badge-promo">-{{ $discount }}%</span>
                             @elseif ($product->is_new)
-                                <span class="product-gallery-badge">Nouveau</span>
+                                <span class="product-gallery-badge">Neu</span>
                             @endif
 
                             @foreach ($galleryImages as $index => $url)
@@ -113,7 +113,7 @@
 
                                 @if ($product->sizes)
                                     <div class="product-option">
-                                        <label for="product-size">Taille</label>
+                                        <label for="product-size">Größe</label>
                                         <select id="product-size" name="size" class="form-control">
                                             @foreach ($product->sizes as $size)
                                                 <option value="{{ $size }}">{{ $size }}</option>
@@ -124,7 +124,7 @@
 
                                 @if ($product->colors)
                                     <div class="product-option">
-                                        <label for="product-color">Coloris</label>
+                                        <label for="product-color">Farben</label>
                                         <select id="product-color" name="color" class="form-control">
                                             @foreach ($product->colors as $color)
                                                 <option value="{{ $color }}">{{ $color }}</option>
@@ -134,7 +134,7 @@
                                 @endif
 
                                 <div class="product-option">
-                                    <label for="product-quantity">Quantité</label>
+                                    <label for="product-quantity">Menge</label>
                                     {{-- Not Bootstrap's .input-group (display:table, with a float:left,
                                          width:100% .form-control sized against its .input-group-btn
                                          siblings): that construction falls apart inside a flex parent,
@@ -146,7 +146,7 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary btn-lg product-add-to-cart">Ajouter au panier</button>
+                                <button type="submit" class="btn btn-primary btn-lg product-add-to-cart">In den Warenkorb</button>
                             </form>
 
                             <p class="product-stock {{ $product->stock <= 3 ? 'is-low' : '' }}">
@@ -157,8 +157,8 @@
                                 @endif
                             </p>
                         @else
-                            <p><span class="btn btn-default btn-outline btn-lg disabled product-add-to-cart">Rupture de stock</span></p>
-                            <p class="product-stock is-out">Cet article est temporairement indisponible.</p>
+                            <p><span class="btn btn-default btn-outline btn-lg disabled product-add-to-cart">Nicht vorrätig</span></p>
+                            <p class="product-stock is-out">Dieser Artikel ist vorübergehend nicht verfügbar.</p>
                         @endif
 
                         <ul class="product-reassurance">
@@ -177,8 +177,8 @@
                 <div class="col-md-12">
                     <div class="fh5co-tabs animate-box">
                         <ul class="fh5co-tab-nav">
-                            <li class="active"><a href="#" data-tab="1"><span class="icon visible-xs"><i class="icon-file"></i></span><span class="hidden-xs">Description</span></a></li>
-                            <li><a href="#" data-tab="2"><span class="icon visible-xs"><i class="icon-bar-graph"></i></span><span class="hidden-xs">Livraison &amp; retours</span></a></li>
+                            <li class="active"><a href="#" data-tab="1"><span class="icon visible-xs"><i class="icon-file"></i></span><span class="hidden-xs">Beschreibung</span></a></li>
+                            <li><a href="#" data-tab="2"><span class="icon visible-xs"><i class="icon-bar-graph"></i></span><span class="hidden-xs">Versand &amp; Rücksendungen</span></a></li>
                             <li><a href="#" data-tab="3"><span class="icon visible-xs"><i class="icon-star"></i></span><span class="hidden-xs">Avis ({{ $product->reviews->count() }})</span></a></li>
                         </ul>
 
@@ -192,7 +192,7 @@
                                 @if (mb_strlen($product->description) > 600)
                                     <div class="product-description" x-data="{ open: false }" :class="{ 'is-collapsed': ! open }">
                                         <div class="product-description-text">{{ $product->description }}</div>
-                                        <button type="button" class="product-description-toggle" x-cloak @click="open = ! open" :aria-expanded="open.toString()" x-text="open ? 'Réduire' : 'Lire la suite'">Lire la suite</button>
+                                        <button type="button" class="product-description-toggle" x-cloak @click="open = ! open" :aria-expanded="open.toString()" x-text="open ? 'Réduire' : 'Lire la suite'">Weiterlesen</button>
                                     </div>
                                 @else
                                     <p style="white-space:pre-line;">{{ $product->description }}</p>
@@ -200,21 +200,21 @@
                             </div>
 
                             <div class="fh5co-tab-content tab-content" data-tab-content="2">
-                                <h3>Livraison</h3>
+                                <h3>Versand</h3>
                                 <ul>
                                     <li>Livraison offerte dès {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }} d'achat, hors zone euro : frais de {{ number_format((float) $settings->international_shipping_fee, 0) }}&nbsp;{{ $settings->currency_symbol }} supplémentaires.</li>
-                                    <li>Expédition sous 2 à 5 jours ouvrés selon disponibilité.</li>
+                                    <li>Versand innerhalb von 2 bis 5 Werktagen je nach Verfügbarkeit.</li>
                                 </ul>
-                                <h3>Retours</h3>
+                                <h3>Rücksendungen</h3>
                                 <ul>
                                     <li>14 jours pour changer d'avis, selon les conditions de retour.</li>
-                                    <li>Article à retourner dans son emballage d'origine.</li>
+                                    <li>Artikel in der Originalverpackung zurücksenden.</li>
                                 </ul>
                             </div>
 
                             <div class="fh5co-tab-content tab-content" data-tab-content="3">
                                 @if ($product->reviews->isEmpty())
-                                    <p>Aucun avis pour le moment.</p>
+                                    <p>Noch keine Bewertungen.</p>
                                 @else
                                     <div class="product-reviews">
                                         @foreach ($product->reviews as $review)
@@ -239,8 +239,8 @@
             @if ($related->isNotEmpty())
                 <div class="row animate-box" style="margin-top:40px;">
                     <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                        <span>Vous aimerez aussi</span>
-                        <h2>Produits liés</h2>
+                        <span>Das könnte Ihnen auch gefallen</span>
+                        <h2>Zugehörige Produkte</h2>
                     </div>
                 </div>
                 <div class="row">

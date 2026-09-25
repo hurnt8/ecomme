@@ -25,7 +25,7 @@ class CheckoutController extends Controller
     {
         if ($this->cart->isEmpty()) {
             return redirect()->route('cart.index')->with('toast', [
-                'message' => 'Votre panier est vide.',
+                'message' => 'Ihr Warenkorb ist leer.',
                 'type' => 'error',
             ]);
         }

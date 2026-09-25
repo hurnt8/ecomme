@@ -49,8 +49,8 @@ class CartController extends Controller
         );
 
         $toast = $added
-            ? ['message' => "{$product->name} ajouté au panier.", 'type' => 'success']
-            : ['message' => 'Ce produit est indisponible en quantité demandée.', 'type' => 'error'];
+            ? ['message' => "{$product->name} in den Warenkorb gelegt.", 'type' => 'success']
+            : ['message' => 'Dieses Produkt ist in der gewünschten Menge nicht verfügbar.', 'type' => 'error'];
 
         if ($request->expectsJson()) {
             return $this->cartResponse($toast, $added ? 200 : 422);
@@ -69,14 +69,14 @@ class CartController extends Controller
             return $this->cartResponse();
         }
 
-        return back()->with('toast', ['message' => 'Panier mis à jour.', 'type' => 'success']);
+        return back()->with('toast', ['message' => 'Warenkorb aktualisiert.', 'type' => 'success']);
     }
 
     public function destroy(Request $request, string $key): RedirectResponse|JsonResponse
     {
         $this->cart->remove($key);
 
-        $toast = ['message' => 'Article retiré du panier.', 'type' => 'success'];
+        $toast = ['message' => 'Artikel aus dem Warenkorb entfernt.', 'type' => 'success'];
 
         if ($request->expectsJson()) {
             return $this->cartResponse($toast);

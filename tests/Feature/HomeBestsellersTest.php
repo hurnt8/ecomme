@@ -24,7 +24,7 @@ it('shows bestseller products on the homepage', function () {
 
     $response = $this->get(route('home'));
 
-    $response->assertOk()->assertSee($bestseller->name)->assertSee('Meilleures ventes');
+    $response->assertOk()->assertSee($bestseller->name)->assertSee('Bestseller');
 
     // "Chaise ordinaire" isn't a bestseller, but it can still legitimately appear elsewhere on
     // the homepage (the generic "Nos pièces" selection) — assert it's absent from the
@@ -41,5 +41,5 @@ it('shows bestseller products on the homepage', function () {
 it('hides the bestsellers section when no product is flagged', function () {
     Product::factory()->create(['is_bestseller' => false]);
 
-    $this->get(route('home'))->assertOk()->assertDontSee('Meilleures ventes');
+    $this->get(route('home'))->assertOk()->assertDontSee('Bestseller');
 });

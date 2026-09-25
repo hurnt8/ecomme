@@ -26,7 +26,7 @@ it('shows the order number as a copyable payment reference', function () {
 
     // The number is the transfer reference, so it gets its own callout rather than only
     // appearing inside a sentence.
-    $response->assertSee('Numéro de commande')
+    $response->assertSee('Bestellnummer')
         ->assertSee('confirmation-reference', false)
         ->assertSee('AM-');
 });

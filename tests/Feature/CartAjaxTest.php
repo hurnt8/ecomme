@@ -14,7 +14,7 @@ it('adds to the cart without redirecting and returns the new count', function ()
 
     $this->postJson(route('cart.store'), ['product_id' => $product->id, 'quantity' => 2])
         ->assertOk()
-        ->assertJson(['count' => 2, 'type' => 'success', 'message' => 'Tondeuse compacte ajouté au panier.']);
+        ->assertJson(['count' => 2, 'type' => 'success', 'message' => 'Tondeuse compacte in den Warenkorb gelegt.']);
 
     expect(app(CartService::class)->count())->toBe(2);
 });
@@ -38,9 +38,9 @@ it('removes a line and sends back the empty cart', function () {
 
     $response = $this->deleteJson(route('cart.destroy', $key))
         ->assertOk()
-        ->assertJson(['count' => 0, 'message' => 'Article retiré du panier.']);
+        ->assertJson(['count' => 0, 'message' => 'Artikel aus dem Warenkorb entfernt.']);
 
-    expect($response->json('html'))->toContain('Votre panier est vide');
+    expect($response->json('html'))->toContain('Ihr Warenkorb ist leer');
 });
 
 it('reports an unavailable product as an error', function () {

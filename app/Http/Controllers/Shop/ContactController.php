@@ -36,14 +36,14 @@ class ContactController extends Controller
                 Log::error('Failed to send contact message', ['error' => $e->getMessage()]);
 
                 return back()->withInput()->with('toast', [
-                    'message' => 'Une erreur est survenue, merci de réessayer ou de nous contacter directement par e-mail.',
+                    'message' => 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt eine E-Mail.',
                     'type' => 'error',
                 ]);
             }
         }
 
         return redirect()->route('contact.index')->with('toast', [
-            'message' => 'Votre message a bien été envoyé, nous vous répondrons rapidement.',
+            'message' => 'Ihre Nachricht wurde gesendet, wir melden uns in Kürze.',
             'type' => 'success',
         ]);
     }

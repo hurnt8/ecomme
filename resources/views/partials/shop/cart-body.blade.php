@@ -9,9 +9,9 @@
 @if ($items->isEmpty())
     <div class="cart-empty">
         <i class="icon-shopping-cart"></i>
-        <h3>Votre panier est vide</h3>
-        <p>Parcourez la boutique et ajoutez les pièces qui vous plaisent.</p>
-        <a href="{{ route('catalog') }}" class="btn btn-primary btn-lg">Découvrir la boutique</a>
+        <h3>Ihr Warenkorb ist leer</h3>
+        <p>Stöbern Sie im Shop und legen Sie hinein, was Ihnen gefällt.</p>
+        <a href="{{ route('catalog') }}" class="btn btn-primary btn-lg">Shop entdecken</a>
     </div>
 @else
     <div class="row">
@@ -54,20 +54,20 @@
                                     @csrf
                                     @method('PATCH')
                                     <div class="product-quantity">
-                                        <button type="button" class="btn btn-default" @click="step(-1)" aria-label="Diminuer la quantité">&minus;</button>
+                                        <button type="button" class="btn btn-default" @click="step(-1)" aria-label="Menge verringern">&minus;</button>
                                         <input type="number" name="quantity" x-model.number="quantity"
                                                min="1" max="{{ $item->product->stock }}"
                                                class="form-control text-center"
-                                               aria-label="Quantité"
+                                               aria-label="Menge"
                                                @change="save()">
-                                        <button type="button" class="btn btn-default" @click="step(1)" aria-label="Augmenter la quantité">+</button>
+                                        <button type="button" class="btn btn-default" @click="step(1)" aria-label="Menge erhöhen">+</button>
                                     </div>
                                 </form>
 
                                 <form method="POST" action="{{ route('cart.destroy', $item->key) }}" data-cart-form>
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="cart-line-remove">Retirer</button>
+                                    <button type="submit" class="cart-line-remove">Entfernen</button>
                                 </form>
                             </div>
                         </div>
@@ -82,16 +82,16 @@
 
         <div class="col-md-4">
             <aside class="cart-summary">
-                <h3>Récapitulatif</h3>
+                <h3>Übersicht</h3>
 
                 <div class="cart-summary-row">
-                    <span>Sous-total</span>
+                    <span>Zwischensumme</span>
                     <strong>{{ number_format($subtotal, 0) }}&nbsp;{{ $settings->currency_symbol }}</strong>
                 </div>
 
                 <div class="cart-summary-row is-muted">
-                    <span>Livraison</span>
-                    <span>Calculée à l'étape suivante</span>
+                    <span>Versand</span>
+                    <span>Wird im nächsten Schritt berechnet</span>
                 </div>
 
                 @if ($threshold > 0)
@@ -107,7 +107,7 @@
                     </div>
                 @endif
 
-                <a href="{{ route('checkout.index') }}" class="btn btn-primary btn-lg btn-block">Passer commande</a>
+                <a href="{{ route('checkout.index') }}" class="btn btn-primary btn-lg btn-block">Zur Kasse</a>
 
                 <ul class="cart-reassurance">
                     <li><i class="icon-wallet"></i> 14 jours pour changer d'avis</li>

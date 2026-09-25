@@ -1,6 +1,6 @@
 @extends('layouts.shop')
 
-@section('title', 'Boutique')
+@section('title', 'Shop')
 @section('meta_description', 'Tondeuses, robots, autoportées, tronçonneuses, outils portés pour tracteur, pompes, bois de chauffage, barbecues et piscines : tout le catalogue.')
 
 @php
@@ -47,7 +47,7 @@
                 <div class="col-md-8 col-md-offset-2 text-center">
                     <div class="display-t">
                         <div class="display-tc animate-box" data-animate-effect="fadeIn">
-                            <h1>Boutique</h1>
+                            <h1>Shop</h1>
                             <h2>{{ $products->total() }} pièce{{ $products->total() > 1 ? 's' : '' }} sélectionnée{{ $products->total() > 1 ? 's' : '' }}</h2>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <button type="button" class="catalog-filters-toggle" @click="filtersOpen = !filtersOpen">
-                            <span x-text="filtersOpen ? 'Masquer les filtres' : 'Filtrer'">Filtrer</span>
+                            <span x-text="filtersOpen ? 'Masquer les filtres' : 'Filtrer'">Filtern</span>
                             @if ($activeFilters->isNotEmpty())
                                 <span class="catalog-filters-count">{{ $activeFilters->count() }}</span>
                             @endif
@@ -85,12 +85,12 @@
 
                         <aside class="catalog-filters" :class="{ 'is-open': filtersOpen }">
                             <div class="catalog-filter-group">
-                                <h3>Catégories</h3>
+                                <h3>Kategorien</h3>
                                 <ul class="catalog-filter-list">
                                     <li>
                                         <a href="{{ route('catalog', collect($baseQuery)->except('category')->all()) }}"
                                            class="{{ request('category') ? '' : 'is-active' }}">
-                                            Toutes les pièces
+                                            Alle Artikel
                                         </a>
                                     </li>
                                     @foreach ($categories as $category)
@@ -106,17 +106,17 @@
                             </div>
 
                             <div class="catalog-filter-group">
-                                <h3>Prix</h3>
+                                <h3>Preis</h3>
                                 <div class="catalog-filter-price">
-                                    <input type="number" name="min_price" value="{{ request('min_price') }}" class="form-control" placeholder="Min" aria-label="Prix minimum">
+                                    <input type="number" name="min_price" value="{{ request('min_price') }}" class="form-control" placeholder="Min" aria-label="Mindestpreis">
                                     <span>–</span>
-                                    <input type="number" name="max_price" value="{{ request('max_price') }}" class="form-control" placeholder="Max" aria-label="Prix maximum">
+                                    <input type="number" name="max_price" value="{{ request('max_price') }}" class="form-control" placeholder="Max" aria-label="Höchstpreis">
                                 </div>
                             </div>
 
                             @if (count($colors))
                                 <div class="catalog-filter-group">
-                                    <h3>Coloris</h3>
+                                    <h3>Farben</h3>
                                     <select name="color" class="form-control" onchange="this.form.submit()">
                                         <option value="">Tous</option>
                                         @foreach ($colors as $color)
@@ -128,9 +128,9 @@
 
                             @if (count($sizes))
                                 <div class="catalog-filter-group">
-                                    <h3>Taille</h3>
+                                    <h3>Größe</h3>
                                     <select name="size" class="form-control" onchange="this.form.submit()">
-                                        <option value="">Toutes</option>
+                                        <option value="">Alle</option>
                                         @foreach ($sizes as $size)
                                             <option value="{{ $size }}" @selected(request('size') === $size)>{{ $size }}</option>
                                         @endforeach
@@ -139,7 +139,7 @@
                             @endif
 
                             <div class="catalog-filter-group">
-                                <h3>Disponibilité</h3>
+                                <h3>Verfügbarkeit</h3>
                                 <label class="catalog-filter-check">
                                     <input type="checkbox" name="in_stock" value="1" @checked(request()->boolean('in_stock')) onchange="this.form.submit()">
                                     En stock uniquement
@@ -154,9 +154,9 @@
                                 </label>
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-block">Appliquer</button>
+                            <button type="submit" class="btn btn-primary btn-block">Anwenden</button>
                             @if ($activeFilters->isNotEmpty())
-                                <a href="{{ route('catalog') }}" class="catalog-filters-reset">Tout réinitialiser</a>
+                                <a href="{{ route('catalog') }}" class="catalog-filters-reset">Alles zurücksetzen</a>
                             @endif
                         </aside>
                     </div>
@@ -172,12 +172,12 @@
                             </p>
 
                             <div class="catalog-sort">
-                                <label for="filter-sort">Trier par</label>
+                                <label for="filter-sort">Sortieren nach</label>
                                 <select name="sort" id="filter-sort" class="form-control" onchange="this.form.submit()">
-                                    <option value="newest" @selected($sort === 'newest')>Plus récents</option>
-                                    <option value="price_asc" @selected($sort === 'price_asc')>Prix croissant</option>
-                                    <option value="price_desc" @selected($sort === 'price_desc')>Prix décroissant</option>
-                                    <option value="name_asc" @selected($sort === 'name_asc')>Nom (A-Z)</option>
+                                    <option value="newest" @selected($sort === 'newest')>Neueste</option>
+                                    <option value="price_asc" @selected($sort === 'price_asc')>Preis aufsteigend</option>
+                                    <option value="price_desc" @selected($sort === 'price_desc')>Preis absteigend</option>
+                                    <option value="name_asc" @selected($sort === 'name_asc')>Name (A-Z)</option>
                                 </select>
                             </div>
                         </div>
@@ -200,9 +200,9 @@
                             </div>
                         @empty
                             <div class="catalog-empty">
-                                <h3>Aucune pièce ne correspond à ces critères</h3>
-                                <p>Essayez d'élargir votre recherche ou de retirer un filtre.</p>
-                                <a href="{{ route('catalog') }}" class="btn btn-primary btn-outline">Voir toute la boutique</a>
+                                <h3>Kein Artikel entspricht diesen Kriterien</h3>
+                                <p>Erweitern Sie Ihre Suche oder entfernen Sie einen Filter.</p>
+                                <a href="{{ route('catalog') }}" class="btn btn-primary btn-outline">Gesamtes Sortiment ansehen</a>
                             </div>
                         @endforelse
 

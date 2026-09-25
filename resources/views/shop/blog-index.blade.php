@@ -4,7 +4,7 @@
 @section('meta_description', 'Conseils d\'achat, entretien du matériel et bois de chauffage : le blog de ' . $settings->site_name . '.')
 
 @section('content')
-    <x-shop.page-hero title="Blog" subtitle="Conseils d'achat, entretien et bois de chauffage" image="hero-objets.jpg" />
+    <x-shop.page-hero title="Blog" subtitle="Kaufberatung, Pflege und Brennholz" image="hero-objets.jpg" />
 
     <div id="fh5co-product">
         <div class="container">

@@ -47,5 +47,5 @@ it('shows the price and the add-to-cart button without needing to scroll past th
 
     // The buy panel is a sibling of the gallery in the same row, not stacked below it.
     expect(strpos($html, 'product-summary'))->toBeGreaterThan(strpos($html, 'product-gallery'))
-        ->and($html)->toContain('Ajouter au panier');
+        ->and($html)->toContain('In den Warenkorb');
 });

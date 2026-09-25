@@ -11,12 +11,12 @@
             <div class="row animate-box">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="desc">
-                        <h3>Qu'est-ce qu'un cookie ?</h3>
-                        <p>Un cookie est un petit fichier déposé sur votre navigateur lors de votre visite. Il permet de conserver certaines informations d'une page à l'autre ou d'une visite à l'autre.</p>
+                        <h3>Was ist ein Cookie?</h3>
+                        <p>Ein Cookie ist eine kleine Datei, die bei Ihrem Besuch in Ihrem Browser abgelegt wird. Sie hält bestimmte Informationen von Seite zu Seite oder von Besuch zu Besuch fest.</p>
                     </div>
                     <div class="desc">
-                        <h3>Cookies utilisés sur ce site</h3>
-                        <p>Nous utilisons uniquement des cookies strictement nécessaires au fonctionnement du site. Ces cookies ne nécessitent pas de consentement préalable et ne sont jamais utilisés à des fins publicitaires ou de traçage :</p>
+                        <h3>Auf dieser Website verwendete Cookies</h3>
+                        <p>Wir setzen ausschließlich Cookies ein, die für den Betrieb der Website unbedingt erforderlich sind. Diese Cookies bedürfen keiner vorherigen Einwilligung und werden niemals für Werbung oder Tracking verwendet:</p>
                         <table class="table table-bordered">
                             <thead>
                                 <tr><th>Cookie</th><th>Finalité</th><th>Durée</th></tr>
@@ -30,8 +30,8 @@
                         </table>
                     </div>
                     <div class="desc">
-                        <h3>Gestion des cookies</h3>
-                        <p>Vous pouvez à tout moment configurer votre navigateur pour refuser les cookies. Le blocage des cookies strictement nécessaires empêchera toutefois le bon fonctionnement du panier et de la connexion.</p>
+                        <h3>Cookies verwalten</h3>
+                        <p>Sie können Ihren Browser jederzeit so einstellen, dass er Cookies ablehnt. Das Blockieren unbedingt erforderlicher Cookies verhindert allerdings das Funktionieren von Warenkorb und Anmeldung.</p>
                     </div>
                 </div>
             </div>

@@ -76,7 +76,7 @@ function staffBar(string $html): string
 it('shows staff a link back to the back-office from the shop', function () {
     $html = $this->actingAs(admin())->get('/')->assertOk()->getContent();
 
-    expect($html)->toContain('Retour à l\'administration')
+    expect($html)->toContain('Zurück zur Verwaltung')
         ->and(staffBar($html))->toContain(route('admin.dashboard'));
 });
 
@@ -90,11 +90,11 @@ it('never shows that bar to a customer', function () {
     $this->actingAs(User::factory()->create(['role' => UserRole::Customer]))
         ->get('/')
         ->assertOk()
-        ->assertDontSee('Retour à l\'administration');
+        ->assertDontSee('Zurück zur Verwaltung');
 });
 
 it('never shows that bar to a visitor', function () {
-    $this->get('/')->assertOk()->assertDontSee('Retour à l\'administration');
+    $this->get('/')->assertOk()->assertDontSee('Zurück zur Verwaltung');
 });
 
 /*

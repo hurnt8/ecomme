@@ -1,30 +1,30 @@
 @extends('layouts.shop')
 
-@section('title', 'À propos')
-@section('meta_description', 'Qui nous sommes : ' . $settings->site_name . ', boutique en ligne de motoculture, d\'outils pour tracteur, de bois de chauffage et d\'équipement d\'extérieur.')
+@section('title', 'Über uns')
+@section('meta_description', 'Wer wir sind: ' . $settings->site_name . ', Online-Shop für Motorgeräte, Traktoranbaugeräte, Brennholz und Ausstattung für den Außenbereich.')
 
 @section('content')
-    <x-shop.page-hero title="À propos" :subtitle="$settings->site_name" image="hero-maison.jpg" />
+    <x-shop.page-hero title="Über uns" :subtitle="$settings->site_name" image="hero-maison.jpg" />
 
     <div id="fh5co-about" class="about">
         <div class="container">
             <div class="row about-intro">
                 <div class="col-md-8 col-md-offset-2 text-center">
-                    <h2>Un catalogue large, un conseil qui reste court.</h2>
+                    <h2>Ein breites Sortiment, eine kurze Beratung.</h2>
                     <p class="about-lead">{{ $settings->tagline }}</p>
                     <p>
-                        {{ $settings->site_name }} est une boutique en ligne. Nous ne fabriquons pas :
-                        nous revendons, chez des constructeurs qui tiennent leurs pièces détachées, le
-                        matériel que nous utiliserions sur notre propre terrain — des machines qui se
-                        réparent plutôt qu'elles ne se remplacent, de quoi se chauffer une fois le bois
-                        coupé, et de quoi profiter du terrain le reste de l'année.
+                        {{ $settings->site_name }} ist ein Online-Shop. Wir stellen nichts selbst her:
+                        Wir verkaufen — von Herstellern, die ihre Ersatzteile vorhalten — die Geräte,
+                        die wir auf dem eigenen Grundstück einsetzen würden. Maschinen, die sich
+                        reparieren statt ersetzen lassen, etwas zum Heizen, wenn das Holz geschlagen ist,
+                        und etwas, um das Grundstück den Rest des Jahres zu genießen.
                     </p>
                     <p>
-                        Le catalogue compte aujourd'hui <strong>{{ number_format($productCount, 0, ',', ' ') }}&nbsp;{{ $productCount > 1 ? 'références' : 'référence' }}</strong>.
-                        C'est beaucoup, et personne ne parcourt une telle liste : servez-vous des
-                        rayons et des filtres pour dégrossir, puis appelez-nous. Le tri, c'est notre
-                        travail — dites-nous la surface, la pente et ce que vous avez déjà, on vous
-                        indique les deux ou trois machines qui conviennent.
+                        Das Sortiment umfasst derzeit <strong>{{ number_format($productCount, 0, ',', ' ') }}&nbsp;{{ $productCount > 1 ? 'Artikel' : 'Artikel' }}</strong>.
+                        Das ist viel, und niemand geht eine solche Liste durch: Grenzen Sie mit den
+                        Sortimenten und Filtern ein und rufen Sie uns dann an. Das Aussortieren ist
+                        unsere Aufgabe — nennen Sie uns Fläche, Hanglage und was Sie bereits haben, und
+                        wir nennen Ihnen die zwei oder drei Maschinen, die dazu passen.
                     </p>
                 </div>
             </div>
@@ -34,15 +34,15 @@
             <div class="row about-facts">
                 <div class="col-sm-4">
                     <strong>{{ $productCount }}</strong>
-                    <span>{{ $productCount > 1 ? 'références disponibles' : 'référence disponible' }} à la commande</span>
+                    <span>{{ $productCount > 1 ? 'Artikel verfügbar' : 'Artikel verfügbar' }} zur Bestellung</span>
                 </div>
                 <div class="col-sm-4">
                     <strong>{{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }}</strong>
-                    <span>le seuil de livraison offerte en zone euro</span>
+                    <span>Mindestbestellwert für kostenlosen Versand in der Eurozone</span>
                 </div>
                 <div class="col-sm-4">
-                    <strong>14 jours</strong>
-                    <span>de rétractation sur tout le catalogue</span>
+                    <strong>14 Tage</strong>
+                    <span>Widerrufsrecht auf das gesamte Sortiment</span>
                 </div>
             </div>
 
@@ -51,7 +51,7 @@
                      decorative shot, so this section fills itself in as ranges get stocked — no
                      copy to update when Bois & Chauffage arrives. --}}
                 <div class="about-ranges">
-                    <h3>Ce que nous vendons</h3>
+                    <h3>Was wir verkaufen</h3>
                     <div class="row">
                         @foreach ($stockedCategories as $category)
                             @php
@@ -68,7 +68,7 @@
                                     <span class="about-range-image" @if ($cover) style="background-image:url('{{ $cover }}');" @endif></span>
                                     <span class="about-range-body">
                                         <strong>{{ $category->name }}</strong>
-                                        <span>{{ $category->products_count }} {{ $category->products_count > 1 ? 'références' : 'référence' }}</span>
+                                        <span>{{ $category->products_count }} {{ $category->products_count > 1 ? 'Artikel' : 'Artikel' }}</span>
                                     </span>
                                 </a>
                             </div>
@@ -78,8 +78,8 @@
                     @if ($emptyCategories->isNotEmpty())
                         {{-- Only while a range really is still empty; it disappears once stocked. --}}
                         <p class="about-note">
-                            {{ $emptyCategories->pluck('name')->join(', ', ' et ') }}
-                            {{ $emptyCategories->count() > 1 ? 'arrivent' : 'arrive' }} prochainement.
+                            {{ $emptyCategories->pluck('name')->join(', ', ' und ') }}
+                            {{ $emptyCategories->count() > 1 ? 'folgen' : 'folgt' }} in Kürze.
                         </p>
                     @endif
                 </div>
@@ -87,41 +87,42 @@
 
             <div class="row about-commitments">
                 <div class="col-md-4">
-                    <h3>Ce que nous regardons</h3>
+                    <h3>Worauf wir achten</h3>
                     <p>
-                        Des moteurs répandus — Honda, Kawasaki, Briggs &amp; Stratton, Kohler, Loncin —
-                        parce qu'on en trouve les pièces partout, et des transmissions dimensionnées
-                        pour l'usage annoncé. Pour le bois de chauffage, la même exigence appliquée
-                        autrement : essences dures, séchage maîtrisé, taux d'humidité contrôlé. Et pour
-                        tout ce qui passe l'hiver dehors — abris, barbecues, piscines — des matériaux
-                        qui tiennent une saison de plus que la garantie.
+                        Verbreitete Motoren — Honda, Kawasaki, Briggs &amp; Stratton, Kohler, Loncin —
+                        weil es dafür überall Teile gibt, und Getriebe, die für den angegebenen Einsatz
+                        ausgelegt sind. Beim Brennholz derselbe Anspruch, anders angewandt: Hartholz,
+                        kontrollierte Trocknung, geprüfte Restfeuchte. Und für alles, was draußen
+                        überwintert — Gartenhäuser, Grills, Pools — Materialien, die eine Saison länger
+                        halten als die Garantie.
                     </p>
                 </div>
                 <div class="col-md-4">
-                    <h3>Comment nous expédions</h3>
+                    <h3>Wie wir versenden</h3>
                     <p>
-                        Sur palette filmée, avec suivi à chaque étape. Livraison offerte dès
+                        Auf folierter Palette, mit Sendungsverfolgung in jedem Schritt. Versandkostenfrei ab
                         {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }}
-                        d'achat en zone euro ; les machines lourdes et le bois passent par un camion à
-                        hayon, sur rendez-vous, avec dépose au pied de la propriété sur sol stabilisé.
+                        Bestellwert innerhalb der Eurozone; schwere Maschinen und Holz kommen per Lkw mit
+                        Hebebühne, nach Terminvereinbarung, mit Absetzen an der Grundstücksgrenze auf
+                        befestigtem Untergrund.
                     </p>
                 </div>
                 <div class="col-md-4">
-                    <h3>Comment nous répondons</h3>
+                    <h3>Wie wir erreichbar sind</h3>
                     <p>
-                        Une équipe réduite, joignable directement.
+                        Ein kleines Team, direkt erreichbar.
                         @if ($settings->contact_phone)
-                            Par téléphone au <a href="tel:{{ $settings->contact_phone }}">{{ $settings->contact_phone }}</a>,
+                            Telefonisch unter <a href="tel:{{ $settings->contact_phone }}">{{ $settings->contact_phone }}</a>,
                         @endif
-                        par e-mail ou via le <a href="{{ route('contact.index') }}">formulaire de contact</a>.
+                        per E-Mail oder über das <a href="{{ route('contact.index') }}">Kontaktformular</a>.
                     </p>
                 </div>
             </div>
 
             <div class="about-cta">
-                <h3>Parcourir la sélection</h3>
-                <p>Toutes nos références, en stock et prêtes à partir.</p>
-                <a href="{{ route('catalog') }}" class="btn btn-primary btn-lg">Découvrir la boutique</a>
+                <h3>Das Sortiment durchstöbern</h3>
+                <p>Alle unsere Artikel, auf Lager und versandbereit.</p>
+                <a href="{{ route('catalog') }}" class="btn btn-primary btn-lg">Shop entdecken</a>
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 @extends('layouts.shop')
 
-@section('title', 'Réinitialiser le mot de passe')
+@section('title', 'Passwort zurücksetzen')
 
 @section('content')
     <x-shop.page-hero title="Nouveau mot de passe" image="hero-objets.jpg" />
@@ -16,7 +16,7 @@
 
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label for="email">E-mail</label>
+                                <label for="email">E-Mail</label>
                                 <input id="email" type="email" name="email" value="{{ old('email', $email) }}" class="form-control" required autofocus>
                                 @error('email')<span style="color:var(--shop-accent);font-size:12px;">{{ $message }}</span>@enderror
                             </div>
@@ -24,7 +24,7 @@
 
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label for="password">Nouveau mot de passe</label>
+                                <label for="password">Neues Passwort</label>
                                 <input id="password" type="password" name="password" class="form-control" required>
                                 @error('password')<span style="color:var(--shop-accent);font-size:12px;">{{ $message }}</span>@enderror
                             </div>
@@ -32,13 +32,13 @@
 
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label for="password_confirmation">Confirmer le mot de passe</label>
+                                <label for="password_confirmation">Passwort bestätigen</label>
                                 <input id="password_confirmation" type="password" name="password_confirmation" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" value="Réinitialiser le mot de passe" class="btn btn-primary">
+                            <input type="submit" value="Passwort zurücksetzen" class="btn btn-primary">
                         </div>
                     </form>
                 </div>

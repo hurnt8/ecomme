@@ -3,7 +3,7 @@
         <div class="row animate-box">
             <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
                 <h2>Newsletter</h2>
-                <p>Recevez nos nouveautés et nos offres en avant-première.</p>
+                <p>Erhalten Sie unsere Neuheiten und Angebote vorab.</p>
             </div>
         </div>
         <div class="row animate-box">
@@ -12,15 +12,15 @@
                     @csrf
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
-                            <label for="newsletter-email" class="sr-only">Email</label>
-                            <input type="email" name="email" class="form-control" id="newsletter-email" placeholder="Votre e-mail" required>
+                            <label for="newsletter-email" class="sr-only">E-Mail</label>
+                            <input type="email" name="email" class="form-control" id="newsletter-email" placeholder="Ihre E-Mail-Adresse" required>
                             @error('email')
                                 <span style="display:block;color:#ffdada;font-size:12px;margin-top:4px;">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
-                        <button type="submit" class="btn btn-default btn-block">S'inscrire</button>
+                        <button type="submit" class="btn btn-default btn-block">Anmelden</button>
                     </div>
                 </form>
             </div>
@@ -56,28 +56,28 @@
                  footer far longer. Headed groups that collapse below the sidebar breakpoint: one
                  tap to open the one you want, nothing to scroll past if you don't. --}}
             @foreach ([
-                ['title' => 'La maison', 'links' => [
-                    ['À propos', url('/a-propos')],
-                    ['Aide / FAQ', url('/aide')],
-                    ['Contact', url('/contact')],
-                    ['CGV', url('/cgv')],
-                    ['Carrières', url('/carrieres')],
+                ['title' => 'Unternehmen', 'links' => [
+                    ['Über uns', url('/a-propos')],
+                    ['Hilfe / FAQ', url('/aide')],
+                    ['Kontakt', url('/contact')],
+                    ['AGB', url('/cgv')],
+                    ['Karriere', url('/carrieres')],
                     ['Presse', url('/presse')],
                 ]],
-                ['title' => 'Boutique', 'links' => [
-                    ['Toute la boutique', route('catalog')],
-                    ['Confidentialité', url('/confidentialite')],
+                ['title' => 'Shop', 'links' => [
+                    ['Gesamtes Sortiment', route('catalog')],
+                    ['Datenschutz', url('/confidentialite')],
                     ['Cookies', url('/cookies')],
-                    ['Mentions légales', url('/mentions-legales')],
-                    ['Accessibilité', url('/accessibilite')],
+                    ['Impressum', url('/mentions-legales')],
+                    ['Barrierefreiheit', url('/accessibilite')],
                 ]],
-                ['title' => 'Commande & aide', 'links' => [
-                    ['Livraison', url('/livraison')],
-                    ['Retours', url('/retours')],
-                    ['Moyens de paiement', url('/moyens-paiement')],
-                    ['Suivi de commande', route('tracking.index')],
+                ['title' => 'Bestellung & Hilfe', 'links' => [
+                    ['Versand', url('/livraison')],
+                    ['Rücksendungen', url('/retours')],
+                    ['Zahlungsarten', url('/moyens-paiement')],
+                    ['Sendungsverfolgung', route('tracking.index')],
                     ['Blog', url('/blog')],
-                    [auth()->check() ? 'Mon compte' : 'Connexion', auth()->check() ? route('account.index') : route('login')],
+                    [auth()->check() ? 'Mein Konto' : 'Anmelden', auth()->check() ? route('account.index') : route('login')],
                 ]],
             ] as $group)
                 <div class="col-md-2 col-sm-4 col-md-push-1 fh5co-footer-group" x-data="{ open: false }">
@@ -127,7 +127,7 @@
         <div class="row copyright">
             <div class="col-md-12 text-center">
                 <p>
-                    <small class="block">&copy; {{ now()->year }} {{ $settings->site_name }}. Tous droits réservés.</small>
+                    <small class="block">&copy; {{ now()->year }} {{ $settings->site_name }}. Alle Rechte vorbehalten.</small>
                 </p>
             </div>
         </div>

@@ -14,7 +14,7 @@ class NewsletterController extends Controller
         Subscriber::create(['email' => $request->validated('email')]);
 
         return back()->with('toast', [
-            'message' => 'Merci pour votre inscription à notre newsletter !',
+            'message' => 'Danke für Ihre Anmeldung zu unserem Newsletter!',
             'type' => 'success',
         ]);
     }

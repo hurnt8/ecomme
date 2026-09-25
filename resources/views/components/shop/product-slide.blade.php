@@ -1,7 +1,7 @@
 @props(['product'])
 
 {{-- A product tile for the home page carousels, after the guerrinibois.fr cards: square photo,
-     discount tag, an "Ajouter au panier" bar that slides up on hover (always shown on touch
+     discount tag, an "In den Warenkorb" bar that slides up on hover (always shown on touch
      screens, see app.css), then the name and price. --}}
 @php
     $url = route('product.show', $product->slug);
@@ -19,14 +19,14 @@
         @if ($discount > 0)
             <span class="home-product-tag">-{{ $discount }}%</span>
         @elseif ($product->is_new)
-            <span class="home-product-tag is-new">Nouveau</span>
+            <span class="home-product-tag is-new">Neu</span>
         @endif
 
         <form method="POST" action="{{ route('cart.store') }}" class="home-product-add" data-cart-form>
             @csrf
             <input type="hidden" name="product_id" value="{{ $product->id }}">
             <input type="hidden" name="quantity" value="1">
-            <button type="submit">Ajouter au panier</button>
+            <button type="submit">In den Warenkorb</button>
         </form>
     </div>
 

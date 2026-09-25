@@ -26,7 +26,7 @@ it('removes a line from the cart', function () {
 
     $this->delete(route('cart.destroy', $key))->assertRedirect();
 
-    $this->get(route('cart.index'))->assertOk()->assertSee('Votre panier est vide');
+    $this->get(route('cart.index'))->assertOk()->assertSee('Ihr Warenkorb ist leer');
 });
 
 it('tells the shopper how much more is needed for free shipping', function () {

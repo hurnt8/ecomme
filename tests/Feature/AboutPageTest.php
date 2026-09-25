@@ -9,7 +9,7 @@ it('counts the catalogue instead of stating a figure in the copy', function () {
     Product::factory()->create(['category_id' => $category->id, 'is_active' => false]);
 
     // Three active, not four: an inactive product is not on sale and must not be advertised.
-    $this->get('/a-propos')->assertOk()->assertSee('3 références');
+    $this->get('/a-propos')->assertOk()->assertSee('3&nbsp;Artikel', false);
 });
 
 it('lists only ranges that actually hold stock, and announces the empty ones', function () {
@@ -23,7 +23,7 @@ it('lists only ranges that actually hold stock, and announces the empty ones', f
 
     expect($ranges)->toContain('Mobilier')
         ->and($ranges)->not->toContain('about-range" href="'.route('catalog', ['category' => 'bois-chauffage']))
-        ->and($ranges)->toContain('arrive prochainement');
+        ->and($ranges)->toContain('folgt in Kürze');
 });
 
 it('drops the coming-soon note once every range is stocked', function () {
@@ -36,7 +36,7 @@ it('drops the coming-soon note once every range is stocked', function () {
     $this->get('/a-propos')
         ->assertOk()
         ->assertSee('Bois &amp; Chauffage', false)
-        ->assertDontSee('prochainement');
+        ->assertDontSee('Kürze');
 });
 
 it('never claims experience the shop cannot back', function () {

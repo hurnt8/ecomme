@@ -1,6 +1,6 @@
 @extends('layouts.shop')
 
-@section('title', 'Commande')
+@section('title', 'Bestellung')
 
 @section('content')
     <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm fh5co-cover-compact" role="banner" style="background-image:url('{{ asset('images/hero-maison.jpg') }}');">
@@ -10,7 +10,7 @@
                 <div class="col-md-8 col-md-offset-2 text-center">
                     <div class="display-t">
                         <div class="display-tc animate-box" data-animate-effect="fadeIn">
-                            <h1>Commande</h1>
+                            <h1>Bestellung</h1>
                         </div>
                     </div>
                 </div>
@@ -64,13 +64,13 @@
                         <section class="checkout-section">
                             <h3><span class="checkout-section-num">1</span> Coordonnées</h3>
                             <div class="form-group">
-                                <label for="customer_name">Nom complet</label>
+                                <label for="customer_name">Vollständiger Name</label>
                                 <input type="text" name="customer_name" id="customer_name" value="{{ old('customer_name') }}" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="customer_email">E-mail</label>
+                                <label for="customer_email">E-Mail</label>
                                 <input type="email" name="customer_email" id="customer_email" value="{{ old('customer_email') }}" class="form-control" required>
-                                <small class="checkout-hint">La confirmation et le suivi de commande y seront envoyés.</small>
+                                <small class="checkout-hint">Bestätigung und Sendungsverfolgung gehen an diese Adresse.</small>
                             </div>
                         </section>
 
@@ -83,13 +83,13 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label for="postal_code">Code postal</label>
+                                        <label for="postal_code">Postleitzahl</label>
                                         <input type="text" name="postal_code" id="postal_code" value="{{ old('postal_code') }}" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="form-group">
-                                        <label for="city">Ville</label>
+                                        <label for="city">Ort</label>
                                         <input type="text" name="city" id="city" value="{{ old('city') }}" class="form-control" required>
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
                         <section class="checkout-section">
                             <h3><span class="checkout-section-num">3</span> Paiement</h3>
                             <div class="checkout-payment">
-                                <strong>Virement bancaire</strong>
+                                <strong>Banküberweisung</strong>
                                 <p>
                                     Nos coordonnées bancaires (IBAN) vous seront communiquées par e-mail et sur la page
                                     de confirmation. Votre commande est préparée dès réception et validation du virement.
@@ -159,19 +159,19 @@
 
                         <div class="checkout-totals">
                             <div class="checkout-total-row">
-                                <span>Sous-total</span>
+                                <span>Zwischensumme</span>
                                 <span>{{ number_format($summary['subtotal'], 2) }}&nbsp;{{ $settings->currency_symbol }}</span>
                             </div>
                             <div class="checkout-total-row">
-                                <span>Livraison</span>
+                                <span>Versand</span>
                                 <span x-text="shipping === 0 ? 'Offerte' : shipping.toFixed(2) + ' {{ $settings->currency_symbol }}'"></span>
                             </div>
                             <div class="checkout-total-row">
-                                <span>Taxes</span>
+                                <span>Steuern</span>
                                 <span x-text="tax.toFixed(2) + ' {{ $settings->currency_symbol }}'"></span>
                             </div>
                             <div class="checkout-total-row is-grand">
-                                <span>Total</span>
+                                <span>Gesamt</span>
                                 <span x-text="total.toFixed(2) + ' {{ $settings->currency_symbol }}'"></span>
                             </div>
                         </div>
@@ -189,7 +189,7 @@
                      col-md-5 recap wraps onto its own line, landing back under the form column on
                      desktop. --}}
                 <div class="col-md-7 checkout-actions-col">
-                    <button type="submit" form="checkout-form" class="btn btn-primary btn-lg checkout-submit">Valider ma commande</button>
+                    <button type="submit" form="checkout-form" class="btn btn-primary btn-lg checkout-submit">Bestellung abschließen</button>
                     <a href="{{ route('cart.index') }}" class="checkout-back">&larr; Retour au panier</a>
                 </div>
             </div>

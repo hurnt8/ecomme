@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             CategorySeeder::class,
             ProductSeeder::class,
+            // After ProductSeeder, never before: it rewrites names that seeder has just written,
+            // so running it first would leave the catalogue back in French.
+            GermanProductNamesSeeder::class,
             BannerSeeder::class,
             ReviewSeeder::class,
             BlogPostSeeder::class,

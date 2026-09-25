@@ -1,6 +1,6 @@
 @extends('layouts.shop')
 
-@section('title', 'Mon profil')
+@section('title', 'Mein Profil')
 
 @section('content')
     <x-shop.page-hero title="Mon profil" image="hero-objets.jpg" />
@@ -25,18 +25,18 @@
 
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label for="email">E-mail</label>
+                                <label for="email">E-Mail</label>
                                 <input id="email" type="email" name="email" value="{{ old('email', auth()->user()->email) }}" class="form-control" required>
                                 @error('email')<span style="color:var(--shop-accent);font-size:12px;">{{ $message }}</span>@enderror
                             </div>
                         </div>
 
-                        <h3 style="margin-top:30px;">Changer de mot de passe</h3>
-                        <p style="font-size:13px;color:#8f8f8f;">Laissez ces champs vides pour conserver votre mot de passe actuel.</p>
+                        <h3 style="margin-top:30px;">Passwort ändern</h3>
+                        <p style="font-size:13px;color:#8f8f8f;">Lassen Sie diese Felder leer, um Ihr aktuelles Passwort beizubehalten.</p>
 
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label for="current_password">Mot de passe actuel</label>
+                                <label for="current_password">Aktuelles Passwort</label>
                                 <input id="current_password" type="password" name="current_password" class="form-control">
                                 @error('current_password')<span style="color:var(--shop-accent);font-size:12px;">{{ $message }}</span>@enderror
                             </div>
@@ -44,7 +44,7 @@
 
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label for="password">Nouveau mot de passe</label>
+                                <label for="password">Neues Passwort</label>
                                 <input id="password" type="password" name="password" class="form-control">
                                 @error('password')<span style="color:var(--shop-accent);font-size:12px;">{{ $message }}</span>@enderror
                             </div>
@@ -52,7 +52,7 @@
 
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label for="password_confirmation">Confirmer le nouveau mot de passe</label>
+                                <label for="password_confirmation">Neues Passwort bestätigen</label>
                                 <input id="password_confirmation" type="password" name="password_confirmation" class="form-control">
                             </div>
                         </div>

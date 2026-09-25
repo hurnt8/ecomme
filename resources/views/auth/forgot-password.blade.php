@@ -1,6 +1,6 @@
 @extends('layouts.shop')
 
-@section('title', 'Mot de passe oublié')
+@section('title', 'Passwort vergessen')
 
 @section('content')
     <x-shop.page-hero title="Mot de passe oublié" subtitle="Recevez un lien de réinitialisation par e-mail" image="hero-maison.jpg" />
@@ -14,14 +14,14 @@
 
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label for="email">E-mail</label>
+                                <label for="email">E-Mail</label>
                                 <input id="email" type="email" name="email" value="{{ old('email') }}" class="form-control" required autofocus>
                                 @error('email')<span style="color:var(--shop-accent);font-size:12px;">{{ $message }}</span>@enderror
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" value="Envoyer le lien de réinitialisation" class="btn btn-primary">
+                            <input type="submit" value="Link zum Zurücksetzen senden" class="btn btn-primary">
                         </div>
                     </form>
 

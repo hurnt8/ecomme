@@ -1,35 +1,35 @@
 @extends('layouts.shop')
 
-@section('title', 'Accessibilité')
+@section('title', 'Barrierefreiheit')
 @section('meta_description', 'Engagement d\'accessibilité du site ' . $settings->site_name . '.')
 
 @section('content')
-    <x-shop.page-hero title="Accessibilité" image="hero-maison.jpg" />
+    <x-shop.page-hero title="Barrierefreiheit" image="hero-maison.jpg" />
 
     <div id="fh5co-about">
         <div class="container">
             <div class="row animate-box">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="desc">
-                        <h3>Notre engagement</h3>
-                        <p>Nous nous efforçons de rendre ce site utilisable par le plus grand nombre : contrastes suffisants, navigation au clavier, textes alternatifs sur les images de produits, structure de titres cohérente.</p>
+                        <h3>Unser Anspruch</h3>
+                        <p>Wir bemühen uns, diese Website für möglichst viele Menschen nutzbar zu machen: ausreichende Kontraste, Tastaturbedienung, Alternativtexte für Produktbilder, eine schlüssige Überschriftenstruktur.</p>
                     </div>
                     <div class="desc">
-                        <h3>Mesures mises en œuvre</h3>
+                        <h3>Umgesetzte Maßnahmen</h3>
                         <ul>
-                            <li>Navigation et validation des formulaires possibles au clavier, sans souris</li>
-                            <li>Zoom du texte jusqu'à 200 % sans perte de contenu ni de fonctionnalité</li>
-                            <li>Structure de titres hiérarchique (h1, h2, h3) pour faciliter la navigation avec un lecteur d'écran</li>
-                            <li>Libellés explicites sur les champs de formulaire (compte, commande, contact)</li>
+                            <li>Navigation und Absenden von Formularen vollständig per Tastatur, ohne Maus</li>
+                            <li>Textzoom bis 200 % ohne Verlust von Inhalten oder Funktionen</li>
+                            <li>Hierarchische Überschriftenstruktur (h1, h2, h3) für die Navigation mit einem Screenreader</li>
+                            <li>Eindeutige Beschriftungen der Formularfelder (Konto, Bestellung, Kontakt)</li>
                         </ul>
                     </div>
                     <div class="desc">
-                        <h3>Niveau de conformité</h3>
-                        <p>Le site vise un niveau de conformité proche du RGAA (Référentiel Général d'Amélioration de l'Accessibilité) sans certification formelle à ce jour. Un audit et une déclaration d'accessibilité complète sont prévus à mesure que le site évolue.</p>
+                        <h3>Grad der Konformität</h3>
+                        <p>Die Website orientiert sich an den Anforderungen der BITV 2.0 und der WCAG 2.1, bislang ohne förmliche Zertifizierung. Ein Audit und eine vollständige Erklärung zur Barrierefreiheit sind im Zuge der Weiterentwicklung vorgesehen.</p>
                     </div>
                     <div class="desc">
-                        <h3>Une difficulté ?</h3>
-                        <p>Si une partie du site vous semble difficile d'accès, faites-le-nous savoir via notre <a href="{{ route('contact.index') }}">formulaire de contact</a> : nous en tiendrons compte dans nos prochaines mises à jour.</p>
+                        <h3>Auf eine Hürde gestoßen?</h3>
+                        <p>Wenn Ihnen ein Teil der Website schwer zugänglich erscheint, teilen Sie es uns über unser <a href="{{ route('contact.index') }}">Kontaktformular</a> : nous en tiendrons compte dans nos prochaines mises à jour.</p>
                     </div>
                 </div>
             </div>

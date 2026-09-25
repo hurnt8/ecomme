@@ -1,6 +1,6 @@
 @extends('layouts.shop')
 
-@section('title', 'Connexion')
+@section('title', 'Anmelden')
 
 @section('content')
     <x-shop.page-hero title="Connexion" subtitle="Accédez à votre compte" image="hero-objets.jpg" />
@@ -18,25 +18,25 @@
 
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label for="email">E-mail</label>
+                                <label for="email">E-Mail</label>
                                 <input id="email" type="email" name="email" value="{{ old('email') }}" class="form-control" required autofocus>
                             </div>
                         </div>
 
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label for="password">Mot de passe</label>
+                                <label for="password">Passwort</label>
                                 <input id="password" type="password" name="password" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" value="Se connecter" class="btn btn-primary">
+                            <input type="submit" value="Anmelden" class="btn btn-primary">
                         </div>
                     </form>
 
-                    <p><a href="{{ route('password.request') }}">Mot de passe oublié ?</a></p>
-                    <p>Pas encore de compte ? <a href="{{ route('register') }}">Créer un compte</a></p>
+                    <p><a href="{{ route('password.request') }}">Passwort vergessen?</a></p>
+                    <p>Noch kein Konto? <a href="{{ route('register') }}">Konto erstellen</a></p>
                 </div>
             </div>
         </div>

@@ -4,47 +4,47 @@
 @section('meta_description', 'Questions fréquentes sur les commandes, la livraison, les retours et le paiement chez ' . $settings->site_name . '.')
 
 @section('content')
-    <x-shop.page-hero title="Aide" subtitle="Questions fréquentes" image="hero-maison.jpg" />
+    <x-shop.page-hero title="Hilfe" subtitle="Häufige Fragen" image="hero-maison.jpg" />
 
     <div id="fh5co-about">
         <div class="container">
             <div class="row animate-box">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="desc">
-                        <h3>Comment passer commande ?</h3>
-                        <p>Ajoutez les articles souhaités à votre panier, puis suivez le tunnel de commande : coordonnées, adresse de livraison, choix du pays et validation. Aucun compte n'est requis pour commander.</p>
+                        <h3>Wie gebe ich eine Bestellung auf?</h3>
+                        <p>Legen Sie die gewünschten Artikel in den Warenkorb und folgen Sie dann dem Bestellvorgang: Kontaktdaten, Lieferanschrift, Auswahl des Landes und Bestätigung. Für eine Bestellung ist kein Konto erforderlich.</p>
                     </div>
                     <div class="desc">
-                        <h3>Quels sont les délais et frais de livraison ?</h3>
-                        <p>La livraison est offerte à partir de {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }} d'achat en zone euro. Hors zone euro, des frais supplémentaires s'appliquent. Détails sur notre page <a href="{{ url('/livraison') }}">Livraison</a>.</p>
+                        <h3>Wie lange dauert der Versand und was kostet er?</h3>
+                        <p>Der Versand ist kostenlos ab {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }} Bestellwert innerhalb der Eurozone. Außerhalb der Eurozone fallen Zuschläge an. Einzelheiten auf unserer Seite <a href="{{ url('/livraison') }}">Versand</a>.</p>
                     </div>
                     <div class="desc">
-                        <h3>Comment suivre ma commande ?</h3>
-                        <p>Rendez-vous sur notre page <a href="{{ route('tracking.index') }}">Suivi de commande</a> avec votre numéro de commande et votre e-mail.</p>
+                        <h3>Wie verfolge ich meine Bestellung?</h3>
+                        <p>Besuchen Sie unsere Seite <a href="{{ route('tracking.index') }}">Sendungsverfolgung</a> avec votre numéro de commande et votre e-mail.</p>
                     </div>
                     <div class="desc">
-                        <h3>Comment payer ma commande ?</h3>
-                        <p>Le règlement s'effectue par virement bancaire. Les coordonnées bancaires vous sont communiquées sur la page de confirmation et par e-mail. Détails sur notre page <a href="{{ url('/moyens-paiement') }}">Moyens de paiement</a>.</p>
+                        <h3>Wie bezahle ich meine Bestellung?</h3>
+                        <p>Die Zahlung erfolgt per Banküberweisung. Die Bankverbindung erhalten Sie auf der Bestätigungsseite und per E-Mail. Einzelheiten auf unserer Seite <a href="{{ url('/moyens-paiement') }}">Moyens de paiement</a>.</p>
                     </div>
                     <div class="desc">
-                        <h3>Puis-je retourner un article ?</h3>
-                        <p>Oui, dans les conditions décrites sur notre page <a href="{{ url('/retours') }}">Retours</a>. Le bois de chauffage entamé ou livré en vrac ne peut toutefois pas être repris, pour des raisons pratiques et d'hygiène.</p>
+                        <h3>Kann ich einen Artikel zurücksenden?</h3>
+                        <p>Ja, unter den Bedingungen, die auf unserer Seite <a href="{{ url('/retours') }}">Rücksendungen</a> beschrieben sind. Le bois de chauffage entamé ou livré en vrac ne peut toutefois pas être repris, pour des raisons pratiques et d'hygiène.</p>
                     </div>
                     <div class="desc">
-                        <h3>Comment est livré le bois de chauffage ?</h3>
-                        <p>Le bois de chauffage est vendu au stère ou en filets, sur palette. En raison du poids et du volume, la livraison de ces produits peut nécessiter une prise de rendez-vous et se fait au pied de l'immeuble ou de la propriété (le transporteur ne monte pas les étages). Voir notre page <a href="{{ url('/livraison') }}">Livraison</a> pour le détail.</p>
+                        <h3>Wie wird Brennholz geliefert?</h3>
+                        <p>Brennholz wird als Raummeter oder im Netz auf Palette verkauft. Wegen Gewicht und Volumen kann für diese Produkte eine Terminvereinbarung nötig sein; geliefert wird bis an den Bordstein oder die Grundstücksgrenze (die Spedition trägt nicht in die Etagen). Siehe unsere Seite <a href="{{ url('/livraison') }}">Versand</a> für Einzelheiten.</p>
                     </div>
                     <div class="desc">
-                        <h3>Comment savoir si un outil porté convient à mon tracteur ?</h3>
-                        <p>Chaque broyeur, benne ou fourche indique sur sa fiche la puissance de tracteur conseillée, le poids et le type d'attelage. Restez dans la plage annoncée : en dessous, la prise de force peine et le rotor ne monte pas en régime ; au-dessus, c'est la transmission de l'outil qui souffre. En cas de doute, indiquez-nous le modèle de votre tracteur avant de commander.</p>
+                        <h3>Woran erkenne ich, ob ein Anbaugerät zu meinem Traktor passt?</h3>
+                        <p>Bei jedem Mulcher, jeder Kippmulde und jeder Gabel nennt das Datenblatt die empfohlene Traktorleistung, das Gewicht und die Anbauart. Bleiben Sie im angegebenen Bereich: darunter quält sich die Zapfwelle und der Rotor kommt nicht auf Drehzahl, darüber leidet das Getriebe des Geräts. Im Zweifel nennen Sie uns vor der Bestellung Ihr Traktormodell.</p>
                     </div>
                     <div class="desc">
-                        <h3>Proposez-vous des devis pour les professionnels ou les grosses quantités ?</h3>
-                        <p>Oui, notamment pour les commandes de bois de chauffage en volume ou l'équipement d'un commerce. Contactez-nous via le <a href="{{ route('contact.index') }}">formulaire de contact</a> en précisant votre besoin.</p>
+                        <h3>Bieten Sie Angebote für Gewerbe oder große Mengen an?</h3>
+                        <p>Ja, insbesondere für Brennholzbestellungen in größeren Mengen oder die Ausstattung eines Betriebs. Kontaktieren Sie uns über das <a href="{{ route('contact.index') }}">Kontaktformular</a> en précisant votre besoin.</p>
                     </div>
                     <div class="desc">
-                        <h3>Une autre question ?</h3>
-                        <p>Notre équipe vous répond via le <a href="{{ route('contact.index') }}">formulaire de contact</a>
+                        <h3>Noch eine Frage?</h3>
+                        <p>Unser Team antwortet Ihnen über das <a href="{{ route('contact.index') }}">Kontaktformular</a>
                             @if ($settings->whatsapp_number)
                                 ou par WhatsApp.
                             @else

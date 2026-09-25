@@ -1,6 +1,6 @@
 @extends('layouts.shop')
 
-@section('title', 'Suivi de commande')
+@section('title', 'Sendungsverfolgung')
 
 @section('content')
     <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm fh5co-cover-compact" role="banner" style="background-image:url('{{ asset('images/hero-boutique.jpg') }}');">
@@ -10,7 +10,7 @@
                 <div class="col-md-8 col-md-offset-2 text-center">
                     <div class="display-t">
                         <div class="display-tc animate-box" data-animate-effect="fadeIn">
-                            <h1>Suivi de commande</h1>
+                            <h1>Sendungsverfolgung</h1>
                         </div>
                     </div>
                 </div>
@@ -23,15 +23,15 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="tracking-form">
-                        <h2>Où en est ma commande&nbsp;?</h2>
-                        <p>Saisissez votre numéro de commande et l'e-mail utilisé lors de l'achat.</p>
+                        <h2>Wo ist meine Bestellung?</h2>
+                        <p>Geben Sie Ihre Bestellnummer und die beim Kauf verwendete E-Mail-Adresse ein.</p>
 
                         <form method="POST" action="{{ route('tracking.search') }}">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="order_number">Numéro de commande</label>
+                                        <label for="order_number">Bestellnummer</label>
                                         <input type="text" name="order_number" id="order_number" value="{{ old('order_number') }}" class="form-control" placeholder="AM-20260101-XXXX" required>
                                         @error('order_number')
                                             <small class="tracking-error">{{ $message }}</small>
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="email">E-mail de la commande</label>
+                                        <label for="email">E-Mail der Bestellung</label>
                                         <input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control" required>
                                         @error('email')
                                             <small class="tracking-error">{{ $message }}</small>
@@ -48,7 +48,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-lg tracking-submit">Suivre ma commande</button>
+                            <button type="submit" class="btn btn-primary btn-lg tracking-submit">Bestellung verfolgen</button>
                         </form>
                     </div>
 
@@ -63,7 +63,7 @@
                             <section class="tracking-result">
                                 <header class="tracking-result-header">
                                     <div>
-                                        <span class="tracking-result-label">Commande</span>
+                                        <span class="tracking-result-label">Bestellung</span>
                                         <strong>{{ $order->order_number }}</strong>
                                     </div>
                                     <span class="tracking-badge {{ $isCancelled ? 'is-cancelled' : '' }}">{{ $order->status->label() }}</span>
@@ -97,7 +97,7 @@
                                     </ol>
                                 @endif
 
-                                <h3>Détail</h3>
+                                <h3>Details</h3>
                                 <ul class="checkout-items">
                                     @foreach ($order->items as $item)
                                         <li>
@@ -116,15 +116,15 @@
 
                                 <div class="checkout-totals">
                                     <div class="checkout-total-row">
-                                        <span>Sous-total</span>
+                                        <span>Zwischensumme</span>
                                         <span>{{ number_format((float) $order->subtotal, 2) }}&nbsp;{{ $settings->currency_symbol }}</span>
                                     </div>
                                     <div class="checkout-total-row">
-                                        <span>Livraison</span>
+                                        <span>Versand</span>
                                         <span>{{ (float) $order->shipping === 0.0 ? 'Offerte' : number_format((float) $order->shipping, 2).' '.$settings->currency_symbol }}</span>
                                     </div>
                                     <div class="checkout-total-row is-grand">
-                                        <span>Total</span>
+                                        <span>Gesamt</span>
                                         <span>{{ number_format((float) $order->total, 2) }}&nbsp;{{ $settings->currency_symbol }}</span>
                                     </div>
                                 </div>
@@ -134,18 +134,18 @@
                                        class="btn btn-primary btn-outline" target="_blank" rel="noopener">
                                         Télécharger la facture (PDF)
                                     </a>
-                                    <a href="{{ route('contact.index') }}" class="tracking-help">Une question sur cette commande&nbsp;?</a>
+                                    <a href="{{ route('contact.index') }}" class="tracking-help">Eine Frage zu dieser Bestellung?</a>
                                 </div>
                             </section>
                         @else
                             <div class="tracking-notfound">
-                                <h3>Aucune commande trouvée</h3>
+                                <h3>Keine Bestellung gefunden</h3>
                                 <p>
                                     Ce numéro et cet e-mail ne correspondent à aucune commande. Vérifiez le numéro
                                     figurant dans votre e-mail de confirmation — il commence par
                                     <strong>AM-</strong> — et l'adresse utilisée lors de l'achat.
                                 </p>
-                                <a href="{{ route('contact.index') }}" class="btn btn-primary btn-outline">Contacter le service client</a>
+                                <a href="{{ route('contact.index') }}" class="btn btn-primary btn-outline">Kundenservice kontaktieren</a>
                             </div>
                         @endif
                     @endif

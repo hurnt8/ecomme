@@ -1,6 +1,6 @@
 @extends('layouts.shop')
 
-@section('title', 'Motoculture, jardin & chauffage au bois')
+@section('title', 'Motorgeräte, Garten & Holzheizung')
 @section('meta_description', $settings->description)
 
 @section('content')
@@ -23,7 +23,7 @@
                                         @if ($banner->subtitle)
                                             <p class="hero-tagline">{{ $banner->subtitle }}</p>
                                         @endif
-                                        <a href="{{ $banner->link_url ?: route('catalog') }}" class="hero-btn">Achetez maintenant</a>
+                                        <a href="{{ $banner->link_url ?: route('catalog') }}" class="hero-btn">Jetzt kaufen</a>
                                     </div>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@
                                     <div class="hero-content">
                                         <h2 class="hero-title">{{ $settings->tagline }}</h2>
                                         <p class="hero-tagline">{{ $settings->site_name }}</p>
-                                        <a href="{{ route('catalog') }}" class="hero-btn">Achetez maintenant</a>
+                                        <a href="{{ route('catalog') }}" class="hero-btn">Jetzt kaufen</a>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
         <section class="home-section">
             <div class="container">
                 <div class="home-heading">
-                    <h2>Acheter par catégorie</h2>
+                    <h2>Nach Kategorie einkaufen</h2>
                 </div>
                 <div class="owl-carousel home-carousel js-home-carousel" data-items="6" data-items-laptop="5" data-items-tablet="4" data-items-mobile="2">
                     @foreach ($categories as $category)
@@ -68,7 +68,7 @@
                                 @endif
                             </a>
                             <div class="home-cat-title"><a href="{{ $url }}">{{ $category->name }}</a></div>
-                            <div class="home-cat-total">{{ $category->products_count }} {{ $category->products_count > 1 ? 'Produits' : 'Produit' }}</div>
+                            <div class="home-cat-total">{{ $category->products_count }} {{ $category->products_count > 1 ? 'Produkte' : 'Produkt' }}</div>
                         </div>
                     @endforeach
                 </div>
@@ -83,8 +83,8 @@
         <section id="fh5co-heating" class="home-section">
             <div class="container">
                 <div class="home-heading">
-                    <h2>La saison du chauffage au bois</h2>
-                    <p>Bûches, granulés et poêles — avec les tronçonneuses pour préparer l'hiver.</p>
+                    <h2>Die Saison für Holzheizung</h2>
+                    <p>Scheitholz, Pellets und Öfen — mit den Kettensägen für die Wintervorbereitung.</p>
                 </div>
                 <div class="owl-carousel home-carousel js-home-carousel" data-items="5" data-items-laptop="4" data-items-tablet="3" data-items-mobile="2">
                     @foreach ($heatingProducts as $product)
@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="text-center home-more">
-                    <a href="{{ route('catalog', ['category' => 'bois-chauffage']) }}" class="btn btn-primary btn-outline btn-lg">Voir tout le bois &amp; chauffage</a>
+                    <a href="{{ route('catalog', ['category' => 'bois-chauffage']) }}" class="btn btn-primary btn-outline btn-lg">Brennholz &amp; Heizen ansehen</a>
                 </div>
             </div>
         </section>
@@ -103,7 +103,7 @@
         <section class="home-section">
             <div class="container">
                 <div class="home-heading">
-                    <h2>Nos offres du jour</h2>
+                    <h2>Unsere Angebote des Tages</h2>
                 </div>
                 <div class="owl-carousel home-carousel js-home-carousel" data-items="5" data-items-laptop="4" data-items-tablet="3" data-items-mobile="2">
                     @foreach ($saleProducts as $product)
@@ -130,7 +130,7 @@
                                         <span class="home-promo-kicker">{{ $banner->subtitle }}</span>
                                     @endif
                                     <span class="home-promo-title">{{ $banner->title }}</span>
-                                    <span class="home-promo-btn">Achetez maintenant</span>
+                                    <span class="home-promo-btn">Jetzt kaufen</span>
                                 </span>
                             </a>
                         </div>
@@ -144,7 +144,7 @@
         <section id="fh5co-bestsellers" class="home-section">
             <div class="container">
                 <div class="home-heading">
-                    <h2>Meilleures ventes</h2>
+                    <h2>Bestseller</h2>
                 </div>
                 <div class="owl-carousel home-carousel js-home-carousel" data-items="5" data-items-laptop="4" data-items-tablet="3" data-items-mobile="2">
                     @foreach ($bestsellerProducts as $product)
@@ -158,7 +158,7 @@
     <section id="fh5co-product" class="home-section">
         <div class="container">
             <div class="home-heading">
-                <h2>Nouveaux produits</h2>
+                <h2>Neue Produkte</h2>
             </div>
             <div class="owl-carousel home-carousel js-home-carousel" data-items="4" data-items-laptop="4" data-items-tablet="3" data-items-mobile="2">
                 @foreach ($latestProducts as $product)
@@ -167,7 +167,7 @@
             </div>
 
             <div class="text-center home-more">
-                <a href="{{ route('catalog') }}" class="btn btn-primary btn-outline btn-lg">Voir toute la boutique</a>
+                <a href="{{ route('catalog') }}" class="btn btn-primary btn-outline btn-lg">Gesamtes Sortiment ansehen</a>
             </div>
         </div>
     </section>
@@ -178,22 +178,22 @@
                 <div class="col-md-4 col-sm-4 text-center">
                     <div class="feature-center animate-box" data-animate-effect="fadeIn">
                         <span class="icon"><i class="icon-credit-card"></i></span>
-                        <h3>Paiement sécurisé</h3>
-                        <p>Réglez votre commande par virement bancaire en toute confiance, avec confirmation immédiate par e-mail.</p>
+                        <h3>Sichere Zahlung</h3>
+                        <p>Bezahlen Sie Ihre Bestellung bequem per Banküberweisung, mit sofortiger Bestätigung per E-Mail.</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-4 text-center">
                     <div class="feature-center animate-box" data-animate-effect="fadeIn">
                         <span class="icon"><i class="icon-wallet"></i></span>
-                        <h3>Conseil avant achat</h3>
-                        <p>Un doute sur la puissance, la largeur de coupe ou la compatibilité ? Appelez-nous avant de commander.</p>
+                        <h3>Beratung vor dem Kauf</h3>
+                        <p>Unsicher bei Leistung, Schnittbreite oder Kompatibilität? Rufen Sie uns vor der Bestellung an.</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-4 text-center">
                     <div class="feature-center animate-box" data-animate-effect="fadeIn">
                         <span class="icon"><i class="icon-paper-plane"></i></span>
-                        <h3>Livraison sur palette</h3>
-                        <p>Livraison sur rendez-vous et suivi à chaque étape, offerte dès {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }} d'achat.</p>
+                        <h3>Palettenlieferung</h3>
+                        <p>Lieferung nach Terminvereinbarung mit Sendungsverfolgung, kostenlos ab {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }} Bestellwert.</p>
                     </div>
                 </div>
             </div>
@@ -204,7 +204,7 @@
         <section class="home-section home-blog">
             <div class="container">
                 <div class="home-heading">
-                    <h2>Du blog</h2>
+                    <h2>Aus dem Blog</h2>
                 </div>
                 <div class="owl-carousel home-carousel js-home-carousel" data-items="3" data-items-laptop="3" data-items-tablet="2" data-items-mobile="1" data-gap="30">
                     @foreach ($blogPosts as $post)
@@ -232,8 +232,8 @@
             <div class="container">
                 <div class="row animate-box">
                     <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                        <span>Avis</span>
-                        <h2>Ils nous font confiance</h2>
+                        <span>Bewertungen</span>
+                        <h2>Sie vertrauen uns</h2>
                     </div>
                 </div>
                 <div class="row">

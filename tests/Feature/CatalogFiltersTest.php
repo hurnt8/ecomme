@@ -13,7 +13,7 @@ it('shows a product count next to each category in the sidebar', function () {
     // Only the two active products are counted; the inactive one would 404 from the grid.
     $html = $response->getContent();
     // Wide enough to span the whole category list (the markup is deeply indented, and the
-    // "Toutes les pièces" entry comes first).
+    // "Alle Artikel" entry comes first).
     $sidebar = substr($html, strpos($html, 'catalog-filter-list'), 3000);
 
     expect($sidebar)->toContain('Mobilier')
@@ -52,6 +52,6 @@ it('offers a way back to the full catalog when nothing matches', function () {
 
     $this->get(route('catalog', ['min_price' => 99999]))
         ->assertOk()
-        ->assertSee('Aucune pièce ne correspond')
-        ->assertSee('Voir toute la boutique');
+        ->assertSee('Kein Artikel entspricht')
+        ->assertSee('Gesamtes Sortiment ansehen');
 });

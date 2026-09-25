@@ -27,7 +27,7 @@ class NewsletterSubscribeRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.unique' => 'Cette adresse e-mail est déjà inscrite à la newsletter.',
+            'email.unique' => 'Diese E-Mail-Adresse ist bereits für den Newsletter angemeldet.',
         ];
     }
 }

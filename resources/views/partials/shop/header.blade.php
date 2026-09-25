@@ -10,9 +10,9 @@
     @if (auth()->user()->isStaff())
         <div class="admin-return-bar">
             <div class="container">
-                <span>Connecté en tant que <strong>{{ auth()->user()->name }}</strong> — {{ auth()->user()->role->label() }}</span>
+                <span>Angemeldet als <strong>{{ auth()->user()->name }}</strong> — {{ auth()->user()->role->label() }}</span>
                 <a href="{{ auth()->user()->isSupervisor() ? route('admin.commandes.index') : route('admin.dashboard') }}">
-                    ← Retour à l'administration
+                    ← Zurück zur Verwaltung
                 </a>
             </div>
         </div>
@@ -36,26 +36,26 @@
                 </div>
 
                 <form class="site-header-search" action="{{ route('catalog') }}" method="GET" role="search">
-                    <select name="category" aria-label="Catégorie">
-                        <option value="">Toutes les catégories</option>
+                    <select name="category" aria-label="Kategorie">
+                        <option value="">Alle Kategorien</option>
                         @foreach ($navCategories as $category)
                             <option value="{{ $category->slug }}" @selected(request('category') === $category->slug)>{{ $category->name }}</option>
                         @endforeach
                     </select>
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher un produit…" aria-label="Rechercher un produit">
-                    <button type="submit">Rechercher</button>
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Produkt suchen…" aria-label="Produkt suchen">
+                    <button type="submit">Suchen</button>
                 </form>
 
                 <div class="site-header-actions">
                     <a href="{{ auth()->check() ? route('account.index') : route('login') }}" class="site-header-account">
                         <i class="icon-user"></i>
                         <span>
-                            <small>Mon compte</small>
-                            <strong>{{ auth()->check() ? auth()->user()->name : 'Connexion / Inscription' }}</strong>
+                            <small>Mein Konto</small>
+                            <strong>{{ auth()->check() ? auth()->user()->name : 'Anmelden / Registrieren' }}</strong>
                         </span>
                     </a>
-                    <a href="{{ route('cart.index') }}" class="site-header-cart" aria-label="Panier ({{ $cartCount }})"
-                       x-data :aria-label="`Panier (${$store.cart.count})`">
+                    <a href="{{ route('cart.index') }}" class="site-header-cart" aria-label="Warenkorb ({{ $cartCount }})"
+                       x-data :aria-label="`Warenkorb (${$store.cart.count})`">
                         <i class="icon-shopping-cart"></i>
                         <span class="site-header-cart-count" x-text="$store.cart.count">{{ $cartCount }}</span>
                     </a>
@@ -65,8 +65,8 @@
                      basket stays out of the burger panel so its count is readable without opening
                      anything; site.js reuses this burger rather than injecting its own. --}}
                 <div class="fh5co-nav-toggle-col">
-                    <a href="{{ route('cart.index') }}" class="fh5co-mobile-cart" aria-label="Panier ({{ $cartCount }})"
-                       x-data :aria-label="`Panier (${$store.cart.count})`">
+                    <a href="{{ route('cart.index') }}" class="fh5co-mobile-cart" aria-label="Warenkorb ({{ $cartCount }})"
+                       x-data :aria-label="`Warenkorb (${$store.cart.count})`">
                         <i class="icon-shopping-cart"></i>
                         {{-- Rendered even for an empty basket, hidden, so the first item added in the
                              background can show it. `hidden` rather than x-show: x-show defers hiding
@@ -75,7 +75,7 @@
                         <span class="fh5co-mobile-cart-count" :hidden="$store.cart.count === 0" x-text="$store.cart.count"
                               @if ($cartCount === 0) hidden @endif>{{ $cartCount }}</span>
                     </a>
-                    <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false"><i></i></a>
+                    <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" aria-label="Menü öffnen" aria-expanded="false"><i></i></a>
                 </div>
             </div>
         </div>
@@ -86,26 +86,26 @@
             <div class="site-header-bar-row">
                 <div class="menu-1">
                     <ul>
-                        <li @class(['active' => request()->routeIs('home')])><a href="{{ route('home') }}">Accueil</a></li>
-                        <li @class(['active' => request()->routeIs('pages.about')])><a href="{{ route('pages.about') }}">À propos</a></li>
+                        <li @class(['active' => request()->routeIs('home')])><a href="{{ route('home') }}">Startseite</a></li>
+                        <li @class(['active' => request()->routeIs('pages.about')])><a href="{{ route('pages.about') }}">Über uns</a></li>
                         <li @class(['has-dropdown', 'active' => request()->routeIs('catalog', 'product.show')])>
-                            <a href="{{ route('catalog') }}">Boutique</a>
+                            <a href="{{ route('catalog') }}">Shop</a>
                             <ul class="dropdown">
-                                <li><a href="{{ route('catalog') }}">Toute la boutique</a></li>
+                                <li><a href="{{ route('catalog') }}">Gesamtes Sortiment</a></li>
                                 @foreach ($navCategories as $category)
                                     <li><a href="{{ route('catalog', ['category' => $category->slug]) }}">{{ $category->name }}</a></li>
                                 @endforeach
-                                <li><a href="{{ route('catalog', ['on_sale' => 1]) }}">Promotions</a></li>
+                                <li><a href="{{ route('catalog', ['on_sale' => 1]) }}">Angebote</a></li>
                             </ul>
                         </li>
-                        <li @class(['active' => request()->routeIs('account.*')])><a href="{{ auth()->check() ? route('account.index') : route('login') }}">Mon compte</a></li>
-                        <li @class(['active' => request()->routeIs('contact.*')])><a href="{{ route('contact.index') }}">Contact</a></li>
-                        <li @class(['active' => request()->routeIs('tracking.*')])><a href="{{ route('tracking.index') }}">Suivi de commande</a></li>
+                        <li @class(['active' => request()->routeIs('account.*')])><a href="{{ auth()->check() ? route('account.index') : route('login') }}">Mein Konto</a></li>
+                        <li @class(['active' => request()->routeIs('contact.*')])><a href="{{ route('contact.index') }}">Kontakt</a></li>
+                        <li @class(['active' => request()->routeIs('tracking.*')])><a href="{{ route('tracking.index') }}">Sendungsverfolgung</a></li>
                     </ul>
                 </div>
 
                 @if ($settings->contact_phone)
-                    <a href="tel:{{ preg_replace('/[^\d+]/', '', $settings->contact_phone) }}" class="site-header-phone">Appelez-nous : {{ $settings->contact_phone }}</a>
+                    <a href="tel:{{ preg_replace('/[^\d+]/', '', $settings->contact_phone) }}" class="site-header-phone">Rufen Sie uns an: {{ $settings->contact_phone }}</a>
                 @endif
             </div>
         </div>
@@ -117,7 +117,7 @@
         <ul>
             <li class="search">
                 <form class="input-group" action="{{ route('catalog') }}" method="GET">
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher..">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Suchen…">
                     <span class="input-group-btn">
                         <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
                     </span>

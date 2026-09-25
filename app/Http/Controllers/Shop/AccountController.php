@@ -36,7 +36,7 @@ class AccountController extends Controller
         $user->save();
 
         return redirect()->route('account.profile')->with('toast', [
-            'message' => 'Votre profil a été mis à jour.',
+            'message' => 'Ihr Profil wurde aktualisiert.',
             'type' => 'success',
         ]);
     }

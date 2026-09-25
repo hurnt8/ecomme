@@ -1,21 +1,21 @@
 @extends('layouts.shop')
 
-@section('title', 'Contact')
-@section('meta_description', 'Contactez ' . $settings->site_name . ' : téléphone, e-mail et formulaire. Réponse sous 24 heures ouvrées.')
+@section('title', 'Kontakt')
+@section('meta_description', 'Kontaktieren Sie ' . $settings->site_name . ': Telefon, E-Mail und Formular. Antwort innerhalb von 24 Werkstunden.')
 
 @section('content')
-    <x-shop.page-hero title="Contact" subtitle="Une question ? Écrivez-nous" image="hero-maison.jpg" />
+    <x-shop.page-hero title="Kontakt" subtitle="Eine Frage? Schreiben Sie uns" image="hero-maison.jpg" />
 
     <div id="fh5co-contact">
         <div class="container">
             <div class="row contact-intro">
                 <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                    <span>Nous écrire</span>
-                    <h2>Une question sur une pièce, une commande ou une livraison ?</h2>
+                    <span>Nachricht senden</span>
+                    <h2>Eine Frage zu einem Teil, einer Bestellung oder einer Lieferung?</h2>
                     <p>
-                        Nous sommes une équipe réduite : c'est l'un de nous qui lira votre message,
-                        et nous répondons sous 24&nbsp;heures ouvrées. Pour une question sur une
-                        commande en cours, indiquez son numéro — la réponse ira plus vite.
+                        Wir sind ein kleines Team: Ihre Nachricht liest einer von uns, und wir antworten
+                        innerhalb von 24&nbsp;Werkstunden. Bei einer Frage zu einer laufenden Bestellung
+                        nennen Sie bitte deren Nummer — dann geht es schneller.
                     </p>
                 </div>
             </div>
@@ -25,7 +25,7 @@
             <div class="row contact-row">
                 <div class="col-md-7 contact-form-col">
                     <div class="contact-panel">
-                        <h3>Envoyez-nous un message</h3>
+                        <h3>Schreiben Sie uns</h3>
 
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -41,38 +41,38 @@
                             @csrf
 
                             <div class="form-group">
-                                <label for="contact-name">Votre nom</label>
+                                <label for="contact-name">Ihr Name</label>
                                 <input type="text" name="name" id="contact-name" value="{{ old('name') }}"
                                        class="form-control @error('name') is-invalid @enderror" required>
                                 @error('name')<span class="field-error">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="contact-email">Votre adresse e-mail</label>
+                                <label for="contact-email">Ihre E-Mail-Adresse</label>
                                 <input type="email" name="email" id="contact-email" value="{{ old('email') }}"
                                        class="form-control @error('email') is-invalid @enderror" required>
                                 @error('email')<span class="field-error">{{ $message }}</span>@enderror
-                                <small class="contact-hint">C'est à cette adresse que nous vous répondrons.</small>
+                                <small class="contact-hint">An diese Adresse senden wir unsere Antwort.</small>
                             </div>
 
                             <div class="form-group">
-                                <label for="contact-subject">Sujet</label>
+                                <label for="contact-subject">Betreff</label>
                                 <input type="text" name="subject" id="contact-subject" value="{{ old('subject') }}"
                                        class="form-control @error('subject') is-invalid @enderror" required>
                                 @error('subject')<span class="field-error">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="contact-message">Votre message</label>
+                                <label for="contact-message">Ihre Nachricht</label>
                                 <textarea name="message" id="contact-message" rows="8"
                                           class="form-control @error('message') is-invalid @enderror" required>{{ old('message') }}</textarea>
                                 @error('message')<span class="field-error">{{ $message }}</span>@enderror
                             </div>
 
                             <div class="contact-submit">
-                                <button type="submit" class="btn btn-primary btn-lg">Envoyer le message</button>
-                                <small>Vos coordonnées servent uniquement à vous répondre. Voir notre
-                                    <a href="{{ route('pages.privacy') }}">politique de confidentialité</a>.</small>
+                                <button type="submit" class="btn btn-primary btn-lg">Nachricht senden</button>
+                                <small>Ihre Kontaktdaten dienen ausschließlich unserer Antwort. Siehe unsere
+                                    <a href="{{ route('pages.privacy') }}">Datenschutzerklärung</a>.</small>
                             </div>
                         </form>
                     </div>
@@ -80,7 +80,7 @@
 
                 <div class="col-md-5 contact-aside-col">
                     <div class="contact-panel contact-panel-muted">
-                        <h3>Nous joindre directement</h3>
+                        <h3>Direkt erreichen</h3>
                         <ul class="contact-details">
                             @if ($settings->contact_phone)
                                 <li>
@@ -90,7 +90,7 @@
                             @endif
                             @if ($settings->contact_email)
                                 <li>
-                                    <span class="contact-details-label">E-mail</span>
+                                    <span class="contact-details-label">E-Mail</span>
                                     <a href="mailto:{{ $settings->contact_email }}">{{ $settings->contact_email }}</a>
                                 </li>
                             @endif
@@ -111,11 +111,11 @@
                     </div>
 
                     <div class="contact-panel contact-panel-muted">
-                        <h3>Horaires</h3>
+                        <h3>Öffnungszeiten</h3>
                         <ul class="contact-hours">
-                            <li><span>Lundi – vendredi</span><strong>9h – 18h</strong></li>
+                            <li><span>Montag – Freitag</span><strong>9h – 18h</strong></li>
                             <li><span>Samedi</span><strong>10h – 17h</strong></li>
-                            <li><span>Dimanche</span><strong>Fermé</strong></li>
+                            <li><span>Sonntag</span><strong>Geschlossen</strong></li>
                         </ul>
                         <p class="contact-hours-note">
                             Les messages reçus le week-end sont traités le lundi matin.
@@ -131,23 +131,23 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <a class="contact-shortcut" href="{{ route('tracking.index') }}">
-                            <strong>Où en est ma commande ?</strong>
+                            <strong>Wo ist meine Bestellung?</strong>
                             <span>Suivez son avancement avec votre numéro de commande.</span>
-                            <em>Suivi de commande</em>
+                            <em>Sendungsverfolgung</em>
                         </a>
                     </div>
                     <div class="col-sm-4">
                         <a class="contact-shortcut" href="{{ route('pages.shipping') }}">
-                            <strong>Délais et frais de livraison</strong>
+                            <strong>Lieferzeiten und Versandkosten</strong>
                             <span>Zones desservies, transporteurs et livraison des pièces volumineuses.</span>
-                            <em>Livraison</em>
+                            <em>Versand</em>
                         </a>
                     </div>
                     <div class="col-sm-4">
                         <a class="contact-shortcut" href="{{ route('pages.returns') }}">
-                            <strong>Retourner un article</strong>
+                            <strong>Einen Artikel zurücksenden</strong>
                             <span>14 jours pour changer d'avis, selon les conditions de retour.</span>
-                            <em>Retours</em>
+                            <em>Rücksendungen</em>
                         </a>
                     </div>
                 </div>

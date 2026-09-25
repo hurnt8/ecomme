@@ -77,7 +77,7 @@ it('matches the order number case-insensitively but still requires the right ema
     $this->post(route('tracking.search'), [
         'order_number' => $order->order_number,
         'email' => 'someone.else@example.com',
-    ])->assertOk()->assertSee('Aucune commande trouvée');
+    ])->assertOk()->assertSee('Keine Bestellung gefunden');
 });
 
 it('places each status correctly on the tracking path', function () {

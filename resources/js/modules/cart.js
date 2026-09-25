@@ -82,7 +82,7 @@ async function send(action, data, button) {
         }));
     } catch (error) {
         reply = { ...(error.response?.data ?? {}), type: 'error' };
-        reply.message ??= "Le panier n'a pas pu être mis à jour. Réessayez.";
+        reply.message ??= "Der Warenkorb konnte nicht aktualisiert werden. Bitte erneut versuchen.";
     }
 
     waiting -= 1;

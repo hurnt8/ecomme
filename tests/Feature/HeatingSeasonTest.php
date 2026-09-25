@@ -42,13 +42,13 @@ it('gives heating its own carousel above the deals', function () {
 
     $response = $this->get('/')->assertOk();
 
-    $response->assertSee('La saison du chauffage au bois');
+    $response->assertSee('Die Saison für Holzheizung');
     $response->assertSee('Bûches de chêne 50 cm');
 
     // Position matters more than presence: the whole point is that heating is seen first.
     $html = $response->getContent();
-    $heating = strpos($html, 'La saison du chauffage au bois');
-    $deals = strpos($html, 'Nos offres du jour');
+    $heating = strpos($html, 'Die Saison für Holzheizung');
+    $deals = strpos($html, 'Unsere Angebote des Tages');
 
     expect($deals)->not->toBeFalse()
         ->and($heating)->not->toBeFalse()
@@ -76,7 +76,7 @@ it('leaves the heating carousel out when nothing is in stock', function () {
 
     $this->get('/')
         ->assertOk()
-        ->assertDontSee('La saison du chauffage au bois');
+        ->assertDontSee('Die Saison für Holzheizung');
 });
 
 it('links the carousel through to the wood category', function () {
@@ -118,7 +118,7 @@ it('keeps out-of-season ranges out of the deals carousel', function () {
     $summer = heatingProduct('piscines', 'Piscine tubulaire soldée');
     $summer->update(['price' => 519, 'compare_at_price' => 700]);
 
-    $deals = carouselSection($this->get('/')->assertOk()->getContent(), 'Nos offres du jour', 'id="fh5co-bestsellers"', 'id="fh5co-product"');
+    $deals = carouselSection($this->get('/')->assertOk()->getContent(), 'Unsere Angebote des Tages', 'id="fh5co-bestsellers"', 'id="fh5co-product"');
 
     expect($deals)->toContain('Palette de granulés')
         ->and($deals)->not->toContain('Piscine tubulaire soldée');
@@ -131,7 +131,7 @@ it('keeps cheap discounted items out of the deals carousel', function () {
     $proper = heatingProduct('bois-chauffage', 'Palette de bûches');
     $proper->update(['price' => 280, 'compare_at_price' => 350]);
 
-    $deals = carouselSection($this->get('/')->assertOk()->getContent(), 'Nos offres du jour', 'id="fh5co-bestsellers"', 'id="fh5co-product"');
+    $deals = carouselSection($this->get('/')->assertOk()->getContent(), 'Unsere Angebote des Tages', 'id="fh5co-bestsellers"', 'id="fh5co-product"');
 
     expect($deals)->toContain('Palette de bûches')
         ->and($deals)->not->toContain('Allume-feu soldé');
@@ -144,7 +144,7 @@ it('limits the bestsellers carousel to cold-season ranges', function () {
     $mower = heatingProduct('tondeuses', 'Tondeuse à gazon vedette');
     $mower->update(['is_bestseller' => true]);
 
-    $best = carouselSection($this->get('/')->assertOk()->getContent(), 'Meilleures ventes', 'id="fh5co-product"');
+    $best = carouselSection($this->get('/')->assertOk()->getContent(), 'Bestseller', 'id="fh5co-product"');
 
     expect($best)->toContain('Bûches densifiées')
         ->and($best)->not->toContain('Tondeuse à gazon vedette');
