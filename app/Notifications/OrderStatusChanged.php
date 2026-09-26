@@ -25,10 +25,12 @@ class OrderStatusChanged extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject("Votre commande {$this->order->order_number} — {$this->order->status->label()}")
-            ->greeting("Bonjour {$this->order->customer_name},")
-            ->line("Le statut de votre commande {$this->order->order_number} a été mis à jour : **{$this->order->status->label()}**.")
-            ->action('Suivre ma commande', url('/suivi'))
-            ->line('Pour suivre votre commande, renseignez son numéro et votre e-mail sur notre page de suivi.');
+            ->subject("Ihre Bestellung {$this->order->order_number} — {$this->order->status->label()}")
+            ->greeting("Guten Tag {$this->order->customer_name},")
+            ->line("Der Status Ihrer Bestellung {$this->order->order_number} wurde aktualisiert: **{$this->order->status->label()}**.")
+            ->action('Bestellung verfolgen', route('tracking.index'))
+            ->line('Geben Sie auf unserer Seite zur Sendungsverfolgung Ihre Bestellnummer und Ihre E-Mail-Adresse ein.')
+            // Without this, Laravel falls back to its own English "Regards,".
+            ->salutation('Mit freundlichen Grüßen,');
     }
 }
