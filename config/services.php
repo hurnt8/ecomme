@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    'google_ads' => [
+        // Vide = tag gtag.js désactivé (utile en local/staging).
+        'id' => env('GOOGLE_ADS_ID'),
+        'conversion_labels' => [
+            'formulaire_1' => env('GOOGLE_ADS_CONVERSION_LABEL_FORMULAIRE_1'),
+        ],
+    ],
+
 ];
