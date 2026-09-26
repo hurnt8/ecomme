@@ -32,18 +32,15 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    {{-- Google tag (gtag.js) — chargé sur toutes les pages boutique ; vide en local si
-         GOOGLE_ADS_ID n'est pas défini, pour ne pas polluer les données de production. --}}
-    @if (config('services.google_ads.id'))
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google_ads.id') }}"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18475917188"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-            gtag('config', '{{ config('services.google_ads.id') }}');
-        </script>
-    @endif
+      gtag('config', 'AW-18475917188');
+    </script>
 </head>
 <body>
     <div id="page">
