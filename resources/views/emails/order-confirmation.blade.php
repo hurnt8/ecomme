@@ -39,6 +39,37 @@
     <h2 style="font-size:16px;margin-top:25px;">Paiement par virement bancaire</h2>
     <p>Merci d'effectuer un virement du montant total ci-dessus en indiquant la référence <strong>{{ $order->order_number }}</strong>. Votre commande sera préparée dès réception et validation du virement.</p>
 
+    {{-- The bank details were missing here: the mail asked for a transfer without saying where to.
+         A customer who closes the confirmation page has nothing left to pay with, so they are
+         repeated in the mail. Hidden entirely when no IBAN is on file, rather than printing an
+         empty "IBAN:" line. --}}
+    @if ($settings->bank_iban)
+        <table style="border-collapse:collapse;margin:14px 0;font-size:14px;">
+            @if ($settings->bank_account_holder)
+                <tr>
+                    <td style="padding:3px 16px 3px 0;color:#777;">Titulaire</td>
+                    <td style="padding:3px 0;">{{ $settings->bank_account_holder }}</td>
+                </tr>
+            @endif
+            @if ($settings->bank_name)
+                <tr>
+                    <td style="padding:3px 16px 3px 0;color:#777;">Banque</td>
+                    <td style="padding:3px 0;">{{ $settings->bank_name }}</td>
+                </tr>
+            @endif
+            <tr>
+                <td style="padding:3px 16px 3px 0;color:#777;">IBAN</td>
+                <td style="padding:3px 0;font-family:monospace;"><strong>{{ $settings->bank_iban }}</strong></td>
+            </tr>
+            @if ($settings->bank_bic)
+                <tr>
+                    <td style="padding:3px 16px 3px 0;color:#777;">BIC</td>
+                    <td style="padding:3px 0;font-family:monospace;">{{ $settings->bank_bic }}</td>
+                </tr>
+            @endif
+        </table>
+    @endif
+
     <p style="color:#777;font-size:13px;">
         Vous pouvez suivre l'état de votre commande à tout moment sur notre page de suivi de commande, avec votre
         numéro de commande et votre e-mail.

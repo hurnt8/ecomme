@@ -70,9 +70,16 @@
 
             {{-- One form spanning both columns: the sidebar inputs and the toolbar's sort control
                  submit together, so sorting never drops the active filters and vice versa. --}}
-            <form method="GET" action="{{ route('catalog') }}" x-data="{ filtersOpen: false }">
-                <input type="hidden" name="search" value="{{ request('search') }}">
-                <input type="hidden" name="category" value="{{ request('category') }}">
+            {{-- The filter form wrapped the product grid, which put every card's add-to-cart form
+                 inside it. Nested forms are invalid HTML: the parser drops the inner one, so the
+                 button posted the filter form (a GET reload) instead of adding to the basket.
+                 The form is now an empty shell and every control joins it by `form="…"`, which
+                 lets the filters and the cards be siblings rather than nested. --}}
+            <form id="catalog-filters" method="GET" action="{{ route('catalog') }}"></form>
+
+            <div x-data="{ filtersOpen: false }">
+                <input type="hidden" name="search" value="{{ request('search') }}" form="catalog-filters">
+                <input type="hidden" name="category" value="{{ request('category') }}" form="catalog-filters">
 
                 <div class="row">
                     <div class="col-md-3">
@@ -108,16 +115,16 @@
                             <div class="catalog-filter-group">
                                 <h3>Prix</h3>
                                 <div class="catalog-filter-price">
-                                    <input type="number" name="min_price" value="{{ request('min_price') }}" class="form-control" placeholder="Min" aria-label="Prix minimum">
+                                    <input type="number" name="min_price" value="{{ request('min_price') }}" form="catalog-filters" class="form-control" placeholder="Min" aria-label="Prix minimum">
                                     <span>–</span>
-                                    <input type="number" name="max_price" value="{{ request('max_price') }}" class="form-control" placeholder="Max" aria-label="Prix maximum">
+                                    <input type="number" name="max_price" value="{{ request('max_price') }}" form="catalog-filters" class="form-control" placeholder="Max" aria-label="Prix maximum">
                                 </div>
                             </div>
 
                             @if (count($colors))
                                 <div class="catalog-filter-group">
                                     <h3>Coloris</h3>
-                                    <select name="color" class="form-control" onchange="this.form.submit()">
+                                    <select name="color" form="catalog-filters" class="form-control" onchange="this.form.submit()">
                                         <option value="">Tous</option>
                                         @foreach ($colors as $color)
                                             <option value="{{ $color }}" @selected(request('color') === $color)>{{ $color }}</option>
@@ -129,7 +136,7 @@
                             @if (count($sizes))
                                 <div class="catalog-filter-group">
                                     <h3>Taille</h3>
-                                    <select name="size" class="form-control" onchange="this.form.submit()">
+                                    <select name="size" form="catalog-filters" class="form-control" onchange="this.form.submit()">
                                         <option value="">Toutes</option>
                                         @foreach ($sizes as $size)
                                             <option value="{{ $size }}" @selected(request('size') === $size)>{{ $size }}</option>
@@ -141,20 +148,20 @@
                             <div class="catalog-filter-group">
                                 <h3>Disponibilité</h3>
                                 <label class="catalog-filter-check">
-                                    <input type="checkbox" name="in_stock" value="1" @checked(request()->boolean('in_stock')) onchange="this.form.submit()">
+                                    <input type="checkbox" name="in_stock" value="1" form="catalog-filters" @checked(request()->boolean('in_stock')) onchange="this.form.submit()">
                                     En stock uniquement
                                 </label>
                                 <label class="catalog-filter-check">
-                                    <input type="checkbox" name="is_new" value="1" @checked(request()->boolean('is_new')) onchange="this.form.submit()">
+                                    <input type="checkbox" name="is_new" value="1" form="catalog-filters" @checked(request()->boolean('is_new')) onchange="this.form.submit()">
                                     Nouveautés
                                 </label>
                                 <label class="catalog-filter-check">
-                                    <input type="checkbox" name="on_sale" value="1" @checked(request()->boolean('on_sale')) onchange="this.form.submit()">
+                                    <input type="checkbox" name="on_sale" value="1" form="catalog-filters" @checked(request()->boolean('on_sale')) onchange="this.form.submit()">
                                     En promotion
                                 </label>
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-block">Appliquer</button>
+                            <button type="submit" form="catalog-filters" class="btn btn-primary btn-block">Appliquer</button>
                             @if ($activeFilters->isNotEmpty())
                                 <a href="{{ route('catalog') }}" class="catalog-filters-reset">Tout réinitialiser</a>
                             @endif
@@ -173,7 +180,7 @@
 
                             <div class="catalog-sort">
                                 <label for="filter-sort">Trier par</label>
-                                <select name="sort" id="filter-sort" class="form-control" onchange="this.form.submit()">
+                                <select name="sort" id="filter-sort" form="catalog-filters" class="form-control" onchange="this.form.submit()">
                                     <option value="newest" @selected($sort === 'newest')>Plus récents</option>
                                     <option value="price_asc" @selected($sort === 'price_asc')>Prix croissant</option>
                                     <option value="price_desc" @selected($sort === 'price_desc')>Prix décroissant</option>
@@ -215,7 +222,7 @@
                         @endif
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 @endsection

@@ -3339,10 +3339,22 @@ html {
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
+/* .product-grid is the catalogue card's photo panel; it carries the same bar, so the reveal has
+   to fire from either container or the bar would stay permanently hidden on the shop page. */
 .home-product-thumb:hover .home-product-add,
-.home-product-thumb:focus-within .home-product-add {
+.home-product-thumb:focus-within .home-product-add,
+.product .product-grid:hover .home-product-add,
+.product .product-grid:focus-within .home-product-add {
     opacity: 1;
     transform: none;
+}
+
+/* On the catalogue card the bar shares the panel with .inner, the dark hover overlay that fills
+   the whole tile. Neither declared a stacking order, so the overlay — later in the cascade and
+   full height — sat over the bar and greyed it out. Lifting the bar is enough; the overlay keeps
+   darkening the photo behind it. */
+.product .product-grid .home-product-add {
+    z-index: 2;
 }
 
 /* No hover on touch screens: keep the button in view. */
@@ -3833,4 +3845,75 @@ html {
 
 [data-cart-body].is-updating {
     opacity: 0.6;
+}
+ * Floating e-mail button.
+ * ====================================================================================== */
+/*
+ * Sits above .gototop (bottom: 20px, height: 50px in the vendored stylesheet) rather than on
+ * top of it. The source snippet used #e91e63, a pink from another project; this takes the
+ * shop's own accent so the button does not read as bolted on.
+ */
+.floating-email {
+    position: fixed;
+    right: 20px;
+    bottom: 82px;
+    z-index: 999;
+    display: flex;
+    width: 54px;
+    height: 54px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--shop-accent);
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.floating-email:hover,
+.floating-email:focus {
+    background: var(--shop-accent-dark);
+    color: #fff;
+    transform: scale(1.08);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+}
+
+/* Keyboard users get a visible ring; the template clears outlines on links globally. */
+.floating-email:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+.floating-email svg {
+    display: block;
+}
+
+/* Thumb-sized targets stack badly on a phone: the button steps aside rather than covering the
+   arrow, and shrinks to leave the basket bar readable. */
+@media (max-width: 768px) {
+    .floating-email {
+        right: 15px;
+        bottom: 76px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .floating-email svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* Respects a reduced-motion preference: the scale on hover is decoration, not information. */
+@media (prefers-reduced-motion: reduce) {
+    .floating-email {
+        transition: none;
+    }
+
+    .floating-email:hover,
+    .floating-email:focus {
+        transform: none;
+    }
 }
