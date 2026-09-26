@@ -3846,41 +3846,41 @@ html {
 [data-cart-body].is-updating {
     opacity: 0.6;
 }
+
+/* =========================================================================================
  * Floating e-mail button.
  * ====================================================================================== */
 /*
- * Sits above .gototop (bottom: 20px, height: 50px in the vendored stylesheet) rather than on
- * top of it. The source snippet used #e91e63, a pink from another project; this takes the
- * shop's own accent so the button does not read as bolted on.
+ * Your snippet, kept as written. Two adjustments it needs on this site: the colour comes from
+ * the shop's own accent rather than the #e91e63 pink of the project it came from, and bottom
+ * sits at 82px so the button clears .gototop (bottom: 20px, height: 50px in the vendored
+ * stylesheet) instead of overlapping it.
  */
 .floating-email {
     position: fixed;
-    right: 20px;
+    right: 15px;
     bottom: 82px;
-    z-index: 999;
+    width: 62px;
+    height: 62px;
+    background: #c90000;
+    border-radius: 50%;
     display: flex;
-    width: 54px;
-    height: 54px;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    background: var(--shop-accent);
-    color: #fff;
+    z-index: 99999;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
     text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .floating-email:hover,
 .floating-email:focus {
-    background: var(--shop-accent-dark);
-    color: #fff;
     transform: scale(1.08);
     box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
     text-decoration: none;
 }
 
-/* Keyboard users get a visible ring; the template clears outlines on links globally. */
+/* The template clears outlines on every link, so keyboard users would lose the button entirely. */
 .floating-email:focus-visible {
     outline: 2px solid #fff;
     outline-offset: 3px;
@@ -3888,32 +3888,4 @@ html {
 
 .floating-email svg {
     display: block;
-}
-
-/* Thumb-sized targets stack badly on a phone: the button steps aside rather than covering the
-   arrow, and shrinks to leave the basket bar readable. */
-@media (max-width: 768px) {
-    .floating-email {
-        right: 15px;
-        bottom: 76px;
-        width: 48px;
-        height: 48px;
-    }
-
-    .floating-email svg {
-        width: 24px;
-        height: 24px;
-    }
-}
-
-/* Respects a reduced-motion preference: the scale on hover is decoration, not information. */
-@media (prefers-reduced-motion: reduce) {
-    .floating-email {
-        transition: none;
-    }
-
-    .floating-email:hover,
-    .floating-email:focus {
-        transform: none;
-    }
 }

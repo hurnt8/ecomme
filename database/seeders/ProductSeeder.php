@@ -53,6 +53,7 @@ class ProductSeeder extends Seeder
         $categoryIds = Category::query()->pluck('id', 'slug');
 
         $missingRanges = [];
+        $skippedWithoutImages = 0;
         $seeded = [];
         $assets = __DIR__.'/assets/products';
 
@@ -64,6 +65,16 @@ class ProductSeeder extends Seeder
                 $categoryId = $categoryIds[$item['range']] ?? null;
                 if ($categoryId === null) {
                     $missingRanges[$item['range']] = true;
+
+                    continue;
+                }
+
+                // The source catalogue carries 108 rows with no photography at all. A product tile
+                // is a photo first, so those listed as placeholders among real ones — and the
+                // catalogue reads as unfinished. Skipped at import rather than deleted afterwards,
+                // or the next db:seed would bring them all back.
+                if (empty($item['images'])) {
+                    $skippedWithoutImages++;
 
                     continue;
                 }
@@ -110,6 +121,11 @@ class ProductSeeder extends Seeder
             throw new \RuntimeException(
                 'Rayons absents de CategorySeeder : '.implode(', ', array_keys($missingRanges))
             );
+        }
+
+        // Reported rather than silent: a shrinking catalogue with no explanation looks like a bug.
+        if ($skippedWithoutImages > 0) {
+            $this->command?->info("{$skippedWithoutImages} produits ignorés : aucune photo dans le catalogue source.");
         }
 
         // Images, in a second pass so the product ids are known, and in bulk for the same reason
