@@ -31,7 +31,7 @@ class RegisteredUserController extends Controller
         $request->session()->regenerate();
 
         return redirect()->route('account.index')->with('toast', [
-            'message' => 'Bienvenue ! Votre compte a été créé.',
+            'message' => 'Willkommen! Ihr Konto wurde erstellt.',
             'type' => 'success',
         ]);
     }

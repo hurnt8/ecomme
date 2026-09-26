@@ -23,7 +23,7 @@ class PasswordResetLinkController extends Controller
         Password::sendResetLink($request->only('email'));
 
         return back()->with('toast', [
-            'message' => 'Si un compte existe avec cette adresse, un lien de réinitialisation vient de lui être envoyé.',
+            'message' => 'Falls zu dieser Adresse ein Konto existiert, wurde soeben ein Link zum Zurücksetzen des Passworts gesendet.',
             'type' => 'success',
         ]);
     }

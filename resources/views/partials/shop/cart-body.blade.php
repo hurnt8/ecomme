@@ -34,15 +34,15 @@
                             <p class="cart-line-meta">
                                 <x-shop.price :price="$item->product->price" />
                                 @if ($item->color)
-                                    <span>Coloris : {{ $item->color }}</span>
+                                    <span>Farbe: {{ $item->color }}</span>
                                 @endif
                                 @if ($item->size)
-                                    <span>Taille : {{ $item->size }}</span>
+                                    <span>Größe: {{ $item->size }}</span>
                                 @endif
                             </p>
 
                             @if ($item->wasCapped)
-                                <p class="cart-line-notice">Quantité ajustée : stock limité à {{ $item->quantity }}.</p>
+                                <p class="cart-line-notice">Menge angepasst: Lagerbestand begrenzt auf {{ $item->quantity }}.</p>
                             @endif
 
                             <div class="cart-line-controls">
@@ -77,7 +77,7 @@
                 @endforeach
             </ul>
 
-            <a href="{{ route('catalog') }}" class="cart-continue">&larr; Continuer mes achats</a>
+            <a href="{{ route('catalog') }}" class="cart-continue">&larr; Weiter einkaufen</a>
         </div>
 
         <div class="col-md-4">
@@ -97,12 +97,12 @@
                 @if ($threshold > 0)
                     <div class="cart-shipping-progress">
                         @if ($missingForFreeShipping > 0)
-                            <p>Plus que <strong>{{ number_format($missingForFreeShipping, 0) }}&nbsp;{{ $settings->currency_symbol }}</strong> pour la livraison offerte.</p>
+                            <p>Nur noch <strong>{{ number_format($missingForFreeShipping, 0) }}&nbsp;{{ $settings->currency_symbol }}</strong> bis zum kostenlosen Versand.</p>
                             <div class="cart-progress-track">
                                 <span style="width: {{ min(100, round($subtotal / $threshold * 100)) }}%"></span>
                             </div>
                         @else
-                            <p class="is-reached"><i class="icon-paper-plane"></i> Livraison offerte&nbsp;!</p>
+                            <p class="is-reached"><i class="icon-paper-plane"></i> Kostenloser Versand&nbsp;!</p>
                         @endif
                     </div>
                 @endif
@@ -110,8 +110,8 @@
                 <a href="{{ route('checkout.index') }}" class="btn btn-primary btn-lg btn-block">Zur Kasse</a>
 
                 <ul class="cart-reassurance">
-                    <li><i class="icon-wallet"></i> 14 jours pour changer d'avis</li>
-                    <li><i class="icon-credit-card"></i> Paiement sécurisé par virement</li>
+                    <li><i class="icon-wallet"></i> 14 Tage Widerrufsrecht</li>
+                    <li><i class="icon-credit-card"></i> Sichere Zahlung per Überweisung</li>
                 </ul>
             </aside>
         </div>
