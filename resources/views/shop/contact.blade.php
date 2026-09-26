@@ -84,7 +84,7 @@
                         <ul class="contact-details">
                             @if ($settings->contact_phone)
                                 <li>
-                                    <span class="contact-details-label">Téléphone</span>
+                                    <span class="contact-details-label">Telefon</span>
                                     <a href="tel:{{ preg_replace('/[^0-9+]/', '', $settings->contact_phone) }}">{{ $settings->contact_phone }}</a>
                                 </li>
                             @endif
@@ -114,11 +114,11 @@
                         <h3>Öffnungszeiten</h3>
                         <ul class="contact-hours">
                             <li><span>Montag – Freitag</span><strong>9h – 18h</strong></li>
-                            <li><span>Samedi</span><strong>10h – 17h</strong></li>
+                            <li><span>Samstag</span><strong>10h – 17h</strong></li>
                             <li><span>Sonntag</span><strong>Geschlossen</strong></li>
                         </ul>
                         <p class="contact-hours-note">
-                            Les messages reçus le week-end sont traités le lundi matin.
+                            Nachrichten, die am Wochenende eingehen, werden am Montagmorgen bearbeitet.
                         </p>
                     </div>
                 </div>
@@ -127,26 +127,26 @@
             {{-- Most contact-form messages are one of these three questions. Answering them here
                  saves the visitor a round trip and us a reply. --}}
             <div class="contact-shortcuts">
-                <h3>Souvent, la réponse est déjà là</h3>
+                <h3>Die Antwort finden Sie oft schon hier</h3>
                 <div class="row">
                     <div class="col-sm-4">
                         <a class="contact-shortcut" href="{{ route('tracking.index') }}">
                             <strong>Wo ist meine Bestellung?</strong>
-                            <span>Suivez son avancement avec votre numéro de commande.</span>
+                            <span>Verfolgen Sie den Status mit Ihrer Bestellnummer.</span>
                             <em>Sendungsverfolgung</em>
                         </a>
                     </div>
                     <div class="col-sm-4">
                         <a class="contact-shortcut" href="{{ route('pages.shipping') }}">
                             <strong>Lieferzeiten und Versandkosten</strong>
-                            <span>Zones desservies, transporteurs et livraison des pièces volumineuses.</span>
+                            <span>Liefergebiete, Spediteure und Lieferung sperriger Teile.</span>
                             <em>Versand</em>
                         </a>
                     </div>
                     <div class="col-sm-4">
                         <a class="contact-shortcut" href="{{ route('pages.returns') }}">
                             <strong>Einen Artikel zurücksenden</strong>
-                            <span>14 jours pour changer d'avis, selon les conditions de retour.</span>
+                            <span>14 Tage Widerrufsrecht gemäß unseren Rückgabebedingungen.</span>
                             <em>Rücksendungen</em>
                         </a>
                     </div>

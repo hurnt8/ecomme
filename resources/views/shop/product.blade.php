@@ -58,7 +58,7 @@
                                             class="product-gallery-thumb"
                                             :class="{ 'is-active': active === {{ $index }} }"
                                             @click="active = {{ $index }}"
-                                            aria-label="Voir l'image {{ $index + 1 }}">
+                                            aria-label="Bild {{ $index + 1 }} ansehen">
                                         <img src="{{ $url }}" alt="">
                                     </button>
                                 @endforeach
@@ -86,7 +86,7 @@
                                 </span>
                                 <span class="product-summary-rating-count">
                                     {{ number_format($averageRating, 1, ',', ' ') }}/5 &middot; {{ $product->reviews->count() }}
-                                    {{ \Illuminate\Support\Str::plural('avis', $product->reviews->count()) }}
+                                    {{ $product->reviews->count() === 1 ? 'Bewertung' : 'Bewertungen' }}
                                 </span>
                             </div>
                         @endif
@@ -140,9 +140,9 @@
                                          siblings): that construction falls apart inside a flex parent,
                                          overlapping the buttons. Plain flex, explicitly sized. --}}
                                     <div class="product-quantity">
-                                        <button type="button" class="btn btn-default" @click="quantity = Math.max(1, quantity - 1)" aria-label="Diminuer la quantité">&minus;</button>
+                                        <button type="button" class="btn btn-default" @click="quantity = Math.max(1, quantity - 1)" aria-label="Menge verringern">&minus;</button>
                                         <input id="product-quantity" type="number" name="quantity" x-model.number="quantity" min="1" :max="max" class="form-control text-center">
-                                        <button type="button" class="btn btn-default" @click="quantity = Math.min(max, quantity + 1)" aria-label="Augmenter la quantité">+</button>
+                                        <button type="button" class="btn btn-default" @click="quantity = Math.min(max, quantity + 1)" aria-label="Menge erhöhen">+</button>
                                     </div>
                                 </div>
 
@@ -151,9 +151,9 @@
 
                             <p class="product-stock {{ $product->stock <= 3 ? 'is-low' : '' }}">
                                 @if ($product->stock <= 3)
-                                    Plus que {{ $product->stock }} en stock — commandez vite
+                                    Nur noch {{ $product->stock }} auf Lager — jetzt bestellen
                                 @else
-                                    En stock ({{ $product->stock }} disponibles)
+                                    Auf Lager ({{ $product->stock }} verfügbar)
                                 @endif
                             </p>
                         @else
@@ -164,10 +164,10 @@
                         <ul class="product-reassurance">
                             <li>
                                 <i class="icon-paper-plane"></i>
-                                Livraison offerte dès {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }} d'achat
+                                Kostenloser Versand ab {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }} Bestellwert
                             </li>
-                            <li><i class="icon-wallet"></i> 14 jours pour changer d'avis</li>
-                            <li><i class="icon-credit-card"></i> Paiement sécurisé par virement bancaire</li>
+                            <li><i class="icon-wallet"></i> 14 Tage Widerrufsrecht</li>
+                            <li><i class="icon-credit-card"></i> Sichere Zahlung per Banküberweisung</li>
                         </ul>
                     </div>
                 </div>
@@ -179,7 +179,7 @@
                         <ul class="fh5co-tab-nav">
                             <li class="active"><a href="#" data-tab="1"><span class="icon visible-xs"><i class="icon-file"></i></span><span class="hidden-xs">Beschreibung</span></a></li>
                             <li><a href="#" data-tab="2"><span class="icon visible-xs"><i class="icon-bar-graph"></i></span><span class="hidden-xs">Versand &amp; Rücksendungen</span></a></li>
-                            <li><a href="#" data-tab="3"><span class="icon visible-xs"><i class="icon-star"></i></span><span class="hidden-xs">Avis ({{ $product->reviews->count() }})</span></a></li>
+                            <li><a href="#" data-tab="3"><span class="icon visible-xs"><i class="icon-star"></i></span><span class="hidden-xs">Bewertungen ({{ $product->reviews->count() }})</span></a></li>
                         </ul>
 
                         <div class="fh5co-tab-content-wrap">
@@ -192,7 +192,7 @@
                                 @if (mb_strlen($product->description) > 600)
                                     <div class="product-description" x-data="{ open: false }" :class="{ 'is-collapsed': ! open }">
                                         <div class="product-description-text">{{ $product->description }}</div>
-                                        <button type="button" class="product-description-toggle" x-cloak @click="open = ! open" :aria-expanded="open.toString()" x-text="open ? 'Réduire' : 'Lire la suite'">Weiterlesen</button>
+                                        <button type="button" class="product-description-toggle" x-cloak @click="open = ! open" :aria-expanded="open.toString()" x-text="open ? 'Weniger anzeigen' : 'Weiterlesen'">Weiterlesen</button>
                                     </div>
                                 @else
                                     <p style="white-space:pre-line;">{{ $product->description }}</p>
@@ -202,12 +202,12 @@
                             <div class="fh5co-tab-content tab-content" data-tab-content="2">
                                 <h3>Versand</h3>
                                 <ul>
-                                    <li>Livraison offerte dès {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }} d'achat, hors zone euro : frais de {{ number_format((float) $settings->international_shipping_fee, 0) }}&nbsp;{{ $settings->currency_symbol }} supplémentaires.</li>
+                                    <li>Kostenloser Versand ab {{ number_format((float) $settings->free_shipping_threshold, 0) }}&nbsp;{{ $settings->currency_symbol }} Bestellwert, außerhalb der Eurozone fallen {{ number_format((float) $settings->international_shipping_fee, 0) }}&nbsp;{{ $settings->currency_symbol }} zusätzliche Gebühren an.</li>
                                     <li>Versand innerhalb von 2 bis 5 Werktagen je nach Verfügbarkeit.</li>
                                 </ul>
                                 <h3>Rücksendungen</h3>
                                 <ul>
-                                    <li>14 jours pour changer d'avis, selon les conditions de retour.</li>
+                                    <li>14 Tage Widerrufsrecht gemäß unseren Rückgabebedingungen.</li>
                                     <li>Artikel in der Originalverpackung zurücksenden.</li>
                                 </ul>
                             </div>

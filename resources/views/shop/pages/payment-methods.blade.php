@@ -1,7 +1,7 @@
 @extends('layouts.shop')
 
 @section('title', 'Zahlungsarten')
-@section('meta_description', 'Comment régler votre commande chez ' . $settings->site_name . '.')
+@section('meta_description', 'So bezahlen Sie Ihre Bestellung bei ' . $settings->site_name . '.')
 
 @section('content')
     <x-shop.page-hero title="Zahlungsarten" image="hero-objets.jpg" />
@@ -16,14 +16,14 @@
                         @if ($settings->bank_iban)
                             <p>
                                 @if ($settings->bank_account_holder)
-                                    Titulaire : {{ $settings->bank_account_holder }}<br>
+                                    Kontoinhaber: {{ $settings->bank_account_holder }}<br>
                                 @endif
                                 @if ($settings->bank_name)
-                                    Banque : {{ $settings->bank_name }}<br>
+                                    Bank: {{ $settings->bank_name }}<br>
                                 @endif
-                                IBAN : <strong>{{ $settings->bank_iban }}</strong>
+                                IBAN: <strong>{{ $settings->bank_iban }}</strong>
                                 @if ($settings->bank_bic)
-                                    <br>BIC : {{ $settings->bank_bic }}
+                                    <br>BIC: {{ $settings->bank_bic }}
                                 @endif
                             </p>
                         @endif

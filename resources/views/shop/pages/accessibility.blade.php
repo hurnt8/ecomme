@@ -1,7 +1,7 @@
 @extends('layouts.shop')
 
 @section('title', 'Barrierefreiheit')
-@section('meta_description', 'Engagement d\'accessibilité du site ' . $settings->site_name . '.')
+@section('meta_description', 'Engagement für Barrierefreiheit der Website ' . $settings->site_name . '.')
 
 @section('content')
     <x-shop.page-hero title="Barrierefreiheit" image="hero-maison.jpg" />
@@ -29,7 +29,7 @@
                     </div>
                     <div class="desc">
                         <h3>Auf eine Hürde gestoßen?</h3>
-                        <p>Wenn Ihnen ein Teil der Website schwer zugänglich erscheint, teilen Sie es uns über unser <a href="{{ route('contact.index') }}">Kontaktformular</a> : nous en tiendrons compte dans nos prochaines mises à jour.</p>
+                        <p>Wenn Ihnen ein Teil der Website schwer zugänglich erscheint, teilen Sie es uns über unser <a href="{{ route('contact.index') }}">Kontaktformular</a> mit: wir berücksichtigen dies bei künftigen Aktualisierungen.</p>
                     </div>
                 </div>
             </div>

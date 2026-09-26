@@ -3,13 +3,13 @@
 @section('title', 'Mein Profil')
 
 @section('content')
-    <x-shop.page-hero title="Mon profil" image="hero-objets.jpg" />
+    <x-shop.page-hero title="Mein Profil" image="hero-objets.jpg" />
 
     <div id="fh5co-about">
         <div class="container">
             <div class="row animate-box">
                 <div class="col-md-6 col-md-offset-3">
-                    <p style="margin-bottom:20px;"><a href="{{ route('account.index') }}">&larr; Retour à mes commandes</a></p>
+                    <p style="margin-bottom:20px;"><a href="{{ route('account.index') }}">&larr; Zurück zu meinen Bestellungen</a></p>
 
                     <form method="POST" action="{{ route('account.profile.update') }}">
                         @csrf
@@ -17,7 +17,7 @@
 
                         <div class="row form-group">
                             <div class="col-md-12">
-                                <label for="name">Nom</label>
+                                <label for="name">Name</label>
                                 <input id="name" type="text" name="name" value="{{ old('name', auth()->user()->name) }}" class="form-control" required>
                                 @error('name')<span style="color:var(--shop-accent);font-size:12px;">{{ $message }}</span>@enderror
                             </div>
@@ -58,7 +58,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" value="Enregistrer" class="btn btn-primary">
+                            <input type="submit" value="Speichern" class="btn btn-primary">
                         </div>
                     </form>
                 </div>

@@ -70,9 +70,9 @@
                                 </header>
 
                                 <p class="tracking-placed">
-                                    Passée le {{ $order->created_at->translatedFormat('j F Y') }}
+                                    Aufgegeben am {{ $order->created_at->translatedFormat('j F Y') }}
                                     @if ($order->paid_at)
-                                        · Paiement reçu le {{ $order->paid_at->translatedFormat('j F Y') }}
+                                        · Zahlung erhalten am {{ $order->paid_at->translatedFormat('j F Y') }}
                                     @endif
                                 </p>
 
@@ -107,7 +107,7 @@
                                             </span>
                                             <span class="checkout-item-body">
                                                 <span class="checkout-item-name">{{ $item->product_name }}</span>
-                                                <small>{{ number_format((float) $item->unit_price, 2) }}&nbsp;{{ $settings->currency_symbol }} l'unité</small>
+                                                <small>{{ number_format((float) $item->unit_price, 2) }}&nbsp;{{ $settings->currency_symbol }} pro Einheit</small>
                                             </span>
                                             <span class="checkout-item-total">{{ number_format((float) $item->unit_price * $item->quantity, 2) }}&nbsp;{{ $settings->currency_symbol }}</span>
                                         </li>
@@ -121,7 +121,7 @@
                                     </div>
                                     <div class="checkout-total-row">
                                         <span>Versand</span>
-                                        <span>{{ (float) $order->shipping === 0.0 ? 'Offerte' : number_format((float) $order->shipping, 2).' '.$settings->currency_symbol }}</span>
+                                        <span>{{ (float) $order->shipping === 0.0 ? 'Kostenlos' : number_format((float) $order->shipping, 2).' '.$settings->currency_symbol }}</span>
                                     </div>
                                     <div class="checkout-total-row is-grand">
                                         <span>Gesamt</span>
@@ -132,7 +132,7 @@
                                 <div class="tracking-actions">
                                     <a href="{{ \Illuminate\Support\Facades\URL::signedRoute('orders.invoice', ['order' => $order->order_number]) }}"
                                        class="btn btn-primary btn-outline" target="_blank" rel="noopener">
-                                        Télécharger la facture (PDF)
+                                        Rechnung herunterladen (PDF)
                                     </a>
                                     <a href="{{ route('contact.index') }}" class="tracking-help">Eine Frage zu dieser Bestellung?</a>
                                 </div>
@@ -141,9 +141,9 @@
                             <div class="tracking-notfound">
                                 <h3>Keine Bestellung gefunden</h3>
                                 <p>
-                                    Ce numéro et cet e-mail ne correspondent à aucune commande. Vérifiez le numéro
-                                    figurant dans votre e-mail de confirmation — il commence par
-                                    <strong>AM-</strong> — et l'adresse utilisée lors de l'achat.
+                                    Diese Bestellnummer und E-Mail-Adresse stimmen mit keiner Bestellung überein.
+                                    Überprüfen Sie die Nummer aus Ihrer Bestätigungs-E-Mail — sie beginnt mit
+                                    <strong>AM-</strong> — sowie die beim Kauf verwendete E-Mail-Adresse.
                                 </p>
                                 <a href="{{ route('contact.index') }}" class="btn btn-primary btn-outline">Kundenservice kontaktieren</a>
                             </div>

@@ -1,7 +1,7 @@
 @extends('layouts.shop')
 
 @section('title', 'Blog')
-@section('meta_description', 'Conseils d\'achat, entretien du matériel et bois de chauffage : le blog de ' . $settings->site_name . '.')
+@section('meta_description', 'Kaufberatung, Gerätepflege und Brennholz: der Blog von ' . $settings->site_name . '.')
 
 @section('content')
     <x-shop.page-hero title="Blog" subtitle="Kaufberatung, Pflege und Brennholz" image="hero-objets.jpg" />
@@ -9,7 +9,7 @@
     <div id="fh5co-product">
         <div class="container">
             @if ($posts->isEmpty())
-                <p class="text-center">Aucun article publié pour le moment.</p>
+                <p class="text-center">Derzeit sind keine Artikel veröffentlicht.</p>
             @endif
 
             @foreach ($posts->chunk(3) as $row)

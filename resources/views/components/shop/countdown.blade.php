@@ -18,8 +18,8 @@
     x-show="remaining > 0"
     x-cloak
 >
-    <span class="fh5co-countdown-label">Se termine dans</span>
+    <span class="fh5co-countdown-label">Endet in</span>
     <span class="fh5co-countdown-clock">
-        <span x-show="days > 0"><span x-text="days"></span>j </span><span x-text="pad(hours)"></span>:<span x-text="pad(minutes)"></span>:<span x-text="pad(seconds)"></span>
+        <span x-show="days > 0"><span x-text="days"></span>T </span><span x-text="pad(hours)"></span>:<span x-text="pad(minutes)"></span>:<span x-text="pad(seconds)"></span>
     </span>
 </div>

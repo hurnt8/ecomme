@@ -21,9 +21,9 @@
     <div id="fh5co-product" class="checkout">
         <div class="container">
             <ol class="checkout-steps">
-                <li class="is-done"><a href="{{ route('cart.index') }}"><span>1</span> Panier</a></li>
-                <li class="is-current"><span>2</span> Livraison &amp; paiement</li>
-                <li><span>3</span> Confirmation</li>
+                <li class="is-done"><a href="{{ route('cart.index') }}"><span>1</span> Warenkorb</a></li>
+                <li class="is-current"><span>2</span> Lieferung &amp; Zahlung</li>
+                <li><span>3</span> Bestätigung</li>
             </ol>
 
             @if ($errors->any())
@@ -62,7 +62,7 @@
                         @csrf
 
                         <section class="checkout-section">
-                            <h3><span class="checkout-section-num">1</span> Coordonnées</h3>
+                            <h3><span class="checkout-section-num">1</span> Kontaktdaten</h3>
                             <div class="form-group">
                                 <label for="customer_name">Vollständiger Name</label>
                                 <input type="text" name="customer_name" id="customer_name" value="{{ old('customer_name') }}" class="form-control" required>
@@ -75,7 +75,7 @@
                         </section>
 
                         <section class="checkout-section">
-                            <h3><span class="checkout-section-num">2</span> Adresse de livraison</h3>
+                            <h3><span class="checkout-section-num">2</span> Lieferadresse</h3>
                             <div class="form-group">
                                 <label for="address_line1">Adresse</label>
                                 <input type="text" name="address_line1" id="address_line1" value="{{ old('address_line1') }}" class="form-control" required>
@@ -95,25 +95,25 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="country">Pays</label>
+                                <label for="country">Land</label>
                                 <select name="country" id="country" class="form-control" x-model="country" required>
                                     @foreach ($countries as $code => $label)
                                         <option value="{{ $code }}" @selected(old('country', 'FR') === $code)>{{ $label }}</option>
                                     @endforeach
                                 </select>
                                 <small class="checkout-hint checkout-hint-warning" x-show="!eurozone.includes(country)" x-cloak>
-                                    Hors zone euro : des frais de livraison internationaux s'appliquent.
+                                    Außerhalb der Eurozone: es fallen internationale Versandkosten an.
                                 </small>
                             </div>
                         </section>
 
                         <section class="checkout-section">
-                            <h3><span class="checkout-section-num">3</span> Paiement</h3>
+                            <h3><span class="checkout-section-num">3</span> Zahlung</h3>
                             <div class="checkout-payment">
                                 <strong>Banküberweisung</strong>
                                 <p>
-                                    Nos coordonnées bancaires (IBAN) vous seront communiquées par e-mail et sur la page
-                                    de confirmation. Votre commande est préparée dès réception et validation du virement.
+                                    Unsere Bankverbindung (IBAN) wird Ihnen per E-Mail und auf der Bestätigungsseite
+                                    mitgeteilt. Ihre Bestellung wird bearbeitet, sobald die Überweisung eingegangen und bestätigt ist.
                                 </p>
                             </div>
                         </section>
@@ -130,8 +130,8 @@
                                 @click="itemsOpen = !itemsOpen"
                                 :aria-expanded="itemsOpen ? 'true' : 'false'">
                             <span>
-                                Votre commande
-                                <small>({{ $items->sum('quantity') }} article{{ $items->sum('quantity') > 1 ? 's' : '' }})</small>
+                                Ihre Bestellung
+                                <small>({{ $items->sum('quantity') }} Artikel)</small>
                             </span>
                             <i class="icon-arrow-down" :class="{ 'is-open': itemsOpen }" aria-hidden="true"></i>
                         </button>
@@ -149,7 +149,7 @@
                                             <small>{{ collect([$item->color, $item->size])->filter()->join(' · ') }}</small>
                                         @endif
                                         @if ($item->wasCapped)
-                                            <small class="checkout-item-notice">Quantité ajustée : stock limité à {{ $item->quantity }}.</small>
+                                            <small class="checkout-item-notice">Menge angepasst: Lagerbestand begrenzt auf {{ $item->quantity }}.</small>
                                         @endif
                                     </span>
                                     <span class="checkout-item-total">{{ number_format($item->lineTotal, 0) }}&nbsp;{{ $settings->currency_symbol }}</span>
@@ -164,7 +164,7 @@
                             </div>
                             <div class="checkout-total-row">
                                 <span>Versand</span>
-                                <span x-text="shipping === 0 ? 'Offerte' : shipping.toFixed(2) + ' {{ $settings->currency_symbol }}'"></span>
+                                <span x-text="shipping === 0 ? 'Kostenlos' : shipping.toFixed(2) + ' {{ $settings->currency_symbol }}'"></span>
                             </div>
                             <div class="checkout-total-row">
                                 <span>Steuern</span>
@@ -177,8 +177,8 @@
                         </div>
 
                         <ul class="checkout-reassurance">
-                            <li><i class="icon-wallet"></i> 14 jours pour changer d'avis</li>
-                            <li><i class="icon-credit-card"></i> Aucune donnée bancaire stockée sur le site</li>
+                            <li><i class="icon-wallet"></i> 14 Tage Widerrufsrecht</li>
+                            <li><i class="icon-credit-card"></i> Keine Bankdaten werden auf der Website gespeichert</li>
                         </ul>
                     </aside>
                 </div>
@@ -190,7 +190,7 @@
                      desktop. --}}
                 <div class="col-md-7 checkout-actions-col">
                     <button type="submit" form="checkout-form" class="btn btn-primary btn-lg checkout-submit">Bestellung abschließen</button>
-                    <a href="{{ route('cart.index') }}" class="checkout-back">&larr; Retour au panier</a>
+                    <a href="{{ route('cart.index') }}" class="checkout-back">&larr; Zurück zum Warenkorb</a>
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@
 @section('title', 'Mein Konto')
 
 @section('content')
-    <x-shop.page-hero title="Mon compte" :subtitle="auth()->user()->name" image="hero-maison.jpg" />
+    <x-shop.page-hero title="Mein Konto" :subtitle="auth()->user()->name" image="hero-maison.jpg" />
 
     <div id="fh5co-product">
         <div class="container">
@@ -27,7 +27,7 @@
                             <thead>
                                 <tr>
                                     <th>Bestellung</th>
-                                    <th>Date</th>
+                                    <th>Datum</th>
                                     <th>Status</th>
                                     <th class="text-right">Gesamt</th>
                                     <th></th>

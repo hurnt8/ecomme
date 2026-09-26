@@ -19,6 +19,8 @@ class Setting extends Model
         'naf_label',
         'registered_address',
         'publication_director',
+        'branch_label',
+        'branch_address',
         'host_details',
         'logo',
         'tagline',

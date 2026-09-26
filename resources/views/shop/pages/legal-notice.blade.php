@@ -21,6 +21,12 @@
                             @if ($settings->publication_director)Verantwortlich für den Inhalt: {{ $settings->publication_director }}@endif
                         </p>
                     </div>
+                    @if ($settings->branch_address)
+                        <div class="desc">
+                            <h3>{{ $settings->branch_label ?: 'Niederlassung' }}</h3>
+                            <p>{{ $settings->branch_address }}</p>
+                        </div>
+                    @endif
                     @if ($settings->siren || $settings->siret || $settings->vat_number || $settings->naf_code)
                         <div class="desc">
                             <h3>Registrierung</h3>

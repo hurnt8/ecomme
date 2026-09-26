@@ -1,7 +1,7 @@
 @extends('layouts.shop')
 
 @section('title', 'Cookies')
-@section('meta_description', 'Utilisation des cookies sur le site ' . $settings->site_name . '.')
+@section('meta_description', 'Verwendung von Cookies auf der Website ' . $settings->site_name . '.')
 
 @section('content')
     <x-shop.page-hero title="Cookies" image="hero-objets.jpg" />
@@ -19,13 +19,13 @@
                         <p>Wir setzen ausschließlich Cookies ein, die für den Betrieb der Website unbedingt erforderlich sind. Diese Cookies bedürfen keiner vorherigen Einwilligung und werden niemals für Werbung oder Tracking verwendet:</p>
                         <table class="table table-bordered">
                             <thead>
-                                <tr><th>Cookie</th><th>Finalité</th><th>Durée</th></tr>
+                                <tr><th>Cookie</th><th>Zweck</th><th>Dauer</th></tr>
                             </thead>
                             <tbody>
-                                <tr><td>Session</td><td>Maintien de votre navigation (panier, page courante)</td><td>Session (fermeture du navigateur)</td></tr>
-                                <tr><td>Panier</td><td>Conservation du contenu de votre panier entre deux visites</td><td>Jusqu'à 2 semaines</td></tr>
-                                <tr><td>Connexion</td><td>Maintien de votre connexion à votre compte</td><td>Jusqu'à 30 jours (selon "Se souvenir de moi")</td></tr>
-                                <tr><td>Jeton CSRF</td><td>Protection contre les attaques lors de l'envoi de formulaires</td><td>Session</td></tr>
+                                <tr><td>Sitzung</td><td>Aufrechterhaltung Ihrer Navigation (Warenkorb, aktuelle Seite)</td><td>Sitzung (bis Browser geschlossen wird)</td></tr>
+                                <tr><td>Warenkorb</td><td>Speicherung des Warenkorbinhalts zwischen zwei Besuchen</td><td>Bis zu 2 Wochen</td></tr>
+                                <tr><td>Anmeldung</td><td>Aufrechterhaltung Ihrer Kontoanmeldung</td><td>Bis zu 30 Tage (je nach "Angemeldet bleiben")</td></tr>
+                                <tr><td>CSRF-Token</td><td>Schutz vor Angriffen beim Absenden von Formularen</td><td>Sitzung</td></tr>
                             </tbody>
                         </table>
                     </div>

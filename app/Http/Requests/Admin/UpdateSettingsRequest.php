@@ -29,6 +29,8 @@ class UpdateSettingsRequest extends FormRequest
             'naf_label' => ['nullable', 'string', 'max:255'],
             'registered_address' => ['nullable', 'string', 'max:255'],
             'publication_director' => ['nullable', 'string', 'max:255'],
+            'branch_label' => ['nullable', 'string', 'max:255'],
+            'branch_address' => ['nullable', 'string', 'max:255'],
             'host_details' => ['nullable', 'string', 'max:255'],
             'logo' => ['nullable', 'image', 'max:2048', 'dimensions:max_width=2000,max_height=2000'],
             'tagline' => ['nullable', 'string', 'max:255'],

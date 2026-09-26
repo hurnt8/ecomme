@@ -1,7 +1,7 @@
 @extends('layouts.shop')
 
 @section('title', 'Versand')
-@section('meta_description', 'Délais et frais de livraison de ' . $settings->site_name . ', en zone euro et à l\'international.')
+@section('meta_description', 'Lieferzeiten und Versandkosten von ' . $settings->site_name . ', innerhalb der Eurozone und international.')
 
 @section('content')
     <x-shop.page-hero title="Versand" image="hero-objets.jpg" />

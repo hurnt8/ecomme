@@ -75,7 +75,7 @@
                             </div>
                             <div class="checkout-total-row">
                                 <span>Versand</span>
-                                <span>{{ (float) $order->shipping === 0.0 ? 'Offerte' : number_format((float) $order->shipping, 2).' '.$settings->currency_symbol }}</span>
+                                <span>{{ (float) $order->shipping === 0.0 ? 'Kostenlos' : number_format((float) $order->shipping, 2).' '.$settings->currency_symbol }}</span>
                             </div>
                             <div class="checkout-total-row">
                                 <span>Steuern</span>

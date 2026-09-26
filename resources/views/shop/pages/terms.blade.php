@@ -1,7 +1,7 @@
 @extends('layouts.shop')
 
-@section('title', 'Conditions générales de vente')
-@section('meta_description', 'Conditions générales de vente de ' . $settings->site_name . '.')
+@section('title', 'Allgemeine Geschäftsbedingungen')
+@section('meta_description', 'Allgemeine Geschäftsbedingungen von ' . $settings->site_name . '.')
 
 @section('content')
     <x-shop.page-hero title="AGB" subtitle="Allgemeine Geschäftsbedingungen" image="hero-maison.jpg" />
@@ -12,7 +12,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="desc">
                         <h3>1. Gegenstand</h3>
-                        <p>Diese Allgemeinen Geschäftsbedingungen gelten für alle Verkäufe über die Website {{ $settings->site_name }} entre {{ $settings->site_name }} und allen Kundinnen und Kunden, die einen Kauf tätigen.</p>
+                        <p>Diese Allgemeinen Geschäftsbedingungen gelten für alle Verkäufe über die Website {{ $settings->site_name }} zwischen {{ $settings->site_name }} und allen Kundinnen und Kunden, die einen Kauf tätigen.</p>
                     </div>
                     <div class="desc">
                         <h3>2. Produkte</h3>
@@ -28,7 +28,7 @@
                     </div>
                     <div class="desc">
                         <h3>5. Zahlung</h3>
-                        <p>Die Zahlung erfolgt per Banküberweisung nach den Bedingungen auf unserer Seite <a href="{{ url('/moyens-paiement') }}">Moyens de paiement</a>.</p>
+                        <p>Die Zahlung erfolgt per Banküberweisung nach den Bedingungen auf unserer Seite <a href="{{ url('/moyens-paiement') }}">Zahlungsarten</a>.</p>
                     </div>
                     <div class="desc">
                         <h3>6. Lieferung</h3>

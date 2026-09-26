@@ -1,7 +1,7 @@
 @extends('layouts.shop')
 
-@section('title', 'Aide / FAQ')
-@section('meta_description', 'Questions fréquentes sur les commandes, la livraison, les retours et le paiement chez ' . $settings->site_name . '.')
+@section('title', 'Hilfe / FAQ')
+@section('meta_description', 'Häufige Fragen zu Bestellungen, Versand, Rücksendungen und Zahlung bei ' . $settings->site_name . '.')
 
 @section('content')
     <x-shop.page-hero title="Hilfe" subtitle="Häufige Fragen" image="hero-maison.jpg" />
@@ -20,15 +20,15 @@
                     </div>
                     <div class="desc">
                         <h3>Wie verfolge ich meine Bestellung?</h3>
-                        <p>Besuchen Sie unsere Seite <a href="{{ route('tracking.index') }}">Sendungsverfolgung</a> avec votre numéro de commande et votre e-mail.</p>
+                        <p>Besuchen Sie unsere Seite <a href="{{ route('tracking.index') }}">Sendungsverfolgung</a> mit Ihrer Bestellnummer und Ihrer E-Mail-Adresse.</p>
                     </div>
                     <div class="desc">
                         <h3>Wie bezahle ich meine Bestellung?</h3>
-                        <p>Die Zahlung erfolgt per Banküberweisung. Die Bankverbindung erhalten Sie auf der Bestätigungsseite und per E-Mail. Einzelheiten auf unserer Seite <a href="{{ url('/moyens-paiement') }}">Moyens de paiement</a>.</p>
+                        <p>Die Zahlung erfolgt per Banküberweisung. Die Bankverbindung erhalten Sie auf der Bestätigungsseite und per E-Mail. Einzelheiten auf unserer Seite <a href="{{ url('/moyens-paiement') }}">Zahlungsarten</a>.</p>
                     </div>
                     <div class="desc">
                         <h3>Kann ich einen Artikel zurücksenden?</h3>
-                        <p>Ja, unter den Bedingungen, die auf unserer Seite <a href="{{ url('/retours') }}">Rücksendungen</a> beschrieben sind. Le bois de chauffage entamé ou livré en vrac ne peut toutefois pas être repris, pour des raisons pratiques et d'hygiène.</p>
+                        <p>Ja, unter den Bedingungen, die auf unserer Seite <a href="{{ url('/retours') }}">Rücksendungen</a> beschrieben sind. Bereits angebrochenes oder als Schüttgut geliefertes Brennholz kann jedoch aus praktischen und hygienischen Gründen nicht zurückgenommen werden.</p>
                     </div>
                     <div class="desc">
                         <h3>Wie wird Brennholz geliefert?</h3>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="desc">
                         <h3>Bieten Sie Angebote für Gewerbe oder große Mengen an?</h3>
-                        <p>Ja, insbesondere für Brennholzbestellungen in größeren Mengen oder die Ausstattung eines Betriebs. Kontaktieren Sie uns über das <a href="{{ route('contact.index') }}">Kontaktformular</a> en précisant votre besoin.</p>
+                        <p>Ja, insbesondere für Brennholzbestellungen in größeren Mengen oder die Ausstattung eines Betriebs. Kontaktieren Sie uns über das <a href="{{ route('contact.index') }}">Kontaktformular</a> und beschreiben Sie kurz Ihren Bedarf.</p>
                     </div>
                     <div class="desc">
                         <h3>Noch eine Frage?</h3>

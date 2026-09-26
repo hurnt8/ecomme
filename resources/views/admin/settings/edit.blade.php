@@ -126,6 +126,8 @@
                             <x-admin.field label="Libellé NAF/APE" name="naf_label" :value="$settings->naf_label" />
                             <x-admin.field label="Adresse du siège social" name="registered_address" :value="$settings->registered_address" placeholder="Hourquette, 32300 Estipouy" />
                             <x-admin.field label="Directeur de la publication" name="publication_director" :value="$settings->publication_director" />
+                            <x-admin.field label="Intitulé du siège annexe" name="branch_label" :value="$settings->branch_label" placeholder="Niederlassung Deutschland" />
+                            <x-admin.field label="Adresse du siège annexe" name="branch_address" :value="$settings->branch_address" />
                             <x-admin.field label="Hébergeur (nom et adresse)" name="host_details" :value="$settings->host_details" />
                         </div>
                     </section>

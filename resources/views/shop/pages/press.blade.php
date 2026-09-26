@@ -1,7 +1,7 @@
 @extends('layouts.shop')
 
 @section('title', 'Presse')
-@section('meta_description', 'Contact presse et ressources média pour ' . $settings->site_name . '.')
+@section('meta_description', 'Pressekontakt und Medienressourcen für ' . $settings->site_name . '.')
 
 @section('content')
     <x-shop.page-hero title="Presse" subtitle="Medienbereich" image="hero-objets.jpg" />

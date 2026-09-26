@@ -21,7 +21,7 @@
                     </div>
 
                     <p style="margin-top:30px;">
-                        <a href="{{ route('blog.index') }}" class="btn btn-primary btn-outline">&larr; Retour au blog</a>
+                        <a href="{{ route('blog.index') }}" class="btn btn-primary btn-outline">&larr; Zurück zum Blog</a>
                     </p>
                 </div>
             </div>
@@ -29,7 +29,7 @@
             @if ($related->isNotEmpty())
                 <div class="row animate-box" style="margin-top:40px;">
                     <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                        <h2>À lire aussi</h2>
+                        <h2>Das könnte Sie auch interessieren</h2>
                     </div>
                 </div>
                 <div class="row">

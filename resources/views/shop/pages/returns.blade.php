@@ -1,7 +1,7 @@
 @extends('layouts.shop')
 
 @section('title', 'Rücksendungen')
-@section('meta_description', 'Conditions de retour et de remboursement chez ' . $settings->site_name . '.')
+@section('meta_description', 'Rückgabe- und Erstattungsbedingungen bei ' . $settings->site_name . '.')
 
 @section('content')
     <x-shop.page-hero title="Rücksendungen" image="hero-maison.jpg" />
@@ -20,7 +20,7 @@
                     </div>
                     <div class="desc">
                         <h3>Ausnahmen</h3>
-                        <p>Gemäß § 312g Abs. 2 BGB besteht kein Widerrufsrecht bei versiegelten Waren, die aus Gründen des Gesundheitsschutzes oder der Hygiene nach der Entsiegelung nicht zur Rückgabe geeignet sind, sowie bei Waren, die nach Kundenspezifikation angefertigt wurden. <strong>Brennholz</strong> livré en vrac ou en filets ouverts ne peut donc pas être retourné une fois la livraison réceptionnée ; nous vous invitons à vérifier votre commande dès sa réception.</p>
+                        <p>Gemäß § 312g Abs. 2 BGB besteht kein Widerrufsrecht bei versiegelten Waren, die aus Gründen des Gesundheitsschutzes oder der Hygiene nach der Entsiegelung nicht zur Rückgabe geeignet sind, sowie bei Waren, die nach Kundenspezifikation angefertigt wurden. <strong>Brennholz</strong>, das als Schüttgut oder in offenen Netzen geliefert wird, kann daher nach Erhalt der Lieferung nicht zurückgenommen werden; wir bitten Sie, Ihre Bestellung gleich bei Erhalt zu überprüfen.</p>
                     </div>
                     <div class="desc">
                         <h3>Wie sende ich einen Artikel zurück?</h3>
