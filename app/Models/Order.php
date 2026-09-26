@@ -20,6 +20,7 @@ class Order extends Model
         'paid_at',
         'customer_name',
         'customer_email',
+        'customer_phone',
         'shipping_address',
         'country',
         'subtotal',

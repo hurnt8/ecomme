@@ -43,6 +43,9 @@
                 <h2 class="text-sm font-medium mb-3">Client</h2>
                 <p class="text-sm">{{ $order->customer_name }}</p>
                 <p class="text-sm text-neutral-500">{{ $order->customer_email }}</p>
+                @if ($order->customer_phone)
+                    <p class="text-sm text-neutral-500">{{ $order->customer_phone }}</p>
+                @endif
                 <p class="text-sm text-neutral-500 mt-2 whitespace-pre-line">{{ $order->shipping_address }}</p>
                 <p class="text-sm text-neutral-500">{{ \App\Support\Countries::label($order->country) ?? $order->country }}</p>
             </div>

@@ -96,6 +96,9 @@
                     <section class="confirmation-panel">
                         <h3>Versand</h3>
                         <address class="confirmation-address">{{ $order->shipping_address }}</address>
+                        @if ($order->customer_phone)
+                            <p class="confirmation-phone">Telefon: {{ $order->customer_phone }}</p>
+                        @endif
                     </section>
                 </div>
 

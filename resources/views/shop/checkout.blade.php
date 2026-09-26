@@ -80,6 +80,11 @@
                                 <label for="address_line1">Adresse</label>
                                 <input type="text" name="address_line1" id="address_line1" value="{{ old('address_line1') }}" class="form-control" required>
                             </div>
+                            <div class="form-group">
+                                <label for="customer_phone">Telefonnummer</label>
+                                <input type="tel" name="customer_phone" id="customer_phone" value="{{ old('customer_phone') }}" class="form-control" required>
+                                <small class="checkout-hint">Für Rückfragen des Lieferdienstes vor der Zustellung.</small>
+                            </div>
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">

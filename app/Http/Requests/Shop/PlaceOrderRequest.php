@@ -21,6 +21,7 @@ class PlaceOrderRequest extends FormRequest
         return [
             'customer_name' => ['required', 'string', 'max:255'],
             'customer_email' => ['required', 'string', 'email', 'max:255'],
+            'customer_phone' => ['required', 'string', 'max:30'],
             'address_line1' => ['required', 'string', 'max:255'],
             'postal_code' => ['required', 'string', 'max:20'],
             'city' => ['required', 'string', 'max:120'],
@@ -29,7 +30,7 @@ class PlaceOrderRequest extends FormRequest
     }
 
     /**
-     * @return array{name: string, email: string, address: string, country: string}
+     * @return array{name: string, email: string, phone: string, address: string, country: string}
      */
     public function customer(): array
     {
@@ -38,6 +39,7 @@ class PlaceOrderRequest extends FormRequest
         return [
             'name' => $this->string('customer_name')->toString(),
             'email' => $this->string('customer_email')->toString(),
+            'phone' => $this->string('customer_phone')->toString(),
             'address' => implode("\n", [
                 $this->string('address_line1')->toString(),
                 $this->string('postal_code').' '.$this->string('city'),

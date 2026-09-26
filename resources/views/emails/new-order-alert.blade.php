@@ -26,5 +26,8 @@
     </table>
 
     <p style="margin-top:15px;">Lieferanschrift: <br><span style="white-space:pre-line;">{{ $order->shipping_address }}</span> ({{ $order->country }})</p>
+    @if ($order->customer_phone)
+        <p>Telefon: {{ $order->customer_phone }}</p>
+    @endif
 </body>
 </html>

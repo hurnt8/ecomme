@@ -29,7 +29,7 @@ class PlaceOrderAction
     ) {}
 
     /**
-     * @param  array{name: string, email: string, address: string, country: string}  $customer
+     * @param  array{name: string, email: string, phone: string, address: string, country: string}  $customer
      *
      * @throws InsufficientStockException
      */
@@ -62,6 +62,7 @@ class PlaceOrderAction
                 'status' => OrderStatus::Pending,
                 'customer_name' => $customer['name'],
                 'customer_email' => $customer['email'],
+                'customer_phone' => $customer['phone'],
                 'shipping_address' => $customer['address'],
                 'country' => strtoupper($customer['country']),
                 'subtotal' => $subtotal,
