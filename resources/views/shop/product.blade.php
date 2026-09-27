@@ -187,7 +187,7 @@
                                 {{-- Supplier descriptions run to several thousand characters, mostly in a
                                      single paragraph, which pushed the reviews and related products
                                      thousands of pixels down. Long ones are folded to a few lines behind
-                                     "Lire la suite". Alpine applies the folded class, so without JS the
+                                     "Weiterlesen". Alpine applies the folded class, so without JS the
                                      text simply stays whole. --}}
                                 @if (mb_strlen($product->description) > 600)
                                     <div class="product-description" x-data="{ open: false }" :class="{ 'is-collapsed': ! open }">

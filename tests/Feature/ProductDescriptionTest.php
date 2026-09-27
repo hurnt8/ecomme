@@ -2,7 +2,7 @@
 
 use App\Models\Product;
 
-it('folds a long description behind a "Lire la suite" toggle', function () {
+it('folds a long description behind a "Weiterlesen" toggle', function () {
     $product = Product::factory()->create([
         'description' => str_repeat('Moteur quatre temps robuste, démarrage par lanceur et fraises en acier. ', 20),
     ]);
@@ -10,7 +10,7 @@ it('folds a long description behind a "Lire la suite" toggle', function () {
     $this->get(route('product.show', $product->slug))
         ->assertOk()
         ->assertSee('product-description-text', false)
-        ->assertSee('Lire la suite');
+        ->assertSee('Weiterlesen');
 });
 
 it('shows a short description whole, without the toggle', function () {
@@ -19,7 +19,7 @@ it('shows a short description whole, without the toggle', function () {
     $this->get(route('product.show', $product->slug))
         ->assertOk()
         ->assertSee('Tondeuse compacte pour petits jardins.')
-        ->assertDontSee('Lire la suite');
+        ->assertDontSee('Weiterlesen');
 });
 
 it('keeps the excerpt next to the price to a short teaser', function () {

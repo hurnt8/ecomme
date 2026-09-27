@@ -37,7 +37,7 @@ it('tells the shopper how much more is needed for free shipping', function () {
 
     $this->get(route('cart.index'))
         ->assertOk()
-        ->assertSee('pour la livraison offerte')
+        ->assertSee('bis zum kostenlosen Versand')
         ->assertSee('60');
 });
 
@@ -49,6 +49,6 @@ it('confirms free shipping once the threshold is reached', function () {
 
     $this->get(route('cart.index'))
         ->assertOk()
-        ->assertSee('Livraison offerte')
-        ->assertDontSee('pour la livraison offerte');
+        ->assertSee('Kostenloser Versand')
+        ->assertDontSee('bis zum kostenlosen Versand');
 });

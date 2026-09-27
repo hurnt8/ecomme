@@ -12,6 +12,8 @@ function checkoutPayload(): array
     return [
         'customer_name' => 'Camille Dupont',
         'customer_email' => 'camille@example.com',
+        // Required since deliveries are made by pallet carrier, who phones ahead.
+        'customer_phone' => '06 12 34 56 78',
         'address_line1' => '12 rue des Lilas',
         'postal_code' => '75011',
         'city' => 'Paris',

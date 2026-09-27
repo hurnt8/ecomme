@@ -12,6 +12,8 @@ function placeOrder(array $overrides = []): void
     test()->post(route('checkout.store'), [
         'customer_name' => 'Marie-Christine de Bourbon-Parme',
         'customer_email' => 'marie@example.com',
+        // Required since deliveries are made by pallet carrier, who phones ahead.
+        'customer_phone' => '06 12 34 56 78',
         'address_line1' => '4 rue des Lilas',
         'postal_code' => '75011',
         'city' => 'Paris',
@@ -47,7 +49,7 @@ it('says the delivery is free rather than showing 0.00', function () {
 
     $this->get(route('checkout.confirmation'))
         ->assertOk()
-        ->assertSee('Offerte');
+        ->assertSee('Kostenlos');
 });
 
 it('shows the bank details needed to pay', function () {
