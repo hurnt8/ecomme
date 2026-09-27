@@ -31,6 +31,21 @@
     <link rel="stylesheet" href="{{ asset('template/css/style.css') }}">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- Google Ads (gtag.js). L'identifiant vient de GOOGLE_ADS_ID, le même réglage que celui
+         qui conditionne la conversion sur la page de confirmation : les deux apparaissent et
+         disparaissent ensemble, sans quoi le compte recevrait des visites mais aucune vente.
+         Vide en local et en préproduction, pour ne pas polluer les statistiques du compte. --}}
+    @if ($googleAdsId = config('services.google_ads.id'))
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $googleAdsId }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '{{ $googleAdsId }}');
+        </script>
+    @endif
 </head>
 <body>
     <div id="page">

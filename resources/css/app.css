@@ -3889,3 +3889,15 @@ html {
 .floating-email svg {
     display: block;
 }
+
+/* Respects a reduced-motion preference: the scale on hover is decoration, not information. */
+@media (prefers-reduced-motion: reduce) {
+    .floating-email {
+        transition: none;
+    }
+
+    .floating-email:hover,
+    .floating-email:focus {
+        transform: none;
+    }
+}

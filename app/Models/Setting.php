@@ -92,6 +92,9 @@ class Setting extends Model
      */
     public static function current(): self
     {
-        return static::query()->firstOrCreate(['id' => 1]);
+        // Les valeurs par défaut sont déclarées côté SQL, or un insert Eloquent ne les applique
+        // pas : la ligne créée ici ressortait avec une devise nulle, et la conversion Google Ads
+        // partait sans devise. Les rappeler ici garde le repli quel que soit le point d'entrée.
+        return static::query()->firstOrCreate(['id' => 1], ['currency' => 'EUR']);
     }
 }
