@@ -32,16 +32,18 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    {{-- Google tag (gtag.js) — chargé sur toutes les pages boutique ; vide en local si
-         GOOGLE_ADS_ID n'est pas défini, pour ne pas polluer les données de production. --}}
-    @if (config('services.google_ads.id'))
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google_ads.id') }}"></script>
+    {{-- Google Ads (gtag.js). L'identifiant vient de GOOGLE_ADS_ID, le même réglage que celui
+         qui conditionne la conversion sur la page de confirmation : les deux apparaissent et
+         disparaissent ensemble, sans quoi le compte recevrait des visites mais aucune vente.
+         Vide en local et en préproduction, pour ne pas polluer les statistiques du compte. --}}
+    @if ($googleAdsId = config('services.google_ads.id'))
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $googleAdsId }}"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', '{{ config('services.google_ads.id') }}');
+            gtag('config', '{{ $googleAdsId }}');
         </script>
     @endif
 </head>
@@ -59,7 +61,7 @@
          only when an address is on file: a mailto: with nothing after it opens an empty compose
          window, which is worse than no button at all. --}}
     @if ($settings->contact_email)
-        <a href="mailto:{{ $settings->contact_email }}" class="floating-email" aria-label="Nous écrire un e-mail">
+        <a href="mailto:{{ $settings->contact_email }}" class="floating-email" aria-label="Schreiben Sie uns eine E-Mail">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                  stroke-linejoin="round" aria-hidden="true" focusable="false">
