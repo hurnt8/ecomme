@@ -32,15 +32,20 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18475917188"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    {{-- Google Ads (gtag.js). L'identifiant vient de GOOGLE_ADS_ID : la page de confirmation
+         conditionne déjà sa conversion à ce même réglage, et un tag global codé en dur alors
+         que la conversion s'efface donne un compte qui reçoit des visites mais aucune vente.
+         Vide en local et en préproduction, pour ne pas polluer les statistiques du compte. --}}
+    @if ($googleAdsId = config('services.google_ads.id'))
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $googleAdsId }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-      gtag('config', 'AW-18475917188');
-    </script>
+            gtag('config', '{{ $googleAdsId }}');
+        </script>
+    @endif
 </head>
 <body>
     <div id="page">
