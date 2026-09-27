@@ -36,7 +36,6 @@ it('reports the purchase as a conversion on the confirmation page', function () 
     $this->post(route('checkout.store'), [
         'customer_name' => 'Camille Dupont',
         'customer_email' => 'camille@example.com',
-        'customer_phone' => '06 12 34 56 78',
         'address_line1' => '12 rue des Lilas',
         'postal_code' => '75011',
         'city' => 'Paris',
