@@ -35,6 +35,11 @@ return [
         ],
     ],
 
+    'google_tag_manager' => [
+        // Vide = Google Tag Manager désactivé (utile en local/staging).
+        'id' => env('GOOGLE_TAG_MANAGER_ID'),
+    ],
+
     'google_ads' => [
         // Vide = tag gtag.js désactivé (utile en local/staging).
         'id' => env('GOOGLE_ADS_ID'),

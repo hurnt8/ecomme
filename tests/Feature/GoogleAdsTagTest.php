@@ -19,7 +19,7 @@ it('serves the gtag.js snippet on the storefront when an Ads id is configured', 
 });
 
 it('leaves the tag out when no Ads id is configured', function () {
-    config(['services.google_ads.id' => null]);
+    config(['services.google_ads.id' => null, 'services.google_tag_manager.id' => null]);
 
     // Sans cela, le local et la préproduction enverraient leurs visites dans le compte réel.
     $this->get(route('home'))
@@ -49,4 +49,13 @@ it('reports the purchase as a conversion on the confirmation page', function () 
         ->assertOk()
         ->assertSee("'send_to': 'AW-18299642494/", false)
         ->assertSee("'currency': 'EUR'", false);
+});
+
+it('serves the Google Tag Manager snippets in the head and right after the body tag', function () {
+    config(['services.google_tag_manager.id' => 'GTM-57GR8WLG']);
+
+    $this->get(route('home'))
+        ->assertOk()
+        ->assertSee("'script','dataLayer','GTM-57GR8WLG'", false)
+        ->assertSee('googletagmanager.com/ns.html?id=GTM-57GR8WLG', false);
 });
