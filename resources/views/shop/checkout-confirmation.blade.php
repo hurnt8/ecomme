@@ -159,13 +159,12 @@
 
     {{-- Conversion Google Ads : déclenchée une seule fois, quand la confirmation de commande
          s'affiche réellement (page de remerciement après soumission du formulaire de commande).
-         Pas de "send_to" : l'événement se rattache au tag global déjà chargé dans le <head>
-         (gtag('config', …) sur GOOGLE_ADS_ID, voir layouts/shop.blade.php). Si un libellé de
-         conversion dédié est un jour fourni par Google Ads, il pourra être ajouté ici via
-         GOOGLE_ADS_CONVERSION_LABEL_FORMULAIRE_1 dans .env. --}}
-    @if (config('services.google_ads.id'))
+         Le tag global est chargé dans le <head> (GOOGLE_ADS_ID, voir layouts/shop.blade.php) ;
+         le libellé de conversion « Achat » vient de GOOGLE_ADS_CONVERSION_LABEL_FORMULAIRE_1. --}}
+    @if ($adsId = config('services.google_ads.id'))
         <script>
-            gtag('event', 'ads_conversion_Formulaire_1', {
+            gtag('event', 'conversion', {
+                'send_to': '{{ $adsId }}/{{ config('services.google_ads.conversion_labels.formulaire_1') }}',
                 'transaction_id': '{{ $order->order_number }}',
                 'value': {{ (float) $order->total }},
                 'currency': '{{ $settings->currency ?: 'EUR' }}'

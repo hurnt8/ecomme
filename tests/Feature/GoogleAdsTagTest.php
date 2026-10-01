@@ -8,14 +8,14 @@ use App\Models\Product;
  * ne l'avait signalé : la boutique s'affichait parfaitement sans lui.
  */
 it('serves the gtag.js snippet on the storefront when an Ads id is configured', function () {
-    config(['services.google_ads.id' => 'AW-18475917188']);
+    config(['services.google_ads.id' => 'AW-18299642494']);
 
     $response = $this->get(route('home'))->assertOk();
 
     // Les deux moitiés comptent : le chargement de la bibliothèque et l'appel config().
     // Le validateur de Google cherche la première, le suivi ne marche que grâce à la seconde.
-    $response->assertSee('googletagmanager.com/gtag/js?id=AW-18475917188', false)
-        ->assertSee("gtag('config', 'AW-18475917188')", false);
+    $response->assertSee('googletagmanager.com/gtag/js?id=AW-18299642494', false)
+        ->assertSee("gtag('config', 'AW-18299642494')", false);
 });
 
 it('leaves the tag out when no Ads id is configured', function () {
@@ -28,7 +28,7 @@ it('leaves the tag out when no Ads id is configured', function () {
 });
 
 it('reports the purchase as a conversion on the confirmation page', function () {
-    config(['services.google_ads.id' => 'AW-18475917188']);
+    config(['services.google_ads.id' => 'AW-18299642494']);
 
     $product = Product::factory()->create(['price' => 200, 'stock' => 5]);
 
@@ -47,6 +47,6 @@ it('reports the purchase as a conversion on the confirmation page', function () 
     // evenement sans elles compte la vente mais pas ce qu'elle rapporte.
     $this->get(route('checkout.confirmation'))
         ->assertOk()
-        ->assertSee('ads_conversion_Formulaire_1', false)
+        ->assertSee("'send_to': 'AW-18299642494/", false)
         ->assertSee("'currency': 'EUR'", false);
 });
